@@ -22,6 +22,18 @@ public class LectureService {
 		close(conn);
 		return result;
 	}
+	
+	//강의리스트
+	public List<Lecture> selectLectureList(int cPage, int numPerPage) {
+		Connection conn=getConnection();
+		List<Lecture> list=dao.selectLectureList(conn, cPage, numPerPage);
+		close(conn);
+		
+		System.out.println("service list :"+list);
+		
+		return list;
+	}
+
 
 	public List<Lecture> lectureApproList(int cPage, int numPerPage) {
 		Connection conn = getConnection();

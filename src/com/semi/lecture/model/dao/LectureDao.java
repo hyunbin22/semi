@@ -264,6 +264,58 @@ public class LectureDao {
 		}
 		return result;
 	}
+	
+	// 강의 리스트 
+	public List<Lecture> selectLectureList(Connection conn, int cPage, int numPerPage) {
+		PreparedStatement pstmt=null;
+		ResultSet rs = null;
+		List<Lecture> lecturelist = new ArrayList();
+		List<LectureUpload> uploadlist = new ArrayList();
+		
+		String sql=prop.getProperty("selectLectureList");
+
+		System.out.println("sql:"+sql);
+
+		try {
+			pstmt=conn.prepareStatement(sql);
+
+			pstmt.setInt(1, (cPage-1)*numPerPage+1);
+			pstmt.setInt(2, cPage*numPerPage);
+			rs=pstmt.executeQuery();
+			while(rs.next()) {
+				Lecture lec=new Lecture();
+				Mento mt = new Mento();
+
+				lec.setLecName(rs.getString("lecname")); 
+				lec.setLecType(rs.getString("lectype"));
+				lec.setLecPrice(rs.getInt("lecprice"));
+
+				System.out.println("dao lec :"+lec);
+
+				mt.setMtNickName(rs.getString("mtnickname"));
+
+				LectureUpload up= new LectureUploadDao().lectureUpCover(conn, rs.getInt("lecnum"));
+
+				uploadlist.add(up);
+
+				lec.setLectureUpList(uploadlist);
+
+				lecturelist.add(lec);
+
+
+
+				System.out.println("lecturelist: "+lecturelist);
+
+
+			}
+		}catch(Exception e) {
+			e.printStackTrace();
+		}finally {
+			close(rs);
+			close(pstmt);
+		}
+		return lecturelist;
+	}
 
 }
 
