@@ -31,6 +31,7 @@ public class UpdateCheckMentoServlet extends HttpServlet {
 		request.setAttribute("msg", msg);
 		request.setAttribute("loc", loc);
 		request.getRequestDispatcher("/admin/AdminMentoApproval.do").forward(request, response);
+		System.out.println("rlgh");
 
 	}
 
