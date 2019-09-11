@@ -670,6 +670,445 @@ hr{
 	height: 20px;
 }
 
+/*-----------------------------------------*/
+
+/* mypage list */
+table.MYLIST {
+	width: 600px;
+	text-align: center;
+	margin: 0 auto;
+}
+
+button#listBtn {
+	width: 150px;
+	height: 30px;
+	font-size: 15pt;
+	background-color: white;
+	border: 1px black solid;
+	cursor: pointer;
+}
+
+/* list data */
+.wrap {
+	min-height: 300px;
+}
+
+table#list {
+	border-collapse: collapse;
+	border: #a79c8e;
+}
+
+.list {
+	height: 50px;
+	text-align: center;
+}
+
+.listName {
+	background-color: #f24365;
+	color: #fff;
+	height: 50px;
+	text-align: center;
+}
+
+.listNumber {
+	width: 60px;
+}
+
+.listContent {
+	width: 600px;
+}
+
+.listCheck {
+	width: 60px;
+}
+
+table#applyBtn {
+	border-collapse: collapse;
+	height: 30px;
+	width: 730px;
+	align-items: center
+}
+
+input#apply {
+	width: 100px;
+	height: 30px;
+	background-color: #eb9f9f;
+	border: none;
+}
+
+
+/*--멘토등록------------------------------------*/
+
+.camera {
+	cursor: pointer;
+}
+
+.file_input{
+    padding-left:150px;
+    padding-right:420px;
+  	background-color:rgb(248, 231, 234);
+    border-radius: 40px;
+    z-index: -1;
+}
+
+#nick{
+    margin-left:100px;
+}
+#phone{
+    margin-left:47px;
+}
+#school1{
+    margin-left: 25px;
+}
+#school3, #school5{
+    margin-left: 137px;
+}
+#profile{
+    font-size:5px;
+    display:inline;
+    position: absolute;
+    width:fit-content;
+    right:20;margin-left: auto;margin-right: auto;
+}
+#school7{
+    margin-left:36px;
+}
+#camera{
+    margin-left:20px;
+    vertical-align: middle;
+}
+#photo{
+    margin-left:138px;
+}
+
+#insert{
+    position: absolute;
+    bottom:20px;
+    right:470px;
+}
+
+/*--수업 상세-------*/
+.wrap{
+    width:1024px;
+}
+
+.detailwrap{
+    width:500px;
+    background-color:rgba(211, 211, 211, 0.486);
+    position: relative;
+    float: left;
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    min-width: 0;
+    word-wrap: break-word;
+    background-color: #fff;
+    background-clip: border-box;
+    border: 1px solid rgba(0, 0, 0, 0.125);
+    border-radius: 0.25rem;
+    margin-left: 400px;
+    margin-top: 50px;
+}
+
+.detailimg{
+    width:500px;
+    height:300px;
+}
+
+.pricewrap{
+    float:right;
+}
+
+.detailbar{
+    border: 1px solid rgba(0, 0, 0, 0.125);
+    background-color: black;
+    width:500px;
+    height: 50px;
+    font-size: 15px;
+    font-weight: 900;
+    text-align: center;
+    vertical-align: middle;
+    color:#f24365;
+    font-family: "나눔스퀘어";
+    cursor: pointer;
+}
+
+.detailbar2{
+    position: fixed;
+    /* border: 1px solid rgba(0, 0, 0, 0.125); */
+    background-color: black;
+    width:500px;
+    height: 50px;
+    top:0px;
+    font-size: 15px;
+    font-weight: 900;
+    text-align: center;
+    vertical-align: middle;
+    color:#f24365;
+    font-family: "나눔스퀘어";
+    cursor: pointer;  
+}
+
+.detailbar tr td a{
+    color:#f24365;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+
+
+.detailbar2 tr td a{
+    color:#f24365;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+
+
+
+.payment{
+    position: absolute;
+    width: 200px;
+    height: 200px;
+    right: 50px;
+    top: 10px;
+    background-color: tomato;
+    color: #fff;
+
+}
+
+/* #floatMenu {
+	position: fixed;
+	width: 250px;
+	height: 300px;
+	right: 100px;
+    top: 46%;
+    margin-top:50px;
+	background-color: #606060;
+	color: #fff;
+} */
+
+.fix{
+    position:fixed;
+    width:200px;
+    height:740px;
+    top:10px;
+    margin-left:100px;
+    margin-top:0px;
+    background-color: #f24365;
+}
+
+.floatMenu {
+	position: absolute;
+	width: 200px;
+    height: 740px;
+    /* top:52%; */
+    margin-top: 50px;
+    margin-left:100px;
+	background-color: #f24365;
+    color: #fff;
+    border-radius: 30px;
+}
+
+.floatTitle{
+    text-align: center;
+    margin : 20px 10px 10px 10px;
+    font-size: 30px;
+    font-weight: 900;
+    font-family: "나눔스퀘어";
+}
+
+.classSubmit{
+    width: 100px;
+    height: 30px;
+    margin-left: 50px;
+    background-color: black;
+    color: white;
+    font-weight: 900;
+    border: 0px;
+    border-radius: 20px;
+}
+
+.floatTitle hr{
+    display: block;
+    border: white 0 none;
+    border-top:5px solid white;
+    height: 10px;
+    border-radius: 5    px;
+    
+}
+
+.floatsubtitle{
+    margin-left: 20px;
+    font-family: "나눔스퀘어";
+    font-weight: 600;
+    font-size: 20px;
+}
+
+div#select_box {
+    position: relative;
+    width: 160px;
+    height: 32px;
+    margin: 10px 20px 30px 20px;
+    background-color: black;
+    color:white;
+    font-weight: 600;
+  }
+  
+  div#select_box label {
+    position: absolute;
+    font-size: 14px;
+    color: #fff;
+    top: 7px;
+    left: 12px;
+    letter-spacing: 1px;
+  }
+  
+  div#select_box select#color {
+    width: 100%;
+    height: 32px;
+    min-height: 32px;
+    line-height: 32px;
+    padding: 0 10px;
+    opacity: 0;
+    filter: alpha(opacity=0);
+    /* IE 8 */
+  }
+
+.classSubmit:hover{
+    text-shadow: 0px 0px 5px white;
+    box-shadow: 0px 0px 5px black;
+}
+
+.right2{
+    right:100px;
+}
+
+.title{
+    color:#f24365;
+    font-weight: 900;
+    font-size: 60px;
+    font-family: '나눔스퀘어';
+    text-align: center;
+    margin: 30px 10px 30px 10px;
+}
+
+.content{
+    margin: 0px 10px 10px 10px;
+    text-align: center;
+    font-size: 15px;
+}
+
+.card-text{
+    float:right;
+    margin-right: 10px;
+    
+}
+
+.proinfo{
+    width:500px;
+    height:300px;
+}
+
+.proinfo tr td img{
+    width:300px;
+    height:300px;
+}
+
+
+.subtext{
+    color: #f24365;
+    font-weight: 900;
+    font-size: 36px;
+    font-family: '나눔스퀘어';
+    text-align: left;
+    margin-left: 20px;
+    margin-top:10px;
+    margin-bottom: 10px;
+}
+
+
+
+.reviewtable{
+    width: 460px;
+    height:150px;
+    margin-left:20px;
+    margin-right: 20px;
+    border-top: solid 1px lightgray;
+    border-bottom: solid 1px lightgray;
+}
+
+
+
+.reviewId{
+    width:100px;
+    text-align: center;
+}
+
+.reviewId b{
+    font-size: 20px;
+}
+
+.reviewContent{
+    position: absolute;
+    width:360px;
+    height: 150px;
+    overflow: scroll;
+    text-align: left;
+    margin-right: 30px;
+    
+}
+
+.reviewContent::-webkit-scrollbar{
+    width:0px;
+}
+.tutorpro{
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+.tutorpro oi{
+    padding : 10px 0px 5px 5px;
+    margin-bottom: 10px;
+    break-inside: auto;
+    display: block;
+    
+}
+
+/* .review_content input[type="password"] {
+    width: 100%;
+    height: auto;
+    line-height : normal;
+    padding: .8em .5em;
+    -moz-appearance: none;
+    appearance: none;
+} */
+
+/*--수업 리스트 ------*/
+
+
+img.lectureImg {
+	width: 338px;
+}
+
+/*--회원가입에 들어가는 버튼 --*/
+
+input.inputbtn , input.btnregister{
+		width: 130px;
+	height: 30px;
+	margin-bottom: 10px;
+	font-size: 16px;
+	color: rgb(255, 255, 255);
+	text-align: center;
+	line-height: 2em;
+	border-radius: 4px;
+	background-color: #eb9f9f;
+	border: none;
+}
+
+
+
 
 /* 결제창 */
 .class-pay-container{

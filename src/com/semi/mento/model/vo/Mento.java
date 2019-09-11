@@ -15,6 +15,8 @@ public class Mento{
 	private String mtAcademic;
 	private String mtAcademicDept;
 	private String mtGraduation;
+	private String mtBank;
+	private String mtAccountNumber;
 	private Date mtaDate;	//멘토신청날짜
 	private char mtCheck;
 	private String mtReason;
@@ -25,10 +27,11 @@ public class Mento{
 	public Mento() {
 
 	}
-	
+
+
 	public Mento(int mtNum, int mNum, Date mtHireDate, String mtNickName, String mtHowConfirm, String mtAcademic,
-			String mtAcademicDept, String mtGraduation, Date mtaDate, char mtCheck, String mtReason, Member member,
-			List<MentoUpload> list) {
+			String mtAcademicDept, String mtGraduation, String mtBank, String mtAccountNumber, Date mtaDate,
+			char mtCheck, String mtReason, Member member, List<MentoUpload> list) {
 		super();
 		this.mtNum = mtNum;
 		this.mNum = mNum;
@@ -38,12 +41,28 @@ public class Mento{
 		this.mtAcademic = mtAcademic;
 		this.mtAcademicDept = mtAcademicDept;
 		this.mtGraduation = mtGraduation;
+		this.mtBank = mtBank;
+		this.mtAccountNumber = mtAccountNumber;
 		this.mtaDate = mtaDate;
 		this.mtCheck = mtCheck;
 		this.mtReason = mtReason;
 		this.member = member;
 		this.list = list;
 	}
+
+
+	public Mento(String mtNickName, String mtHowConfirm, String mtAcademic, String mtAcademicDept, String mtGraduation,
+			String mtBank, String mtAccountNumber) {
+		super();
+		this.mtNickName = mtNickName;
+		this.mtHowConfirm = mtHowConfirm;
+		this.mtAcademic = mtAcademic;
+		this.mtAcademicDept = mtAcademicDept;
+		this.mtGraduation = mtGraduation;
+		this.mtBank = mtBank;
+		this.mtAccountNumber = mtAccountNumber;
+	}
+
 
 	public int getMtNum() {
 		return mtNum;
@@ -125,6 +144,26 @@ public class Mento{
 	}
 
 
+	public String getMtBank() {
+		return mtBank;
+	}
+
+
+	public void setMtBank(String mtBank) {
+		this.mtBank = mtBank;
+	}
+
+
+	public String getMtAccountNumber() {
+		return mtAccountNumber;
+	}
+
+
+	public void setMtAccountNumber(String mtAccountNumber) {
+		this.mtAccountNumber = mtAccountNumber;
+	}
+
+
 	public Date getMtaDate() {
 		return mtaDate;
 	}
@@ -155,19 +194,9 @@ public class Mento{
 	}
 
 
-	public List<MentoUpload> getList() {
-		return list;
-	}
-
-	public void setList(List<MentoUpload> list) {
-		this.list = list;
-	}
-
 	public Member getMember() {
 		return member;
 	}
-
-
 
 
 	public void setMember(Member member) {
@@ -175,17 +204,24 @@ public class Mento{
 	}
 
 
+	public List<MentoUpload> getList() {
+		return list;
+	}
+
+
+	public void setList(List<MentoUpload> list) {
+		this.list = list;
+	}
 
 
 	@Override
 	public String toString() {
 		return "Mento [mtNum=" + mtNum + ", mNum=" + mNum + ", mtHireDate=" + mtHireDate + ", mtNickName=" + mtNickName
 				+ ", mtHowConfirm=" + mtHowConfirm + ", mtAcademic=" + mtAcademic + ", mtAcademicDept=" + mtAcademicDept
-				+ ", mtGraduation=" + mtGraduation + ", mtaDate=" + mtaDate + ", mtCheck=" + mtCheck + ", mtReason="
-				+ mtReason + ", list=" + list + "]";
+				+ ", mtGraduation=" + mtGraduation + ", mtBank=" + mtBank + ", mtAccountNumber=" + mtAccountNumber
+				+ ", mtaDate=" + mtaDate + ", mtCheck=" + mtCheck + ", mtReason=" + mtReason + ", member=" + member
+				+ ", list=" + list + "]";
 	}
-
 	
 	
-
 }

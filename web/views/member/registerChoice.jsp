@@ -59,7 +59,7 @@
 	});
 	
 	$('#rgFacebook').click(function(){
-		location.href="<%=request.getContextPath()%>/views/register/register2.jsp";
+		location.href="<%=request.getContextPath()%>/views/member/register2.jsp";
 	});
 	
  });

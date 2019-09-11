@@ -21,7 +21,7 @@ import com.semi.mento.model.vo.Mento;
 public class LectureDao {
 	private Properties prop = new Properties();
 	public LectureDao() {
-		String path = MentoDao.class.getResource("/sql/lecture/lecture-query.properties").getPath();
+		String path = MentoDao.class.getResource("/sql/semi/lecture-query.properties").getPath();
 		try {
 			prop.load(new FileReader(path));
 		} catch(IOException e) {

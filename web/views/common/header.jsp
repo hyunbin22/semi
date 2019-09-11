@@ -95,14 +95,14 @@
             <div><a href = "<%=request.getContextPath()%>"><img id = "Main" src = "<%=request.getContextPath()%>/image/LOGO.png"></a></div> <!--메인 아이콘 이미지-->
                 <%if(memberLogin == null){ %>
             <div id = loginmenu>
-            <form id = "loginFrm" action = "<%=request.getContextPath() %>/MemberLoginServlet.do" method="POST" onsubmit="return validate();">
+            <form id = "loginFrm" action = "<%=request.getContextPath() %>/member/memberLoginServlet.do" method="POST" onsubmit="return validate();">
                 <input id = "id" type = "text" name = "userId" placeholder="아이디">
                 <input id = "pwd" type = "password" name = "userPwd" placeholder="비밀번호">
                 <input type="submit" value="로그인" id="login">
             </form>
             </div>
                 <div id = "loginmenu2">
-                <span onclick = "location.href='<%=request.getContextPath()%>/views/register/registerChoice.jsp'" id = "join">회원가입</span>
+                <span onclick = "location.href='<%=request.getContextPath()%>/views/member/registerChoice.jsp'" id = "join">회원가입</span>
                 <span onclick = "location.href='<%=request.getContextPath()%>/views/member/FINDID.jsp'" id = findId>아이디 찾기</span>
                 <span onclick = "location.href='<%=request.getContextPath()%>/views/member/FINDPWD.jsp'" id = findPw>비밀번호 찾기</span>
                    <%} else {%>
@@ -113,7 +113,7 @@
                 </div>
                 <div id = "mypromenu">
                     <button onclick = "location.href='<%=request.getContextPath()%>/memberLogoutServlet.do'" id = logout>로그아웃</button>
-                    <button onclick = "location.href='<%=request.getContextPath()%>/member/memberMyPage.do?userId=<%=memberLogin.getmId()%>'" id = mypage>마이페이지</button>
+                    <button onclick = "location.href='<%=request.getContextPath()%>/member/memberMyPage.do?mId=<%=memberLogin.getmId()%>'" id = mypage>마이페이지</button>
                 </div>
             </div>
                    <%} %>

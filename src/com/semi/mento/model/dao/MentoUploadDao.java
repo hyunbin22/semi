@@ -19,7 +19,7 @@ public class MentoUploadDao {
 	private Properties prop = new Properties();
 
 	public MentoUploadDao() {
-		String path = MentoDao.class.getResource("/sql/mento/mento-query.properties").getPath();
+		String path = MentoDao.class.getResource("/sql/semi/mento-query.properties").getPath();
 		try {
 			prop.load(new FileReader(path));
 		} catch(IOException e) {
