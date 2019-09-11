@@ -32,16 +32,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-    <script src="<%=request.getContextPath() %>/js/jquery-3.4.1.js"></script>
-    <script src="https://sdk.accountkit.com/en_US/sdk.js"></script>	<!-- sms인증 -->
-    <script src="//developers.kakao.com/sdk/js/kakao.min.js"></script>	<!-- kakao -->
-    <link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/css/main.css">
+    <link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/css/MAIN.css">
     <link href="https://fonts.googleapis.com/css?family=Stylish&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Black+Han+Sans&display=swap" rel="stylesheet">
     <title>KH SEMI</title>
 
 </head>
-<body class="center1">
+<body>
 
         <script>
 
@@ -59,10 +56,7 @@
             return true;
         }
         
-            function test()
-            {
-                alert("테스트");
-            }
+
 
                 $(document).ready(function() {
                     var $banner = $(".banner").find("ul");
@@ -71,13 +65,13 @@
                     var $length = $banner.children().length;//이미지의 갯수
                     var rollingId;
                     //정해진 초마다 함수 실행
-                    rollingId = setInterval(function() { rollingStart(); }, 5000);//다음 이미지로 롤링 애니메이션 할 시간차
+                    rollingId = setInterval(function() { rollingStart(); }, 3000);//다음 이미지로 롤링 애니메이션 할 시간차
                     function rollingStart() {
                         $banner.css("width", $bannerWidth * $length + "px");
                         $banner.css("height", $bannerHeight + "px");
                         //alert(bannerHeight);
                         //배너의 좌측 위치를 옮겨 준다.
-                        $banner.animate({left: - $bannerWidth + "px"}, 5000, function() { //숫자는 롤링 진행되는 시간이다.
+                        $banner.animate({left: - $bannerWidth + "px"}, 1, function() { //숫자는 롤링 진행되는 시간이다.
                             //첫번째 이미지를 마지막 끝에 복사(이동이 아니라 복사)해서 추가한다.
                             $(this).append("<li>" + $(this).find("li:first").html() + "</li>");
                             //뒤로 복사된 첫번재 이미지는 필요 없으니 삭제한다.
@@ -88,32 +82,36 @@
                         });
                     }
                 }); 
+                
+                
+                
+                
             </script>
 
-    <header id="mainHeader">
+    <header>
         <div id="head" >
             <div><a href = "<%=request.getContextPath()%>"><img id = "Main" src = "<%=request.getContextPath()%>/image/LOGO.png"></a></div> <!--메인 아이콘 이미지-->
+            <%if(memberLogin != null && (memberLogin.getmId().equals("test"))) {%><div><span onclick = "" id = "join">관리자전용</span></div><%} %>
                 <%if(memberLogin == null){ %>
             <div id = loginmenu>
-            <form id = "loginFrm" action = "<%=request.getContextPath() %>/MemberLoginServlet.do" method="POST" onsubmit="return validate();">
-                <input id = "id" type = "text" name = "userId" placeholder="아이디">
-                <input id = "pwd" type = "password" name = "userPwd" placeholder="비밀번호">
+            <form id = "loginFrm" action = "<%=request.getContextPath() %>/member/memberLoginServlet.do" method="POST" onsubmit="return validate();">
+                <input id = "id" type = "text" name = "mId" placeholder="아이디">
+                <input id = "pwd" type = "password" name = "mPw" placeholder="비밀번호">
                 <input type="submit" value="로그인" id="login">
             </form>
             </div>
                 <div id = "loginmenu2">
-                <span onclick = "location.href='<%=request.getContextPath()%>/views/register/registerChoice.jsp'" id = "join">회원가입</span>
+                <span onclick = "location.href='<%=request.getContextPath()%>/views/member/register_choice.jsp'" id = "join">회원가입</span>
                 <span onclick = "location.href='<%=request.getContextPath()%>/views/member/FINDID.jsp'" id = findId>아이디 찾기</span>
                 <span onclick = "location.href='<%=request.getContextPath()%>/views/member/FINDPWD.jsp'" id = findPw>비밀번호 찾기</span>
                    <%} else {%>
                 <div id = profile1>
                 <div id = "myPro">
-                    <div id = "myPro2"><%=memberLogin.getmId()%>님</div>
-                    <div style = "text-align: center">환영합니다!</div>
+                    <div id = "myPro2"><%=memberLogin.getmId()%>님 환영합니다!</div>
                 </div>
                 <div id = "mypromenu">
                     <button onclick = "location.href='<%=request.getContextPath()%>/memberLogoutServlet.do'" id = logout>로그아웃</button>
-                    <button onclick = "location.href='<%=request.getContextPath()%>/member/memberMyPage.do?userId=<%=memberLogin.getmId()%>'" id = mypage>마이페이지</button>
+                    <button onclick = "location.href='<%=request.getContextPath()%>/member/memberMyPage.do?mId=<%=memberLogin.getmId()%>'" id = mypage>마이페이지</button>
                 </div>
             </div>
                    <%} %>
@@ -126,10 +124,35 @@
     
  		<nav>
                         <ul class="center1">
+                        
+                        <li><a href="#">ABLING</a></li>
+                        <li><a href="#">강의찾기</a></li>
+                        <li><a href="#">수업모임</a></li>
+                        <li><a href="#">이벤트</a></li>
+                        
                   
-                           <li><a href="<%=request.getContextPath()%>">홈으로</a></li>
+                           <li><a href="#">고객지원</a>
+                              <ul>
+                              <li><a href="#">공지사항</a></li>
                   
-                           <li><a href="<%=request.getContextPath()%>/admin/AdminMentoApproval.do">뷰티</a>
+                           <li><a href="#">F & A</a>  
+                           </li>
+                 
+                            <%if(memberLogin != null) { %>
+                            <li><a href="#">1대1문의</a>
+                            </li>
+                            
+                            <li><a href="<%=request.getContextPath()%>/views/report/reportForm.jsp">신고하기</a>
+                            </li>
+                            <% } %>
+                              </ul>
+                           </li>
+                           
+                           <!--  1   -->
+                           
+                           
+                  
+                          <!--  <li><a href="#">뷰티</a>
                   
                               <ul>
                                  <li><a href="#">메이크업</a></li>
@@ -138,7 +161,7 @@
                               </ul>
                            </li>
                   
-                           <li><a href="#">유튜브</a>
+                           <li><a href="#">미디어</a>
                   
                                <ul>
                                    <li><a href="#">마케팅</a></li>
@@ -172,12 +195,14 @@
                                     <li><a href="#">중국어</a></li>
                                     <li><a href="#">스페인어</a></li>
                                 </ul>
-                            </li>
+                            </li> -->
                             </ul>
                             
                             </nav>
 
         </div>
     </header> 
+    <script>
 
-    <br>
+    </script>
+

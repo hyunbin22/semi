@@ -2,7 +2,6 @@ package com.semi.member.controller;
 
 import java.io.IOException;
 import java.sql.Date;
-
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -27,7 +26,7 @@ public class MemberRegisterServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		String id = request.getParameter("id");
-		String pw = request.getParameter("pw");
+		String pw = request.getParameter("mPw");
 		String name = request.getParameter("name");
 		char gender = request.getParameter("gender").charAt(0);
 		Date birth = Date.valueOf(request.getParameter("birth"));
@@ -35,6 +34,15 @@ public class MemberRegisterServlet extends HttpServlet {
 		String phone = request.getParameter("tel1");
 		phone+=request.getParameter("tel2");
 		phone+=request.getParameter("tel3");
+		
+		System.out.println(id);
+		System.out.println(pw);
+		System.out.println(name);
+		System.out.println(gender);
+		System.out.println(birth);
+		System.out.println(email);
+		System.out.println(phone);
+		
 		MemberService service = new MemberService();
 		Member m = new Member(id,pw,name,gender,birth,email,phone);
 		int result = service.insertMember(m);

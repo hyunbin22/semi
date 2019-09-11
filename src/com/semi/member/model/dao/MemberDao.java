@@ -18,7 +18,7 @@ public class MemberDao {
 	private Properties prop = new Properties();
 	
 	public MemberDao() {
-		String path = MemberDao.class.getResource("/sql/member/member-query.properties").getPath();
+		String path = MemberDao.class.getResource("/sql/semi/member-query.properties").getPath();
 		try {
 			prop.load(new FileReader(path));
 		} catch(IOException e) {
@@ -26,6 +26,7 @@ public class MemberDao {
 		}
 	}
 	
+	//회원가입
 	public int register(Connection conn, Member m) {
 		PreparedStatement pstmt = null;
 		int result = 0;
@@ -51,16 +52,16 @@ public class MemberDao {
 		return result;
 	}
 	
-	
-	public Member selectId(Connection conn, String id, String pw) {
+	//로그인
+	public Member selectId(Connection conn, String mId, String mPw) {
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		String sql = prop.getProperty("selectId");
 		Member m = null;
 		try {
 			pstmt = conn.prepareStatement(sql);
-			pstmt.setString(1, id);
-			pstmt.setString(2, pw);
+			pstmt.setString(1, mId);
+			pstmt.setString(2, mPw);
 			rs = pstmt.executeQuery();
 			if(rs.next()) {
 				m = new Member();
@@ -69,9 +70,11 @@ public class MemberDao {
 				m.setmPassword(rs.getString("mPassword"));
 				m.setmName(rs.getString("mName"));
 				m.setmGender(rs.getString("mGender").charAt(0));
+				m.setmBirth(rs.getDate("mBirth"));
 				m.setmEmail(rs.getString("mEmail"));
 				m.setmPhone(rs.getString("mPhone"));
-				m.setmHireDate(rs.getDate("mHireDate"));
+				m.setmUse(rs.getString("mUse").charAt(0));
+				m.setmHireDate(rs.getDate("mHire_Date"));
 			}
 		} catch(SQLException e) {
 			e.printStackTrace();
@@ -81,7 +84,80 @@ public class MemberDao {
 		}
 		return m;
 	}
-
+	
+	//마이페이지
+	public Member selectMember(Connection conn, String mId) {
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		Member m=null;
+		String sql=prop.getProperty("selectMember");
+		try {
+			pstmt=conn.prepareStatement(sql);
+			pstmt.setString(1, mId);
+			rs=pstmt.executeQuery();
+			if(rs.next()) {
+				m = new Member();
+				m.setmNum(rs.getInt("mNum"));
+				m.setmId(rs.getString("mId"));
+				m.setmPassword(rs.getString("mPassword"));
+				m.setmName(rs.getString("mName"));
+				m.setmGender(rs.getString("mGender").charAt(0));
+				m.setmBirth(rs.getDate("mBirth"));
+				m.setmEmail(rs.getString("mEmail"));
+				m.setmPhone(rs.getString("mPhone"));
+				m.setmUse(rs.getString("mUse").charAt(0));
+				m.setmHireDate(rs.getDate("mHire_Date"));
+			}
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}
+		finally {
+			close(rs);
+			close(pstmt);
+		}
+		return m;
+	}
+	
+	//회원탈퇴
+	public int deleteMember(Connection conn, String mId) {
+		PreparedStatement pstmt=null;
+		int result=0;
+		String sql=prop.getProperty("deleteMember");
+		System.out.println(sql);
+		try {
+			pstmt=conn.prepareStatement(sql);
+			pstmt.setString(1, mId);
+			result=pstmt.executeUpdate();
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}
+		finally {
+			close(pstmt);
+		}
+		return result;
+	}
+	
+	//회원정보수정
+	public int updateMember(Connection conn, String mPw, String mEmail, String mPhone, String mId) {
+		PreparedStatement pstmt=null;
+		int result=0;
+		String sql=prop.getProperty("updateMember");
+		try {
+			pstmt=conn.prepareStatement(sql);
+			pstmt.setString(1, mPw);
+			pstmt.setString(2, mEmail);
+			pstmt.setString(3, mPhone);
+			pstmt.setString(4, mId);
+			result=pstmt.executeUpdate();
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}
+		finally {
+			close(pstmt);
+		}
+		return result;
+	}
+	
 	public int idDupliCheck(Connection conn, String userId) {
 		Statement stmt = null;
 		ResultSet rs = null;
@@ -101,61 +177,7 @@ public class MemberDao {
 			close(stmt);
 		}
 		return -1;	//db오류
-
 	}
-
-	public int emailDupliCheck(Connection conn, String email) {
-		Statement stmt = null;
-		ResultSet rs = null;
-		String sql = "select * from tb_member where memail='"+email+"'";
-		try {
-			stmt = conn.createStatement();
-			rs = stmt.executeQuery(sql);
-			if(rs.next()) {
-				return 0;	//중복된 이메일
-			} else {
-				return 1;	//가입가능한 이메일 
-			}
-		} catch(SQLException e) {
-			e.printStackTrace();
-		} finally {
-			close(rs);
-			close(stmt);
-		}
-		return -1;	//db오류
-	}
-	
-	public Member selectMember(Connection conn, String mId) {
-	      PreparedStatement pstmt=null;
-	      ResultSet rs=null;
-	      Member m=null;
-	      String sql=prop.getProperty("selectMember");
-	      try {
-	         pstmt=conn.prepareStatement(sql);
-	         pstmt.setString(1, mId);
-	         rs=pstmt.executeQuery();
-	         if(rs.next()) {
-	            m = new Member();
-	            m.setmNum(rs.getInt("mNum"));
-	            m.setmId(rs.getString("mId"));
-	            m.setmPassword(rs.getString("mPassword"));
-	            m.setmName(rs.getString("mName"));
-	            m.setmGender(rs.getString("mGender").charAt(0));
-	            m.setmBirth(rs.getDate("mBirth"));
-	            m.setmEmail(rs.getString("mEmail"));
-	            m.setmPhone(rs.getString("mPhone"));
-	            m.setmUse(rs.getString("mUse").charAt(0));
-	            m.setmHireDate(rs.getDate("mHire_Date"));
-	         }
-	      }catch(SQLException e) {
-	         e.printStackTrace();
-	      }
-	      finally {
-	         close(rs);
-	         close(pstmt);
-	      }
-	      return m;
-	   }
 	
 }
 

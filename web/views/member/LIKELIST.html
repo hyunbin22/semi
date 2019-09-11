@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="css/MAIN.css">
+    <link href="https://fonts.googleapis.com/css?family=Stylish&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Black+Han+Sans&display=swap" rel="stylesheet">
+    <title>즐겨찾기목록</title>
+
+</head>
+<body>
+
+    <header>
+        <div id="head" class="center1">
+            <div><img id = "Main" src = "img/LOGO.png"></img></div> <!--메인 아이콘 이미지-->
+            <div id = profile>
+                <div id = "myPro">
+                    <div id = "myPro2">KH정보교육원</div>
+                    <div style = "text-align: center">환영합니다!</div>
+                </div>
+                <div id = "mypromenu">
+                    <button onclick = "location.href=''" id = logout>로그아웃</button>
+                    <button onclick = "location.href='MTPAGE.html'" id = mypage>마이페이지</button>
+                </div>
+            </div>
+        </div>
+        <br><br><br><br><br><br><br><br><br><br>
+        
+        <br>
+        <div id = menu class = "center1">
+                <nav>
+                        <ul class="center1">
+                  
+                           <li><a href="#">홈으로</a></li>
+                  
+                           <li><a href="#">뷰티</a>
+                  
+                              <ul>
+                                 <li><a href="#">메이크업</a></li>
+                                 <li><a href="#">네일</a></li>
+                                 <li><a href="#">헤어</a></li>
+                              </ul>
+                           </li>
+                  
+                           <li><a href="#">유튜브</a>
+                  
+                               <ul>
+                                   <li><a href="#">마케팅</a></li>
+                                   <li><a href="#">편집</a></li>
+                                   <li><a href="#">촬영</a></li>
+                               </ul>
+                           </li>
+                  
+                           <li><a href="#">운동</a>
+                  
+                                <ul>
+                                    <li><a href="#">헬스</a></li>
+                                    <li><a href="#">축구</a></li>
+                                    <li><a href="#">요가</a></li>
+                                </ul>
+                            </li>
+
+                            <li><a href="#">음악</a>
+                  
+                                <ul>
+                                    <li><a href="#">기타</a></li>
+                                    <li><a href="#">DJ</a></li>
+                                    <li><a href="#">보컬</a></li>
+                                </ul>
+                            </li>
+
+                            <li><a href="#">외국어</a>
+                  
+                                <ul>
+                                    <li><a href="#">영어</a></li>
+                                    <li><a href="#">중국어</a></li>
+                                    <li><a href="#">스페인어</a></li>
+                                </ul>
+                            </li>
+                            </ul>
+                     </nav>
+        </div>
+    </header> 
+    <br>
+    <section>
+            <div class="wrap">
+                <div class="bar">
+                    <br>
+                    <table class = "MYLIST">
+                            <tr>
+                                <td><button onclick="location.href='MYPAGE.html'" id = "listBtn">마이페이지</button></td>
+                                <td><button onclick="location.href='MYPAGE_MODIFY.html'" id = "listBtn">내정보수정</button></td>
+                                <td><button onclick="location.href='STUDYLIST.html'" id = "listBtn">내강좌목록</button></td>
+                                <td><button onclick="location.href='LIKELIST.html'" id = "listBtn">즐겨찾기목록</button></td>
+                                <td><button onclick="location.href=''" id = "listBtn">멘토신청하기</button></td>
+                            </tr>
+                    </table>
+                    <br><br>
+                    <h1 class="center1">내강좌목록</h1>
+                    <br><br>
+                    <hr>
+                    <br>
+                </div>
+                <div class="list center1">
+                    <form action = "" method="POST">
+                    <table id = "list" border="1">
+                            <tr class = "listName">
+                                    <td class = "listNumber">No</td>
+                                    <td class = "listContent">강의 이름</td>
+                                    <td class = "listCheck">선택</td>
+                                </tr>
+                        <tr class = "list">
+                            <td class = "listNumber">1</td>
+                            <td class = "listContent"><span>박기오와 함께하는 기타 수업</span></td>
+                            <td class = "listCheck"><input type = "checkbox" name = "check" value = "1"></td>
+                        </tr>
+                        <tr class = "list">
+                            <td class = "listNumber">2</td>
+                            <td class = "listContent"><span>정현빈의 누구나 따라하는 뷰티학개론</span></td>
+                            <td class = "listCheck"><input type = "checkbox" name = "check" value = "1"></td>
+                        </tr>
+                        <tr class = "list">
+                            <td class = "listNumber">3</td>
+                            <td class = "listContent"><span>만능 유튜버 여동규의 간단한 동영상 제작</span></td>
+                            <td class = "listCheck"><input type = "checkbox" name = "check" value = "1"></td>
+                        </tr>
+                        <tr class = "list">
+                            <td class = "listNumber">4</td>
+                            <td class = "listContent"><span>송주미의 말랑 말랑 슬라임의 모든것을 알아보는 시간</span></td>
+                            <td class = "listCheck"><input type = "checkbox" name = "check" value = "1"></td>
+                        </tr>
+                        <tr class = "list">
+                            <td class = "listNumber">5</td>
+                            <td class = "listContent"><span>이걸 만들고 있는 김기호 ㅠㅠ</span></td>
+                            <td class = "listCheck"><input type = "checkbox" name = "check" value = "1"></td>
+                        </tr>
+                    </table>
+                    <br>
+                    <table id = "applyBtn">
+                        <tr>
+                            <td><input type = "submit" id = "apply" value="삭제" style="cursor: pointer"></td>
+                        </tr>
+                    </table>
+                </form>
+    
+    
+                </div>
+            </div>
+        </section>
+    
+
+
+    <footer>
+        <div class="footmenu">
+            <ul class="center1">
+                <li class="mainshadow"><a href="#">공지사항</a></li>
+                <li class="mainshadow"><a href="#">이벤트</a></li>
+                <li class="mainshadow"><a href="#">Q&A</a></li>
+            </ul>
+        </div>
+        <br>
+        <p class="center1">대표 : 정현빈 | 사업자등록번호 : 000-00-000000 주소 | 서울 강남구 테헤란로14길 6 남도빌딩 2층, 3층 </p>
+        <br><p class="center1">Tel. 010-5803-3236</p>
+        <br><p class="center1">Copyright ⓒ 2019 KH Academy</p>
+
+    </footer>
+
+
+
+
+
+    
+</body>
+</html>

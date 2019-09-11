@@ -1,22 +1,26 @@
 package com.semi.lecture.model.vo;
 
 import java.sql.Date;
-import java.util.Arrays;
 import java.util.List;
 
 import com.semi.mento.model.vo.Mento;
 
+/**
+ * @author gusql
+ *
+ */
 public class Lecture {
 	
 	private int lecNum;
 	private int mtNum;
 	private int subNum;
 	private int localSubNum;
+	private String address;
 	private String lecName;
 	private String lecType;
 	private int lecMaxCount;
 	private int lecPrice;
-	private double lecTime;
+	private int lecTime;
 	private int lecCount;
 	private String lecWeek;
 	private String lecMeet;
@@ -34,15 +38,17 @@ public class Lecture {
 	private char lecStatus;
 	private List<LectureUpload> lectureUpList;
 	private Mento lecMento;
+
 	public Lecture() {
 		// TODO Auto-generated constructor stub
 	}
-	public Lecture(int lecNum, int mtNum, int subNum, int localSubNum, String lecName, String lecType, int lecMaxCount,
-			int lecPrice, double lecTime, int lecCount, String lecWeek, String lecMeet, String lecTot, String lecTot2,
-			Date lecOpenDate, Date lecOpenDate2, String lecLocalContent, String lecMentoContent,
-			String lecLectureContent, int lecStudentCount, Date lecADate, char lecCheck, String lecReason,
-			char lecStatus, List<LectureUpload> lectureUpList, Mento lecMento) {
-		super();
+
+	public Lecture(int lecNum, int mtNum, int subNum, int localSubNum, String lecName,
+			String lecType, int lecMaxCount, int lecPrice, int lecTime, int lecCount, String lecWeek, String lecMeet,
+			String lecTot, String lecTot2, Date lecOpenDate, Date lecOpenDate2, String lecLocalContent,
+			String lecMentoContent, String lecLectureContent, int lecStudentCount, Date lecADate, char lecCheck,
+			String lecReason, char lecStatus, List<LectureUpload> lectureUpList, Mento lecMento) {
+
 		this.lecNum = lecNum;
 		this.mtNum = mtNum;
 		this.subNum = subNum;
@@ -70,6 +76,35 @@ public class Lecture {
 		this.lectureUpList = lectureUpList;
 		this.lecMento = lecMento;
 	}
+
+
+	public Lecture(int subNum, int mtNum, int localSubNum, String address, String lecName, String lecType,
+			int lecMaxCount, int lecPrice, int lecTime, int lecCount, String lecWeek, String lecMeet, String lecTot,
+			String lecTot2, Date lecOpenDate, Date lecOpenDate2, String lecLocalContent, String lecMentoContent,
+			String lecLectureContent) {
+
+		this.subNum = subNum;
+		this.mtNum = mtNum;
+		this.localSubNum = localSubNum;
+		this.address = address;
+		this.lecName = lecName;
+		this.lecType = lecType;
+		this.lecMaxCount = lecMaxCount;
+		this.lecPrice = lecPrice;
+		this.lecTime = lecTime;
+		this.lecCount = lecCount;
+		this.lecWeek = lecWeek;
+		this.lecMeet = lecMeet;
+		this.lecTot = lecTot;
+		this.lecTot2 = lecTot2;
+		this.lecOpenDate = lecOpenDate;
+		this.lecOpenDate2 = lecOpenDate2;
+		this.lecLocalContent = lecLocalContent;
+		this.lecMentoContent = lecMentoContent;
+		this.lecLectureContent = lecLectureContent;
+		
+	}
+
 	public int getLecNum() {
 		return lecNum;
 	}
@@ -82,9 +117,11 @@ public class Lecture {
 	public void setMtNum(int mtNum) {
 		this.mtNum = mtNum;
 	}
+
 	public int getSubNum() {
 		return subNum;
 	}
+
 	public void setSubNum(int subNum) {
 		this.subNum = subNum;
 	}
@@ -94,6 +131,14 @@ public class Lecture {
 	public void setLocalSubNum(int localSubNum) {
 		this.localSubNum = localSubNum;
 	}
+	public String getAddress() {
+		return address;
+	}
+
+	public void setAddress(String address) {
+		this.address = address;
+	}
+
 	public String getLecName() {
 		return lecName;
 	}
@@ -118,10 +163,10 @@ public class Lecture {
 	public void setLecPrice(int lecPrice) {
 		this.lecPrice = lecPrice;
 	}
-	public double getLecTime() {
+	public int getLecTime() {
 		return lecTime;
 	}
-	public void setLecTime(double lecTime) {
+	public void setLecTime(int lecTime) {
 		this.lecTime = lecTime;
 	}
 	public int getLecCount() {
@@ -226,19 +271,17 @@ public class Lecture {
 	public void setLecMento(Mento lecMento) {
 		this.lecMento = lecMento;
 	}
+
 	@Override
 	public String toString() {
 		return "Lecture [lecNum=" + lecNum + ", mtNum=" + mtNum + ", subNum=" + subNum + ", localSubNum=" + localSubNum
 				+ ", lecName=" + lecName + ", lecType=" + lecType + ", lecMaxCount=" + lecMaxCount + ", lecPrice="
-				+ lecPrice + ", lecTime=" + lecTime + ", lecCount=" + lecCount + ", lecWeek=" + lecWeek
-				+ ", lecMeet=" + lecMeet + ", lecTot=" + lecTot + ", lecTot2=" + lecTot2 + ", lecOpenDate="
-				+ lecOpenDate + ", lecOpenDate2=" + lecOpenDate2 + ", lecLocalContent=" + lecLocalContent
-				+ ", lecMentoContent=" + lecMentoContent + ", lecLectureContent=" + lecLectureContent
-				+ ", LecStudentCount=" + LecStudentCount + ", lecADate=" + lecADate + ", lecCheck=" + lecCheck
-				+ ", lecReason=" + lecReason + ", lecStatus=" + lecStatus + ", lectureUpList=" + lectureUpList
-				+ ", lecMento=" + lecMento + "]";
+				+ lecPrice + ", lecTime=" + lecTime + ", lecCount=" + lecCount + ", lecWeek=" + lecWeek + ", lecMeet="
+				+ lecMeet + ", lecTot=" + lecTot + ", lecTot2=" + lecTot2 + ", lecOpenDate=" + lecOpenDate
+				+ ", lecOpenDate2=" + lecOpenDate2 + ", lecLocalContent=" + lecLocalContent + ", lecMentoContent="
+				+ lecMentoContent + ", lecLectureContent=" + lecLectureContent + ", LecStudentCount=" + LecStudentCount
+				+ ", lecADate=" + lecADate + ", lecCheck=" + lecCheck + ", lecReason=" + lecReason + ", lecStatus="
+				+ lecStatus + ", lectureUpList=" + lectureUpList + ", lecMento=" + lecMento + "]";
 	}
-	
-	
-	
+
 }
