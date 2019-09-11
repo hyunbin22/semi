@@ -20,9 +20,9 @@ body{
     background-color: rgba(255, 212, 219, 0.87);
 }
 .admin-header ul li{
-	line-height: 70px;
-	font-size: 1.6em;
-	font-weight: 900;
+   line-height: 70px;
+   font-size: 1.6em;
+   font-weight: 900;
     font: 맑은 고딕;    
     display: inline;
     margin-right: 50px;
@@ -30,11 +30,11 @@ body{
 }
 
 .admin-header ul li a{
-	color: #f24365;
+   color: #f24365;
 }
 
 #exit{
-	line-height:40px;
+   line-height:40px;
     float: right;
     margin-top: 10px;
     margin-right: 30px;
@@ -80,100 +80,100 @@ footer{
 
 /* 멘토관리 */
 article.admin-list{
-	width: 700px;
+   width: 700px;
 }
 /* 관리자승인관리 */
 div#admin-Mento-Search-container {
-	
+   
 }
 div#search-mId{
-	display: inline-block;
+   display: inline-block;
 }
 div#search-mName{
-	display:none;
+   display:none;
 }
 
 div#admin-appro-pageBar{
-	margin-top:10px; 
-	text-align:center;
+   margin-top:10px; 
+   text-align:center;
 }
 div#admin-appro-pageBarr span.admin-appro-cPage{
-	color: darkgray;
+   color: darkgray;
 }
 
 .approImg{
-	width: 150px;
-	height: 150px;
-	border-radius: 30px;
+   width: 150px;
+   height: 150px;
+   border-radius: 30px;
 }
 
 
 .admin-list-container{
-	float: right;
-	width: 780px;
+   float: right;
+   width: 780px;
 }
 
 table.tbl-appro{
-	width:100%;
+   width:100%;
 }
 
 table.tbl-appro tr td:first-child{
-	float:left;
+   float:left;
 }
 
 a.appro-aTag {
-	text-decoration: none;	
-	color: darkgray;
-	
+   text-decoration: none;   
+   color: darkgray;
+   
 }
 
 .admin-floatTitle {
-	text-align: center;
+   text-align: center;
 }
 .admin-floatMenu {
-	position: absolute;
-	width: 200px;
+   position: absolute;
+   width: 200px;
     margin-top: 50px;
-	background-color: #fff;
-	color: darkgray;
-	
+   background-color: #fff;
+   color: darkgray;
+   
 }
 
 .admin-floatMenu ul li {
-	list-style: none;
-	margin-bottom: 10px;
-	text-align: left;
-	font-weight: 800;
+   list-style: none;
+   margin-bottom: 10px;
+   text-align: left;
+   font-weight: 800;
 }
 
 .admin-floatMenu ul li a:hover {
-	list-style: none;
-	margin-left: 10px;
-	text-align: center;
-	font-weight: 900;
-	color: black;
-	text-decoration: none;
+   list-style: none;
+   margin-left: 10px;
+   text-align: center;
+   font-weight: 900;
+   color: black;
+   text-decoration: none;
 }
 
 .admintitle{
-	text-align: center;
-	margin-bottom:30px;
-	margin-top : 30px;
+   text-align: center;
+   margin-bottom:30px;
+   margin-top : 30px;
 }
 
 div.approContent .card-title{
-	text-align:left;
+   text-align:left;
 }
 
 
 /* 멘토상세보기 */
 article#admin-mento-wrap{
-	width: 780px;
-	float:right;
+   width: 780px;
+   float:right;
 }
 
 div.appro-btn-wrap{
-	text-align:center;
+   text-align:center;
 }
 .mento_info_child{
     padding-top: 20px;
@@ -187,33 +187,33 @@ div#picture-cover .mento-profile-img .lecture-cover-img{
     width:auto; height: auto;
     min-width:400px; min-height: 400px;
     max-width: 500px; max-height: 500px;
-	border: 1px solid gray;
-	margin-top: 10px;
-	margin-bottom: 10px;
-	margin-left: 0;
+   border: 1px solid gray;
+   margin-top: 10px;
+   margin-bottom: 10px;
+   margin-left: 0;
 }
 
 div.admin-detail-frm-wrap{
-	border: 1px solid lightgray;
-	
+   border: 1px solid lightgray;
+   
 }
 div.admin-mento-detailwrap>h1{
-	text-align:center;
-	background-color: lightgray;
-	margin-bottom: 0;
-	height: 60px;
+   text-align:center;
+   background-color: lightgray;
+   margin-bottom: 0;
+   height: 60px;
 }
 
 div.admin-mento-detailwrap h2{
-	text-align:center;
-	background-color: lightgray;
-	margin-bottom: 0;
-	height: 40px;
-	width: 100%;
+   text-align:center;
+   background-color: lightgray;
+   margin-bottom: 0;
+   height: 40px;
+   width: 100%;
 }
 
 form.admin-mento-detail-frm{
-	border : 1px solid rgb(255, 207, 207);
+   border : 1px solid rgb(255, 207, 207);
 }
 .admin-mento-detailwrap{
     width: 780px;
@@ -228,11 +228,11 @@ form.admin-mento-detail-frm{
 }
 
 .admin-mento-detailwrap hr{
-	width: 100%;
-	margin-left: 0;
+   width: 100%;
+   margin-left: 0;
 }
 .admin-mento-detailwrap p{
-	margin-left: 20px;
+   margin-left: 20px;
 }
 
 .admin-mento-detailwrap ul{
@@ -257,7 +257,7 @@ form.admin-mento-detail-frm{
 } */
 
 input.mentosubmit {
-	 width: 150px;
+    width: 150px;
     font-size: 16px;
     color: rgb(255, 255, 255);
     text-align: center; 
@@ -268,7 +268,7 @@ input.mentosubmit {
 }
 
 div#mento_info h5 {
-	padding-left: 30px;
+   padding-left: 30px;
 } 
 
 /* 강의상세보기 */
@@ -336,14 +336,14 @@ img.detailimg{
 
 
 .floatMenu {
-	position: absolute;
-	width: 200px;
+   position: absolute;
+   width: 200px;
     height: 740px;
     /* top:52%; */
     margin-top: 50px;
     margin-left:100px;
-	background-color: #f24365;
-	color: #fff;
+   background-color: #f24365;
+   color: #fff;
 }
 
 .right2{

@@ -1,6 +1,7 @@
 package com.semi.report.model.service;
 
 import java.sql.Connection;
+import java.util.List;
 
 import com.semi.report.model.dao.ReportDao;
 import com.semi.member.model.vo.Member;
@@ -16,7 +17,7 @@ import static common.template.JDBCTemplate.rollback;
 
 public class ReportService {
 
-	private ReportDao dao = new ReportDao();
+	private static ReportDao dao = new ReportDao();
 	
 	public int regsterReport(Report rp, Member m) {
 		
@@ -46,6 +47,20 @@ public class ReportService {
 		{
 			rollback(conn);
 		}
+		close(conn);
+		return result;
+	}
+
+	public List<Report> selectAllReport(int cPage,int numPerPage) {
+		Connection conn=getConnection();
+		List<Report> list=dao.selectReportList(conn,cPage,numPerPage);
+		close(conn);
+		return list;
+	}
+
+	public int selectReportCount() {
+		Connection conn=getConnection();
+		int result=dao.selectReportCount(conn);
 		close(conn);
 		return result;
 	}

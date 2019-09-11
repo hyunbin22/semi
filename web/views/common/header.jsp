@@ -91,7 +91,7 @@
     <header>
         <div id="head" >
             <div><a href = "<%=request.getContextPath()%>"><img id = "Main" src = "<%=request.getContextPath()%>/image/LOGO.png"></a></div> <!--메인 아이콘 이미지-->
-            <%if(memberLogin != null && (memberLogin.getmId().equals("test"))) {%><div><span onclick = "" id = "join">관리자전용</span></div><%} %>
+            <%if(memberLogin != null && (memberLogin.getmId().equals("admin"))) {%><div><span onclick = "location.href='<%=request.getContextPath()%>/views/admin/adminMain.jsp'" id = "join">관리자전용</span></div><%} %>
                 <%if(memberLogin == null){ %>
             <div id = loginmenu>
             <form id = "loginFrm" action = "<%=request.getContextPath() %>/member/memberLoginServlet.do" method="POST" onsubmit="return validate();">

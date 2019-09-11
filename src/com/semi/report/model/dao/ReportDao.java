@@ -9,6 +9,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Properties;
 
 import com.semi.member.model.vo.Member;
@@ -94,6 +96,55 @@ public class ReportDao {
 		}
 		return result;
 		
+	}
+
+	public int selectReportCount(Connection conn) {
+		Statement stmt=null;
+		ResultSet rs=null;
+		int result=0;
+		String sql="select count(*) from tb_report";
+		try {
+			stmt=conn.createStatement();
+			rs=stmt.executeQuery(sql);
+			if(rs.next())
+			{
+				result=rs.getInt(1);
+			}
+		}catch (Exception e) {
+			e.printStackTrace();
+		}finally {
+			close(rs);
+			close(stmt);
+		}return result;
+	}
+
+	public List<Report> selectReportList(Connection conn, int cPage, int numPerPage) {
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		List<Report> list=new ArrayList();
+		String sql=prop.getProperty("selectReportList");
+		try {
+			pstmt=conn.prepareStatement(sql);
+			pstmt.setInt(1, (cPage-1)*numPerPage+1);
+			pstmt.setInt(2, cPage*numPerPage);
+			rs=pstmt.executeQuery();
+			while(rs.next()) {
+				Report rp = new Report();
+				rp.setReportNum(rs.getInt("report_num"));
+				rp.setmReporterNum(rs.getInt("mreporter_num"));
+				rp.setmAttackerNum(rs.getInt("mattacker_num"));
+				rp.setReportTitle(rs.getString("report_title"));
+				rp.setReportContent(rs.getString("report_content"));
+				rp.setReportCheck(rs.getString("report_check").charAt(0));
+				rp.setReportDate(rs.getDate("report_date"));
+				list.add(rp);
+			}
+		}catch (Exception e) {
+			e.printStackTrace();
+		}finally {
+			close(rs);
+			close(pstmt);
+		}return list;
 	}
 
 }
