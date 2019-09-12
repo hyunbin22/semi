@@ -3,6 +3,8 @@ package com.semi.report.model.vo;
 import java.sql.Date;
 import java.util.List;
 
+import com.semi.member.model.vo.Member;
+
 public class Report {
 	
 	private int reportNum; // 신고번호
@@ -13,11 +15,12 @@ public class Report {
 	private String reportContent; //신고 내용
 	private char reportCheck; // 신고 결정 여부
 	private Date reportDate; // 신고 날짜
+	private Member member;
 	
 	private List<ReportUpload> reportUpList;
 	
 	public Report(int reportNum, int mReporterNum, int mAttackerNum, String reportId, String reportTitle,
-			String reportContent, char reportCheck, Date reportDate, List<ReportUpload> reportUpList) {
+			String reportContent, char reportCheck, Date reportDate, List<ReportUpload> reportUpList, Member member) {
 		super();
 		this.reportNum = reportNum;
 		this.mReporterNum = mReporterNum;
@@ -28,6 +31,7 @@ public class Report {
 		this.reportCheck = reportCheck;
 		this.reportDate = reportDate;
 		this.reportUpList = reportUpList;
+		this.member = member;
 	}
 
 
@@ -43,6 +47,26 @@ public class Report {
 		this.reportNum = reportNum;
 	}
 
+
+
+	public Member getMember() {
+		return member;
+	}
+
+
+	public void setMember(Member member) {
+		this.member = member;
+	}
+
+
+	public List<ReportUpload> getReportUpList() {
+		return reportUpList;
+	}
+
+
+	public void setReportUpList(List<ReportUpload> reportUpList) {
+		this.reportUpList = reportUpList;
+	}
 
 
 	public Report() {

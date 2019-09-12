@@ -42,7 +42,9 @@ public class AdminReportApprovalServlet extends HttpServlet {
 		int numPerPage=10;
 		ReportService service=new ReportService();
 		int totalReport = service.selectReportCount();
+		System.out.println(totalReport);
 		List<Report> list=service.selectAllReport(cPage,numPerPage);
+		System.out.println(list);
 		
 		//페이징처리 구현
 		int totalPage=(int)Math.ceil((double)totalReport/numPerPage);
@@ -56,7 +58,7 @@ public class AdminReportApprovalServlet extends HttpServlet {
 			pageBar+="<span>[이전]</span>";
 		}else {
 			pageBar+="<a href='"+request.getContextPath()
-			+"/board/boardList?cPage="+(pageNo-1)+"'>[이전]</a>";
+			+"/admin/AdminReportApproval.do?cPage="+(pageNo-1)+"'>[이전]</a>";
 		}
 		
 		while(!(pageNo>pageEnd||pageNo>totalPage)) {
@@ -65,7 +67,7 @@ public class AdminReportApprovalServlet extends HttpServlet {
 			}
 			else {
 				pageBar+="<a href='"+request.getContextPath()
-				+"/board/boardList?cPage="+pageNo+"'>"+pageNo+"</a>";
+				+"/admin/AdminReportApproval.do?cPage="+pageNo+"'>"+pageNo+"</a>";
 			}
 			pageNo++;
 		}
@@ -75,7 +77,7 @@ public class AdminReportApprovalServlet extends HttpServlet {
 		}
 		else {
 			pageBar+="<a href='"+request.getContextPath()
-			+"/board/boardList?cPage="+(pageNo)+"'>[다음]</a>";
+			+"/admin/AdminReportApproval.do?cPage="+(pageNo)+"'>[다음]</a>";
 		}
 		
 		request.setAttribute("pageBar", pageBar);

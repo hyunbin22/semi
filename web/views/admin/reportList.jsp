@@ -10,9 +10,8 @@
 
 <section>
 
- <article id="search1">
+
  <div id="admin-Mento-Search-container">
-   </article>
    <article class="admin-list-container wrap">
       <div class="row">
          <div class="col">
@@ -22,39 +21,30 @@
                   <div class="card appro-frm-wrap">
                      <%
                      for (int i = 0; i < list.size(); i++) {
-                        if(list.get(i).getReportCheck()=='N') {
                      %>
                      <div class="lectureAppro-frm" style="height: 280px">
                         <!-- 강의승인신청목록 -->
-                        <div class="card-header mtAppro-name"><%=list.get(i).getLecMento().getMtNickName()%>
-                           (<%=list.get(i).getLecMento().getMember().getmId()%>)
+                        <div class="card-header mtAppro-name"><%=list.get(i).getReportId()%>
                         </div>
                         <div class="card-body">
                            <table class="tbl-appro">
                               <tr>
-                                 <td><h5 class="card-title"><%=list.get(i).getLecName() %></h5></td>
+                                 <td><h5 class="card-title"><%=list.get(i).getmAttackerNum()%></h5></td>
                               </tr>
                               <tr>
                                  <td rowspan="2">
-                                 <%for(int j = 0; j < list.get(i).getLectureUpList().size(); j++) {
-                                    if(list.get(i).getLectureUpList().get(j).getUpLectureReCover()!=null && list.get(i).getLecNum()==list.get(i).getLectureUpList().get(j).getLecNum()) {%>
-                                 <img
-                                    src='<%=request.getContextPath()%>/upload/lecture/<%=list.get(i).getLectureUpList().get(j).getUpLectureReCover()%>'
-                                    class="approImg"></td>
-                                 <%} 
-                                 }%>
-                                 <td><p class="approDate"><%=list.get(i).getLecADate()%></p></td>
+                                 </td>
+
+                                 <td><p class="approDate"></p></td>
                                  <td>
-                                    <button type="submit" class="btn btn-primary btn-appro-view"
-                                       onclick="location.href='<%=request.getContextPath()%>/admin/AdminLectureDetailServlet.do?lecNum=<%=list.get(i).getLecNum()%>'">
-                                       More</button>
+
                                  </td>
                               </tr>
                            </table>
                         </div>
                      </div>
                      <%
-                        }
+                      
                       }         
                      %>
                   </div>
@@ -68,6 +58,7 @@
       </div>
    <br><br>
    </article>
+   </div>
 
 <%@ include file="/views/common/adminAside.jsp"%>
 
