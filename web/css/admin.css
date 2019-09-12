@@ -394,3 +394,18 @@ img.detailimg{
     margin-top:10px;
     margin-bottom: 10px;
 }
+
+button#seeMore{
+	width: 120px;
+	height: 33px;
+	margin: 10px;
+	background-color: #eb9f9f;
+	color: black;
+	border: none;
+	border-radius: 5px;
+	cursor: pointer;
+}
+
+section{
+	height: 100%;
+}

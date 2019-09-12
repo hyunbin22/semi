@@ -10,72 +10,47 @@
 
 <section>
 
-
- <div id="admin-Mento-Search-container">
    <article class="admin-list-container wrap">
       <div class="row">
          <div class="col">
             <h3 class="admintitle">신고처리대기목록</h3>
             <div class="tab-content">
                <div class="tab-pane fade show active" id="lectureAppro">
-                  <div class="card appro-frm-wrap">
-                     <%
+                                    <%
                      for (int i = 0; i < list.size(); i++) {
                      %>
-                     <div class="lectureAppro-frm" style="height: 280px">
+                  <div class="card appro-frm-wrap" style = "height: 110px;">
+                     <div class="lectureAppro-frm">
                         <!-- 강의승인신청목록 -->
-                        <div class="card-header mtAppro-name"><%=list.get(i).getReportId()%>
+                        <div class="card-header mtAppro-name">신고자 ID 번호 . [<%=list.get(i).getmReporterNum()%>] &emsp;/&emsp; 신고 날짜 : [<%=list.get(i).getReportDate() %>]
                         </div>
-                        <div class="card-body">
-                           <table class="tbl-appro">
-                              <tr>
-                                 <td><h5 class="card-title"><%=list.get(i).getmAttackerNum()%></h5></td>
-                              </tr>
-                              <tr>
-                                 <td rowspan="2">
-                                 </td>
 
-                                 <td><p class="approDate"></p></td>
+                           <table class="tbl-appro" style = "text-align: center">
+                              <tr>
+                                 <td style = "margin-top: 13.5px; margin-left: 10px; text-align: center; width: 150px;"><%=list.get(i).getReportTitle() %></td>
                                  <td>
-
+										<button id ="seeMore" name = "seeMore">자세히보기</button>
                                  </td>
-                              </tr>
+                              </tr>        
                            </table>
-                        </div>
+<br>
                      </div>
                      <%
-                      
                       }         
                      %>
+                    <div id="admin-appro-pageBar">
+         				<%=request.getAttribute("pageBar")%>
+      				</div>
                   </div>
                </div>
             </div>
          </div>
       </div>
-  
-      <div id="admin-appro-pageBar">
-         <%=request.getAttribute("pageBar")%>
-      </div>
-   <br><br>
    </article>
-   </div>
+ 
 
 <%@ include file="/views/common/adminAside.jsp"%>
 
 </section>
 
-<script>
-$(function(){
-   var sid = $("#search-mId");
-   var sname = $("#search-mName");
-   var searchType=$("#searchType");
-   searchType.change(function() {
-      sid.hide();
-      sname.hide();
-      $("#search-"+this.value).show().css("display","inline-block");
-   });
-   $("#searchType").trigger('change');
-   
-});
-</script>
 <%@ include file="/views/common/adminFooter.jsp"%>
