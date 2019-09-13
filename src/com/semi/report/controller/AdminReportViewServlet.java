@@ -1,4 +1,4 @@
-package com.semi.admin.controller;
+package com.semi.report.controller;
 
 import java.io.IOException;
 import javax.servlet.ServletException;
@@ -36,7 +36,7 @@ public class AdminReportViewServlet extends HttpServlet {
 				
 		Report rp = new ReportService().selectReportContent(reportTitle);
 		request.setAttribute("report", rp);
-		request.getRequestDispatcher("/views/admin/reportView.jsp")
+		request.getRequestDispatcher("/views/report/reportView.jsp")
 		.forward(request, response);
 		
 	}

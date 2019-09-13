@@ -1,4 +1,4 @@
-package com.semi.admin.controller;
+package com.semi.report.controller;
 
 import java.io.IOException;
 import java.util.List;
@@ -83,7 +83,7 @@ public class AdminReportApprovalServlet extends HttpServlet {
 		request.setAttribute("pageBar", pageBar);
 		request.setAttribute("cPage", cPage);
 		request.setAttribute("list", list);
-		request.getRequestDispatcher("/views/admin/reportList.jsp")
+		request.getRequestDispatcher("/views/report/reportList.jsp")
 		.forward(request, response);
 		
 	}
