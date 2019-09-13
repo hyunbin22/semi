@@ -13,7 +13,7 @@
    <article class="admin-list-container wrap">
       <div class="row">
          <div class="col">
-            <h3 class="admintitle">신고처리대기목록</h3>
+            <h3 class="admintitle">신고처리완료목록</h3>
             <div class="tab-content">
                <div class="tab-pane fade show active" id="lectureAppro">
                      <%
@@ -36,7 +36,8 @@
 						<br>
                      </div>
                      <%
-                      }         
+                      }  
+    
                      %>
                     <div id="admin-appro-pageBar">
          				<%=request.getAttribute("pageBar")%>

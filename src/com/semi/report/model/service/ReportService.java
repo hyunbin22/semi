@@ -65,6 +65,21 @@ public class ReportService {
 		return result;
 	}
 
+	public List<Report> selectAllReportComplete(int cPage, int numPerPage) {
+		Connection conn=getConnection();
+		List<Report> list=dao.selectReportCompleteList(conn,cPage,numPerPage);
+		close(conn);
+		return list;
+	}
+
+	public Report selectReportContent(String reportTitle) {
+		Connection conn=getConnection();
+		Report rp = dao.selectReportContent(conn,reportTitle);
+		close(conn);
+		return rp;
+		
+	}
+
 
 
 }

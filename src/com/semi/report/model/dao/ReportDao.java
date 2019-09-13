@@ -147,4 +147,60 @@ public class ReportDao {
 		}return list;
 	}
 
+	public List<Report> selectReportCompleteList(Connection conn, int cPage, int numPerPage) {
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		List<Report> list=new ArrayList();
+		String sql=prop.getProperty("selectReportList2");
+		try {
+			pstmt=conn.prepareStatement(sql);
+			pstmt.setInt(1, (cPage-1)*numPerPage+1);
+			pstmt.setInt(2, cPage*numPerPage);
+			rs=pstmt.executeQuery();
+			while(rs.next()) {
+				Report rp = new Report();
+				rp.setReportNum(rs.getInt("report_num"));
+				rp.setmReporterNum(rs.getInt("mreporter_num"));
+				rp.setmAttackerNum(rs.getInt("mattacker_num"));
+				rp.setReportTitle(rs.getString("report_title"));
+				rp.setReportContent(rs.getString("report_content"));
+				rp.setReportCheck(rs.getString("report_check").charAt(0));
+				rp.setReportDate(rs.getDate("report_date"));
+				list.add(rp);
+			}
+		}catch (Exception e) {
+			e.printStackTrace();
+		}finally {
+			close(rs);
+			close(pstmt);
+		}return list;
+	}
+
+	public Report selectReportContent(Connection conn, String reportTitle) {
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		Report rp=null;
+		String sql=prop.getProperty("selectReport");
+		try {
+			pstmt=conn.prepareStatement(sql);
+			pstmt.setString(1, reportTitle);
+			rs=pstmt.executeQuery();
+			if(rs.next()) {
+				rp=new Report();
+				rp.setReportNum(rs.getInt("report_num"));
+				rp.setmReporterNum(rs.getInt("mreporter_num"));
+				rp.setmAttackerNum(rs.getInt("mattacker_num"));
+				rp.setReportTitle(rs.getString("report_title"));
+				rp.setReportContent(rs.getString("report_content"));
+				rp.setReportCheck(rs.getString("report_check").charAt(0));
+				rp.setReportDate(rs.getDate("report_date"));
+			}
+		}catch (Exception e) {
+			e.printStackTrace();
+		}finally {
+			close(rs);
+			close(pstmt);
+		}return rp;
+	}
+
 }

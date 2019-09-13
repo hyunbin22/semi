@@ -13,6 +13,7 @@
                    <li><a href="<%=request.getContextPath()%>/admin/AdminMentoNoApproval.do" class="appro-aTag">멘토승인거절목록</a></li>
                    <li><a href="<%=request.getContextPath()%>/admin/AdminLectureNoApproval.do" class="appro-aTag">강의승인거절목록</a></li>
                    <li><a href="<%=request.getContextPath()%>/admin/AdminReportApproval.do" class="appro-aTag">신고처리대기목록</a></li>
+                   <li><a href="<%=request.getContextPath()%>/admin/AdminReportCompleteApproval.do" class="appro-aTag">신고처리완료목록</a></li>
                 </ul>            
             </div>
         </div>
