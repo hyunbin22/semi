@@ -13,6 +13,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
 
+import com.semi.member.model.dao.MemberDao;
 import com.semi.member.model.vo.Member;
 import com.semi.mento.model.dao.MentoDao;
 import com.semi.report.model.vo.Report;
@@ -122,6 +123,9 @@ public class ReportDao {
 		PreparedStatement pstmt=null;
 		ResultSet rs=null;
 		List<Report> list=new ArrayList();
+		Member m = new Member();
+		MemberDao dao = new MemberDao();
+		
 		String sql=prop.getProperty("selectReportList");
 		try {
 			pstmt=conn.prepareStatement(sql);
@@ -137,6 +141,7 @@ public class ReportDao {
 				rp.setReportContent(rs.getString("report_content"));
 				rp.setReportCheck(rs.getString("report_check").charAt(0));
 				rp.setReportDate(rs.getDate("report_date"));
+				rp.setMember(dao.selectMemberMnum(conn, rs.getInt("mreporter_num")));
 				list.add(rp);
 			}
 		}catch (Exception e) {
@@ -176,14 +181,16 @@ public class ReportDao {
 		}return list;
 	}
 
-	public Report selectReportContent(Connection conn, String reportTitle) {
+	public Report selectReportContent(Connection conn, int reportNo) {
 		PreparedStatement pstmt=null;
 		ResultSet rs=null;
 		Report rp=null;
+		Member m = new Member();
+		MemberDao dao = new MemberDao();
 		String sql=prop.getProperty("selectReport");
 		try {
 			pstmt=conn.prepareStatement(sql);
-			pstmt.setString(1, reportTitle);
+			pstmt.setInt(1, reportNo);
 			rs=pstmt.executeQuery();
 			if(rs.next()) {
 				rp=new Report();
@@ -194,6 +201,7 @@ public class ReportDao {
 				rp.setReportContent(rs.getString("report_content"));
 				rp.setReportCheck(rs.getString("report_check").charAt(0));
 				rp.setReportDate(rs.getDate("report_date"));
+				rp.setMember(dao.selectMemberMnum(conn, rs.getInt("mreporter_num")));
 			}
 		}catch (Exception e) {
 			e.printStackTrace();
@@ -201,6 +209,32 @@ public class ReportDao {
 			close(rs);
 			close(pstmt);
 		}return rp;
+	}
+
+	public ReportUpload selectReportUpload(Connection conn, int reportNo) {
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		ReportUpload rpu=null;
+		String sql = prop.getProperty("selectReportUpload");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, reportNo);
+			rs=pstmt.executeQuery();
+			if(rs.next())
+			{
+				rpu = new ReportUpload();
+				rpu.setFileOriName(rs.getString("up_report_org_filename"));
+				rpu.setFileReNmae(rs.getString("up_report_re_filename"));
+			}
+		}catch (Exception e) {
+			e.printStackTrace();
+		}finally {
+			close(rs);
+			close(pstmt);
+		}
+		
+		return rpu;
 	}
 
 }

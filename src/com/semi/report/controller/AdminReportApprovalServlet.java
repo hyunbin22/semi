@@ -39,7 +39,7 @@ public class AdminReportApprovalServlet extends HttpServlet {
 		}catch(NumberFormatException e) {
 			cPage=1;
 		}
-		int numPerPage=10;
+		int numPerPage=4;
 		ReportService service=new ReportService();
 		int totalReport = service.selectReportCount();
 		System.out.println(totalReport);
@@ -83,8 +83,7 @@ public class AdminReportApprovalServlet extends HttpServlet {
 		request.setAttribute("pageBar", pageBar);
 		request.setAttribute("cPage", cPage);
 		request.setAttribute("list", list);
-		request.getRequestDispatcher("/views/report/reportList.jsp")
-		.forward(request, response);
+		request.getRequestDispatcher("/views/report/reportList.jsp").forward(request, response);
 		
 	}
 

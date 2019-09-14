@@ -178,6 +178,38 @@ public class MemberDao {
 		}
 		return -1;	//db오류
 	}
+
+	public Member selectMemberMnum(Connection conn, int mNum) {
+	      PreparedStatement pstmt=null;
+	      ResultSet rs=null;
+	      Member m=null;
+	      String sql=prop.getProperty("selectMemberMnum");
+	      try {
+	         pstmt=conn.prepareStatement(sql);
+	         pstmt.setInt(1, mNum);
+	         rs=pstmt.executeQuery();
+	         if(rs.next()) {
+	            m = new Member();
+	            m.setmNum(rs.getInt("mNum"));
+	            m.setmId(rs.getString("mId"));
+	            m.setmPassword(rs.getString("mPassword"));
+	            m.setmName(rs.getString("mName"));
+	            m.setmGender(rs.getString("mGender").charAt(0));
+	            m.setmBirth(rs.getDate("mBirth"));
+	            m.setmEmail(rs.getString("mEmail"));
+	            m.setmPhone(rs.getString("mPhone"));
+	            m.setmUse(rs.getString("mUse").charAt(0));
+	            m.setmHireDate(rs.getDate("mHire_Date"));
+	         }
+	      }catch(SQLException e) {
+	         e.printStackTrace();
+	      }
+	      finally {
+	         close(rs);
+	         close(pstmt);
+	      }
+	      return m;
+	   }
 	
 }
 

@@ -72,12 +72,19 @@ public class ReportService {
 		return list;
 	}
 
-	public Report selectReportContent(String reportTitle) {
+	public Report selectReportContent(int reportNo) {
 		Connection conn=getConnection();
-		Report rp = dao.selectReportContent(conn,reportTitle);
+		Report rp = dao.selectReportContent(conn,reportNo);
 		close(conn);
 		return rp;
 		
+	}
+
+	public ReportUpload selectReportUpload(int reportNo) {
+		Connection conn=getConnection();
+		ReportUpload rpu = dao.selectReportUpload(conn,reportNo);
+		close(conn);
+		return rpu;
 	}
 
 

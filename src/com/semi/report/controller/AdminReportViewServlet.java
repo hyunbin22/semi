@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.semi.report.model.service.ReportService;
 import com.semi.report.model.vo.Report;
+import com.semi.report.model.vo.ReportUpload;
 
 /**
  * Servlet implementation class AdminReportViewServlet
@@ -31,11 +32,19 @@ public class AdminReportViewServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		String reportTitle = request.getParameter("reportTitle");
+		int reportNo = Integer.parseInt(request.getParameter("reportNo"));
 		
-				
-		Report rp = new ReportService().selectReportContent(reportTitle);
+		System.out.println("신고글 번호 : " + reportNo);
+			
+		Report rp = new ReportService().selectReportContent(reportNo);
+		ReportUpload rpu = new ReportService().selectReportUpload(reportNo);
+		
+		
+		request.setAttribute("reportUp", rpu);
 		request.setAttribute("report", rp);
+		
+		System.out.println(rp);
+		System.out.println(rpu);
 		request.getRequestDispatcher("/views/report/reportView.jsp")
 		.forward(request, response);
 		

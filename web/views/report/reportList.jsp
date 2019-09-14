@@ -9,7 +9,7 @@
    %>
 
 <section>
-
+<div style = "height: 700px;">
    <article class="admin-list-container wrap">
       <div class="row">
          <div class="col">
@@ -22,14 +22,14 @@
                   <div class="card appro-frm-wrap" style = "height: 110px;">
                      <div class="lectureAppro-frm">
                         <!-- 강의승인신청목록 -->
-                        <div class="card-header mtAppro-name">신고자 ID 번호 . [<%=list.get(i).getmReporterNum()%>] &emsp;/&emsp; 신고 날짜 : [<%=list.get(i).getReportDate() %>]
+                        <div class="card-header mtAppro-name">신고자 ID . [<%=list.get(i).getMember().getmId()%>] &emsp;/&emsp; 신고 날짜 : [<%=list.get(i).getReportDate() %>]
                         </div>
 
                            <table class="tbl-appro" style = "text-align: center">
                               <tr>
                                  <td style = "margin-top: 13.5px; margin-left: 10px; text-align: center; width: 150px;"><%=list.get(i).getReportTitle() %></td>
                                  <td>
-										<button id ="seeMore" name = "seeMore"  onclick="location.href='<%=request.getContextPath()%>/admin/reportView?reportTitle=<%=list.get(i).getReportTitle()%>'">자세히보기</button>
+										<button id ="seeMore" name = "seeMore"  onclick="location.href='<%=request.getContextPath()%>/admin/reportView?reportNo=<%=list.get(i).getReportNum()%>'">자세히보기</button>
                                  </td>
                               </tr>        
                            </table>
@@ -47,10 +47,10 @@
          </div>
       </div>
    </article>
- 
+
 
 <%@ include file="/views/common/adminAside.jsp"%>
-
+</div>
 </section>
 
 <%@ include file="/views/common/adminFooter.jsp"%>

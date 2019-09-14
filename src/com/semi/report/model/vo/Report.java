@@ -142,12 +142,16 @@ public class Report {
 		this.reportDate = reportDate;
 	}
 
+
 	@Override
 	public String toString() {
 		return "Report [reportNum=" + reportNum + ", mReporterNum=" + mReporterNum + ", mAttackerNum=" + mAttackerNum
-				+ ", reportTitle=" + reportTitle + ", reportContent=" + reportContent + ", reportCheck=" + reportCheck
-				+ ", reportDate=" + reportDate + "]";
+				+ ", reportId=" + reportId + ", reportTitle=" + reportTitle + ", reportContent=" + reportContent
+				+ ", reportCheck=" + reportCheck + ", reportDate=" + reportDate + ", member=" + member
+				+ ", reportUpList=" + reportUpList + "]";
 	}
+
+
 	
 	
 	
