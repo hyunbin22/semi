@@ -18,35 +18,35 @@
 	<div class="wrap">
 		<div class="bar">
 			<br>
-			<table class="MYLIST">
-				<tr>
-					<td><button
-							onclick="location.href='<%=request.getContextPath()%>/member/memberMyPage.do?mId=<%=m.getmId()%>'"
-							id="listBtn">마이페이지</button></td>
-					<td><button
-							onclick="location.href='<%=request.getContextPath()%>/member/mypageModify.do?mId=<%=m.getmId()%>'"
-							id="listBtn">내정보수정</button></td>
-					<td><button onclick="location.href='STUDYLIST.html'"
-							id="listBtn">신청한강의</button></td>
-					<td><button onclick="location.href='LIKELIST.html'"
-							id="listBtn">즐겨찾기목록</button></td>
-					<%
-						if (mt != null && m.getmNum() == mt.getmNum()) {
-					%>
-					<td><button
-							onclick="location.href='<%=request.getContextPath()%>/mento/enrollLecture.do?mtNum=<%=mt.getMtNum()%>'"
-							id="listBtn">강의만들기</button></td>
-					<%
-						} else {
-					%>
-					<td><button
-							onclick="location.href='<%=request.getContextPath()%>/mento/mentoRegister.do?mId=<%=m.getmId()%>'"
-							id="listBtn">멘토신청하기</button></td>
-					<%
-						}
-					%>
-				</tr>
-			</table>
+   <table class = "MYLIST">
+                                <tr>
+                                    <td><button onclick="location.href='<%=request.getContextPath()%>/member/memberMyPage.do?mId=<%=m.getmId()%>'" id = "listBtn">마이페이지</button></td>
+                                    <td><button onclick="location.href='<%=request.getContextPath()%>/member/mypageModify.do?mId=<%=m.getmId()%>'" id = "listBtn">내정보수정</button></td>
+                                    <td><button onclick="location.href='<%=request.getContextPath()%>/member/studyList.do?mNum=<%=m.getmNum()%>'" id = "listBtn">신청한강의</button></td>
+                                    <td><button onclick="location.href='LIKELIST.html'" id = "listBtn">즐겨찾기목록</button></td>
+                                    <%if(mt != null && m.getmNum() == mt.getmNum()) { %>
+                                    
+                                    <%} else { %>
+                                    <td><button onclick="location.href='<%=request.getContextPath()%>/mento/mentoRegister.do?mId=<%=m.getmId()%>'" id = "listBtn">멘토신청하기</button></td>    
+                                   <%} %>
+                                </tr>
+                        </table>
+                        <table class = "MYLIST">
+                                <tr>
+                                    <%if(mt != null && m.getmNum() == mt.getmNum()) { %>
+                                    <td><button onclick="location.href='<%=request.getContextPath()%>/mento/mentoMyPage.do?getMtNum=<%=mt.getMtNum()%>&getMnum = <%=m.getmNum() %>'" id = "listBtn">멘토페이지</button></td>
+                                    <td><button onclick="location.href='<%=request.getContextPath()%>/member/mypageModify.do?mId=<%=m.getmId()%>'" id = "listBtn">멘토정보수정</button></td>
+                                    <td><button onclick="location.href='<%=request.getContextPath()%>/mento/mentoRegister.do?mId=<%=m.getmId()%>'" id = "listBtn">멘토강의목록</button></td>                                 
+                                    <%} else { %>
+                                    
+                                    <%} %>
+                                    <%if(mt != null && m.getmNum() == mt.getmNum()) { %>
+                                    <td><button onclick="location.href='<%=request.getContextPath()%>/mento/enrollLecture.do?mtNum=<%=mt.getMtNum()%>'" id = "listBtn">강의만들기</button></td>
+                                    <%} else { %>
+                                        
+                                   <%} %>
+                                </tr>
+                        </table>
 			<br>
 			<br>
 			<h1 class="center1">강의 만들기</h1>

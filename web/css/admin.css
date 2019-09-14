@@ -434,7 +434,7 @@ button#seeMore{
     width: 50px;
 }
 .notice-table{ /* 공지사항내용목록 */
-    margin : 20px 0 0 40px;
+    margin : 20px 0 0;
     float: left;
     text-align: center;
 }
@@ -443,6 +443,7 @@ button#seeMore{
     margin-bottom: 15px;
     border-bottom: 2px solid #cacaca;
     background-color: #eb9f9f;
+    width : 800px;
 }
 .notice-table-div{
     border: 1px solid #f24365;
