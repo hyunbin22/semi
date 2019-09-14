@@ -16,6 +16,7 @@ import com.semi.member.model.service.MemberService;
 import com.semi.member.model.vo.Member;
 import com.semi.mento.model.service.MentoService;
 import com.semi.mento.model.vo.Mento;
+import com.semi.message.model.service.MessageService;
 
 /**
  * Servlet implementation class LoginMemberServlet
@@ -43,15 +44,10 @@ public class MemberLoginServlet extends HttpServlet {
 		
 		String mId = request.getParameter("mId");
 		String mPw = request.getParameter("mPw");
-		
-		System.out.println(mId);
-		System.out.println(mPw);
-		
+
 		MemberService service = new MemberService();
 		Member m = service.selectId(mId,mPw);
-		System.out.println(m);
-
-		
+	
 		String view = "";
 
 		if(m != null)
@@ -69,7 +65,13 @@ public class MemberLoginServlet extends HttpServlet {
 			}
 			
 			view = "/";
+			//채팅 안읽은수 
+			int readCount = new MessageService().noReadCount(m.getmNum());
+			session.setAttribute("readCount", readCount);
+			
 			response.sendRedirect(request.getContextPath()+view);
+			
+			
 		}
 		else
 		{
@@ -83,13 +85,7 @@ public class MemberLoginServlet extends HttpServlet {
 			rd.forward(request, response);
 			
 		}
-		
 
-
-		
-	
-		
-		
 	}
 
 	/**
