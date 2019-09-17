@@ -73,6 +73,7 @@ public class OrderDao {
 				order.setoPrice(rs.getInt("oprice"));
 				order.setoPayment(rs.getString("opayment").charAt(0));
 				order.setoCheck(rs.getString("ocheck").charAt(0));
+				
 				order.setLecture(new LectureService().lectureView(rs.getInt("lecNum")));
 				order.setMember(new MemberService().selectMember(rs.getInt("mnum")));
 			}

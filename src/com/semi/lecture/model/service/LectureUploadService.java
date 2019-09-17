@@ -25,5 +25,4 @@ public class LectureUploadService {
 	      close(conn);
 	      return result;
 	 }
-
 }

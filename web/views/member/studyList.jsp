@@ -33,7 +33,6 @@
                     <br>
                 </div>
                 <div class="center1">
-                    <form action = "" method="POST">
                     <table id = "list" border="1">
                     
                             <tr class = "listName">
@@ -44,7 +43,7 @@
                         <tr class = "list">
                             <td class = "listNumber">1</td>
                             <td class = "listContent"><span>박기오와 함께하는 기타 수업</span></td>
-                            <td><button id="btn-goPay" class="btn btn-primary">결제하기</button></td>
+                            <td><button id="btn-goPay" class="btn btn-primary next">결제하기</button></td>
                             <!-- <td class = "listCheck"><input type = "checkbox" name = "check" value = "1"></td> -->
                         </tr>
                         <tr class = "list">
@@ -69,7 +68,6 @@
                         </tr>
                     
                     </table>
-                    </form>
                     <br>
   
            
@@ -89,11 +87,11 @@
       	$(function(){
       		$('#btn-goPay').click(function(){
       			console.log('야야');
-      			<%-- var url="<%=request.getContextPath()%>/order/orderPaymentView.do"; --%>
-      			/* form.attr("action",url); */
+      			var url="<%=request.getContextPath()%>/order/orderPaymentView.do?oNum=1";
+      			/* form.attr("action",url); 
+      			orderPayFrm.submit();*/
+      			orderPayFrm.action=url;
       			orderPayFrm.submit();
-      			/* orderPayFrm.action=url;
-      			orderPayFrm.submit(); */
       		});
       	});
       

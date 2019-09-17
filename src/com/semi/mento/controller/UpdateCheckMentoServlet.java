@@ -25,10 +25,9 @@ public class UpdateCheckMentoServlet extends HttpServlet {
     }
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		System.out.println("upDateCheckMentoServlet");
+
 		int mtNum = Integer.parseInt(request.getParameter("mtNum"));
 		int result = new MentoService().updateCheckMento(mtNum);
-		System.out.println(result);
 		String msg = "";
 		String loc = "/admin/AdminMentoApproval.do";
 		msg = result>0?"멘토 승인하였습니다.":"멘토승인이 실패하였습니다.";

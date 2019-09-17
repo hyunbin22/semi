@@ -1055,13 +1055,35 @@ input.inputbtn , input.btnregister{
 	margin-bottom : 30px;
 }
 
-#class-pay-tbl tr:nth-child(2n) {
-		background-color: lightpink;	
+/* #class-pay-tbl tr:nth-child(2n) {
+	background-color: lightpink;	
+} */
+
+/* #class-pay-tbl td:first-child {
+	background-color: #A6C2CE;
+	text-align:left;
+} */
+
+#class-pay-tbl th {
+
+}
+
+.btn-pay-wrap {
+	width: 498px;
+	background-color:#A6C2;
+	height: 50px;
+	
 }
 
 #class-pay-tbl tr th {
 	border-right: 1px solid gray;
+	text-align:left;
+	width:200px;
 	
+}
+
+.col-md-4{
+	background-color: none;
 }
 
 #class-payment-submit{
@@ -1071,6 +1093,10 @@ input.inputbtn , input.btnregister{
     background-color: #eb9f9f;
     color: #fff;
     border: none;
+}
+
+.orderImg{
+	width: 400px;
 }
 
 .card-title{
