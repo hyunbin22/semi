@@ -15,28 +15,32 @@ import com.semi.mento.model.vo.Mento;
 public class LectureService {
 	
 	private LectureDao dao = new LectureDao();
-
+	
+	//승인카운트
 	public int countLectureApproval() {
 		Connection conn = getConnection();
 		int result = dao.countLectureApproval(conn);
 		close(conn);
 		return result;
 	}
-
+	
+	//강의승인리스트
 	public List<Lecture> lectureApproList(int cPage, int numPerPage) {
 		Connection conn = getConnection();
 		List<Lecture> list = dao.lectureApproList(conn, cPage, numPerPage);
 		close(conn);
 		return list;
 	}
-
+	
+	//강의승인목록 검색
 	public List<Lecture> lectureApproFindList(String type, String data, int cPage, int numPerPage) {
 		Connection conn = getConnection();
 		List<Lecture> list = dao.lectureApproList(conn, type, data, cPage, numPerPage);
 		close(conn);
 		return list;
 	}
-
+	
+	//강의 한개 보기
 	public Lecture lectureView(int lecNum) {
 		Connection conn = getConnection();
 		Lecture lec = dao.lectureView(conn, lecNum);

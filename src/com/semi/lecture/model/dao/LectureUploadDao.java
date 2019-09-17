@@ -83,11 +83,7 @@ public class LectureUploadDao {
          close(stmt);
       }
       
-      
       return lecUp;
-      
-      
-      
    }
 	
 	// 강의번호에 맞는 이미지 넣기(다중)

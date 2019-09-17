@@ -132,10 +132,10 @@
 				<nav>
 			        <ul class="center1">
 			        
-				        <li><a href="#">ABLING</a></li>
+				        <li><a href="<%=request.getContextPath()%>/">ABLING</a></li>
 				        <li><a href="<%=request.getContextPath()%>/lecture/lectureList.do">강의찾기</a></li>
 				        <li><a href="#">수업모임</a></li>
-				        <li><a href="#">이벤트</a></li>
+				        <!-- <li><a href="#">이벤트</a></li> -->
 				        <li><a href="#">고객지원</a>
 			         <ul>
 			            <li><a href="#">공지사항</a></li>

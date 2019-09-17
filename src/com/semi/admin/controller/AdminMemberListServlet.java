@@ -48,9 +48,7 @@ public class AdminMemberListServlet extends HttpServlet {
       int totalPage=(int)Math.ceil((double)totalMember/numPerPage);
       String pageBar="";
       int pageSizeBar=5;
-      System.out.println("cpage : "+cPage);
       int pageNo=((cPage-1)/pageSizeBar)*pageSizeBar+1;
-      System.out.println("pageNo : "+(cPage-1)/pageSizeBar*pageSizeBar);
       int pageEnd=pageNo+pageSizeBar-1;
       if(pageNo==1) {
          pageBar+="<span>[이전]</span>";
