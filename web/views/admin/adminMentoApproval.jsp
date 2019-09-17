@@ -8,6 +8,7 @@
 	int cPage = (int)request.getAttribute("cPage");
 	String searchType = (String)request.getAttribute("searchType");
 	String searchKey = (String)request.getAttribute("searchKeyword");
+	int count = 0;
 %>
 <section>
 
@@ -51,7 +52,7 @@
 							%>
 							<div class="mentoAppro-frm" style="height: 280px">
 								<!-- 멘토승인신청목록 -->
-								<div class="card-header mtAppro-name"><%=list.get(i).getMember().getmName()%>
+								<div class="card-header"><%=list.get(i).getMember().getmName()%>
 									(<%=list.get(i).getMember().getmId()%>)
 								</div>
 								<div class="card-body">
@@ -63,9 +64,9 @@
 											<td rowspan="2"><img
 												src="<%=request.getContextPath()%>/upload/mento/<%=list.get(i).getList().get(0).getUpMentoReName() %>"
 												class="approImg"></td>
-											<td><p class="approDate"><%=list.get(i).getMtaDate()%></p></td>
-											<td>
-												<button type="submit" class="btn btn-primary btn-appro-view"
+											<td style="width:170px"><p class="approDate">신청날짜 : <%=list.get(i).getMtaDate()%></p></td>
+											<td style="width:130px">
+												<button type="submit" class="btn btn-primary btn-appro-view next"
 													onclick="location.href='<%=request.getContextPath()%>/admin/AdminMentoDetailServlet.do?mtNum=<%=list.get(i).getMtNum()%>'">
 													More</button>
 											</td>
@@ -74,10 +75,13 @@
 								</div>
 							</div>
 							<%
+									count++;
+									}
 								}
-							}
-								
+							if(count==0) {
 							%>
+							<div id="EmptyListWrap"></div>
+							<%} %>
 						</div>
 					</div>
 				</div>
@@ -110,9 +114,10 @@ $(function(){
 });
 
 $(function(){
-	if(<%=list.size()%>==0) {
-		alert("승인신청한 멘토가 없습니다.");
-	} 		
+	if(<%=count%>==0) {
+		alert("승인거절된 강의가 없습니다.");
+			
+	}
 });
 </script>
 <%@ include file="/views/common/adminFooter.jsp"%>
