@@ -65,6 +65,46 @@ public class LectureService {
 		close(conn);
 		return result;
 	}
+	
+	//멘토가 강의 등록신청
+	public int insertLecture(Lecture l , int mtNum) {
+	      
+      Connection conn= getConnection();
+      int result=dao.insertLecture(conn, l , mtNum);
+      
+      if(result>0) {
+         commit(conn);
+         result = dao.selectSeqLecNum(conn, l.getMtNum());
+      }else {
+         rollback(conn);
+      }
+      return result;
+   }
+	
+	// 강의 전체 갯수!(승인된것)
+   public int selectLectureCount() {
+      Connection conn=getConnection();
+      int result=dao.selectLectureCount(conn);
+      close(conn);
+      return result;
+   }
+   
+   // lectureList 페이징
+   public List<Lecture> selectLectureList(int cPage, int numPerPage) {
+      Connection conn=getConnection();
+      List<Lecture> list=dao.selectLectureList(conn, cPage, numPerPage);
+      close(conn);
+      
+      return list;
+   }
 
+   //강의 선택
+   public Lecture selectLecture(String lectureNo) {
+      Connection conn = getConnection();
+      Lecture lec = dao.lectureView(conn, Integer.parseInt(lectureNo));
+
+      close(conn);
+      return lec;
+   }
 
 }

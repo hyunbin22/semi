@@ -1,11 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ include file="/views/common/adminHeader.jsp"%>
-<%@ page import="com.semi.lecture.model.vo.Lecture" %>
+<%@ page import="com.semi.lecture.model.vo.Lecture, com.semi.member.model.vo.Member" %>
 <% 
 	Lecture lec = (Lecture)request.getAttribute("lecture");
 	int temp = (int)request.getAttribute("temp");
-
+	Member m = (Member)session.getAttribute("loginMember");
+	String toId = lec.getLecMento().getMember().getmId();
 %>
 
 <section>
@@ -13,7 +14,7 @@
 		<div class="admin-mento-detailwrap">
 		<br><br><h1>강의 상세보기</h1>
 		<div class="admin-detail-frm-wrap">
-			<form id="admin-mento-detail-frm" method="post" onsubmit="return checkAppro();">
+			<form id="admin-mento-detail-frm" method="post">
 			<input type="hidden" name="lecNum" id="lecNum" value="<%=lec.getLecNum()%>">
 			<br>
 			<%for(int i = 0; i < lec.getLectureUpList().size(); i++) {
@@ -42,7 +43,7 @@
 						<p>
 							<%for(int i = 0; i < lec.getLectureUpList().size(); i++) {
 								if(lec.getLectureUpList().get(i).getUpLectureCategory().equals("lecimage")) {%>
-							<img src=<%=request.getContextPath() %>/upload/lecture/<%=lec.getLectureUpList().get(i) %>>
+							<img src='<%=request.getContextPath() %>/upload/lecture/<%=lec.getLectureUpList().get(i) %>'>
 							<%}
 							}%>
 						</p>
@@ -62,25 +63,34 @@
 							</p>
 						</p>
 					<%} %>
-				<button class="mentosubmit" onclick="sendMessage">문의하기</button>
 				</div>
 			</div>
 			<%if(temp!=0) {%>
-				<button type="submit" class="mentosubmit" id="btnclassAppro">승인</button>
-				<button class="mentosubmit" id="btnclassRefusal" onclick="popOpen();">거절</button>
+			<div class="appro-btn-wrap">
+				<button type="submit" class="next" id="btnclassAppro" onclick="checkAppro();">승인</button>
+				<button class="next" id="btnclassRefusal" onclick="popOpen();">거절</button>
+			<br><br><br>
+			</div>
 			<%} %>
 			</form>
-	
+			
 			<form name="saveRefusalFrm" method="post">
 				<input type="hidden" name="lecNum" id="inputlecNum">
 			</form>
+			<button class="mentosubmit" id="sendMessage">문의하기</button>
+			
+			<form name="openMessageFrm" method="post">
+				<input type="hidden" name="toId" value="<%=lec.getLecMento().getMember().getmId()%>">
+				<input type="hidden" name="fromId" value="<%=m.getmId()%>">
+				<input type="hidden" name="lectureName" value="<%=lec.getLecName() %>">
+			</form>
+			
 			</div>
 		</div>
 		</article>
 		<%if(temp!=0) {%>
 	<%@ include file="/views/common/adminAside.jsp" %>
 	<%} %>
-
 </section>
 	<script>
 		$(function(){
@@ -106,24 +116,30 @@
     		saveRefusalFrm.action=url;
     		saveRefusalFrm.submit();
 		};
-
-		$('#btnclassAppro').click(function() {
+		
+		function checkAppro() {
 			if(confirm('승인하시겠습니까?')){
 				var lecNum = <%=lec.getLecNum()%>;
 				var url="<%=request.getContextPath()%>/lecture/updateCheckLecture.do?lecNum="+lecNum;
 				location.href=url;
 			}
-		});
+		}
+
 		
-		$('#sendMessage').click(function(){
-			var url = "<%=request.getContextPath()%>/message/openMessageView.do";
-			var status = "width=500, height=700, resizable=no, scrollbars=yes, status=no;";
-			var title="메세지"
-			var popUp = open("", title, status);
-			window.name="parentWin";
-			saveRefusalFrm.target = title;
-			saveRefusalFrm.action=url;
-			saveRefusalFrm.submit();
+		//문의하기
+		$(function(){
+			$('#sendMessage').click(function(){
+				var toId = "<%=toId%>";
+				var fromId = "<%=m.getmId()%>"
+				var url = "<%=request.getContextPath()%>/message/openLecMessage.do?toId="+toId;
+				var status = "width=400, height=600, resizable=no, status=no, toolbars=no, menubar=no";
+				var title="ABLINGTALK"
+				var popUp = open("", title, status);
+				window.name="parentWin"; 
+				openMessageFrm.target = title;
+				openMessageFrm.action=url;
+				openMessageFrm.submit();
+			});
 		});
 	</script>
 <%@ include file="/views/common/adminFooter.jsp"%>

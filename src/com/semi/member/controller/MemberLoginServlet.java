@@ -16,7 +16,6 @@ import com.semi.member.model.service.MemberService;
 import com.semi.member.model.vo.Member;
 import com.semi.mento.model.service.MentoService;
 import com.semi.mento.model.vo.Mento;
-import com.semi.message.model.service.MessageService;
 
 /**
  * Servlet implementation class LoginMemberServlet
@@ -44,32 +43,36 @@ public class MemberLoginServlet extends HttpServlet {
 		
 		String mId = request.getParameter("mId");
 		String mPw = request.getParameter("mPw");
-
+		
 		MemberService service = new MemberService();
 		Member m = service.selectId(mId,mPw);
-	
+		
 		String view = "";
 
 		if(m != null)
 		{
-			
+			if(m.getmUse() != 'N') {
 			HttpSession session = request.getSession();
 			session.setAttribute("loginMember", m);
 			
 			MentoService service2 = new MentoService();
-			Mento mt = service2.mentoView(m.getmNum());
-
+			Mento mt = service2.mentoByMNum(m.getmNum());
 			if(mt != null)
 			{
 				session.setAttribute("loginMento", mt);
 			}
 			
 			view = "/";
-			//채팅 안읽은수 
-			int readCount = new MessageService().noReadCount(m.getmNum());
-			session.setAttribute("readCount", readCount);
-			
 			response.sendRedirect(request.getContextPath()+view);
+			} else {
+				String msg = "로그인 할 수 없습니다. 관리자에게 문의하세요!";
+				request.setAttribute("msg", msg);
+				view = "/views/common/msg.jsp";
+				String loc = "/";
+				request.setAttribute("loc", loc);
+				RequestDispatcher rd = request.getRequestDispatcher(view);
+				rd.forward(request, response);
+			}
 			
 			
 		}
@@ -85,7 +88,6 @@ public class MemberLoginServlet extends HttpServlet {
 			rd.forward(request, response);
 			
 		}
-
 	}
 
 	/**
