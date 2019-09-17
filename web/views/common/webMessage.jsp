@@ -14,7 +14,7 @@
 <link rel="stylesheet" href="<%=request.getContextPath() %>/css/bootstrap.css">
 <link rel="stylesheet" href="<%=request.getContextPath()%>/css/custom.css"> 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-<title>메세지</title>
+<title>ABLINGTALK</title>
 </head>
 <body onresize="parent.resizeTo(450,600)" onload="parent.resizeTo(450,600)">
 	<nav class="navbar navbar-default">
@@ -25,11 +25,6 @@
 	</nav>	
 	<div class="container">
 		<table class="table" style="margin: 0 auto;">
-			<thead>
-				<tr>
-					<th><h4>메세지 목록</h4></th>
-				</tr>
-			</thead>
 			<tbody>
 				<td>
 					<div style="overflow-y : auto; width: 100%; max-height: 450px;">
@@ -150,6 +145,10 @@
 	
 	function addBox(lastId, toId, chatContent, chatTime, unread) {
 		console.log(toId);
+		console.log(chatContent);
+		if(chatContent.length>25) {
+			chatContent = chatContent.substr(0,30)+"...";
+		}
 		$('#boxTable').append('<tr onclick="location.href=\'<%=request.getContextPath()%>/message/messageList.do?toId=' + encodeURIComponent(toId) + '\'">' +
 				'<td style="width: 150px;"><h5>' + (lastId=='msgAdmin'?"관리자":lastId) + '<span class="label label-info">' + unread + '</span></h5></td>' +
 				'<td><h5>' + chatContent +

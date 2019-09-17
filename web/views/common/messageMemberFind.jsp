@@ -28,12 +28,12 @@
 <link rel="stylesheet" href="<%=request.getContextPath()%>/css/custom.css"> 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 
-<title>메세지</title>
+<title>ABLINGTALK</title>
 </head>
 <body onresize="parent.resizeTo(450,600)" onload="parent.resizeTo(450,600)">
 	<nav class="navbar navbar-default">
 		<div class="navbar-header">
-			<a class="navbar-brand" href="#">ABLINGTALK<span id = "unread" class="label label-info"></span></a>
+			<a class="navbar-brand" href="<%=request.getContextPath()%>/message/openMessage.do">ABLINGTALK<span id = "unread" class="label label-info"></span></a>
 			<a class="navbar-brand" href="<%=request.getContextPath() %>/message/memberFind.do">친구찾기</a>
 		</div>
 	</nav>	
@@ -51,7 +51,7 @@
 					<td><input class="form-control" type="text" id="findId" maxlength="20" placeholder="찾을 아이디를 입력하세요"></td>
 				</tr>
 				<tr>
-					<td colspan="2"><button class="btn btn-primary pull-right" id="findMember">검색</button></td>
+					<td colspan="2"><button class=" pull-right next" id="findMember">검색</button></td>
 				</tr>
 			</tbody>
 		</table>
@@ -214,7 +214,7 @@
 			'<th><h4>검색 결과</h4></th>' +
 			'</tr></thead>' +
 			'<tbody><tr>' +
-			'<td style="text-align: center;"><h3>' + findId + '</h3><a href="<%=request.getContextPath()%>/message/messageList.do?toId='+encodeURIComponent(findId) + '" class="btn btn-primary pull-right">' +
+			'<td style="text-align: center;"><h3>' + findId + '</h3><a href="<%=request.getContextPath()%>/message/messageList.do?toId='+encodeURIComponent(findId) + '" class="pull-right next">' +
 			'메세지 보내기</a></td>' +
 			'</tr></tbody>'
 		);

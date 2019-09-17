@@ -44,14 +44,14 @@
 <body onresize="parent.resizeTo(450,600)" onload="parent.resizeTo(450,600)">
 	<nav class="navbar navbar-default">
 		<div class="navbar-header">
-			<a class="navbar-brand" href="#">ABLINGTALK<span id = "unread" class="label label-info"></span></a>
+			<a class="navbar-brand" href="<%=request.getContextPath()%>/message/openMessage.do">ABLINGTALK<span id = "unread" class="label label-info"></span></a>
 			<a class="navbar-brand" href="<%=request.getContextPath() %>/message/memberFind.do">친구찾기</a>
 		</div>
 	</nav>	
 	<div class="container bootstrap snippet">
 		<div class="row"> 
 			<div class="col-xs-12">
-				<div class="portlet portlet-default">
+				<div class="portlet portlet-default chatWrap">
 					<div class="portlet-heading">
 						<div class="portlet-title">
 							<h4><i class="fa fa-circle text-green"></i><%=toId %></h4>
@@ -71,9 +71,9 @@
 								<div class="form-group col-xs-10">
 								<%if(!toId.equals("msgAdmin")) {%>
 									<%if(lecName!=null && !lecName.equals("")) {%> 
-										<textarea style="height: 70px;" id="chatContent" class="form-control" maxlength="100">[<%=lecName %>] 수업 문의합니다!</textarea>
+										<textarea style="height: 70px;resize: none;" id="chatContent" class="form-control" maxlength="100">[<%=lecName %>] 수업 문의합니다!</textarea>
 									<%} else { %>
-										<textarea style="height: 70px;" id="chatContent" class="form-control" maxlength="100" placeholder="메세지를 입력하세요."></textarea>
+										<textarea style="height: 70px;resize: none;" id="chatContent" class="form-control" maxlength="100" placeholder="메세지를 입력하세요."></textarea>
 									<%} %>
 									</div> 
 										<div class="form-group col-xs-2">
@@ -81,7 +81,7 @@
 											<div class="clearfix"></div>
 										</div>
 								<%} else {%>	<!-- 관리자로부터 받은경우 -->
-										<textarea style="height: 70px;" id="chatContent" class="form-control" readonly>이 발신자는 읽기만 가능합니다.</textarea>
+										<textarea style="height: 70px;resize: none;" id="chatContent" class="form-control" readonly>이 발신자는 읽기만 가능합니다.</textarea>
 									</div> 
 								<%} %>
 								<!-- <div class="form-group col-xs-2">
