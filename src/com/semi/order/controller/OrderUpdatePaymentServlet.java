@@ -8,6 +8,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.semi.lecture.model.service.LectureService;
+import com.semi.message.model.service.MessageService;
 import com.semi.order.model.service.OrderService;
 
 /**
@@ -26,8 +28,20 @@ public class OrderUpdatePaymentServlet extends HttpServlet {
 		
 		int oNum = Integer.parseInt(request.getParameter("oNum"));
 		int result = new OrderService().updatePayment(oNum);
-		System.out.println(result);
-		response.getWriter().write(result+"");
+		if(result > 0) {
+			int addStudentCount = new LectureService().updateStudentCount(oNum);
+			if(addStudentCount > 0) {
+				response.getWriter().write(result+"");
+				
+				//멘토한테 결제되었다는 메세지 보내기
+				String userId = new OrderService().selectOrder(oNum).getLecture().getLecMento().getMember().getmId();
+				new MessageService().insertMessage("msgAdmin", userId, "[ 신청번호 '"+oNum+"' ] 결제 완료 되었습니다.");
+			}
+		}
+		
+		response.getWriter().write("0");
+		
+		
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

@@ -260,7 +260,7 @@ public class MessageDao {
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, fromId);
 			pstmt.setString(2, toId);
-			pstmt.setString(3, text.replaceAll(" ", "&nbsp;").replaceAll("<", "&lt;").replaceAll(">", "&gt;").replaceAll("\n", "<br>"));
+			pstmt.setString(3, text);
 			result = pstmt.executeUpdate();
 		} catch(Exception e) {
 			e.printStackTrace();

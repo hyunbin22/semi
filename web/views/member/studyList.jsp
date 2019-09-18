@@ -5,6 +5,7 @@
     <section>
 	<%@ include file="/views/common/myPageAside.jsp" %>
 	  	<div class="wrap">
+	  		<div id="myPageContentWrap">
              <div class="bar">
 				<br>
                 <h1 class="center1">신청한 강의</h1>
@@ -27,9 +28,11 @@
                             <td class = "listContent"><span><%=list.get(i).getLecture().getLecName() %></span></td>
                             <td class = "listContent"><span><button class = "next" onclick = "location.href='<%=request.getContextPath()%>/member/seeMoreStudy.do?lecNum=<%=list.get(i).getLecNum()%>'">상세보기</button></span></td>
                             <td class = "listCheck"><%=list.get(i).getoCheck() %></td>
-                            <td class = "listCheck"><%if(list.get(i).getoCheck() == 'Y'){ %>
-                            							<span><button class = "next" onclick = "location.href='<%=request.getContextPath()%>/order/orderPaymentView.do?lecNum=<%=list.get(i).getLecNum()%>'">결제하기</button></span>
-                            							<%}else{ %>
+                            <td class = "listCheck"><%if(list.get(i).getoCheck() == 'Y' && list.get(i).getoPayment() == 'N'){ %>
+                            							<span><button class = "next" onclick = "location.href='<%=request.getContextPath()%>/order/orderPaymentView.do?oNum=<%=list.get(i).getoNum()%>'">결제하기</button></span>
+                            							<%} else if(list.get(i).getoCheck() == 'Y' && list.get(i).getoPayment() == 'Y') {%>
+                            							<span>결제완료</span>
+                            							<%} else { %>
                             							<span>승인대기중</span>
                             							<%} %>
                             </td>
@@ -41,16 +44,10 @@
 
          
   
-  
+  					</div>
                 </div>
             </div>
       </section>
-      
-      <!-- 결제창 보낼 데이터 -->
-      <form method="post" name="orderPayFrm" id="orderPayFrm" action="<%=request.getContextPath()%>/order/orderPaymentView.do">
-      	<input type="hidden" name="mNum" value="<%=m.getmNum()%>">
-      	<input type="hidden" name="oNum" value="1">
-      </form>
       
       <script>
 

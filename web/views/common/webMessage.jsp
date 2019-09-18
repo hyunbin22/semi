@@ -79,7 +79,9 @@
 				success: function(data) {
 					if(data == "") return;
 					$('#boxTable').html('');
+					console.log(typeof data);
 					var parsed = JSON.parse(data);
+					console.log(typeof data);
 					var result = parsed.result;
 					for(var i = 0; i < result.length; i++) {
 						if(result[i][0].value == userId) {	//메세지 보낸사람이 나인지 상대방인지
@@ -91,7 +93,7 @@
 					}
 				}
 			});
-		},500);
+		},2000);
 		
 	});
 	

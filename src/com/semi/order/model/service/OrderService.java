@@ -32,8 +32,8 @@ private OrderDao dao = new OrderDao();
 //		return result;
 //	}
 	
-	//결제 전 신청내역 가져오기
-	public Order noPayOrder(int oNum) {
+	//신청내역 가져오기
+	public Order selectOrder(int oNum) {
 		Connection conn = getConnection();
 		Order order = null;
 		order = dao.selectOrder(conn, oNum);

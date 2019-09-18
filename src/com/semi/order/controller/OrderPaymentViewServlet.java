@@ -26,7 +26,7 @@ public class OrderPaymentViewServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		int oNum = Integer.parseInt(request.getParameter("oNum"));
-		Order order = new OrderService().noPayOrder(oNum);
+		Order order = new OrderService().selectOrder(oNum);
 		request.setAttribute("order", order);
 		request.getRequestDispatcher("/views/lecture/orderPayment.jsp").forward(request, response);
 

@@ -8,6 +8,8 @@
     	MentoUpload mu = (MentoUpload)request.getAttribute("mentoUpload");
     %>
 	<%@ include file="/views/common/myPageAside.jsp" %>
+	<div class="wrap">
+	<div id="myPageContentWrap">
                         <br><br>
                     <h1 class="center1">멘토페이지</h1>
                     <br><br>
@@ -88,6 +90,8 @@
                         </tr>
                     </table>
                 </div>
+            </div>
+            </div>
             </div>
         </section>
 

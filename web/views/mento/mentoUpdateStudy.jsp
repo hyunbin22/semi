@@ -23,6 +23,8 @@
     	}
     %>
 <%@ include file="/views/common/myPageAside.jsp" %>
+<div class="wrap">
+     <div id="myPageContentWrap">
 			<br>
 			<br>
 			<h1 class="center1">멘토 강의수정</h1>
@@ -211,7 +213,7 @@
 			</form>
 		</div>
 	</div>
-
+</div>
 </section>
 <script>
 

@@ -9,6 +9,7 @@
     %>
       <%@ include file="/views/common/myPageAside.jsp" %>
       	  	<div class="wrap">
+      	  		<div id="myPageContentWrap">
              <div class="bar">
 					<br>
 					<br>
@@ -44,6 +45,7 @@
                     </table>
                     <br>
                 </div>
+            </div>
             </div>
             </div>
             </div>

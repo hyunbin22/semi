@@ -23,7 +23,112 @@
 
 <section class="center1">
 	<article>
-		<div id="class-pay-container">
+	<div class="container-fluid class-pay-container">
+		<div class="row">
+			<div class="col-md-12">
+				<div class="row">
+					<div class="col-md-4" id="payMentoInfo">
+						<div id="center1">
+							<img alt="." src='<%=request.getContextPath()%>/upload/lecture/<%=lecCoverImg%>' id="lecCoverImg" />
+						</div>
+						<h3>
+							<%=lec.getLecName() %>
+						</h3>
+							<h5><%=lec.getLecMento().getMtNickName() %></h5> <br><br>
+						<p>
+							신청해주셔서 감사합니다.
+						</p>
+					</div>
+					<div class="col-md-8">
+						<table class="table" id="payOrderInfo">
+							<thead>
+								<tr>
+									<th>
+										신청번호 : <%=order.getoNum() %>
+									</th>
+									<th>
+										신청일자 : <%=order.getOrderDate() %>
+									</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr>
+									<th>
+										첫 수업 날짜
+									</th>
+									<td>
+										<%if(lec.getLecType().equals("협의")) {%>
+											협의
+										<%} else {%>
+											<%=lec.getLecOpenDate() %>
+										<%} %>
+									</td>
+								</tr>
+								<tr>
+									<th>
+										신청한 수업 시간
+									</th>
+									<td>
+										<%if(lec.getLecType().equals("협의")) {%>
+											협의
+										<%} else {%>
+											<%=order.getoTot()%>
+										<%} %>
+									</td>
+								</tr>
+								<tr>
+									<th>
+										1회 수업시간
+									</th>
+									<td>
+										<%=lec.getLecTime() %> 시간
+									</td>
+								</tr>
+								<tr>
+									<th>
+										1회 수업 금액
+									</th>
+									<td>
+										<%=lec.getLecPrice() %> 원
+									</td>
+								</tr>
+								<tr>
+									<th>
+										총 수업횟수
+									</th>
+									<td>
+										<%=lec.getLecCount() %> 회
+									</td>
+								</tr>
+
+								<tr>
+									<th>
+										총 결제금액
+									</th>
+									<td>
+										<%=order.getoPrice() %> 원
+									</td>
+								</tr>
+								<tr>
+									<th>
+										결제수단
+									</th>
+									<td>
+										<label><input type="radio" name="kakaopay">카카오페이</label>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				</div>
+			</div>
+		</div>
+		<br><br>
+		<div class="center1">
+	   		<button onclick="fn_iampay();" class="next">결제하기</button>
+		</div>
+	</div>
+		<%-- <div id="class-pay-container">
 			<div class="card mb-3 center1" style="max-width: 800px;">
 				<div class="row no-gutters">
 					<div class="col-md-4 center1">
@@ -65,7 +170,7 @@
 					</div>
 				</div>
 			</div>
-		</div>
+		</div> --%>
 	</article>
 </section>
 <script>
@@ -98,9 +203,9 @@
             				console.log(check);
             				msg = '결제가 완료되었습니다.';
         	                msg += '\결제 금액 : ' + rsp.paid_amount;
-        					
+        					alert(msg);
         	                //성공시 이동할 페이지
-        	                location.href='<%=request.getContextPath()%>/order/orderPaySuccess.do?msg='+encodeURI(msg);
+        	                location.href='<%=request.getContextPath()%>/order/orderPaySuccess.do?oNum=<%=order.getoNum()%>';
             			}
             		},
             		error : function(request, status, error) {

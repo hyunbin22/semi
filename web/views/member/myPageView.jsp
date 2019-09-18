@@ -3,6 +3,7 @@
     <%@ include file = "/views/common/header.jsp" %>
 	<%@ include file="/views/common/myPageAside.jsp" %>
         <div class="wrap">
+        <div id="myPageContentWrap">
             <div class="bar">
                 <br>
                     
@@ -63,6 +64,7 @@
             <div class = "center1">
                 <input type="button" id = "btnDelete" value="탈퇴하기" class="next center1" onclick="deleteMember();">
             </div>
+        </div>
         </div>
         </div>
     </section>
