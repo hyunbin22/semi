@@ -1,17 +1,21 @@
 package com.semi.lecture.model.vo;
 
 import java.sql.Date;
-import java.util.Arrays;
 import java.util.List;
 
 import com.semi.mento.model.vo.Mento;
 
+/**
+ * @author gusql
+ *
+ */
 public class Lecture {
 	
 	private int lecNum;
 	private int mtNum;
 	private int subNum;
 	private int localSubNum;
+	private String address;
 	private String lecName;
 	private String lecType;
 	private int lecMaxCount;
@@ -32,58 +36,19 @@ public class Lecture {
 	private char lecCheck;
 	private String lecReason;
 	private char lecStatus;
-	private LectureUpload lectureUpload;
 	private List<LectureUpload> lectureUpList;
 	private Mento lecMento;
+
 	public Lecture() {
 		// TODO Auto-generated constructor stub
 	}
-	
-	
-	
-	public Lecture(int lecNum, int mtNum, int subNum, int localSubNum, String lecName, String lecType, int lecMaxCount,
-			int lecPrice, int lecTime, int lecCount, String lecWeek, String lecMeet, String lecTot, String lecTot2,
-			Date lecOpenDate, Date lecOpenDate2, String lecLocalContent, String lecMentoContent,
-			String lecLectureContent, int lecStudentCount, Date lecADate, char lecCheck, String lecReason,
-			char lecStatus, LectureUpload lectureUpload, List<LectureUpload> lectureUpList, Mento lecMento) {
-		super();
-		this.lecNum = lecNum;
-		this.mtNum = mtNum;
-		this.subNum = subNum;
-		this.localSubNum = localSubNum;
-		this.lecName = lecName;
-		this.lecType = lecType;
-		this.lecMaxCount = lecMaxCount;
-		this.lecPrice = lecPrice;
-		this.lecTime = lecTime;
-		this.lecCount = lecCount;
-		this.lecWeek = lecWeek;
-		this.lecMeet = lecMeet;
-		this.lecTot = lecTot;
-		this.lecTot2 = lecTot2;
-		this.lecOpenDate = lecOpenDate;
-		this.lecOpenDate2 = lecOpenDate2;
-		this.lecLocalContent = lecLocalContent;
-		this.lecMentoContent = lecMentoContent;
-		this.lecLectureContent = lecLectureContent;
-		LecStudentCount = lecStudentCount;
-		this.lecADate = lecADate;
-		this.lecCheck = lecCheck;
-		this.lecReason = lecReason;
-		this.lecStatus = lecStatus;
-		this.lectureUpload = lectureUpload;
-		this.lectureUpList = lectureUpList;
-		this.lecMento = lecMento;
-	}
 
+	public Lecture(int lecNum, int mtNum, int subNum, int localSubNum, String lecName,
+			String lecType, int lecMaxCount, int lecPrice, int lecTime, int lecCount, String lecWeek, String lecMeet,
+			String lecTot, String lecTot2, Date lecOpenDate, Date lecOpenDate2, String lecLocalContent,
+			String lecMentoContent, String lecLectureContent, int lecStudentCount, Date lecADate, char lecCheck,
+			String lecReason, char lecStatus, List<LectureUpload> lectureUpList, Mento lecMento) {
 
-
-	public Lecture(int lecNum, int mtNum, int subNum, int localSubNum, String lecName, String lecType, int lecMaxCount,
-			int lecPrice, int lecTime, int lecCount, String lecWeek, String lecMeet, String lecTot, String lecTot2,
-			Date lecOpenDate, Date lecOpenDate2, String lecLocalContent, String lecMentoContent,
-			String lecLectureContent, int lecStudentCount, Date lecADate, char lecCheck, String lecReason,
-			char lecStatus, List<LectureUpload> lectureUpList, Mento lecMento) {
-		super();
 		this.lecNum = lecNum;
 		this.mtNum = mtNum;
 		this.subNum = subNum;
@@ -111,15 +76,69 @@ public class Lecture {
 		this.lectureUpList = lectureUpList;
 		this.lecMento = lecMento;
 	}
+
+
+	public Lecture(int mtNum, int subNum, int localSubNum, String lecName, String lecType,
+			int lecMaxCount, int lecPrice, int lecTime, int lecCount, String lecWeek, String lecMeet, String lecTot,
+			String lecTot2, Date lecOpenDate, Date lecOpenDate2, String lecLocalContent, String lecMentoContent,
+			String lecLectureContent) {
+
+		this.subNum = subNum;
+		this.mtNum = mtNum;
+		this.localSubNum = localSubNum;
+		this.lecName = lecName;
+		this.lecType = lecType;
+		this.lecMaxCount = lecMaxCount;
+		this.lecPrice = lecPrice;
+		this.lecTime = lecTime;
+		this.lecCount = lecCount;
+		this.lecWeek = lecWeek;
+		this.lecMeet = lecMeet;
+		this.lecTot = lecTot;
+		this.lecTot2 = lecTot2;
+		this.lecOpenDate = lecOpenDate;
+		this.lecOpenDate2 = lecOpenDate2;
+		this.lecLocalContent = lecLocalContent;
+		this.lecMentoContent = lecMentoContent;
+		this.lecLectureContent = lecLectureContent;
+		
+	}
+	
+	public Lecture(int lecNum, int mtNum, int subNum, int localSubNum, String lecName, String lecType,
+			int lecMaxCount, int lecPrice, int lecTime, int lecCount, String lecWeek, String lecMeet, String lecTot,
+			String lecTot2, Date lecOpenDate, Date lecOpenDate2, String lecLocalContent, String lecMentoContent,
+			String lecLectureContent) {
+
+		this.lecNum = lecNum;
+		this.subNum = subNum;
+		this.mtNum = mtNum;
+		this.localSubNum = localSubNum;
+		this.lecName = lecName;
+		this.lecType = lecType;
+		this.lecMaxCount = lecMaxCount;
+		this.lecPrice = lecPrice;
+		this.lecTime = lecTime;
+		this.lecCount = lecCount;
+		this.lecWeek = lecWeek;
+		this.lecMeet = lecMeet;
+		this.lecTot = lecTot;
+		this.lecTot2 = lecTot2;
+		this.lecOpenDate = lecOpenDate;
+		this.lecOpenDate2 = lecOpenDate2;
+		this.lecLocalContent = lecLocalContent;
+		this.lecMentoContent = lecMentoContent;
+		this.lecLectureContent = lecLectureContent;
+		
+	}
+	
 	
 	
 
-	public Lecture(int mtNum, int subNum, int localSubNum, String lecName, String lecType, int lecMaxCount,
+	public Lecture(int subNum, int localSubNum, String lecName, String lecType, int lecMaxCount,
 			int lecPrice, int lecTime, int lecCount, String lecWeek, String lecMeet, String lecTot, String lecTot2,
 			Date lecOpenDate, Date lecOpenDate2, String lecLocalContent, String lecMentoContent,
 			String lecLectureContent) {
 		super();
-		this.mtNum = mtNum;
 		this.subNum = subNum;
 		this.localSubNum = localSubNum;
 		this.lecName = lecName;
@@ -140,6 +159,8 @@ public class Lecture {
 	}
 	
 	
+
+
 	public Lecture(String lecName, String lecType, int lecMaxCount, int lecPrice, int lecTime, int lecCount,
 			String lecWeek, String lecMeet, String lecTot, String lecTot2, Date lecOpenDate, Date lecOpenDate2,
 			String lecLocalContent, String lecMentoContent, String lecLectureContent) {
@@ -160,20 +181,6 @@ public class Lecture {
 		this.lecMentoContent = lecMentoContent;
 		this.lecLectureContent = lecLectureContent;
 	}
-	
-	
-	
-	public LectureUpload getLectureUpload() {
-		return lectureUpload;
-	}
-
-
-
-	public void setLectureUpload(LectureUpload lectureUpload) {
-		this.lectureUpload = lectureUpload;
-	}
-
-
 
 	public int getLecNum() {
 		return lecNum;
@@ -187,9 +194,11 @@ public class Lecture {
 	public void setMtNum(int mtNum) {
 		this.mtNum = mtNum;
 	}
+
 	public int getSubNum() {
 		return subNum;
 	}
+
 	public void setSubNum(int subNum) {
 		this.subNum = subNum;
 	}
@@ -199,6 +208,14 @@ public class Lecture {
 	public void setLocalSubNum(int localSubNum) {
 		this.localSubNum = localSubNum;
 	}
+	public String getAddress() {
+		return address;
+	}
+
+	public void setAddress(String address) {
+		this.address = address;
+	}
+
 	public String getLecName() {
 		return lecName;
 	}
@@ -331,19 +348,17 @@ public class Lecture {
 	public void setLecMento(Mento lecMento) {
 		this.lecMento = lecMento;
 	}
+
 	@Override
 	public String toString() {
 		return "Lecture [lecNum=" + lecNum + ", mtNum=" + mtNum + ", subNum=" + subNum + ", localSubNum=" + localSubNum
 				+ ", lecName=" + lecName + ", lecType=" + lecType + ", lecMaxCount=" + lecMaxCount + ", lecPrice="
-				+ lecPrice + ", lecTime=" + lecTime + ", lecCount=" + lecCount + ", lecWeek=" + lecWeek
-				+ ", lecMeet=" + lecMeet + ", lecTot=" + lecTot + ", lecTot2=" + lecTot2 + ", lecOpenDate="
-				+ lecOpenDate + ", lecOpenDate2=" + lecOpenDate2 + ", lecLocalContent=" + lecLocalContent
-				+ ", lecMentoContent=" + lecMentoContent + ", lecLectureContent=" + lecLectureContent
-				+ ", LecStudentCount=" + LecStudentCount + ", lecADate=" + lecADate + ", lecCheck=" + lecCheck
-				+ ", lecReason=" + lecReason + ", lecStatus=" + lecStatus + ", lectureUpList=" + lectureUpList
-				+ ", lecMento=" + lecMento + "]";
+				+ lecPrice + ", lecTime=" + lecTime + ", lecCount=" + lecCount + ", lecWeek=" + lecWeek + ", lecMeet="
+				+ lecMeet + ", lecTot=" + lecTot + ", lecTot2=" + lecTot2 + ", lecOpenDate=" + lecOpenDate
+				+ ", lecOpenDate2=" + lecOpenDate2 + ", lecLocalContent=" + lecLocalContent + ", lecMentoContent="
+				+ lecMentoContent + ", lecLectureContent=" + lecLectureContent + ", LecStudentCount=" + LecStudentCount
+				+ ", lecADate=" + lecADate + ", lecCheck=" + lecCheck + ", lecReason=" + lecReason + ", lecStatus="
+				+ lecStatus + ", lectureUpList=" + lectureUpList + ", lecMento=" + lecMento + "]";
 	}
-	
-	
-	
+
 }

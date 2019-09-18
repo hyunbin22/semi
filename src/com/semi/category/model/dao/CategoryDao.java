@@ -70,14 +70,14 @@ public class CategoryDao {
 		return list;
 	}
 	
-	public int updateCategory(Connection conn, String scName, int scNum) {
+	public int updateCategory(Connection conn, int selectbank, String inputcategory) {
 		PreparedStatement pstmt=null;
 		int result=0;
 		String sql=prop.getProperty("updateCategory");
 		try {
 			pstmt=conn.prepareStatement(sql);
-			pstmt.setString(1, scName);
-			pstmt.setInt(2, scNum);
+			pstmt.setString(1, inputcategory);
+			pstmt.setInt(2, selectbank);
 			result=pstmt.executeUpdate();
 		}catch(Exception e) {
 			e.printStackTrace();
@@ -87,15 +87,32 @@ public class CategoryDao {
 		return result;
 	}
 	
-	public int deleteCategory(Connection conn, String scName) {
+	public int deleteCategory(Connection conn, int selectbank) {
 		PreparedStatement pstmt=null;
 		int result=0;
 		String sql=prop.getProperty("deleteCategory");
 		try {
 			pstmt=conn.prepareStatement(sql);
-			pstmt.setString(1, scName);
+			pstmt.setInt(1, selectbank);
 			result=pstmt.executeUpdate();
 		}catch(Exception e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}
+		return result;
+	}
+
+
+	public int enrollCategory(Connection conn, String inputcategory) {
+		PreparedStatement pstmt = null;
+		int result=0;
+		String sql=prop.getProperty("enrollCategory");
+		try {
+			pstmt=conn.prepareStatement(sql);
+			pstmt.setString(1, inputcategory);
+			result=pstmt.executeUpdate();
+		}catch(SQLException e) {
 			e.printStackTrace();
 		}finally {
 			close(pstmt);

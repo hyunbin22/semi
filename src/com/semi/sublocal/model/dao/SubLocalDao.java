@@ -51,14 +51,14 @@ public class SubLocalDao {
 		Statement stmt=null;
 		ResultSet rs=null;
 		List<SubLocal> list=new ArrayList();
-		String sql="select * from tb_sublocation";
+		String sql="select * from tb_sub_location";
 		try {
 			stmt=conn.createStatement();
 			rs=stmt.executeQuery(sql);
 			while(rs.next()) {
 				SubLocal sl=new SubLocal();
-				sl.setLocalsubNum(rs.getInt("localsubNum"));
-				sl.setLocalCountry(rs.getString("localCountry"));
+				sl.setLocalsubNum(rs.getInt("sublocalNum"));
+				sl.setLocalCountry(rs.getString("local_Country"));
 				list.add(sl);
 			}
 		}catch(Exception e) {
@@ -125,6 +125,29 @@ public class SubLocalDao {
 			close(stmt);
 		}
 		return list;
+	}
+
+	public int selectsubLocalName(Connection conn, int local, String subLocal) {
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		int result=0;
+		String sql="select sublocalnum from tb_sub_location where localnum=? and local_country=?";
+		System.out.println("로컬 ㅣ "+local+"서브로컬 : "+subLocal);
+		try {
+			pstmt=conn.prepareStatement(sql);
+			pstmt.setInt(1, local);
+			pstmt.setString(2, subLocal);
+			rs=pstmt.executeQuery();
+			if(rs.next()) {
+				result=rs.getInt(1);
+			}
+		}catch(Exception e) {
+			e.printStackTrace();
+		}finally {
+			close(rs);
+			close(pstmt);
+		}
+		return result;
 	}
 
 }

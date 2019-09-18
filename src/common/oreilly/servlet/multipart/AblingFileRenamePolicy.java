@@ -5,7 +5,10 @@ import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+import javax.servlet.http.HttpSession;
+
 import com.oreilly.servlet.multipart.FileRenamePolicy;
+import com.semi.member.model.vo.Member;
 
 
 public class AblingFileRenamePolicy implements FileRenamePolicy{

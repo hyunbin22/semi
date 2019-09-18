@@ -16,10 +16,10 @@ public class SubCategoryService {
 	
 	private SubCategoryDao dao=new SubCategoryDao();
 	
-	public int enrollSubCategory(SubCategory sc, Category c) {
+	public int enrollSubCategory(String inputsubcategory, int maincategory) {
 		
 		Connection conn=getConnection();
-		int result=dao.enrollSubCategory(conn,sc,c);
+		int result=dao.enrollSubCategory(conn,inputsubcategory,maincategory);
 		
 		if(result>0) {
 			commit(conn);
@@ -62,13 +62,19 @@ public class SubCategoryService {
 		return result;
 	}
 
-
-
 	public List selectSub(int scNum) {
 		Connection conn = getConnection();
 		List<SubCategory> list=dao.selectSubCategory(conn,scNum);
 		close(conn);
 		return list;
+	}
+
+	public int selectsubName(String subCategory) {
+		Connection conn=getConnection();
+		int result=dao.selectsubName(conn, subCategory);
+
+		close(conn);
+		return result;
 	}
 
 }

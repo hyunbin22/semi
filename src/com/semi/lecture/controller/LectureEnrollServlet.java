@@ -19,51 +19,50 @@ import com.semi.sublocal.model.service.SubLocalService;
 import com.semi.sublocal.model.vo.SubLocal;
 
 /**
- * Servlet implementation class LectureEnrollServlet
+ * Servlet implementation class enrollLectureServlet
  */
 @WebServlet("/mento/enrollLecture.do")
 public class LectureEnrollServlet extends HttpServlet {
-	   private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 1L;
        
-	    /**
-	     * @see HttpServlet#HttpServlet()
-	     */
-	    public LectureEnrollServlet() {
-	        super();
-	        // TODO Auto-generated constructor stub
-	    }
+    /**
+     * @see HttpServlet#HttpServlet()
+     */
+    public LectureEnrollServlet() {
+        super();
+        // TODO Auto-generated constructor stub
+    }
 
-	   /**
-	    * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
-	    */
-	   protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-	      
-	      String mtNum = request.getParameter("mtNum");
-	      
-	        List<Category> c= (List)new CategoryService().selectCategory();
-	        List<SubCategory> sc= (List)new SubCategoryService().selectSubCategory();
-	        List<Local> l= (List)new LocalService().selectLocal();
-	        List<SubLocal> sl= (List)new SubLocalService().selectSubLocal();
-	        
-	        
-	        request.setAttribute("category", c);
-	        request.setAttribute("subcategory", sc);
-	        request.setAttribute("local", l);
-	        request.setAttribute("subLocal", sl);
-	        
-	      request.setAttribute("mtNum", mtNum);
-	      request.getRequestDispatcher("/views/lecture/enrollLecture.jsp").forward(request, response);
-	      
-	      
-	   }
+	/**
+	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+	 */
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
+		String mtNum = request.getParameter("mtNum");
+		
+        List<Category> c= (List)new CategoryService().selectCategory();
+        List<SubCategory> sc= (List)new SubCategoryService().selectSubCategory();
+        List<Local> l= (List)new LocalService().selectLocal();
+        List<SubLocal> sl= (List)new SubLocalService().selectSubLocal();
+        
+        
+        request.setAttribute("category", c);
+        request.setAttribute("subcategory", sc);
+        request.setAttribute("local", l);
+        request.setAttribute("subLocal", sl);
+        
+		request.setAttribute("mtNum", mtNum);
+		request.getRequestDispatcher("/views/lecture/enrollLecture.jsp").forward(request, response);
+		
+		
+	}
 
-	   /**
-	    * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	    */
-	   protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-	      // TODO Auto-generated method stub
-	      doGet(request, response);
-	   }
-
+	/**
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 */
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// TODO Auto-generated method stub
+		doGet(request, response);
+	}
 
 }

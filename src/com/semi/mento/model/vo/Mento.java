@@ -15,9 +15,9 @@ public class Mento{
 	private String mtAcademic;
 	private String mtAcademicDept;
 	private String mtGraduation;
-	private String mtBank;
-	private String mtAccountNumber;
-	private Date mtaDate;	//멘토신청날짜
+	private String bank;
+	private String accountNumber;
+	private Date mtaDate;   //멘토신청날짜
 	private char mtCheck;
 	private String mtReason;
 	private Member member;
@@ -26,28 +26,6 @@ public class Mento{
 
 	public Mento() {
 
-	}
-
-
-	public Mento(int mtNum, int mNum, Date mtHireDate, String mtNickName, String mtHowConfirm, String mtAcademic,
-			String mtAcademicDept, String mtGraduation, String mtBank, String mtAccountNumber, Date mtaDate,
-			char mtCheck, String mtReason, Member member, List<MentoUpload> list) {
-		super();
-		this.mtNum = mtNum;
-		this.mNum = mNum;
-		this.mtHireDate = mtHireDate;
-		this.mtNickName = mtNickName;
-		this.mtHowConfirm = mtHowConfirm;
-		this.mtAcademic = mtAcademic;
-		this.mtAcademicDept = mtAcademicDept;
-		this.mtGraduation = mtGraduation;
-		this.mtBank = mtBank;
-		this.mtAccountNumber = mtAccountNumber;
-		this.mtaDate = mtaDate;
-		this.mtCheck = mtCheck;
-		this.mtReason = mtReason;
-		this.member = member;
-		this.list = list;
 	}
 	
 	
@@ -59,16 +37,37 @@ public class Mento{
 	}
 
 
-	public Mento(String mtNickName, String mtHowConfirm, String mtAcademic, String mtAcademicDept, String mtGraduation,
-			String mtBank, String mtAccountNumber) {
+
+
+	public Mento(int mtNum, int mNum, Date mtHireDate, String mtNickName, String mtHowConfirm, String mtAcademic,
+			String mtAcademicDept, String mtGraduation, Date mtaDate, char mtCheck, String mtReason, Member member,
+			List<MentoUpload> list) {
+		super();
+		this.mtNum = mtNum;
+		this.mNum = mNum;
+		this.mtHireDate = mtHireDate;
+		this.mtNickName = mtNickName;
+		this.mtHowConfirm = mtHowConfirm;
+		this.mtAcademic = mtAcademic;
+		this.mtAcademicDept = mtAcademicDept;
+		this.mtGraduation = mtGraduation;
+		this.mtaDate = mtaDate;
+		this.mtCheck = mtCheck;
+		this.mtReason = mtReason;
+		this.member = member;
+		this.list = list;
+	}
+
+
+	public Mento(String mtNickName, String mtHowConfirm, String mtAcademic, String mtAcademicDept, String mtGraduation, String bank, String accountNumber) {
 		super();
 		this.mtNickName = mtNickName;
 		this.mtHowConfirm = mtHowConfirm;
 		this.mtAcademic = mtAcademic;
 		this.mtAcademicDept = mtAcademicDept;
 		this.mtGraduation = mtGraduation;
-		this.mtBank = mtBank;
-		this.mtAccountNumber = mtAccountNumber;
+		this.bank = bank;
+		this.accountNumber = accountNumber;
 	}
 
 
@@ -94,6 +93,27 @@ public class Mento{
 
 	public Date getMtHireDate() {
 		return mtHireDate;
+	}
+
+
+
+	public String getBank() {
+		return bank;
+	}
+
+
+	public void setBank(String bank) {
+		this.bank = bank;
+	}
+
+
+	public String getAccountNumber() {
+		return accountNumber;
+	}
+
+
+	public void setAccountNumber(String accountNumber) {
+		this.accountNumber = accountNumber;
 	}
 
 
@@ -152,26 +172,6 @@ public class Mento{
 	}
 
 
-	public String getMtBank() {
-		return mtBank;
-	}
-
-
-	public void setMtBank(String mtBank) {
-		this.mtBank = mtBank;
-	}
-
-
-	public String getMtAccountNumber() {
-		return mtAccountNumber;
-	}
-
-
-	public void setMtAccountNumber(String mtAccountNumber) {
-		this.mtAccountNumber = mtAccountNumber;
-	}
-
-
 	public Date getMtaDate() {
 		return mtaDate;
 	}
@@ -226,10 +226,10 @@ public class Mento{
 	public String toString() {
 		return "Mento [mtNum=" + mtNum + ", mNum=" + mNum + ", mtHireDate=" + mtHireDate + ", mtNickName=" + mtNickName
 				+ ", mtHowConfirm=" + mtHowConfirm + ", mtAcademic=" + mtAcademic + ", mtAcademicDept=" + mtAcademicDept
-				+ ", mtGraduation=" + mtGraduation + ", mtBank=" + mtBank + ", mtAccountNumber=" + mtAccountNumber
-				+ ", mtaDate=" + mtaDate + ", mtCheck=" + mtCheck + ", mtReason=" + mtReason + ", member=" + member
-				+ ", list=" + list + "]";
+				+ ", mtGraduation=" + mtGraduation + ", bank=" + bank + ", accountNumber=" + accountNumber + ", mtaDate="
+				+ mtaDate + ", mtCheck=" + mtCheck + ", mtReason=" + mtReason + ", member=" + member + ", list=" + list
+				+ "]";
 	}
-	
-	
+
+
 }
