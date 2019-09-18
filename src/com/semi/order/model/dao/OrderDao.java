@@ -76,7 +76,7 @@ public class OrderDao {
 				order.setoPrice(rs.getInt("oprice"));
 				order.setoPayment(rs.getString("opayment").charAt(0));
 				order.setoCheck(rs.getString("ocheck").charAt(0));
-				order.setoDate(rs.getDate("orderDate"));
+				order.setOrderDate(rs.getDate("orderDate"));
 				order.setPayDate(rs.getDate("paydate"));
 				
 				order.setLecture(new LectureService().lectureView(rs.getInt("lecNum")));

@@ -431,16 +431,16 @@ public class MemberDao {
 	         rs=pstmt.executeQuery();
 	         while(rs.next()) {
 	        	 Order o = new Order();
-	        	 o.setoNum(rs.getInt("snum"));
+	        	 o.setoNum(rs.getInt("onum"));
 	        	 o.setmNum(rs.getInt("mnum"));
 	        	 o.setLecNum(rs.getInt("lecnum"));
 	        	 o.setLecture(dao.selectLectureName(conn, rs.getInt("lecnum")));
-	        	 o.setoText(rs.getString("stext").replaceAll(" ", "&nbsp;").replaceAll("<", "&lt;").replaceAll(">", "&gt;").replaceAll("\n", "<br>"));
-	        	 o.setoTot(rs.getString("stot"));
-	        	 o.setoPrice(rs.getInt("sprice"));
-	        	 o.setoPayment(rs.getString("spayment").charAt(0));
-	        	 o.setoCheck(rs.getString("afccheck").charAt(0));
-	        	 o.setoDate(rs.getDate("orderDate"));
+	        	 o.setoText(rs.getString("otext").replaceAll(" ", "&nbsp;").replaceAll("<", "&lt;").replaceAll(">", "&gt;").replaceAll("\n", "<br>"));
+	        	 o.setoTot(rs.getString("otot"));
+	        	 o.setoPrice(rs.getInt("oprice"));
+	        	 o.setoPayment(rs.getString("opayment").charAt(0));
+	        	 o.setoCheck(rs.getString("ocheck").charAt(0));
+	        	 o.setOrderDate(rs.getDate("orderDate"));
 	        	 list.add(o);  
 	         }
 	      }catch(SQLException e) {
@@ -464,16 +464,17 @@ public class MemberDao {
 	         rs=pstmt.executeQuery();
 	         if(rs.next()) {
 	        	 o = new Order();
-	        	 o.setoNum(rs.getInt("snum"));
+	        	 o.setoNum(rs.getInt("onum"));
 	        	 o.setmNum(rs.getInt("mnum"));
 	        	 o.setLecNum(rs.getInt("lecnum"));
 	        	 o.setLecture(dao.selectLectureName(conn, rs.getInt("lecnum")));
-	        	 o.setoText(rs.getString("stext").replaceAll(" ", "&nbsp;").replaceAll("<", "&lt;").replaceAll(">", "&gt;").replaceAll("\n", "<br>"));
-	        	 o.setoTot(rs.getString("stot"));
-	        	 o.setoPrice(rs.getInt("sprice"));
-	        	 o.setoPayment(rs.getString("spayment").charAt(0));
-	        	 o.setoCheck(rs.getString("afccheck").charAt(0));  
-	        	 o.setoDate(rs.getDate("orderDate"));
+	        	 o.setoText(rs.getString("otext").replaceAll(" ", "&nbsp;").replaceAll("<", "&lt;").replaceAll(">", "&gt;").replaceAll("\n", "<br>"));
+	        	 o.setoTot(rs.getString("otot"));
+	        	 o.setoPrice(rs.getInt("oprice"));
+	        	 o.setoPayment(rs.getString("opayment").charAt(0));
+	        	 o.setoCheck(rs.getString("ocheck").charAt(0));  
+	        	 o.setOrderDate(rs.getDate("orderDate"));
+	        	 o.setPayDate(rs.getDate("payDate"));
 	         }
 	      }catch(SQLException e) {
 	         e.printStackTrace();

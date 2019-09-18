@@ -36,7 +36,7 @@
 										<tr>
 											<th style = "background-color: lightpink; text-align: center;" >신청 날짜</th>
 											<td>
-												<%=o.getoDate() %>
+												<%=o.getOrderDate() %>
 											</td>
 										</tr>
 
