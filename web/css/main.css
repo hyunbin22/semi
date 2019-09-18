@@ -1279,5 +1279,130 @@ div.myPage-content-wrap {
 }
 
 
+.LectureMainFrame{
+	width:685px;
+	heigth:1600px;
+	border-left:340px;
+}
 
+
+
+.lectureFix{
+    position:fixed;
+    width:200px;
+    height:400px;
+    top:10px;
+    margin-left:40px;
+    margin-top:0px;
+    background-color: #f24365;
+    color:#fff;
+    border-radius: 30px;
+}
+
+.lectureFloatMenu {
+	position: absolute;
+	width: 200px;
+    height: 400px;
+    /* top:52%; */
+    margin-top: 50px;
+    margin-left:40px;
+	background-color: #f24365;
+    color: #fff;
+    border-radius: 30px;
+}
+
+.lectureFloatTitle{
+    text-align: center;
+    margin : 20px 10px 10px 10px;
+    font-size: 30px;
+    font-weight: 900;
+    font-family: "나눔스퀘어";
+}
+
+.lectureSubmit{
+    width: 100px;
+    height: 30px;
+    margin-left: 50px;
+    background-color: black;
+    color: white;
+    font-weight: 900;
+    border: 0px;
+    border-radius: 20px;
+}
+
+.lectureFloatTitle hr{
+    display: block;
+    border: white 0 none;
+    border-top:5px solid white;
+    height: 10px;
+    border-radius: 5px;
+    
+}
+
+.lectureFloatsubtitle{
+    margin-left: 20px;
+    font-family: "나눔스퀘어";
+    font-weight: 600;
+    font-size: 20px;
+}
+
+
+.lectureFloatMenu div select{
+	position: relative;
+	width: 160px;
+	height: 32px;
+	margin-top:10px;
+	margin-bottom:15px;
+	margin-left:20px;
+	border:0px;
+	border-radius:10px;
+	font-family: "나눔스퀘어";
+	font-weight: 900;
+}
+
+.lectureFloatMenu div selecet option{
+	margin-left:10px;
+}
+
+.lectureListText{
+	color: #f24365;
+    font-weight: 900;
+    font-size: 36px;
+    font-family: '나눔스퀘어';
+    text-align: center;
+    margin-left: 40px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.lectureTable {
+	table-layout: fixed;
+	font-family: Arial, Helvetica, sans-serif;
+	display: block;
+	float: left;
+	cursor: pointer;
+	position: relative;
+	width:341.3px;
+	height: 560px;
+	border: solid #a79c8e 0.3px;
+	border-collapse: collapse;
+
+}
+
+.lectureTable:nth-child(2n-1) {
+	border-left:340px;
+}
+
+.img300px{
+	weight:340px;
+	height:340px;
+}
+
+.lectureListName{
+	text-align:center;
+	padding: 5%;
+	font-weight: 900;
+	color: #f24365;
+	font-size: 24px;
+}
 

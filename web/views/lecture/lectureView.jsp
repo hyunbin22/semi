@@ -6,6 +6,9 @@
 <%
    Lecture lec = (Lecture) request.getAttribute("lecture");
    List<LectureReview> list = (List) request.getAttribute("list");
+   
+   String var = lec.getLecWeek();
+   String [] vars = var.split(",");
 %>
 
 
@@ -17,7 +20,7 @@
 <section class="center">
    <div class="wrap">
       <article class="detailwrap">
-         <img src="사이즈500_500.png" class="detailimg" alt="...">
+         <img src="<%=request.getContextPath()%>/upload/lecture/<%=lec.getLectureUpload().getUpLectureReName()%>" class="detailimg" alt="...">
          <!--card-img-top -->
          <div class="detailbody">
             <div class="class_info">
@@ -177,17 +180,22 @@
 </section>
 
 <aside class="center">
-   <form action="<%=request.getContextPath()%>/lecturePayment"
-      method="post" enctype="multipart/form-data">
+
       <div class="wrap">
          <div class="floatMenu">
+            <form action="<%=request.getContextPath()%>/lecture/LectureMemberRegist.do?lecnum=<%=lec.getLecNum() %>"
+      method="post" enctype="multipart/form-data">
             <div class="floatTitle">
                결제
                <hr>
             </div>
             <div class="floatsubtitle">수업시간</div>
             <div id="select_box">
-               <label for="color"><%=lec.getLecTot()%> ~ <%=lec.getLecTot2()%></label>
+               <li>
+               		<ol value="<%=lec.getLecTot()%>"><%=lec.getLecTot() %></ol>
+               		<ol value="<%=lec.getLecTot2()%>"><%=lec.getLecTot2() %></ol>
+               	
+               </li>
                <!-- <select id="color" title="select color">
                         <option selected="selected">asdf</option>
                     </select> -->
@@ -196,24 +204,22 @@
             <div id="select_box">
                <label for="color">한달 <%=lec.getLecCount()%>회
                </label>
-               <!-- <select id="color" title="select color">
-                        <option selected="selected">asdf</option>
-                        <option>asdf</option>
-                        <option>asdf</option>
-                        <option>asdf</option>
-                        <option>asdf</option>
-                    </select> -->
             </div>
-            <div class="floatsubtitle">1회 시간</div>
+            <div class="floatsubtitle">1회당</div>
             <div id="select_box">
-               <label for="color"><%=lec.getLecTime()%></label>
+               <label for="color"><%=lec.getLecTime()%>시간</label>
 
             </div>
             <div class="floatsubtitle">요일</div>
             <div id="select_box">
-               <label for="color"><%=lec.getLecWeek()%></label>
-
+            	<select id="week" name="day">
+            		<option value="<%=lec.getLecWeek() %>"><%=lec.getLecWeek() %></option>
+            		<%-- <%for (int i=0; i<vars.length;i++){ %>
+            		<option value="<%=vars[i]%>"><%=vars[i]%></option>
+            		<%} %> --%>
+            	</select>
             </div>
+            
             <div class="floatsubtitle">장소</div>
             <div id="select_box">
                <label for="color"><%=lec.getLecMeet()%></label>
@@ -235,15 +241,22 @@
                   });
                });
             </script>
+            
             <div>
-               <!-- <input type=""> -->
-               <input type="submit" value="확인" class="classSubmit">
+	            	<input type="submit" value="신청하기" class="classSubmit">
+	        </div>
+	           </form>
+            <br>
+            <form action="<%=request.getContextPath()%>/lectureMewmberRegist">
+	            <div>
+               <input type="submit" value="문의하기" class="classSubmit">
             </div>
+            </form>
 
          </div>
       </div>
 
-   </form>
+
 </aside>
 
 <script>
