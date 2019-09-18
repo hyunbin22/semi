@@ -80,13 +80,13 @@ public class AdminLectureApproFinderServlet extends HttpServlet {
 			pageBar+="<a href="+request.getContextPath()+
 			"/admin/AdminMentoApproval.do?cPage="+(pageNo)+">[다음]</a>";
 		}
-		
+		System.out.println(lectureList);
 		
 		//view페이지에 데이터 전송
 		request.setAttribute("pageBar", pageBar);
 		request.setAttribute("cPage", cPage);
 		request.setAttribute("lectureList",lectureList);
-		if(temp==1) {
+		if(temp==1) {	//승인안된것에서 검색
 			request.getRequestDispatcher("/views/admin/adminLectureApproval.jsp").forward(request, response);
 		}
 	}

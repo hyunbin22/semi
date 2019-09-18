@@ -37,22 +37,24 @@ public class Lecture {
 	private String lecReason;
 	private char lecStatus;
 	private List<LectureUpload> lectureUpList;
+	private LectureUpload lectureUpload;
 	private Mento lecMento;
 
 	public Lecture() {
 		// TODO Auto-generated constructor stub
 	}
 
-	public Lecture(int lecNum, int mtNum, int subNum, int localSubNum, String lecName,
-			String lecType, int lecMaxCount, int lecPrice, int lecTime, int lecCount, String lecWeek, String lecMeet,
-			String lecTot, String lecTot2, Date lecOpenDate, Date lecOpenDate2, String lecLocalContent,
-			String lecMentoContent, String lecLectureContent, int lecStudentCount, Date lecADate, char lecCheck,
-			String lecReason, char lecStatus, List<LectureUpload> lectureUpList, Mento lecMento) {
-
+	public Lecture(int lecNum, int mtNum, int subNum, int localSubNum, String address, String lecName, String lecType,
+			int lecMaxCount, int lecPrice, int lecTime, int lecCount, String lecWeek, String lecMeet, String lecTot,
+			String lecTot2, Date lecOpenDate, Date lecOpenDate2, String lecLocalContent, String lecMentoContent,
+			String lecLectureContent, int lecStudentCount, Date lecADate, char lecCheck, String lecReason,
+			char lecStatus, List<LectureUpload> lectureUpList, LectureUpload lectureUpload, Mento lecMento) {
+		super();
 		this.lecNum = lecNum;
 		this.mtNum = mtNum;
 		this.subNum = subNum;
 		this.localSubNum = localSubNum;
+		this.address = address;
 		this.lecName = lecName;
 		this.lecType = lecType;
 		this.lecMaxCount = lecMaxCount;
@@ -74,8 +76,11 @@ public class Lecture {
 		this.lecReason = lecReason;
 		this.lecStatus = lecStatus;
 		this.lectureUpList = lectureUpList;
+		this.lectureUpload = lectureUpload;
 		this.lecMento = lecMento;
 	}
+
+
 
 
 	public Lecture(int mtNum, int subNum, int localSubNum, String lecName, String lecType,
@@ -180,6 +185,16 @@ public class Lecture {
 		this.lecLocalContent = lecLocalContent;
 		this.lecMentoContent = lecMentoContent;
 		this.lecLectureContent = lecLectureContent;
+	}
+
+	
+	
+	public LectureUpload getLectureUpload() {
+		return lectureUpload;
+	}
+
+	public void setLectureUpload(LectureUpload lectureUpload) {
+		this.lectureUpload = lectureUpload;
 	}
 
 	public int getLecNum() {

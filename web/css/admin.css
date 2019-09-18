@@ -95,6 +95,9 @@ article.admin-list{
 /* 관리자승인관리 */
 
 /* 승인list꾸미기 */
+div#adminSearchContainer {
+	float:left;
+}
 .card-header{
 	background-color: lavender;
 	font-weight: bold;

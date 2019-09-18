@@ -52,5 +52,33 @@ private OrderDao dao = new OrderDao();
 		return result;
 	}
 
+	public int selectStudyListCount() {
+		Connection conn = getConnection();
+		int result = dao.selectStudyListCount(conn);
+		if(result > 0)
+		{
+			commit(conn);
+		}
+		else
+		{
+			rollback(conn);
+		}
+
+		return result;
+	}
+
+	public List<Order> selectOrderList(int cPage, int numPerPage, int mNum) {
+		Connection conn = getConnection();
+		List<Order> list = dao.selectStudyList(conn,cPage,numPerPage, mNum);
+		close(conn);
+		return list;
+	}
+
+	public Order seeMoreStudy(int lecNum) {
+		Connection conn = getConnection();
+		Order o = dao.seeMoreStudyList(conn, lecNum);
+		close(conn);
+		return o;
+	}
 
 }

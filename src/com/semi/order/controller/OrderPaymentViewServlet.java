@@ -27,7 +27,6 @@ public class OrderPaymentViewServlet extends HttpServlet {
 		
 		int oNum = Integer.parseInt(request.getParameter("oNum"));
 		Order order = new OrderService().noPayOrder(oNum);
-		System.out.println(order);
 		request.setAttribute("order", order);
 		request.getRequestDispatcher("/views/lecture/orderPayment.jsp").forward(request, response);
 

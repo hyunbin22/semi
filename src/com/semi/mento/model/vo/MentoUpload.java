@@ -1,13 +1,7 @@
 package com.semi.mento.model.vo;
 
 public class MentoUpload {
-//   private String upMentoOrgProfile; //멘토 프로필 첨부파일 원래이름
-//   private String upMentoReProfile; // 멘토 프로필 첨부파일 변경이름
-//   private String upMentoOrgConfirm; // 멘토 신분인증 첨부파일 원래이름
-//   private String upMentoReConfirm; // 멘토 신분인증 첨부파일 변경이름
-//   private String upMentoOrgLicense; // 멘토 자격증 첨부파일 원래이름
-//   private String upMentoReLicense; // 멘토 자격증 첨부파일 변경이름
-   
+
    private int upMentoNum; // 멘토첨부파일 번호
    private int mtNum; // 멘토테이블 참조 멘토번호
    private String upMentoCategory; // 멘토 첨부파일 카테고리 참조 카테고리 이름

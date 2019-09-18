@@ -44,13 +44,8 @@ public class MemberLoginServlet extends HttpServlet {
 		String mId = request.getParameter("mId");
 		String mPw = request.getParameter("mPw");
 		
-		System.out.println(mId);
-		System.out.println(mPw);
-		
 		MemberService service = new MemberService();
 		Member m = service.selectId(mId,mPw);
-		System.out.println(m);
-
 		
 		String view = "";
 
@@ -61,7 +56,7 @@ public class MemberLoginServlet extends HttpServlet {
 			session.setAttribute("loginMember", m);
 			
 			MentoService service2 = new MentoService();
-			Mento mt = service2.selectMento(m.getmNum());
+			Mento mt = service2.mentoByMNum(m.getmNum());
 
 			if(mt != null)
 			{
@@ -83,12 +78,7 @@ public class MemberLoginServlet extends HttpServlet {
 			rd.forward(request, response);
 			
 		}
-		
 
-
-		
-	
-		
 		
 	}
 

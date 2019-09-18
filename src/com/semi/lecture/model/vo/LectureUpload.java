@@ -5,30 +5,29 @@ public class LectureUpload {
 	private int upLectureNum;
 	private int lecNum;
 	private String upLectureCategory;
-	private String LectureOrgName;
-	private String LectureReName;
-
+	private String upLectureOrgName;
+	private String upLectureReName;
+	
 	public LectureUpload() {
 		// TODO Auto-generated constructor stub
 	}
 
-	public LectureUpload(int upLectureNum, int lecNum, String upLectureCategory, String LectureOrgName, String LectureReName) {
+	public LectureUpload(int upLectureNum, int lecNum, String upLectureCategory, String upLectureOrgName,
+			String upLectureReName) {
 		super();
 		this.upLectureNum = upLectureNum;
 		this.lecNum = lecNum;
 		this.upLectureCategory = upLectureCategory;
-		this.LectureOrgName = LectureOrgName;
-		this.LectureReName = LectureReName;
+		this.upLectureOrgName = upLectureOrgName;
+		this.upLectureReName = upLectureReName;
 	}
-	
-	
 
-	public LectureUpload(int lecNum, String upLectureCategory, String LectureOrgName, String LectureReName) {
+	public LectureUpload(int upLectureNum, String upLectureCategory, String upLectureOrgName, String upLectureReName) {
 		super();
-		this.lecNum = lecNum;
+		this.upLectureNum = upLectureNum;
 		this.upLectureCategory = upLectureCategory;
-		this.LectureOrgName = LectureOrgName;
-		this.LectureReName = LectureReName;
+		this.upLectureOrgName = upLectureOrgName;
+		this.upLectureReName = upLectureReName;
 	}
 
 	public int getUpLectureNum() {
@@ -55,28 +54,28 @@ public class LectureUpload {
 		this.upLectureCategory = upLectureCategory;
 	}
 
-	public String getLectureOrgName() {
-		return LectureOrgName;
+	public String getUpLectureOrgName() {
+		return upLectureOrgName;
 	}
 
-	public void setLectureOrgName(String lectureOrgName) {
-		LectureOrgName = lectureOrgName;
+	public void setUpLectureOrgName(String upLectureOrgName) {
+		this.upLectureOrgName = upLectureOrgName;
 	}
 
-	public String getLectureReName() {
-		return LectureReName;
+	public String getUpLectureReName() {
+		return upLectureReName;
 	}
 
-	public void setLectureReName(String lectureReName) {
-		LectureReName = lectureReName;
+	public void setUpLectureReName(String upLectureReName) {
+		this.upLectureReName = upLectureReName;
 	}
 
 	@Override
 	public String toString() {
 		return "LectureUpload [upLectureNum=" + upLectureNum + ", lecNum=" + lecNum + ", upLectureCategory="
-				+ upLectureCategory + ", LectureOrgName=" + LectureOrgName + ", LectureReName=" + LectureReName + "]";
+				+ upLectureCategory + ", upLectureOrgName=" + upLectureOrgName + ", upLectureReName=" + upLectureReName
+				+ "]";
 	}
-
 	
 	
 

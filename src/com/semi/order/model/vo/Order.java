@@ -18,7 +18,7 @@ public class Order {
    private char oCheck;
    private Lecture lecture;
    private Member member;
-   private Date oDate;
+   private Date orderDate;
    private Date payDate;
 	
 	public Order() {
@@ -26,7 +26,7 @@ public class Order {
 	}
 
 	public Order(int oNum, int mNum, int lecNum, String oTot, String oText, int oPrice, char oPayment, char oCheck,
-			Lecture lecture, Member member, Date oDate, Date payDate) {
+			Lecture lecture, Member member, Date orderDate, Date payDate) {
 		super();
 		this.oNum = oNum;
 		this.mNum = mNum;
@@ -38,7 +38,7 @@ public class Order {
 		this.oCheck = oCheck;
 		this.lecture = lecture;
 		this.member = member;
-		this.oDate = oDate;
+		this.orderDate = orderDate;
 		this.payDate = payDate;
 	}
 
@@ -60,13 +60,14 @@ public class Order {
 		this.payDate = payDate;
 	}
 
+	
 
-	public Date getoDate() {
-		return oDate;
+	public Date getOrderDate() {
+		return orderDate;
 	}
 
-	public void setoDate(Date oDate) {
-		this.oDate = oDate;
+	public void setOrderDate(Date orderDate) {
+		this.orderDate = orderDate;
 	}
 
 	public int getoNum() {

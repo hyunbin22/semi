@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.semi.member.model.service.MemberService;
 import com.semi.message.model.service.MessageService;
 import com.semi.report.model.service.ReportService;
 
@@ -42,7 +43,7 @@ public class AdminMemberBlacklistServlet extends HttpServlet {
 		
 		if(check.equals("Y"))
 		{
-			int result2 = service.memberUse(mAttackerNum);
+			int result2 = new MemberService().memberUse(mAttackerNum);
 		}
 		//메세지 보내기 처리
 		if(result3>0) {
