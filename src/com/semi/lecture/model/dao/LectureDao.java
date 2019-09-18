@@ -81,9 +81,9 @@ public class LectureDao {
 				lec.setLecTot2(rs.getString("lecTot2"));
 				lec.setLecOpenDate(rs.getDate("lecOpenDate"));
 				lec.setLecOpenDate2(rs.getDate("lecOpenDate2"));
-				lec.setLecLocalContent(rs.getString("lecLocalContent"));
-				lec.setLecMentoContent(rs.getString("lecMentoContent"));
-				lec.setLecLectureContent(rs.getString("lecLectureContent"));
+				lec.setLecLocalContent(rs.getString("lecLocalContent").replaceAll(" ", "&nbsp;").replaceAll("<", "&lt;").replaceAll(">", "&gt;").replaceAll("\n", "<br>"));
+				lec.setLecMentoContent(rs.getString("lecMentoContent").replaceAll(" ", "&nbsp;").replaceAll("<", "&lt;").replaceAll(">", "&gt;").replaceAll("\n", "<br>"));
+				lec.setLecLectureContent(rs.getString("lecLectureContent").replaceAll(" ", "&nbsp;").replaceAll("<", "&lt;").replaceAll(">", "&gt;").replaceAll("\n", "<br>"));
 				lec.setLecStudentCount(rs.getInt("lecStudentCount"));
 				lec.setLecADate(rs.getDate("lecaDate"));
 				lec.setLecCheck(rs.getString("lecCheck").charAt(0));
@@ -143,9 +143,9 @@ public class LectureDao {
 				lec.setLecTot2(rs.getString("lecTot2"));
 				lec.setLecOpenDate(rs.getDate("lecOpenDate"));
 				lec.setLecOpenDate2(rs.getDate("lecOpenDate2"));
-				lec.setLecLocalContent(rs.getString("lecLocalContent"));
-				lec.setLecMentoContent(rs.getString("lecMentoContent"));
-				lec.setLecLectureContent(rs.getString("lecLectureContent"));
+				lec.setLecLocalContent(rs.getString("lecLocalContent").replaceAll(" ", "&nbsp;").replaceAll("<", "&lt;").replaceAll(">", "&gt;").replaceAll("\n", "<br>"));
+				lec.setLecMentoContent(rs.getString("lecMentoContent").replaceAll(" ", "&nbsp;").replaceAll("<", "&lt;").replaceAll(">", "&gt;").replaceAll("\n", "<br>"));
+				lec.setLecLectureContent(rs.getString("lecLectureContent").replaceAll(" ", "&nbsp;").replaceAll("<", "&lt;").replaceAll(">", "&gt;").replaceAll("\n", "<br>"));
 				lec.setLecStudentCount(rs.getInt("lecStudentCount"));
 				lec.setLecADate(rs.getDate("lecaDate"));
 				lec.setLecCheck(rs.getString("lecCheck").charAt(0));
@@ -198,22 +198,21 @@ public class LectureDao {
 				lec.setLecTot2(rs.getString("lecTot2"));
 				lec.setLecOpenDate(rs.getDate("lecOpenDate"));
 				lec.setLecOpenDate2(rs.getDate("lecOpenDate2"));
-				lec.setLecLocalContent(rs.getString("lecLocalContent"));
-				lec.setLecMentoContent(rs.getString("lecMentoContent"));
-				lec.setLecLectureContent(rs.getString("lecLectureContent"));
+				lec.setLecLocalContent(rs.getString("lecLocalContent").replaceAll(" ", "&nbsp;").replaceAll("<", "&lt;").replaceAll(">", "&gt;").replaceAll("\n", "<br>"));
+				lec.setLecMentoContent(rs.getString("lecMentoContent").replaceAll(" ", "&nbsp;").replaceAll("<", "&lt;").replaceAll(">", "&gt;").replaceAll("\n", "<br>"));
+				lec.setLecLectureContent(rs.getString("lecLectureContent").replaceAll(" ", "&nbsp;").replaceAll("<", "&lt;").replaceAll(">", "&gt;").replaceAll("\n", "<br>"));
 				lec.setLecStudentCount(rs.getInt("lecStudentCount"));
 				lec.setLecADate(rs.getDate("lecaDate"));
 				lec.setLecCheck(rs.getString("lecCheck").charAt(0));
-				lec.setLecReason(rs.getString("lecReason"));
+				if(rs.getString("lecReason")==null) {
+					lec.setLecReason(rs.getString("lecReason"));
+				} else {
+					lec.setLecReason(rs.getString("lecReason").replaceAll(" ", "&nbsp;").replaceAll("<", "&lt;").replaceAll(">", "&gt;").replaceAll("\n", "<br>"));
+				}
 				lec.setLecStatus(rs.getString("lecstatus").charAt(0));
 
-				List<LectureUpload> upList = new LectureUploadDao().lectureUpList(conn, rs.getInt("lecnum"));
+				lec.setLectureUpList(new LectureUploadDao().lectureUpList(conn, rs.getInt("lecnum")));
 				Mento m = new MentoDao().mentoView(conn, rs.getInt("mtnum"));
-				
-				for(int i = 0; i < upList.size(); i++) {
-					setUpList.add(upList.get(i));
-				}
-				lec.setLectureUpList(setUpList);
 				lec.setLecMento(m);
 			}
 		} catch(SQLException e) {

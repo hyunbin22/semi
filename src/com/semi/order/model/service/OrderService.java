@@ -48,6 +48,7 @@ private OrderDao dao = new OrderDao();
 		int result = dao.updatePayment(conn, oNum);
 		if(result > 0) commit(conn);
 		else rollback(conn);
+		close(conn);
 		return result;
 	}
 

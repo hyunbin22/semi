@@ -3,12 +3,14 @@
     
     <%
     	
+	 int readCount = 0;
      Member memberLogin = (Member) session.getAttribute("loginMember");
      Cookie[] cookies = request.getCookies();
      String userId = "";
 	 if(memberLogin!=null) {
 		 userId = memberLogin.getmId();
 	 } 
+	 
      
    	 String saveId = null;
 	 if(cookies!=null){
@@ -23,7 +25,6 @@
    			}
       	}
 	}
-   
     
     
     %>
@@ -91,7 +92,7 @@
         <div id="head" >
         	<div id="topWrap">
 	            <div id='logoWrap'><a href = "<%=request.getContextPath()%>"><img id = 'logoImg' src = "<%=request.getContextPath()%>/image/logo.png"></a></div> <!--메인 아이콘 이미지-->
-	              <%if(memberLogin == null){ %>
+	            <%if(memberLogin == null){ %>
 	            		
 	            <div id="loginWrap">
 		            <div id = loginmenu>
@@ -132,7 +133,7 @@
 				<nav>
 			        <ul class="center1">
 			        
-				        <li><a href="<%=request.getContextPath()%>/">ABLING</a></li>
+				        <li><a href="<%=request.getContextPath()%>">ABLING</a></li>
 				        <li><a href="<%=request.getContextPath()%>/lecture/lectureList.do">강의찾기</a></li>
 				        <li><a href="#">수업모임</a></li>
 				        <!-- <li><a href="#">이벤트</a></li> -->
@@ -162,13 +163,14 @@
 
 <!-- 채팅시 넘어갈 데이터 -->
 <form name="openMessageFrm" method="post">
+	<input type="hidden" name="userId" value="<%=userId%>">
 </form>
 
 <!-- 메세지 -->
 <script>
 	$(function(){
 		$('#messageIcon').click(function(){
-			var url = "<%=request.getContextPath()%>/message/openMessage.do";
+			var url = "<%=request.getContextPath()%>/message/openMessage.do?userId=<%=userId%>";
 			var status = "width=400, height=600, resizable=no, status=no, toolbars=no, menubar=no";
 			var title="메세지"
 			var popUp = open("", title, status);
@@ -192,9 +194,8 @@
 				success: function(result) {
 					if(result>=1) {
 						showUnread(result);
-						console.log(result);
 					} else {
-						showUnread('');
+						showUnread('0');
 					}
 				}
 			});

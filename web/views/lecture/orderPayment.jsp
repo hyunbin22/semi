@@ -90,11 +90,17 @@
             	$.ajax({
             		url:"<%=request.getContextPath()%>/order/orderUpdatePayment.do?oNum="+<%=order.getoNum()%>,
             		type : "get",
-            		dataType : "html",
+   					dataType : "html", 
             		success:function(result) {
             			console.log(result);
             			if(result>0) {
             				check=1;
+            				console.log(check);
+            				msg = '결제가 완료되었습니다.';
+        	                msg += '\결제 금액 : ' + rsp.paid_amount;
+        					
+        	                //성공시 이동할 페이지
+        	                location.href='<%=request.getContextPath()%>/order/orderPaySuccess.do?msg='+encodeURI(msg);
             			}
             		},
             		error : function(request, status, error) {
@@ -104,25 +110,12 @@
 								+ " error = " + error); 
 					}
             	});
-            	if(check==1) {
-	           	 	msg = '결제가 완료되었습니다.';
-	                msg += '\n고유ID : ' + rsp.imp_uid;
-	                msg += '\n상점 거래ID : ' + rsp.merchant_uid;
-	                msg += '\결제 금액 : ' + rsp.paid_amount;
-	                msg += '카드 승인번호 : ' + rsp.apply_num;
-					
-	                //성공시 이동할 페이지
-	                location.href='<%=request.getContextPath()%>/order/orderPaySuccess.do?msg='+msg;
-            	} else {
-            		console.log("update실패");
-            	}
+            	
             } else {
                 msg = '결제에 실패하였습니다.';
                 msg += '에러내용 : ' + rsp.error_msg;
                 //실패시 이동할 페이지
-                location.href="<%=request.getContextPath()%>/order/orderPayFail.do?msg="+msg;
-                //location.href="#";
-                alert(msg);
+                location.href="<%=request.getContextPath()%>/order/orderPayFail.do?msg="+encodeURI(msg);
             }
         });
     };

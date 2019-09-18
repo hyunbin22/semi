@@ -6,7 +6,6 @@ import java.io.PrintWriter;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -16,6 +15,7 @@ import com.semi.member.model.service.MemberService;
 import com.semi.member.model.vo.Member;
 import com.semi.mento.model.service.MentoService;
 import com.semi.mento.model.vo.Mento;
+import com.semi.message.model.service.MessageService;
 
 /**
  * Servlet implementation class LoginMemberServlet
@@ -36,7 +36,6 @@ public class MemberLoginServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
 		
 		PrintWriter out = response.getWriter();
 		response.setContentType("text/html;charset=UTF-8");
@@ -63,7 +62,7 @@ public class MemberLoginServlet extends HttpServlet {
 			}
 			
 			view = "/";
-			response.sendRedirect(request.getContextPath()+view);
+			response.sendRedirect(request.getContextPath()+"/"+view);
 			} else {
 				String msg = "로그인 할 수 없습니다. 관리자에게 문의하세요!";
 				request.setAttribute("msg", msg);

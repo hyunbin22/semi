@@ -128,8 +128,8 @@ public class LectureUploadDao {
 				lecUp = new LectureUpload();
 				lecUp.setUpLectureNum(rs.getInt("up_lecturenum"));
 				lecUp.setLecNum(rs.getInt("lecnum"));
-				lecUp.setUpLectureCategory("up_Lecture_Category");
-				lecUp.setUpLectureOrgName("up_Lecture_Org_Name");
+				lecUp.setUpLectureCategory(rs.getString("up_Lecture_Category"));
+				lecUp.setUpLectureOrgName(rs.getString("up_Lecture_Org_Name"));
 				lecUp.setUpLectureReName(rs.getString("up_lecture_re_name"));
 				list.add(lecUp);
 			}
