@@ -9,8 +9,12 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.semi.category.model.service.CategoryService;
+import com.semi.category.model.vo.Category;
 import com.semi.lecture.model.service.LectureService;
 import com.semi.lecture.model.vo.Lecture;
+import com.semi.subcategory.model.service.SubCategoryService;
+import com.semi.subcategory.model.vo.SubCategory;
 
 /**
  * Servlet implementation class LectureListServlet
@@ -32,6 +36,10 @@ public class LectureListServlet extends HttpServlet {
     */
    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
       
+	   // 카테고리 & 서브카테고리
+	   List<Category> c= (List)new CategoryService().selectCategory();
+       List<SubCategory> sc= (List)new SubCategoryService().selectSubCategory();
+	   
       // 강의 리스트 페이징 처리
       int cPage;
       try {
@@ -75,7 +83,8 @@ public class LectureListServlet extends HttpServlet {
       }
       
       
-      
+      request.setAttribute("category", c);
+      request.setAttribute("subcategory", sc);
       request.setAttribute("pageBar", pageBar);
       request.setAttribute("cPage", cPage);
       request.setAttribute("list", lecturelist);
