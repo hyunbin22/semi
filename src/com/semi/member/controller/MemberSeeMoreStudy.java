@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.semi.member.model.service.MemberService;
+import com.semi.order.model.service.OrderService;
 import com.semi.order.model.vo.Order;
 
 /**
@@ -33,7 +34,7 @@ public class MemberSeeMoreStudy extends HttpServlet {
 		
 		int lecNum = Integer.parseInt(request.getParameter("lecNum"));
 		
-		MemberService service = new MemberService();
+		OrderService service = new OrderService();
 		Order o = service.seeMoreStudy(lecNum);
 		
 		request.setAttribute("order", o);

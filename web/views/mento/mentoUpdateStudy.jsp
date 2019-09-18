@@ -7,8 +7,6 @@
     <%@ page import="java.util.*, com.semi.category.model.vo.Category, com.semi.subcategory.model.vo.SubCategory, com.semi.local.model.vo.Local, com.semi.sublocal.model.vo.SubLocal"%>
     <%@ page import="com.semi.lecture.model.vo.LectureUpload" %>
     <% 
-    	Mento mt = (Mento)session.getAttribute("loginMento");
-    	Member m = (Member) session.getAttribute("loginMember");
     	String mtNum = (String) request.getAttribute("mtNum");
     	Lecture lt = (Lecture)request.getAttribute("lecture");
     	List<Category> cList=(List)request.getAttribute("category");
@@ -18,46 +16,13 @@
     	String classImgName=null;
     	for(LectureUpload cn : lt.getLectureUpList()){
     		if(cn.getUpLectureCategory().equals("cover")){
-    			coverName=cn.getLectureReName();
+    			coverName=cn.getUpLectureReName();
     		}if(cn.getUpLectureCategory().equals("lecimage")){
-    			classImgName=cn.getLectureReName();
+    			classImgName=cn.getUpLectureReName();
     		}
     	}
     %>
-<section class="center1">
-	  <div class="wrap">
-		<div class="bar">
-			<br>
-			
-						 <table class = "MYLIST">
-                                <tr>
-                                    <td><button onclick="location.href='<%=request.getContextPath()%>/member/memberMyPage.do?mId=<%=m.getmId()%>'" id = "listBtn">마이페이지</button></td>
-                                    <td><button onclick="location.href='<%=request.getContextPath()%>/member/mypageModify.do?mId=<%=m.getmId()%>'" id = "listBtn">내정보수정</button></td>
-                                    <td><button onclick="location.href='<%=request.getContextPath()%>/member/studyList.do?mNum=<%=m.getmNum()%>'" id = "listBtn">신청한강의</button></td>
-                                    <td><button onclick="location.href='LIKELIST.html'" id = "listBtn">즐겨찾기목록</button></td>
-                                	 <%if(mt != null && m.getmNum() == mt.getmNum()) { %>
-                                    
-                                    <%} else { %>
-                                    <td><button onclick="location.href='<%=request.getContextPath()%>/mento/mentoRegister.do?mId=<%=m.getmId()%>'" id = "listBtn">멘토신청하기</button></td>    
-                                	<%} %>
-                                </tr>
-                        </table>
-                        <table class = "MYLIST">
-                                <tr>
-                                    <%if(mt != null && m.getmNum() == mt.getmNum()) { %>
-                                    <td><button onclick="location.href='<%=request.getContextPath()%>/mento/mentoMyPage.do?getmNum=<%=mt.getmNum()%>&getMtNum=<%=mt.getMtNum() %>'" id = "listBtn">멘토페이지</button></td>
-                                    <td><button onclick="location.href='<%=request.getContextPath()%>/mento/mypageModify.do?mtnum=<%=mt.getMtNum()%>'" id = "listBtn">멘토정보수정</button></td>
-                                    <td><button onclick="location.href='<%=request.getContextPath()%>/mento/studyList.do?mtnum=<%=mt.getMtNum()%>'" id = "listBtn">멘토강의목록</button></td>                                 
-                                    <%} else { %>
-                                    
-                                    <%} %>
-                                    <%if(mt != null && m.getmNum() == mt.getmNum()) { %>
-                                    <td><button onclick="location.href='<%=request.getContextPath()%>/mento/enrollLecture.do?mtNum=<%=mt.getMtNum()%>'" id = "listBtn">강의만들기</button></td>
-                                    <%} else { %>
-                                        
-                                	<%} %>
-                                </tr>
-                        </table>
+<%@ include file="/views/common/myPageAside.jsp" %>
 			<br>
 			<br>
 			<h1 class="center1">멘토 강의수정</h1>

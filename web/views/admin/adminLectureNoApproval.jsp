@@ -12,7 +12,7 @@
 %>
 <section>
 		<article id="search1">
-		<div id="admin-Mento-Search-container">
+		<div id="adminSearchContainer">
 			<select id="searchType">
 				<option value="mId" <%="mId".equals(searchType)?"selected":"" %>>아이디</option>
 				<option value="mName" <%="mName".equals(searchType)?"selected":"" %>>이름</option>

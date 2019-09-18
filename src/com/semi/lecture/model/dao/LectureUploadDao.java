@@ -15,16 +15,101 @@ import com.semi.lecture.model.vo.LectureUpload;
 import static common.template.JDBCTemplate.*;
 
 public class LectureUploadDao {
-	
+
 	private Properties prop=new Properties();
-		
-		public LectureUploadDao() {
-			String path=LectureDao.class.getResource("/sql/semi/lecture-query.properties").getPath();
+
+	public LectureUploadDao() {
+		String path=LectureDao.class.getResource("/sql/semi/lecture-query.properties").getPath();
+		try {
+			prop.load(new FileReader(path));
+		}catch(IOException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	//강의번호에 맞는 커버사진 불러오기
+		public List<LectureUpload> lectureUpCover(Connection conn, int lecNum) {
+			Statement stmt = null;
+			List<LectureUpload> list = new ArrayList();
+			LectureUpload lecUp = null;
+			ResultSet rs = null;
+			String sql = "select * from tb_upload_lecture where up_lecture_category='cover' and lecNum="+lecNum;
 			try {
-				prop.load(new FileReader(path));
-			}catch(IOException e) {
+				stmt = conn.createStatement();
+				rs = stmt.executeQuery(sql);
+				while(rs.next()) {
+					lecUp = new LectureUpload();
+					lecUp.setUpLectureNum(rs.getInt("up_lecturenum"));
+					lecUp.setLecNum(rs.getInt("lecnum"));
+					lecUp.setUpLectureCategory(rs.getString("up_Lecture_Category"));
+					lecUp.setUpLectureOrgName(rs.getString("up_Lecture_Org_Name"));
+					lecUp.setUpLectureReName(rs.getString("up_lecture_re_name"));
+					list.add(lecUp);
+				}
+				
+			} catch(Exception e) {
 				e.printStackTrace();
-			}
+			} finally {
+				close(rs);
+				close(stmt);
+			} return list;
+			
+		}
+		
+		// 강의번호에 맞는 커버사진 불러오기 (LectureUpload) 하나
+	   public LectureUpload lectureUpCover2(Connection conn, int lecNum) {
+	      Statement stmt = null;
+	      ResultSet rs = null;
+	      LectureUpload lecUp = null;
+	      String sql = "select * from tb_upload_lecture where up_lecture_category='cover' and lecNum="+lecNum;
+	      try {
+	         stmt = conn.createStatement();
+	         rs=stmt.executeQuery(sql);
+	         while(rs.next()) {
+	            lecUp = new LectureUpload();
+	            lecUp.setUpLectureNum(rs.getInt("up_lecturenum"));
+	            lecUp.setLecNum(rs.getInt("lecnum"));
+	            lecUp.setUpLectureCategory(rs.getString("up_Lecture_Category"));
+	            lecUp.setUpLectureOrgName(rs.getString("up_Lecture_Org_Name"));
+	            lecUp.setUpLectureReName(rs.getString("up_lecture_re_name"));
+	            
+	         }
+	      }catch(Exception e) {
+	         e.printStackTrace();
+	      } finally {
+	         close(rs);
+	         close(stmt);
+	      }
+	      
+	      return lecUp;
+	   }
+		
+		// 강의번호에 맞는 이미지 넣기(다중)
+		public List<LectureUpload> lectureUpImgList(Connection conn, int lecNum) {
+			Statement stmt = null;
+			List<LectureUpload> list = new ArrayList();
+			ResultSet rs = null;
+			String sql = "select up_lectureNum, lecnum, up_lecture_org_lecimg, up_lecture_re_lecimg from tb_upload_lecture where lecNum="+lecNum;
+			try {
+				stmt = conn.createStatement();
+				rs = stmt.executeQuery(sql);
+				while(rs.next()) {
+					LectureUpload lecUp = new LectureUpload();
+					lecUp = new LectureUpload();
+					lecUp.setUpLectureNum(rs.getInt("up_lecturenum"));
+					lecUp.setLecNum(rs.getInt("lecnum"));
+					lecUp.setUpLectureCategory("up_Lecture_Category");
+					lecUp.setUpLectureOrgName("up_Lecture_Org_Name");
+					lecUp.setUpLectureReName(rs.getString("up_lecture_re_name"));
+					list.add(lecUp);
+				}
+				
+			} catch(Exception e) {
+				e.printStackTrace();
+			} finally {
+				close(rs);
+				close(stmt);
+			} return list;
 		}
 
 	public int insertLectureImage(Connection conn, LectureUpload lecup, int lecNum, String category) {
@@ -36,17 +121,17 @@ public class LectureUploadDao {
 			pstmt=conn.prepareStatement(sql);
 			pstmt.setInt(1, lecNum);
 			pstmt.setString(2, category);
-			pstmt.setString(3, lecup.getLectureOrgName());
-			pstmt.setString(4, lecup.getLectureReName());
+			pstmt.setString(3, lecup.getUpLectureOrgName());
+			pstmt.setString(4, lecup.getUpLectureReName());
 			result=pstmt.executeUpdate();
-			
+
 		}catch(SQLException e) {
 			e.printStackTrace();
 		}finally {
 			close(pstmt);
 		}
 		return result;
-		
+
 	}
 
 	public int updateLectureImage(Connection conn, LectureUpload lecup1, int result, String category) {
@@ -56,8 +141,8 @@ public class LectureUploadDao {
 		try {
 			pstmt=conn.prepareStatement(sql);
 			pstmt.setString(1, category);
-			pstmt.setString(2, lecup1.getLectureOrgName());
-			pstmt.setString(3, lecup1.getLectureReName());
+			pstmt.setString(2, lecup1.getUpLectureOrgName());
+			pstmt.setString(3, lecup1.getUpLectureReName());
 			pstmt.setInt(4, result);
 
 		}catch(SQLException e) {
@@ -65,7 +150,7 @@ public class LectureUploadDao {
 		}finally {
 			close(pstmt);
 		}
-		
+
 		return result1;
 	}
 
@@ -82,35 +167,35 @@ public class LectureUploadDao {
 		}finally {
 			close(pstmt);
 		}
-		
+
 		return result1;
 	}
-	
-	   public List<LectureUpload> lectureUpList(Connection conn, int lecNum) {
-		      Statement stmt = null;
-		      List<LectureUpload> list = new ArrayList();
-		      ResultSet rs = null;
-		      String sql = "select * from tb_upload_lecture where lecNum="+lecNum;
-		      try {
-		         stmt = conn.createStatement();
-		         rs = stmt.executeQuery(sql);
-		         while(rs.next()) {
-		            LectureUpload lecUp = new LectureUpload();
-		            lecUp = new LectureUpload();
-		            lecUp.setUpLectureNum(rs.getInt("up_lecturenum"));
-		            lecUp.setLecNum(rs.getInt("lecnum"));
-		            lecUp.setUpLectureCategory(rs.getString("up_Lecture_Category"));
-		            lecUp.setLectureOrgName(rs.getString("up_Lecture_Org_Name"));
-		            lecUp.setLectureReName(rs.getString("up_lecture_re_name"));
-		            list.add(lecUp);
-		         }
-		         
-		      } catch(Exception e) {
-		         e.printStackTrace();
-		      } finally {
-		         close(rs);
-		         close(stmt);
-		      } return list;
-		   }
+
+	public List<LectureUpload> lectureUpList(Connection conn, int lecNum) {
+		Statement stmt = null;
+		List<LectureUpload> list = new ArrayList();
+		ResultSet rs = null;
+		String sql = "select * from tb_upload_lecture where lecNum="+lecNum;
+		try {
+			stmt = conn.createStatement();
+			rs = stmt.executeQuery(sql);
+			while(rs.next()) {
+				LectureUpload lecUp = new LectureUpload();
+				lecUp = new LectureUpload();
+				lecUp.setUpLectureNum(rs.getInt("up_lecturenum"));
+				lecUp.setLecNum(rs.getInt("lecnum"));
+				lecUp.setUpLectureCategory(rs.getString("up_Lecture_Category"));
+				lecUp.setUpLectureOrgName(rs.getString("up_Lecture_Org_Name"));
+				lecUp.setUpLectureReName(rs.getString("up_lecture_re_name"));
+				list.add(lecUp);
+			}
+
+		} catch(Exception e) {
+			e.printStackTrace();
+		} finally {
+			close(rs);
+			close(stmt);
+		} return list;
+	}
 
 }

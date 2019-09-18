@@ -10,6 +10,8 @@ import java.sql.Connection;
 import com.semi.mento.model.dao.MentoUploadDao;
 import com.semi.mento.model.vo.MentoUpload;
 
+import common.template.JDBCTemplate;
+
 public class MentoUploadService {
 	
 	private MentoUploadDao dao = new MentoUploadDao();
@@ -30,5 +32,6 @@ public class MentoUploadService {
 		return result1;
 		
 	}
+
 
 }

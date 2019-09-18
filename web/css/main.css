@@ -1230,6 +1230,9 @@ button#seeMore , input#seeMore{
 }
 
 /* 마이페이지 mypage */
+table.mtStudyList{
+	margin-left:-30px;
+}
 #myPageNavWrap {
 
 	float:left;

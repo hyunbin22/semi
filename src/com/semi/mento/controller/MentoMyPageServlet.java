@@ -1,7 +1,6 @@
 package com.semi.mento.controller;
 
 import java.io.IOException;
-import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -10,6 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.semi.mento.model.service.MentoService;
+import com.semi.mento.model.service.MentoUploadService;
 import com.semi.mento.model.vo.Mento;
 import com.semi.mento.model.vo.MentoUpload;
 
@@ -33,21 +33,21 @@ public class MentoMyPageServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		int getmNum=Integer.parseInt(request.getParameter("getmNum"));
-		
-		int getMtNum=Integer.parseInt(request.getParameter("getMtNum"));
-		
-		System.out.println("넘어온거 " + getmNum + "/" + getMtNum);
-		
-		MentoUpload mu = new MentoService().selectMentoUpload(getMtNum);
-		Mento mt= new MentoService().selectMento(getmNum);
-		
-		request.setAttribute("mento", mt);
-		System.out.println(mt);
+//		int getmNum=Integer.parseInt(request.getParameter("getmNum"));
+//		
+//		int getMtNum=Integer.parseInt(request.getParameter("getMtNum"));
+//		
+//		System.out.println("넘어온거 " + getmNum + "/" + getMtNum);
+//		
+//		MentoUpload mu = new MentoUploadService().selectMentoUpload(getMtNum);
+//		Mento mt= new MentoService().selectMento(getmNum);
+//		
+//		request.setAttribute("mento", mt);
+//		System.out.println(mt);
 //		request.setAttribute("mentoUpload", mu);
 //		System.out.println(mu);
-		
-		request.getRequestDispatcher("/views/mento/mentoPageView.jsp").forward(request,response);		
+//		
+//		request.getRequestDispatcher("/views/mento/mentoPageView.jsp").forward(request,response);		
 	}
 
 	/**

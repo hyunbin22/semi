@@ -3,7 +3,6 @@
     
     <%
     	
-	 int readCount = 0;
      Member memberLogin = (Member) session.getAttribute("loginMember");
      Cookie[] cookies = request.getCookies();
      String userId = "";

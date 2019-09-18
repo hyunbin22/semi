@@ -13,7 +13,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
 
+import com.semi.lecture.model.dao.LectureDao;
 import com.semi.lecture.model.service.LectureService;
+import com.semi.lecture.model.vo.Lecture;
 import com.semi.member.model.service.MemberService;
 import com.semi.order.model.vo.Order;
 
@@ -76,7 +78,7 @@ public class OrderDao {
 				order.setoPrice(rs.getInt("oprice"));
 				order.setoPayment(rs.getString("opayment").charAt(0));
 				order.setoCheck(rs.getString("ocheck").charAt(0));
-				order.setoDate(rs.getDate("orderDate"));
+				order.setOrderDate(rs.getDate("orderDate"));
 				order.setPayDate(rs.getDate("paydate"));
 				
 				order.setLecture(new LectureService().lectureView(rs.getInt("lecNum")));
@@ -108,6 +110,90 @@ public class OrderDao {
 		return result;
 	}
 
+	public int selectStudyListCount(Connection conn) {
+		PreparedStatement pstmt = null;
+		int result = 0;
+		String sql = prop.getProperty("countStudyList");
+		try {
+			pstmt=conn.prepareStatement(sql);
+			result=pstmt.executeUpdate();
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}
+		finally {
+			close(pstmt);
+		}
+		return result;
+	}
+
+	public List<Order> selectStudyList(Connection conn, int cPage, int numPerPage, int mNum) {
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		String sql=prop.getProperty("selectOrderList");
+		List<Order> list=new ArrayList();
+		Lecture l = new Lecture();
+		LectureDao dao = new LectureDao();
+		try {
+			pstmt=conn.prepareStatement(sql);
+			pstmt.setInt(1,mNum);
+			pstmt.setInt(2,(cPage-1)*numPerPage+1);
+			pstmt.setInt(3,cPage*numPerPage);
+			rs=pstmt.executeQuery();
+			while(rs.next()) {
+				Order o = new Order();
+				o.setoNum(rs.getInt("onum"));
+				o.setmNum(rs.getInt("mnum"));
+				o.setLecNum(rs.getInt("lecnum"));
+				o.setLecture(dao.selectLectureName(conn, rs.getInt("lecnum")));
+				o.setoText(rs.getString("otext").replaceAll(" ", "&nbsp;").replaceAll("<", "&lt;").replaceAll(">", "&gt;").replaceAll("\n", "<br>"));
+				o.setoTot(rs.getString("otot"));
+				o.setoPrice(rs.getInt("oprice"));
+				o.setoPayment(rs.getString("opayment").charAt(0));
+				o.setoCheck(rs.getString("ocheck").charAt(0));
+				o.setOrderDate(rs.getDate("orderDate"));
+				list.add(o);  
+			}
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rs);
+			close(pstmt);
+		}return list;
+	}
+
+	public Order seeMoreStudyList(Connection conn, int lecNum) {
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		String sql=prop.getProperty("selectOrder");
+		Order o = null;
+		Lecture l = new Lecture();
+		LectureDao dao = new LectureDao();
+		try {
+			pstmt=conn.prepareStatement(sql);
+			pstmt.setInt(1,lecNum);
+			rs=pstmt.executeQuery();
+			if(rs.next()) {
+				o = new Order();
+				o.setoNum(rs.getInt("onum"));
+				o.setmNum(rs.getInt("mnum"));
+				o.setLecNum(rs.getInt("lecnum"));
+				o.setLecture(dao.selectLectureName(conn, rs.getInt("lecnum")));
+				o.setoText(rs.getString("otext").replaceAll(" ", "&nbsp;").replaceAll("<", "&lt;").replaceAll(">", "&gt;").replaceAll("\n", "<br>"));
+				o.setoTot(rs.getString("otot"));
+				o.setoPrice(rs.getInt("oprice"));
+				o.setoPayment(rs.getString("opayment").charAt(0));
+				o.setoCheck(rs.getString("ocheck").charAt(0));  
+				o.setOrderDate(rs.getDate("orderDate"));
+				o.setPayDate(rs.getDate("payDate"));
+			}
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rs);
+			close(pstmt);
+		}
+		return o;
+	}
 
 
 }
