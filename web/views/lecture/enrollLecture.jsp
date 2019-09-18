@@ -14,14 +14,12 @@
     %>
 <%@ include file="/views/common/myPageAside.jsp" %>
 	  	<div class="wrap">
+	  	<div id="myPageContentWrap">
              <div class="bar">
-			<br>
 			<br>
 			<h1 class="center1">강의 만들기</h1>
 			<br>
-			<br>
 			<hr>
-		<br><br><br>
 		</div>
 		
 		<div class=" center1 myPage-content-wrap">
@@ -173,6 +171,7 @@
 				<button type="submit" id="insert1" name="submit1">승인요청</button>
 			</form>
 		</div>
+	</div>
 	</div>
 	</div>
 	</div>

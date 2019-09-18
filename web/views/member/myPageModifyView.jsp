@@ -3,6 +3,7 @@
     <%@ include file = "/views/common/header.jsp" %>
     <%@ include file="/views/common/myPageAside.jsp" %>
         <div class="wrap">
+        <div id="myPageContentWrap">
             <div class="bar">
                     <br>
                     <h1 class="center1">내정보수정</h1>
@@ -71,7 +72,7 @@
     
     		</div>
             </div>
-    
+    		</div>
             </div>
         </section>
         <script>

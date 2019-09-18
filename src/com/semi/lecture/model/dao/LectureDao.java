@@ -512,5 +512,23 @@ public class LectureDao {
 		return result;
 	}
 
+	//결제 완료시 강의 누적 수강인원 증가
+	public int updateStudentCount(Connection conn, int oNum) {
+		PreparedStatement pstmt = null;
+		String sql = "update tb_lecture set lecstudentcount=lecstudentcount+1 where lecnum=(select lecnum from tb_order where onum=?)";
+		int result = 0;
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, oNum);
+			result = pstmt.executeUpdate();
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}
+
+		return result;
+	}
+
 
 }

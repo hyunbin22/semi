@@ -16,10 +16,10 @@ import com.semi.message.model.service.MessageService;
  * Servlet implementation class UpdateCheckLectureServlet
  */
 @WebServlet("/lecture/updateCheckLecture.do")
-public class UpdateCheckLectureServlet extends HttpServlet {
+public class LectureUpdateCheckServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
-    public UpdateCheckLectureServlet() {
+    public LectureUpdateCheckServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -35,7 +35,7 @@ public class UpdateCheckLectureServlet extends HttpServlet {
 		//강의승인 되었다는 메세지 관리자로 보내기
 		Lecture lec = new LectureService().lectureView(lecNum);
 		if(result>0) {
-			new MessageService().insertMessage("msgAdmin", lec.getLecMento().getMember().getmId(), "["+lec.getLecName()+"] 강의가 승인되었습니다.");
+			new MessageService().insertMessage("msgAdmin", lec.getLecMento().getMember().getmId(), "< "+lec.getLecName()+" > 강의가 승인되었습니다.");
 		}
 		
 		

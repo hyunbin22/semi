@@ -105,7 +105,7 @@ $(function(){
 
 	$(function(){
 		if(<%=list.size()%>==0) {
-			alert("승인완료된 멘토가 없습니다.");
+			alert("조회 결과가 없습니다.");
 		} 		
 	});
 

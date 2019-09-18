@@ -600,6 +600,13 @@ span#unread{
 /*-----------------------------------------*/
 
 /* mypage list */
+/* 마이페이지 section 크기조정 */
+#myPageContentWrap {
+	width: 864px;
+	margin-right: 0px;
+}
+
+
 table.myListTbl {
 	width: 600px;
 	text-align: center;
@@ -623,7 +630,7 @@ button#listBtn {
 table#list {
 	border-collapse: collapse;
 	border: #a79c8e;
-	width: 700px;
+	width: 800px;
 	margin-left: -20px;
 }
 
@@ -644,12 +651,13 @@ table#list {
 }
 
 .listContent {
-	width: 600px;
+	width: 240px;
 }
 
 .listCheck {
 	width: 60px;
 }
+
 
 table#applyBtn {
 	border-collapse: collapse;
@@ -1050,34 +1058,32 @@ input.inputbtn , input.btnregister{
 /* 결제창 */
 .class-pay-container{
     margin-top: 30px;
+    width: 800px;
 	
 }
 
-.col-md-4 {
-	background-color: lightgray;
+#lecCoverImg{
+	width: 200px;
+	border-radius: 50px;
+	margin: 15px;
 }
 
-#class-pay-tbl{
-	text-align : center;
-	border: 1px solid lightgray;
-	width: 500px;
+#payMentoInfo{
+	height: 470px;
+	background-color: #f4f2f4;
+	
 }
 
-#class-pay-tbl tr{
-	height: 30px;
-	margin-bottom : 30px;
+#payOrderInfo{
+	height: 470px;
+
 }
 
-/* #class-pay-tbl tr:nth-child(2n) {
-	background-color: lightpink;	
-} */
+#payOrderInfo tr:last-child {
+	border-bottom: 1px solid lightgray;
+}
 
-/* #class-pay-tbl td:first-child {
-	background-color: #A6C2CE;
-	text-align:left;
-} */
-
-#class-pay-tbl th {
+#payOrderInfo th {
 
 }
 
@@ -1088,10 +1094,9 @@ input.inputbtn , input.btnregister{
 	
 }
 
-#class-pay-tbl tr th {
-	border-right: 1px solid gray;
+#payOrderInfo tbody tr th {
+	border-right: 1px solid lightgray;
 	text-align:left;
-	width:200px;
 	
 }
 
@@ -1112,12 +1117,7 @@ input.inputbtn , input.btnregister{
 	width: 400px;
 }
 
-.card-title{
-	font-weight: 900;
-}
-.card-body{
-	text-align: center;
-}
+
 
 /*-- 신고 상세보기 페이지*/
 #notice-nav{
@@ -1274,9 +1274,9 @@ table.mtStudyList{
 	margin-left : 25px;
 }
 
-div.myPage-content-wrap {
+/* div.myPage-content-wrap {
 	width: 500px;
-}
+} */
 
 
 

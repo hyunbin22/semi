@@ -5,6 +5,7 @@
     <section>
 	<%@ include file="/views/common/myPageAside.jsp" %>
 	  	<div class="wrap">
+	  	<div id="myPageContentWrap">
              <div class="bar">
 				<br>
                 <h1 class="center1">즐겨찾기</h1>
@@ -34,7 +35,7 @@
 
          
   
-  
+  					</div>
                 </div>
             </div>
       </section>

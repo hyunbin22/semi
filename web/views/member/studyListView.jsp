@@ -6,6 +6,7 @@
 <section>
 
 	  	<div class="wrap">
+	  	<div id="myPageContentWrap">
              <div class="bar">
 				<br>
                 <h1 class="center1">신청한 강의 상세</h1>
@@ -50,7 +51,7 @@
 
          
   
-  
+  					</div>
                 </div>
             </div>
       </section>

@@ -7,6 +7,8 @@
     	MentoUpload mu = (MentoUpload)request.getAttribute("mu");
     %>
     <%@ include file="/views/common/myPageAside.jsp" %>
+    <div class="wrap">
+    		<div id="myPageContentWrap">
                         <br><br>
                     <h1 class="center1">멘토정보수정</h1>
                     <br><br>
@@ -109,9 +111,9 @@
                 </form>
 
     
-    
-                </div>
-    
+   					 </div>
+                	</div>
+    			</div>
             </div>
         </section>
         <script>
