@@ -69,4 +69,12 @@ public class SubLocalService {
 		return list;
 	}
 
+	public int selectsubLocalName(int local, String subLocal) {
+		Connection conn=getConnection();
+		int result=dao.selectsubLocalName(conn, local, subLocal);
+
+		close(conn);
+		return result;
+	}
+
 }

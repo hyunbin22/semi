@@ -30,9 +30,9 @@ public class CategoryUpdateServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		String scName = request.getParameter("scName");
-		int scNum = Integer.parseInt(request.getParameter("scNum"));
-		int result=new CategoryService().updateCategory(scName,scNum);
+		int selectbank = Integer.parseInt(request.getParameter("selectbank")); //select box에서 선택한 값
+		String inputcategory = request.getParameter("inputcategory"); //새로 입력한 값
+		int result=new CategoryService().updateCategory(selectbank,inputcategory);
 		
 		String msg=result>0?"카테고리 수정이 완료되었습니다.":"카테고리 수정이 실패하였습니다.";
 		String loc="/";

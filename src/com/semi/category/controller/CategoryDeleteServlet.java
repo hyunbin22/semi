@@ -1,6 +1,7 @@
 package com.semi.category.controller;
 
 import java.io.IOException;
+import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -9,6 +10,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.semi.category.model.service.CategoryService;
+import com.semi.subcategory.model.service.SubCategoryService;
+import com.semi.subcategory.model.vo.SubCategory;
 
 /**
  * Servlet implementation class CategoryDeleteServlet
@@ -30,14 +33,21 @@ public class CategoryDeleteServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		String scName = request.getParameter("scName");
-		int result= new CategoryService().deleteCategory(scName);
 		
-		String msg=result>0?"카테고리삭제완료":"카테고리삭제실패";
+		List<SubCategory> sc= (List)new SubCategoryService().selectSubCategory();
+		int selectbank = Integer.parseInt(request.getParameter("selectbank"));
+		int result= new CategoryService().deleteCategory(selectbank);
+		
+		System.out.println(sc);
+		System.out.println(selectbank);
+		System.out.println(result);
+		
+		String msg=result>0?"카테고리삭제완료":"카테고리삭제실패!! 등록된강의가있습니다.";
 		String loc="/";
+		
 		request.setAttribute("msg", msg);
 		request.setAttribute("loc", loc);
-		request.getRequestDispatcher("/views/common/msg.jsp");
+		request.getRequestDispatcher("/views/common/msg.jsp").forward(request, response);
 	}
 
 	/**

@@ -1,6 +1,7 @@
 package com.semi.subcategory.controller;
 
 import java.io.IOException;
+import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -8,6 +9,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.semi.category.model.service.CategoryService;
 import com.semi.category.model.vo.Category;
 import com.semi.subcategory.model.service.SubCategoryService;
 import com.semi.subcategory.model.vo.SubCategory;
@@ -32,17 +34,16 @@ public class SubCategoryEnrollServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		String subName = request.getParameter("subName");
-		int scNum = Integer.parseInt(request.getParameter("scNum"));
+		List<SubCategory> sc= (List)new SubCategoryService().selectSubCategory();
+		List<Category> c= (List)new CategoryService().selectCategory();
 		
-		System.out.println(subName);
-		System.out.println(scNum);
-		
-		SubCategory sc = new SubCategory(subName);
-		Category c = new Category(scNum);
-		
-		SubCategoryService service=new SubCategoryService();
-		int result=service.enrollSubCategory(sc,c);
+        
+        request.setAttribute("subcategory", sc);
+        request.setAttribute("category", c);
+        System.out.println(sc);
+        System.out.println(c);
+        
+		request.getRequestDispatcher("/views/admin/subcategoryEnroll.jsp").forward(request, response);
 		
 	}
 

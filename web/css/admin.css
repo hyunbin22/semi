@@ -533,3 +533,26 @@ button#seeMore , input#seeMore{
 	border-radius: 5px;
 	cursor: pointer;
 }
+
+/* 카테고리  */
+#search1{
+	text-align:center;
+}
+#scName{
+	margin-left:440px;
+}
+#subName{
+	margin-left:440px;
+}
+#localCountry{
+	margin-left:440px;
+}
+#localCity{
+	margin-left:440px;
+}
+table{
+	width:fit-content;
+    left:0;
+    right:0;
+    margin: 0 auto;
+}

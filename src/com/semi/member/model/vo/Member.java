@@ -15,8 +15,17 @@ public class Member {
 	private char mUse;
 	private Date mHireDate;
 	
-	public Member() {
-		// TODO Auto-generated constructor stub
+
+	
+	public Member()
+	{
+		
+	}
+	
+	public Member(int mNum, String mId) {
+		super();
+		this.mNum = mNum;
+		this.mId = mId;
 	}
 
 	public Member(int mNum, String mId, String mPassword, String mName, char mGender, Date mBirth, String mEmail,
@@ -48,16 +57,18 @@ public class Member {
 	}
 	
 	public Member(int mNum) {
-		super();
 		this.mNum = mNum;
+
 	}
 	
-	public Member(String mName) {
-		this.mName = mName;
+
+
+	public Member(String mId) {
+		super();
+		this.mId = mId;
 	}
-	
-	
-	
+
+
 	public int getmNum() {
 		return mNum;
 	}

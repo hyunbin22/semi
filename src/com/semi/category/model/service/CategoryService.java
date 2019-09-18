@@ -36,11 +36,12 @@ public class CategoryService {
 		close(conn);
 		return list;
 	}
+
 	
 	
-	public int updateCategory(String scName, int scNum) {
+	public int updateCategory(int selectbank, String inputcategory) {
 		Connection conn=getConnection();
-		int result=dao.updateCategory(conn,scName,scNum);
+		int result=dao.updateCategory(conn,selectbank,inputcategory);
 		if(result>0) {
 			commit(conn);
 		}else {
@@ -50,9 +51,22 @@ public class CategoryService {
 		return result;
 	}
 
-	public int deleteCategory(String scName) {
+	public int deleteCategory(int selectbank) {
 		Connection conn=getConnection();
-		int result=dao.deleteCategory(conn,scName);
+		int result=dao.deleteCategory(conn,selectbank);
+		if(result>0) {
+			commit(conn);
+		}else {
+			rollback(conn);
+		}
+		close(conn);
+		return result;
+	}
+
+	public int enrollCategory(String inputcategory) {
+		Connection conn=getConnection();
+		int result=dao.enrollCategory(conn,inputcategory);
+		
 		if(result>0) {
 			commit(conn);
 		}else {

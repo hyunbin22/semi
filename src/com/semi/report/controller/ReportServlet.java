@@ -1,8 +1,6 @@
 package com.semi.report.controller;
 
 import java.io.IOException;
-import java.util.List;
-
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -12,14 +10,15 @@ import javax.servlet.http.HttpSession;
 
 import org.apache.tomcat.util.http.fileupload.servlet.ServletFileUpload;
 
-import common.oreilly.servlet.multipart.AblingFileRenamePolicy;
-
 import com.oreilly.servlet.MultipartRequest;
+import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 import com.semi.member.model.vo.Member;
-import com.semi.message.model.service.MessageService;
 import com.semi.report.model.service.ReportService;
 import com.semi.report.model.vo.Report;
 import com.semi.report.model.vo.ReportUpload;
+
+import common.oreilly.servlet.multipart.AblingFileRenamePolicy;
+
 
 /**
  * Servlet implementation class MemberReportServlet
@@ -50,6 +49,7 @@ public class ReportServlet extends HttpServlet {
 		}
 		
 		String root=getServletContext().getRealPath("/");
+		System.out.println(root);
 		
 		String saveDir=root+"/upload/report";
 		
@@ -67,23 +67,31 @@ public class ReportServlet extends HttpServlet {
 		
 		String reReportOriFile = mr.getOriginalFileName("reportPhoto");
 		String reReportReFile = mr.getFilesystemName("reportPhoto");
-
+		
+		
+		System.out.println(mNum);
+		System.out.println(reportId);
+		System.out.println(reportTitle);
+		System.out.println(reportContent);
+		System.out.println("파일 이름 : " + reReportOriFile);
+		System.out.println("변경된 파일 이름 : " + reReportReFile);
+		
 		
 		Report rp = new Report(reportId, reportTitle, reportContent);
 		Member m = new Member(mNum);
 		
 		//reportDB에 저장
-		int result = new ReportService().registerReport(rp, m);
-		
+		int result = new ReportService().regsterReport(rp, m);
 		
 		ReportUpload ru = new ReportUpload(reReportOriFile, reReportReFile);
 		int result2 = new ReportService().regsterReportImage(ru, result);
 		
 		
+		
 		String msg="";
 		String loc="";
 		
-		if(result>0 && result2>0) {
+		if(result>0) {
 			msg="신고 완료";
 			loc="/";
 		}

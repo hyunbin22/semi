@@ -31,30 +31,12 @@ public class CategoryEnrollServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
-		String scName = request.getParameter("scName");
-		
-		Category c = new Category(scName);
-		System.out.println(c);
-		
-		CategoryService service=new CategoryService();
-		int result=service.enrollCategory(c);
-		
-
-		//List<Category> list = service.selectCategory(scName);
-		
-	
-		System.out.println(result);
-
-		
-		
-		String msg="";
-		String loc="/";
-		msg=result>0?"카테고리 등록 성공":"카테고리 등록 실패";
-		request.setAttribute("msg", msg);
-		request.setAttribute("loc", loc);
-//		request.setAttribute("list", list);
-		request.getRequestDispatcher("/views/common/msg.jsp").forward(request, response);
+	       
+        List<Category> c= (List)new CategoryService().selectCategory();
+        
+        request.setAttribute("category", c);
+    
+		request.getRequestDispatcher("/views/admin/categoryEnroll.jsp").forward(request, response);
 		
 		
 	}

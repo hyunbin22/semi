@@ -29,14 +29,14 @@ public class SubCategoryDao {
 		}
 	}
 	
-	public int enrollSubCategory(Connection conn, SubCategory sc, Category c) {
+	public int enrollSubCategory(Connection conn, String inputsubcategory, int maincategory) {
 		PreparedStatement pstmt=null;
 		int result=0;
 		String sql=prop.getProperty("enrollSubCategory");
 		try {
 			pstmt=conn.prepareStatement(sql);
-			pstmt.setString(1, sc.getSubName());
-			pstmt.setInt(2, c.getScNum());
+			pstmt.setString(1, inputsubcategory);
+			pstmt.setInt(2, maincategory);
 			result=pstmt.executeUpdate();
 		}catch(SQLException e) {
 			e.printStackTrace();
@@ -124,5 +124,26 @@ public class SubCategoryDao {
 			close(stmt);
 		}
 		return list;
+	}
+
+	public int selectsubName(Connection conn, String subCategory) {
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		int result=0;
+		String sql="select subnum from tb_subcategory where subname=?";
+		try {
+			pstmt=conn.prepareStatement(sql);
+			pstmt.setString(1, subCategory);
+			rs=pstmt.executeQuery();
+			if(rs.next()) {
+				result=rs.getInt(1);
+			}
+		}catch(Exception e) {
+			e.printStackTrace();
+		}finally {
+			close(rs);
+			close(pstmt);
+		}
+		return result;
 	}
 }
