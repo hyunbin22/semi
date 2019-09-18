@@ -10,6 +10,7 @@ import java.util.List;
 
 import com.semi.member.model.dao.MemberDao;
 import com.semi.member.model.vo.Member;
+import com.semi.order.model.vo.Order;
 
 import common.template.JDBCTemplate;
 
@@ -148,4 +149,33 @@ public class MemberService {
  		close(conn);
  		return m;
  	}
+
+	public int selectStudyListCount() {
+		Connection conn = JDBCTemplate.getConnection();
+		int result = dao.selectStudyListCount(conn);
+		if(result > 0)
+		{
+			commit(conn);
+		}
+		else
+		{
+			rollback(conn);
+		}
+		
+		return result;
+	}
+
+	public List<Order> selectOrderList(int cPage, int numPerPage, int mNum) {
+		Connection conn = JDBCTemplate.getConnection();
+		List<Order> list = dao.selectStudyList(conn,cPage,numPerPage, mNum);
+		close(conn);
+		return list;
+	}
+
+	public Order seeMoreStudy(int lecNum) {
+		Connection conn = JDBCTemplate.getConnection();
+		Order o = dao.seeMoreStudyList(conn, lecNum);
+		close(conn);
+		return o;
+	}
 }

@@ -14,7 +14,7 @@
                	<li><a href="<%=request.getContextPath()%>/member/memberMyPage.do?mId=<%=m.getmId()%>" class="appro-aTag">마이페이지</a></li>
                	<li><a href="<%=request.getContextPath()%>/member/mypageModify.do?mId=<%=m.getmId()%>" class="appro-aTag">내정보수정</a></li>
                	<li><a href="<%=request.getContextPath()%>/member/studyList.do?mNum=<%=m.getmNum()%>" class="appro-aTag">신청한강의</a></li>
-               	<li><a href="#" class="appro-aTag">즐겨찾기목록</a></li>
+               	<li><a href="<%=request.getContextPath()%>/member/likeList.do?mNum=<%=m.getmNum()%>" class="appro-aTag">즐겨찾기목록</a></li>
                	<%if(mt != null && m.getmNum() == mt.getmNum()) { %>
                                 
                 <%} else { %>

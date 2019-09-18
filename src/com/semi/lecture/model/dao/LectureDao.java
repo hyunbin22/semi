@@ -15,8 +15,10 @@ import java.util.Properties;
 
 import com.semi.lecture.model.vo.Lecture;
 import com.semi.lecture.model.vo.LectureUpload;
+import com.semi.member.model.vo.Member;
 import com.semi.mento.model.dao.MentoDao;
 import com.semi.mento.model.vo.Mento;
+import com.semi.report.model.vo.Report;
 
 public class LectureDao {
 	private Properties prop = new Properties();
@@ -375,6 +377,29 @@ public class LectureDao {
         close(pstmt);
      }
      return lecturelist;
+  }
+
+
+  public Lecture selectLectureName(Connection conn, int int1) {
+	  PreparedStatement pstmt=null;
+	  ResultSet rs=null;
+	  Lecture l=null;
+	  String sql=prop.getProperty("selectLectureName");
+	  try {
+			pstmt=conn.prepareStatement(sql);
+			pstmt.setInt(1, int1);
+			rs=pstmt.executeQuery();
+			if(rs.next()) {
+				l = new Lecture();
+				l.setLecName(rs.getString("LECNAME"));
+			}
+		}catch (Exception e) {
+			e.printStackTrace();
+		}finally {
+			close(rs);
+			close(pstmt);
+		}
+	  return l;
   }
 
 

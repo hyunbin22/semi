@@ -1,5 +1,7 @@
 package com.semi.order.model.vo;
 
+import java.sql.Date;
+
 import com.semi.lecture.model.vo.Lecture;
 import com.semi.member.model.vo.Member;
 
@@ -15,13 +17,14 @@ public class Order {
 	private char oCheck;
 	private Lecture lecture;
 	private Member member;
+	private Date oDate;
 	
 	public Order() {
 		// TODO Auto-generated constructor stub
 	}
 
 	public Order(int oNum, int mNum, int lecNum, String oTot, String oText, int oPrice, char oPayment, char oCheck,
-			Lecture lecture, Member member) {
+			Lecture lecture, Member member, Date oDate) {
 		super();
 		this.oNum = oNum;
 		this.mNum = mNum;
@@ -33,6 +36,7 @@ public class Order {
 		this.oCheck = oCheck;
 		this.lecture = lecture;
 		this.member = member;
+		this.oDate = oDate;
 	}
 	
 	
@@ -44,6 +48,16 @@ public class Order {
 		this.oTot = oTot;
 		this.oText = oText;
 		this.oPrice = oPrice;
+	}
+
+	
+	
+	public Date getoDate() {
+		return oDate;
+	}
+
+	public void setoDate(Date oDate) {
+		this.oDate = oDate;
 	}
 
 	public int getoNum() {
