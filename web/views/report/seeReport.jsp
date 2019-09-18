@@ -64,7 +64,7 @@
                 <table class = "center1">
                     <tr class="null">
                     <td>
-                    <button id ="seeMore" name = "seeMore"  onclick="back();">목록으로</button>
+                    <button id ="seeMore" name = "seeMore" onclick="back();">목록으로</button>
                     </td>
                     </tr>
                 </table>

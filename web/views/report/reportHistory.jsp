@@ -19,7 +19,7 @@
                                 </tr>
                         </table><br><br>
                     <h1 class="center1">신고내역</h1><br>
-                    <h5 class = "center1">제목을 클릭하면 상세페이지로 이동합니다.</h5>
+                    <h5 class = "center1">자세히 버튼 클릭시 상세페이지로 이동합니다.</h5>
                     <br>
                     <hr>
     		</div>

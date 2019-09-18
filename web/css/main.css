@@ -1231,7 +1231,7 @@ button#seeMore , input#seeMore{
 
 /* 마이페이지 mypage */
 #myPageNavWrap {
-	border-right: 3px dashed lightpink;
+
 	float:left;
 	width: 160px;
 	background-color: #fff;

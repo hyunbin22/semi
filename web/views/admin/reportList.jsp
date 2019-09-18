@@ -7,7 +7,7 @@
 		int cPage=(int)request.getAttribute("cPage");
 		String pageBar=(String)request.getAttribute("pageBar");
    %>
-
+   <%@ include file="/views/common/adminAside.jsp"%>
 <section>
 <div style = "height: 700px;">
    <article class="admin-list-container wrap">
@@ -45,7 +45,7 @@
          </div>
       </div>
    </article>
-   <%@ include file="/views/common/adminAside.jsp"%>
+
 </div>
 </section>
 
