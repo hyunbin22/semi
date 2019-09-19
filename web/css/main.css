@@ -108,6 +108,7 @@ div#loginmenu2 {
 	width: 450px;
 	top: 190px;
 	margin-left:22.5px;
+	padding: 0px;
 }
 
 input#id, input#pwd {
@@ -119,10 +120,10 @@ input#id, input#pwd {
 
 span#join, span#findId, span#findPw {
 	width: 120px;
-	height: 23px;
+	height: 35px;
 	background-color: #eb9f9f;
 	color: black;
-	margin: 5px;
+	margin: 10px;
 	padding: 5px;
 	text-align: center;
 	display: inline-block;

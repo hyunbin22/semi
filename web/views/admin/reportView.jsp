@@ -95,7 +95,7 @@
                         </tr>
                         <tr class = "notice-top">
                         <td colspan="1">
-                        	결과
+                        	ID 사용정지 처리 :
                         </td>
                         <td colspan="3">
                         

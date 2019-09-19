@@ -1,7 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8" import = "java.util.* , com.semi.bookmark.model.vo.Bookmark"%>
     <%@ include file = "/views/common/header.jsp" %>
-    <% List<Bookmark> list = (List)request.getAttribute("list"); %>
+    <% List<Bookmark> list = (List)request.getAttribute("list"); 
+    	int cPage=(int)request.getAttribute("cPage");
+		String pageBar=(String)request.getAttribute("pageBar");
+		int count = 0;%>
     <section>
 	<%@ include file="/views/common/myPageAside.jsp" %>
 	  	<div class="wrap">
@@ -28,11 +31,19 @@
                             <td class = "listContent"><span><button class = "next" onclick = "location.href='<%=request.getContextPath()%>/member/seeMoreStudy.do?lecNum=<%=list.get(i).getLecNum()%>'">상세보기</button></span></td>
                             <td class = "listCheck"><span><button class = "next" onclick = "location.href=''">삭제</button></span></td>
                         </tr>
-                    <%} %>
-
+                    <% count ++;} %>
+					<%if(count == 0){ %>
+					<tr class = "list">
+					<td colspan="4">즐겨찾기 등록된 강의가 없습니다.</td>
+					</tr>
+					<%} %>
                     </table>
                  <br>
-
+			 	<%if(count > 0){ %>
+					<div id="admin-appro-pageBar">
+         				<%=request.getAttribute("pageBar")%>
+      				</div>
+      			<%} %>
          
   
   					</div>

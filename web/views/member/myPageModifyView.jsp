@@ -14,54 +14,29 @@
                 <form action="member/memberUpdate.do" method="POST" id = "memberFrm" onsubmit="return checkValue();">
                    <table class="tblreg center1">
 					<tr>
-						<td colspan="3">아이디</td>
+						<td colspan="1">아이디</td>
 						<td><%=m.getmId() %></td>
 						<td></td>
 					</tr>
 					<tr>
-						<td colspan="3">비밀번호 변경</td>
+						<td colspan="1">비밀번호 변경</td>
 						<td><input class="textfield" type="password" name="mPw"
 							id="newPw" placeholder="변경하실 비밀번호를 입력해주세요" required></td>
 						<td></td>
 					</tr>
 					<tr>
-						<td colspan="3">비밀번호 재입력</td>
+						<td colspan="1">비밀번호 재입력</td>
 						<td><input class="textfield" type="password" name="userPwd2"
 							id="newPw2" placeholder="" required></td>
 						<td></td>
 					</tr>
 					<tr>
-						<td colspan="3">이메일 변경</td>
+						<td colspan="1">이메일 변경</td>
 						<td><input class="textfield" type="email" name="email"
 							id="email" placeholder="변경하실 이메일을 입력해주세요" required></td>
 					</tr>
 					<tr>
-						<td colspan="3">휴대폰 번호 변경</td>
-						<td>
-							<!-- <input class="textfield" type="text" name="phone" placeholder="휴대폰번호를 입력해주세요"> -->
-
-							<input type="text" name="tel1" id="tel1" class="phone"
-							list="data" required> - <datalist id="data">
-								<option value="010"></option>
-								<option value="011"></option>
-								<option value="019"></option>
-							</datalist> <input type="text" name="tel2" id="tel2" class="phone"
-							maxlength=4 required> - <input type="text" name="tel3"
-							id="tel3" class="phone" maxlength=4 required>
-						</td>
-
-						<td><input type="button" value="인증번호받기" class="inputbtn">
-						</td>
-					</tr>
-					<tr>
-						<td colspan="3">인증번호</td>
-						<td><input class="textfield" type="text" name="number"
-							placeholder="인증번호를 입력해주세요"></td>
-						<td><input type="button" value="인증번호확인" class="inputbtn"
-							onclick=""></td>
-					</tr>
-					<tr>
-						<td colspan='3'>
+						<td colspan='2'>
 					</tr>
 				</table>
 				<div class="center1">

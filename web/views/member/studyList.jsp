@@ -1,7 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8" import = "java.util.* , com.semi.order.model.vo.Order"%>
     <%@ include file = "/views/common/header.jsp" %>
-    <% List<Order> list = (List)request.getAttribute("list"); %>
+    <% List<Order> list = (List)request.getAttribute("list");
+       int cPage=(int)request.getAttribute("cPage");
+	   String pageBar=(String)request.getAttribute("pageBar");
+	   int count = 0;
+	%>
     <section>
 	<%@ include file="/views/common/myPageAside.jsp" %>
 	  	<div class="wrap">
@@ -37,11 +41,19 @@
                             							<%} %>
                             </td>
                         </tr>
-                    <%} %>
-
+                    <% count++;} %>
+					<%if(count == 0){ %>
+					<tr class = "list">
+					<td colspan="5">신청한 강의 목록이 없습니다.</td>
+					</tr>
+					<%} %>
                     </table>
                  <br>
-
+                 <%if(count > 0){ %>
+					<div id="admin-appro-pageBar">
+         				<%=request.getAttribute("pageBar")%>
+      				</div>
+      			<%} %>
          
   
   					</div>
