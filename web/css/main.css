@@ -750,7 +750,7 @@ input#apply {
 
 .detailimg{
     width:500px;
-    height:300px;
+    height:500px;
 }
 
 .pricewrap{
@@ -841,7 +841,7 @@ input#apply {
 	width: 200px;
     height: 740px;
     /* top:52%; */
-    margin-top: 50px;
+    margin-top: -250px;
     margin-left:100px;
 	background-color: #f24365;
     color: #fff;
@@ -891,6 +891,7 @@ div#select_box {
     background-color: black;
     color:white;
     font-weight: 600;
+    border-radius: 10px;
   }
   
   div#select_box label {
@@ -1280,7 +1281,7 @@ div.myPage-content-wrap {
 
 
 .LectureMainFrame{
-	width:685px;
+	width:1024px;
 	heigth:1600px;
 	border-left:340px;
 }
@@ -1297,6 +1298,24 @@ div.myPage-content-wrap {
     background-color: #f24365;
     color:#fff;
     border-radius: 30px;
+}
+
+
+.lectureFix div select {
+    position: relative;
+    width: 160px;
+    height: 32px;
+    margin-top: 10px;
+    margin-bottom: 15px;
+    margin-left: 20px;
+    border: 0px;
+    border-radius: 10px;
+    font-family: "나눔스퀘어";
+    font-weight: 900;
+}
+
+.width100{
+	width:100%;
 }
 
 .lectureFloatMenu {
@@ -1371,12 +1390,11 @@ div.myPage-content-wrap {
     font-family: '나눔스퀘어';
     text-align: center;
     margin-left: 40px;
-    margin-top: 10px;
+    margin-top: -300px;
     margin-bottom: 10px;
 }
 
 .lectureTable {
-	table-layout: fixed;
 	font-family: Arial, Helvetica, sans-serif;
 	display: block;
 	float: left;
@@ -1390,7 +1408,11 @@ div.myPage-content-wrap {
 }
 
 .lectureTable:nth-child(2n-1) {
-	border-left:340px;
+	margin-left: 260px;
+}
+
+.lectureTable:nth-child(2n){
+	margin-left: 10px;
 }
 
 .img300px{
@@ -1406,3 +1428,70 @@ div.myPage-content-wrap {
 	font-size: 24px;
 }
 
+.page1{
+	
+	min-height:22px;
+	text-align:center;
+	color:white;
+	font-weight: 500;
+}
+
+.page{
+	display:inline-block;
+	padding: 8px 0 6px;
+	vertical-align: top;
+}
+
+#select_box select {
+	position: relative;
+    width: 160px;
+    height: 32px;
+    margin-bottom: 15px;
+    border: 0px;
+    border-radius: 10px;
+    font-family: "나눔스퀘어";
+    font-weight: 900;
+    
+}
+
+// lectureMemberRegist
+#lecMemRegistTable{
+	width: 800px;
+	height:500px;
+}
+
+#LecMemRegistTable tr td{
+	padding: 10px;
+	text-align: center;
+}
+
+
+.lecMemRegButton{
+	width: 800px;
+    height: 40px;
+    font-size:24px;
+    background-color: #f24365;
+    color: white;
+    font-weight: 900;
+    border: 0px;
+    border-radius: 20px;
+}
+
+.lecMemRegButton:hover{
+	text-shadow: 0px 0px 3px white;
+}
+
+.lecMemRegImage{
+	width:300px;
+	height:300px;
+	float:left;
+	align-content: center;
+}
+
+.lecMemRegTitle{
+    color: #f24365;
+    font-weight: 900;
+    font-size: 24px;
+    font-family: '나눔스퀘어';
+}
+	

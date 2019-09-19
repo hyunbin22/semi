@@ -7,6 +7,14 @@
    Lecture lec = (Lecture) request.getAttribute("lecture");
    List<LectureReview> list = (List) request.getAttribute("list");
    String days = (String)request.getAttribute("day");
+   
+   String coverImage = "";
+   for(int i=0;i<lec.getLectureUpList().size();i++){
+		if(lec.getLectureUpList().get(i).getUpLectureCategory().equals("cover")){
+			coverImage = lec.getLectureUpList().get(i).getUpLectureReName();
+		}
+	}
+   
 %>
 
 
@@ -20,10 +28,10 @@
 </div>
 <br><br>
 <section>
-<form action="<%=request.getContextPath()%>/lecture/LecturePatymentView.do?=lecnum=<%=lec.getLecNum()%>" method="post">
+<form action="<%=request.getContextPath()%>/lecture/OrderEnrollEnd.do?=lecnum=<%=lec.getLecNum()%>" method="post">
 	<table id="LecMemRegistTable">
 		<tr>
-			<td rowspan="6"><img class="lecMemRegImage" src="<%=request.getContextPath() %>/upload/lecture/<%=lec.getLectureUpload().getUpLectureReName() %>"></td>
+			<td rowspan="6"><img class="lecMemRegImage" src="<%=request.getContextPath() %>/upload/lecture/<%=coverImage %>"></td>
 			<td colspan="4" class="lecMemRegTitle"><%=lec.getLecName() %></td>
 		</tr>
 		<tr>
@@ -46,7 +54,7 @@
 			<td colspan="4"><%=lec.getLecPrice() %>원</td>
 		</tr>
 		<tr>
-			<td colspan="4"><input class="lecMemRegButton" type="submit" value="결제하기"></td>
+			<td colspan="4"><input class="lecMemRegButton" type="submit" value="신청하기" ></td>
 		</tr>
 	</table>
 	

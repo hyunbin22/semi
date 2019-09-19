@@ -37,6 +37,9 @@ public class LectureViewServlet extends HttpServlet {
 
       Lecture lec=new LectureService().selectLecture(lectureNo);
       
+      System.out.println("LectureViewServlet lec : "+lec);
+      
+      
       request.setAttribute("lecture", lec);
       request.getRequestDispatcher("/views/lecture/lectureView.jsp").forward(request, response);
    }

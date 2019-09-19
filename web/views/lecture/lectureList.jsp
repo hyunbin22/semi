@@ -16,7 +16,8 @@
 
 <%@ include file="/views/common/header.jsp"%>
 
-<aside class="center">
+<section class="center ">
+<aside>
    <form>
       <div class="wrap">
          <div class="lectureFloatMenu">
@@ -109,6 +110,13 @@
                <!-- <input type=""> -->
                <input type="submit" value="확인" class="classSubmit">
             </div>
+            <section class= "page1">
+			    <div class="page" id="pageBar">
+			       <%=pageBar %>
+			       <br>
+			        
+			    </div>
+			</section>
 
          </div>
       </div>
@@ -120,7 +128,7 @@
 
 
         
-    <section class="center ">
+    
     <div class="LectureMainFrame">
         
         
@@ -185,13 +193,5 @@
 </section>
 
 
-
-<%--     <section class= "page1">
-    <div class="page" id="pageBar">
-       <%=pageBar %>
-       <br>
-        
-    </div>
-</section> --%>
 
 <%@ include file="/views/common/footer.jsp"%>

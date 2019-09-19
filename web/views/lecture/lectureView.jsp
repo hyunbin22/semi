@@ -5,7 +5,27 @@
 <%@ page import="java.util.List"%>
 <%
    Lecture lec = (Lecture) request.getAttribute("lecture");
+
    List<LectureReview> list = (List) request.getAttribute("list");
+	
+   String coverImage = "";
+   String profileImage = "";
+	String lectureImage[] = null;
+   for(int i=0;i<lec.getLectureUpList().size();i++){
+		if(lec.getLectureUpList().get(i).getUpLectureCategory().equals("cover")){
+			coverImage = lec.getLectureUpList().get(i).getUpLectureReName();
+		}/* else if (lec.getLectureUpList().get(i).getUpLectureCategory().equals("lecimage")){
+			lectureImage[i] = lec.getLectureUpList().get(i).getUpLectureReName();
+		} */
+		else if(lec.getLecMento().getList().get(i).getUpMentoCategory().equals("profile")){
+			profileImage = lec.getLecMento().getList().get(i).getUpMentoReName();
+		}
+	}
+   
+	
+	   
+   
+   
    
    String var = lec.getLecWeek();
    String [] vars = var.split(",");
@@ -20,7 +40,7 @@
 <section class="center">
    <div class="wrap">
       <article class="detailwrap">
-         <img src="<%=request.getContextPath()%>/upload/lecture/<%=lec.getLectureUpload().getUpLectureReName()%>" class="detailimg" alt="...">
+         <img src="<%=request.getContextPath()%>/upload/lecture/<%=coverImage%>" class="detailimg" alt="...">
          <!--card-img-top -->
          <div class="detailbody">
             <div class="class_info">
@@ -60,7 +80,7 @@
 
                   </tr>
                   <tr>
-                     <td><img src=""></td>
+                     <td><img src="<%=request.getContextPath()%>/upload/lecture/<%=profileImage%>"></td>
                      <td>
                         <ul class="tutorpro" name="lecmentocontent">
                            <%=lec.getLecMentoContent()%>
@@ -88,7 +108,7 @@
 
 
                <!-- 리뷰 댓글창 -->
-               <p class="reviewinfo" id="rinfo">
+               <%-- <p class="reviewinfo" id="rinfo">
                <form
                   action="<%=request.getContextPath()%>/LectureReview/reviewWrite"
                   method="post">
@@ -169,7 +189,7 @@
                %>
 
                </p>
-               <p class="questioninfo" id="qinfo"></p>
+               <p class="questioninfo" id="qinfo"></p> --%>
             </div>
          </div>
       </article>
@@ -183,7 +203,7 @@
 
       <div class="wrap">
          <div class="floatMenu">
-            <form action="<%=request.getContextPath()%>/lecture/LectureMemberRegist.do?lecnum=<%=lec.getLecNum() %>"
+            <form action="<%=request.getContextPath()%>/lecture/OrderEnroll.do?lecnum=<%=lec.getLecNum() %>"
       method="post" enctype="multipart/form-data">
             <div class="floatTitle">
                결제
