@@ -5,6 +5,10 @@
 <%
 	Mento mt = (Mento)request.getAttribute("mento");
 	int temp = (int)request.getAttribute("temp");
+	String reason = "";
+	if(mt.getMtReason()!=null) {
+		reason = mt.getMtReason();
+	}
 %>
 <section>
 	<article id="admin-mento-wrap">
@@ -66,7 +70,7 @@
 						if (mt.getMtReason() != null) {
 					%>
 					<h2>거절사유</h2>
-					<textarea id="refusalContent" cols="107" rows="5" style="resize: none;" maxlength="100" placeholder="거절사유를 입력하세요."><%=mt.getMtReason() %></textarea>
+					<textarea id="refusalContent" cols="107" rows="5" style="resize: none;" maxlength="100" placeholder="거절사유를 입력하세요."><%=reason %></textarea>
 	
 					<%
 						}
@@ -97,6 +101,17 @@
 	<%} %>
 </section>
 <script>
+	$(function(){
+		<%if(temp==0) {%>
+			$('#admin-mento-wrap').css('float','none');
+			$('#admin-mento-wrap').addClass('center1');
+			
+		<%} else if(temp==1) {%>
+			$('#btnclassAppro').addClass('mentosubmit');
+			$('#btnclassAppro').addClass('mentosubmit');
+			
+		<%}%>
+	});
 	//거절버튼 눌렀을때
 	function btnRefusal() {
 		var reason = $('#refusalContent').val();
@@ -116,6 +131,7 @@
 			location.href=url;
 		}
 	}; 
+	
 
 	
 </script>

@@ -41,6 +41,15 @@ public class AdminLectureApproFinderServlet extends HttpServlet {
 		String type = request.getParameter("searchType");
 		String data = request.getParameter("searchKeyword");
 		int temp = Integer.parseInt(request.getParameter("temp"));
+		String path = "";
+		if(temp==0) {
+			path="/admin/AdminLectureApproval.do";	//승인완료 리스트로 변경해야함
+		} else if(temp==1 ) {
+			path="/admin/AdminLectureApproval.do";
+		} else if(temp==2) {
+			path="/admin/AdminLectureNoApproval.do";
+		}
+		
 		
 		int cPage;
 		try {
@@ -52,7 +61,7 @@ public class AdminLectureApproFinderServlet extends HttpServlet {
 		int countMentoApproval = new MentoService().countMentoApproval(type, data);
 		
 		List<Lecture> lectureList = new LectureService().lectureApproFindList(type, data, cPage, numPerPage);
-		
+		System.out.println("LectureFinderServlet " + lectureList);
 		int mentoTotalPage=(int)Math.ceil((double)countMentoApproval/numPerPage);
 		String pageBar="";
 		int pageSizeBar=5;
@@ -62,14 +71,14 @@ public class AdminLectureApproFinderServlet extends HttpServlet {
 			pageBar+="<span>[이전]</span>&nbsp;";
 		}
 		else {
-			pageBar+="<a href="+request.getContextPath()+"/admin/AdminApprovalServlet.do?cPage="+(pageNo-1)+">[이전]</a>&nbsp;";
+			pageBar+="<a href="+request.getContextPath() + path + "?cPage="+(pageNo-1)+">[이전]</a>&nbsp;";
 		}
 		while(!(pageNo>pageEnd||pageNo>mentoTotalPage)) {
 			if(pageNo==cPage) {
 				pageBar+="<span class='admin-appro-cPage'>"+pageNo+"</span>&nbsp;";
 			}
 			else {
-				pageBar+="<a href="+request.getContextPath()+"/admin/AdminApprovalServlet.do?cPage="+pageNo+">"+pageNo+"</a>&nbsp;";
+				pageBar+="<a href="+request.getContextPath() + path + "?cPage="+pageNo+">"+pageNo+"</a>&nbsp;";
 			}
 			pageNo++;
 		}
@@ -77,17 +86,21 @@ public class AdminLectureApproFinderServlet extends HttpServlet {
 			pageBar+="<span>[다음]</span>";
 		}
 		else {
-			pageBar+="<a href="+request.getContextPath()+
-			"/admin/AdminMentoApproval.do?cPage="+(pageNo)+">[다음]</a>";
+			pageBar+="<a href="+request.getContextPath() + path + "?cPage="+(pageNo)+">[다음]</a>";
 		}
 		
 		//view페이지에 데이터 전송
 		request.setAttribute("pageBar", pageBar);
 		request.setAttribute("cPage", cPage);
 		request.setAttribute("lectureList",lectureList);
-		if(temp==1) {	//승인안된것에서 검색
+		if(temp==0) {	//승인완료된 리스트
+			request.getRequestDispatcher("/views/admin/adminLectureList.jsp").forward(request, response);
+		} else if(temp==1){
 			request.getRequestDispatcher("/views/admin/adminLectureApproval.jsp").forward(request, response);
+		} else if(temp==2) {
+			request.getRequestDispatcher("/views/admin/adminLectureNoApproval.jsp").forward(request, response);
 		}
+
 	}
 
 	/**

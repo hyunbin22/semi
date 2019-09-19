@@ -97,6 +97,20 @@
 
 </section>
 <script>
+
+$(function(){
+	var sid = $("#search-mId");
+	var sname = $("#search-mName");
+	var searchType=$("#searchType");
+	searchType.change(function() {
+		sid.hide();
+		sname.hide();
+		$("#search-"+this.value).show().css("display","inline-block");
+	});
+	$("#searchType").trigger('change');
+});
+
+
 $(function(){
 	if(<%=count%>==0) {
 		alert("조회 결과가 없습니다.");

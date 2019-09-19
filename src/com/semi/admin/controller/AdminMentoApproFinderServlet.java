@@ -28,7 +28,14 @@ public class AdminMentoApproFinderServlet extends HttpServlet {
 		String type = request.getParameter("searchType");
 		String data = request.getParameter("searchKeyword");
 		int temp = Integer.parseInt(request.getParameter("temp"));
-		
+		String path="";
+		if(temp==0) {
+			path="/admin/AdminMentoList.do";	//승인완료 리스트로 변경해야함
+		} else if(temp==1 ) {
+			path="/admin/AdminMentoApproval.do";
+		} else if(temp==2) {
+			path="/admin/AdminMentoNoApproval.do";	
+		}
 		int cPage;
 		try {
 			cPage = Integer.parseInt(request.getParameter("cPage"));
@@ -49,14 +56,14 @@ public class AdminMentoApproFinderServlet extends HttpServlet {
 			pageBar+="<span>[이전]</span>&nbsp;";
 		}
 		else {
-			pageBar+="<a href="+request.getContextPath()+"/admin/AdminApprovalServlet.do?cPage="+(pageNo-1)+">[이전]</a>&nbsp;";
+			pageBar+="<a href="+request.getContextPath()+ path + "?cPage="+(pageNo-1)+">[이전]</a>&nbsp;";
 		}
 		while(!(pageNo>pageEnd||pageNo>mentoTotalPage)) {
 			if(pageNo==cPage) {
 				pageBar+="<span class='admin-appro-cPage'>"+pageNo+"</span>&nbsp;";
 			}
 			else {
-				pageBar+="<a href="+request.getContextPath()+"/admin/AdminApprovalServlet.do?cPage="+pageNo+">"+pageNo+"</a>&nbsp;";
+				pageBar+="<a href="+request.getContextPath()+ path + "?cPage="+pageNo+">"+pageNo+"</a>&nbsp;";
 			}
 			pageNo++;
 		}
@@ -64,8 +71,7 @@ public class AdminMentoApproFinderServlet extends HttpServlet {
 			pageBar+="<span>[다음]</span>";
 		}
 		else {
-			pageBar+="<a href="+request.getContextPath()+
-			"/admin/AdminMentoApproval.do?cPage="+(pageNo)+">[다음]</a>";
+			pageBar+="<a href="+request.getContextPath()+ path + "?cPage="+(pageNo)+">[다음]</a>";
 		}
 		
 		//view페이지에 데이터 전송

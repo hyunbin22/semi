@@ -7,6 +7,10 @@
 	int temp = (int)request.getAttribute("temp");
 	Member m = (Member)session.getAttribute("loginMember");
 	String toId = lec.getLecMento().getMember().getmId();
+	String reason = "";
+	if(lec.getLecReason()!=null) {
+		reason = lec.getLecReason();
+	}
 %>
 
 <section>
@@ -54,7 +58,7 @@
 						</p>
 					</p>
 					<hr>
-					<%if(temp==2) {%>
+					<%if(temp!=0) {%>
 						<p class="refusalinfo">
 							<h2>거절사유</h2>
 							<textarea id="refusalContent" cols="107" rows="5" style="resize: none;" maxlength="100" placeholder="거절사유를 입력하세요."><%=lec.getLecReason() %></textarea>
