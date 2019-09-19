@@ -80,7 +80,6 @@
 				</div>
 			</div>
 		</div>
-<!-- 	</div> -->
 	<div class="alert alert-success" id="successMessage" style="display:none;">
 		<strong>메세지 전송에 성공했습니다.</strong>
 	</div>
@@ -90,51 +89,6 @@
 	<div class="alert alert-warning" id="warningMessage" style="display:none;">
 		<strong>오류가 발생했습니다.</strong>
 	</div>
-	<%-- <%
-		String messageContent = null;
-	if(session.getAttribute("messageContent") != null) {
-		messageContent=(String)session.getAttribute("messageContent");
-	}
-	String messageType=null;
-	if(session.getAttribute("messageType")!=null) {
-		messageType=(String)session.getAttribute("messageType");
-	}
-	
-	if(messageContent != null) {
-	%>
-		<div class="modal fade" id="messageModal" tabindex="-1" role="dialog" aria-hidden="true">
-		<div class="vertical-alignment-helper">
-			<div class="modal-dialog vertical-align-cener">
-				<div class="modal-content <%if(messageType.equals("오류 메세지")) out.println("panel-warning"); else out.println("panel-success");%>">
-					<div class="modal-header panel-heading">
-						<button type="button" class="close" data-dismiss="modal">
-							<span aria-hidden="true">&times</span>
-							<span class="sr-only">Close</span>
-						</button>
-						<h4 class="modal-title">
-							<%=messageType %>
-						</h4>
-					</div>
-					<div class="modal-body">
-						<%=messageContent %>
-					</div>
-					<div class="modal-footer">
-						<button type="button" class="btn btn-primary" data-dismiss="modal">확인</button>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div> 
-	<script>
-		$('#messageModal').modal("show");
-		
-	</script>
-	<%
-		session.removeAttribute("messageContent");
-		session.removeAttribute("messageType");
-		
-		} %>
- --%>
 <script>
 	function autoClosingAlert(selector, delay) {
 		var alert = $(selector).alert();
@@ -194,42 +148,11 @@
 		})
 	}
 	
-/* 	function addChat(chatName, chatContent, chatTime) {
-		console.log(chatName)
-		$('#chatList').append('<div class="row">' +
-			'<div class="col-lg-12">' +
-			'<div class="media">' +
-			/* '<a class="pull-left" href="#">' +
-			'<img class="media-object img-circle" style="width:30px; height:30px;" src="images.icon.png" alt="">' +
-			'</a>' + */
-			/* '<div class="media-body">' +
-			((chatName=='나') ? "'<h5 class=\"media-heading\">' +
-					'<span class=\"small pull-left\">' +
-					chatTime +
-					'</span>' +
-					chatName +
-					'</h5>'+
-					'<p class=\"pull-right\">' + chatContent + '</p>'"
-					:
-					"'<h5 class=\"media-heading\">' +
-					chatName +
-					'<span class=\"small pull-right\">' +
-					chatTime +
-					'</span></h5>'+
-					'<p>' + chatContent + '</p>'") +
-				
-			'</div></div></div></div>' +
-			'<hr>');
-		$('#chatList').scrollTop($('#chatList')[0].scrollHeight);
-	} */
-	
+
 	function addChat(chatName, chatContent, chatTime) {
 		$('#chatList').append('<div class="row">' +
 			'<div class="col-lg-12">' +
 			'<div class="media">' +
-			/* '<a class="pull-left" href="#">' +
-			'<img class="media-object img-circle" style="width:30px; height:30px;" src="images.icon.png" alt="">' +
-			'</a>' + */
 			'<div class="media-body">' +
 			'<h4 class="media-heading">' +
 			(chatName=='msgAdmin'?"관리자":chatName) +
@@ -264,7 +187,7 @@
 					}
 				}
 			});
-		},1000);
+		},500);
 		
 	});
 	function showUnread(result){
