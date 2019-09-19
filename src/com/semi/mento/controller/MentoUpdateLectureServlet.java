@@ -47,15 +47,19 @@ public class MentoUpdateLectureServlet extends HttpServlet {
         List<SubCategory> sc= (List)new SubCategoryService().selectSubCategory();
         List<Local> l= (List)new LocalService().selectLocal();
         List<SubLocal> sl= (List)new SubLocalService().selectSubLocal();
+        List<Lecture> lList = (List)new LectureService().lectureAllListByLecNum(lecNum);
         Lecture lt=new LectureService().lectureListByLecNum(lecNum);
 
 				
         System.out.println(lecNum);
+        System.out.println(lList);
+        System.out.println(lt);
         request.setAttribute("category", c);
         request.setAttribute("subcategory", sc);
         request.setAttribute("local", l);
         request.setAttribute("subLocal", sl);
 		request.setAttribute("lecture", lt);
+		request.setAttribute("lList", lList);
 		
 		request.getRequestDispatcher("/views/mento/mentoUpdateStudy.jsp").forward(request, response);
 		

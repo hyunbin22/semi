@@ -12,9 +12,10 @@
     	List<Category> cList=(List)request.getAttribute("category");
     	List<SubCategory> scList=(List)request.getAttribute("scList");
     	List<Local> lList=(List)request.getAttribute("local");
+    	List<Lecture> leclist=(List)request.getAttribute("lList");
     	String coverName=null;
     	String classImgName=null;
-    	for(LectureUpload cn : lt.getLectureUpList()){
+    for(LectureUpload cn : lt.getLectureUpList()){
     		if(cn.getUpLectureCategory().equals("cover")){
     			coverName=cn.getUpLectureReName();
     		}if(cn.getUpLectureCategory().equals("lecimage")){
@@ -62,15 +63,15 @@
 							<input type="radio" name="classType" id="r1" value="1:1" checked><label for="r1">1:1수업</label>            
                         <%} %>
 				<br> <br>
-				 커버사진등록 <input type="file" name="file1" 	accept="image/*" multiple onchange="previewImage(this,'View_area')"/> <br> <br>
-				 <div id='View_area' style='position: relative; width: 100px; height: 100px; color: black; border: 0px solid black; dispaly: inline;'>
+				 커버사진등록 <input type='file' id="file1" name="file1" /> <br> <br>
+				 <div id='View_area' style='position: relative; width: 100px; height: 100px; color: black; border: 0px solid black; dispaly: inline; margin:0;'>
 			
-			  	<img src="<%=request.getContextPath() %>/upload/lecture/<%=coverName%>">
+			  	<img id="image_section1" alt="미리보기" src="<%=request.getContextPath() %>/upload/lecture/<%=coverName%>" style='position: relative; width: 250px; height: 200px; color: black; border: 0px solid black; dispaly: inline;'>
 						        
 			         </div>
-			         <br><br><br>
-				사진등록(최대3개)
-				<table width="400" border="0" cellspacing="0" cellpadding="0">
+			         <br><br><br><br><br><br>
+				수업사진등록
+				<table width="400" border="0" cellspacing="0" cellpadding="0" style= 'margin:0;'>
 					<tr>
 						<td colspan="2" align="left" bgcolor="#FFFFFF">
 							<table width="100%" border="0" cellpadding="0" cellspacing="0">
@@ -88,15 +89,15 @@
 											<tr>
 												<br>
 												<td>
-												<input type="file" name="addImg" onchange="previewImage(this,'View_area')"></td>
+												 <input type='file' id="addImg" name="addImg"/></td>
 												<td align="left"></td>
 											</tr>
 										</table>
 										<br>
-								<div id='View_area' style='position: relative; width: 100px; height: 100px; color: black; border: 0px solid black; dispaly: inline;' >
-			       								<img src="<%=request.getContextPath() %>/upload/lecture/<%=classImgName%>">
-			       								  </div>
-									</td>
+								<div id='View_area' style='position: relative; width: 100px; height: 100px; color: black; border: 0px solid black; dispaly: inline; margin:0;' >
+	       								<img src="<%=request.getContextPath() %>/upload/lecture/<%=classImgName%>" id="image_section2" alt="미리보기" style='position: relative; width: 250px; height: 200px; color: black; border: 0px solid black; dispaly: inline;'>				
+						        
+	       								  </div>
 								</tr>
 							</table>
 						</td>
@@ -163,7 +164,7 @@
 					<option id="si">시/구/군 선택</option>
 				</select> <br> <br>
 				<input type="text" name="local2" id="local2"
-					placeholder="<%=lt.getAddress()%>"> <br> <br> <br>
+					value="<%=lt.getLecLocalContent()%>"> <br> <br> <br>
 				<div>가능 요일별 시간대(복수선택)</div>
 				<br>
 
@@ -180,8 +181,11 @@
 				<input type="checkbox" name="yo" value="토요일">토요일
 				
 				<input type="checkbox" name="yo" value="일요일">일요일
+				<small><div>*변경전 선택한 요일 (<%for (Lecture list : leclist){ %>
+						<%=list.getLecWeek() %>
+							<%} %>)
+				</div></small>
 				
-
 				<br> <br>
 				<%
 						if(lt.getLecTot()==null) {
@@ -191,10 +195,19 @@
 							 <input type="text" name="day1"	value="<%=lt.getLecTot()%>">
 							
 					<%} %>
-
-							 <input type="radio" name="week1" id="f1" value="선택" checked><label for="f1"></label>
-							 <input type="date" name="month1" min='2019-01-01' max='2019-12-31' placeholder="<%=lt.getLecOpenDate()%>"/>
-							 <input type="radio" name="week1" id="f2" value="협의"><label for="f2">협의</label> <br> <br> <br>                            
+					
+					<%
+						if(lt.getLecMeet().equals("선택")) {
+					%>
+				 		 <input type="radio" name="week1" id="f1" value="선택" checked><label for="f1"></label>
+							 <input type="date" name="month1" min='2019-01-01' max='2019-12-31' value="<%=lt.getLecOpenDate()%>"/>
+							 <input type="radio" name="week1" id="f2" value="협의"><label for="f2">협의</label> <br> <br> <br>  
+					<%}else{%>
+							 		 <input type="radio" name="week1" id="f1" value="선택"><label for="f1"></label>
+							 <input type="date" name="month1" min='2019-01-01' max='2019-12-31' value="<%=lt.getLecOpenDate()%>"/>
+							 <input type="radio" name="week1" id="f2" value="협의" checked><label for="f2">협의</label> <br> <br> <br>  
+							
+					<%} %>                         
    
 				 <%
 						if(lt.getLecTot2()==null) {
@@ -204,10 +217,19 @@
 							 <input type="text" name="day2"	value="<%=lt.getLecTot2()%>">
 							
 					<%} %>
-							 <input type="radio" name="week2" id="f3" value="선택" checked><label for="f3"></label>
+					
+							<%
+						if(lt.getLecMeet().equals("선택")) {
+					%>
+				 			 <input type="radio" name="week2" id="f3" value="선택" checked><label for="f3"></label>
 							 <input type="date" name="month2" min='2019-01-01' max='2019-12-31' value="<%=lt.getLecOpenDate2()%>"/>
-							 <input type="radio" name="week2" id="f4" value="협의"><label for="f4">협의</label> <br> <br> <br>                            
- 
+							 <input type="radio" name="week2" id="f4" value="협의"><label for="f4">협의</label> <br> <br> <br>   
+					<%}else{%>
+							 	 <input type="radio" name="week2" id="f3" value="선택" ><label for="f3"></label>
+							 <input type="date" name="month2" min='2019-01-01' max='2019-12-31' value="<%=lt.getLecOpenDate2()%>"/>
+							 <input type="radio" name="week2" id="f4" value="협의" checked><label for="f4">협의</label> <br> <br> <br>   
+							
+					<%} %>                             
 
 				 <button type="submit" id="insert1" name="submit1">승인요청</button>
 			</form>
@@ -216,6 +238,40 @@
 </div>
 </section>
 <script>
+
+//커버사진 미리보기
+function readURL(input) {
+	  if (input.files && input.files[0]) {
+	   var reader = new FileReader();
+	   
+	   reader.onload = function (e) {
+	    $('#image_section1').attr('src', e.target.result);  
+	   }
+	   
+	   reader.readAsDataURL(input.files[0]);
+	   }
+	 }   
+	 
+	 $("#file1").change(function(){
+	    readURL(this);
+	 });
+	 
+  //수업사진 미리보기
+  function readURL2(input) {
+	  if (input.files && input.files[0]) {
+	   var reader = new FileReader();
+	   
+	   reader.onload = function (ee) {
+	    $('#image_section2').attr('src', ee.target.result);  
+	   }
+	   
+	   reader.readAsDataURL(input.files[0]);
+	   }
+	 }   
+	 
+	 $("#addImg").change(function(){
+	    readURL2(this);
+	 });
 
        //장르선택 카테고리
       $(function(){
