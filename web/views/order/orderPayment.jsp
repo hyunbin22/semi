@@ -57,7 +57,7 @@
 										첫 수업 날짜
 									</th>
 									<td>
-										<%if(lec.getLecType().equals("협의")) {%>
+										<%if(lec.getLecOpenDate()==null) {%>
 											협의
 										<%} else {%>
 											<%=lec.getLecOpenDate() %>
@@ -128,49 +128,6 @@
 	   		<button onclick="fn_iampay();" class="next">결제하기</button>
 		</div>
 	</div>
-		<%-- <div id="class-pay-container">
-			<div class="card mb-3 center1" style="max-width: 800px;">
-				<div class="row no-gutters">
-					<div class="col-md-4 center1">
-						<img src="<%=request.getContextPath()%>/upload/lecture/<%=lecCoverImg%>" class="card-img orderImg" alt="...">
-						<h1 class="center1"><%=lec.getLecMento().getMtNickName() %></h1>
-					</div>
-					<div class="col-md-8">
-						<div class="card-body">
-							<h2 class="card-title"><%=lec.getLecName() %></h2>
-							<div class="class-pay-table-wrap">
-								
-									<table id="class-pay-tbl">
-										<tr>
-											<th>수업횟수</th>
-											<td><%=lec.getLecCount() %> 회</td>
-										</tr>
-										<tr>
-											<th>수업시간</th>
-											<td><%=lec.getLecTime() %> 시간</td>
-										</tr>
-										<tr>
-											<th>가격(1회 수업 금액)</th>
-											<td><%=lec.getLecPrice() %> 원</td>
-										</tr>
-										<tr>
-											<th>총결제금액</th>
-											<td><%=order.getoPrice() %> 원</td>
-										</tr>
-										<tr>
-											<th>결제수단</th>
-											<td><label><input type="radio" name="kakaopay">카카오페이</label></td>
-										</tr>
-									</table>
-									<div class="center1 btn-pay-wrap">
-								   		<button onclick="fn_iampay();" class="next">결제하기</button>
-									</div>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div> --%>
 	</article>
 </section>
 <script>
@@ -203,9 +160,8 @@
             				console.log(check);
             				msg = '결제가 완료되었습니다.';
         	                msg += '\결제 금액 : ' + rsp.paid_amount;
-        					alert(msg);
         	                //성공시 이동할 페이지
-        	                location.href='<%=request.getContextPath()%>/order/orderPaySuccess.do?oNum=<%=order.getoNum()%>';
+        	                location.href='<%=request.getContextPath()%>/order/orderPaySuccess.do?msg='+msg+'&oNum=<%=order.getoNum()%>';
             			}
             		},
             		error : function(request, status, error) {

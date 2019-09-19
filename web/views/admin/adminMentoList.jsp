@@ -39,7 +39,7 @@
 		</div>
 	</article>
 	<article class="center1 admin-list">
-		<div class="row">
+		<div class="row mentoListRow">
 			<div class="col">
 				<h3 class="admintitle">멘토목록</h3>
 				<div class="tab-content">

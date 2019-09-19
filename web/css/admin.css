@@ -10,6 +10,10 @@
     margin: 0 auto;
 }
 
+h1, h2 {
+	font-family: 'Hanna';
+}
+
 /* admin */
 body{
     width: 1024px
@@ -95,6 +99,10 @@ footer{
 /* 멘토관리 */
 article.admin-list{
 	width: 700px;
+}
+
+.mentoListRow{
+	width: 100%;
 }
 /* 관리자승인관리 */
 
@@ -243,14 +251,14 @@ div.admin-detail-frm-wrap{
 }
 div.admin-mento-detailwrap>h1{
 	text-align:center;
-	background-color: lightgray;
+	background-color: lavender;
 	margin-bottom: 0;
 	height: 60px;
 }
 
 div.admin-mento-detailwrap h2{
 	text-align:center;
-	background-color: lightgray;
+	background-color: lavender;
 	margin-bottom: 0;
 	height: 40px;
 	width: 100%;

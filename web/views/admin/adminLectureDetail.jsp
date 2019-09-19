@@ -43,7 +43,7 @@
 						<p>
 							<%for(int i = 0; i < lec.getLectureUpList().size(); i++) {
 								if(lec.getLectureUpList().get(i).getUpLectureCategory().equals("lecimage")) {%>
-							<img src='<%=request.getContextPath() %>/upload/lecture/<%=lec.getLectureUpList().get(i) %>'>
+							<img src='<%=request.getContextPath() %>/upload/lecture/<%=lec.getLectureUpList().get(i).getUpLectureReName() %>'>
 							<%}
 							}%>
 						</p>

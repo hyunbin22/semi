@@ -32,7 +32,7 @@ public class MemberService {
 	public int idDupliCheck(String userId) {
 		Connection conn = getConnection();
 		int check = dao.idDupliCheck(conn, userId);
-
+		close(conn);
 		return check;
 	}
 
@@ -80,7 +80,6 @@ public class MemberService {
 		else 
 		{
 			rollback(conn);
-			System.out.println("서비스");
 		}
 		close(conn);
 		return result;

@@ -17,13 +17,13 @@ h4 {
 }
 h3 {
 	font-family: 'Hanna';
-}
+}*/
 h2 {
 	font-family: 'Hanna';
 }
 h1 {
 	font-family: 'Hanna';
-} */
+} 
 
 header {
 	min-height: 300px;
@@ -469,7 +469,6 @@ nav ul {
     
    }
 .bar h1 {
-	font-family: "Black+Han+Sans";
 	font-size: 50px;
 }
 
@@ -521,7 +520,7 @@ span#unread{
 
 .tbl-register2 th{
 	width:50px;
-	height: 200px;
+	height: 50px;
 }
 
 .tbl-register2 td p {
@@ -535,6 +534,10 @@ span#unread{
 
 .tbl-register2 td{
 	text-align: center;
+}
+
+.lblAgree{
+	float:left;
 }
 
 
@@ -553,8 +556,8 @@ span#unread{
 	text-align:center;	
 }
 .phone{
-    width:80px;
-    height: 20px;
+    width:90px;
+    height: 30px;
 
 }
 .emailfield
@@ -569,6 +572,11 @@ span#unread{
     border-radius: 4px; 
     background-color: #eb9f9f;
 }
+
+.btnPhone {
+	margin-bottom: 0;	
+}
+
 .tblreg td:first-child{
 	width: 130px;
 }
@@ -580,7 +588,7 @@ span#unread{
 
 .tblreg td .textfield {
 	width: 305px;
-	height: 20px;
+	height: 30px;
 }
 
 /* .tblreg td .textfield{

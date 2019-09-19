@@ -50,6 +50,7 @@
 						<td>생년월일</td>
 						<td><input class="textfield" type="date" name="birth"
 							id="birth" required></td>
+						<td id="birthCheck" class="rg-checkMsg"></td>
 					</tr>
 					<tr>
 						<td>이메일</td>
@@ -70,19 +71,20 @@
 							<input type="text" name="tel3" id="tel3" class="phone" maxlength=4 required>
 						</td>
 
-						<td><input type="button" value="인증번호받기" class="inputbtn"
+						<td><input type="button" value="인증번호받기" class="inputbtn btnPhone"
 							id="sendSms"></td>
 					</tr>
 					<tr>
 						<td>인증번호</td>
 						<td><input class="textfield" type="text" name="number"
 							placeholder="인증번호를 입력해주세요" id="checkNum" required></td>
-						<td><input type="button" value="인증번호확인" class="inputbtn"
+						<td><input type="button" value="인증번호확인" class="inputbtn btnPhone"
 							id="checkKey"></td>
 					</tr>
 					<tr>
 						<td></td>
-						<td id="keyCheck"></td>
+						<td id="keyCheck" class="rg-checkMsg"></td>
+						<td id="keyCheck2" class="rg-checkMsg"></td>
 					</tr>
 					<tr class="register-submit">
 						<td colspan='3'><input type="submit" value="회원가입"
@@ -107,13 +109,12 @@
 				alert("유효한 휴대폰번호를 입력해주세요.");
 				return;
 			}
-			console.log(phone);
 			$.ajax({
 				url:"<%=request.getContextPath()%>/sendSms.do?phone="+phone,
 				type:"get",
 				dataType:"text",
 				success:function(data) {
-					console.log(data);
+					$('#checkKey').html("인증번호 재발송");
 					key = data;
 				},
 				error:function(request,status,error){
@@ -138,6 +139,11 @@
 			} else if(key==userKey) {
 				$('#sendSms').prop("disabled", false);
 				$('#checkKey').prop("disabled", false);
+				
+				$('#keyCheck2').text("인증번호가 일치합니다.");
+				$('#keyCheck2').css({"color":"green","font-size":"11px"});
+				$('#keyCheck2').prop("disabled", true);
+				
 				$('#tel1').prop("readonly", true);
 				$('#tel2').prop("readonly", true);
 				$('#tel3').prop("readonly", true);
@@ -294,6 +300,32 @@
 		});
 
 	});
+	
+	//생년월일 체크 현재로부터 만 14세가 지나야함 
+	$(function(){
+		var birthCheck = $('#birthCheck');
+		
+		$('#birth').blur(function(){
+			
+			var toDay = new Date();
+			var birth = $('#birth').val();
+			var dateBirth = new Date(birth);
+			var years = toDay.getFullYear() - dateBirth.getFullYear();
+
+		    if(years<14) {
+		    	birthCheck.text("만 14세 미만은 가입할 수 없습니다.");
+		    	birthCheck.css({
+		    		"color" : "red",
+		    		"font-size" : "11px"
+		    	});
+		    	birthCheck.prop("disabled",true);
+		    } else {
+		    	birthCheck.text("");
+		    	birthCheck.prop("disabled",false);
+		    }
+		});
+		
+	});
 
 	//회원가입 정규식
 	function checkValue() {
@@ -302,7 +334,7 @@
 		var email = $('#email');
 		var tel2 = $('#tel2');
 		var tel3 = $('#tel3');
-		console.log("checkNum.val" + $('#checkNum').val());
+		var birth = $('#birth');
 
 		var re2 = /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i;// 이메일이 적합한지 검사할 정규식
 
@@ -318,11 +350,11 @@
 			return false;
 		}
 
-		/* //인증번호 체크글자가 보일때
+		//인증번호 체크글자가 보일때
 		if ($('#keyCheck').prop('disabled')) {
 			alert("인증번호를 확인하세요.");
 			return false;
-		} */
+		} 
 		
 		//이메일 체크 글자가 보일때
 		if ($('#emailCheck').prop('disabled')) {
@@ -336,7 +368,16 @@
 			$('#checkNum').focus();
 			return false;
 		}
+		
+		//생년월일 체크 글자가 보일때
+		if ($('#birthCheck').prop('disabled')) {
+			alert("생년월일을 확인하세요.");
+			return false;
+		}
 		return true;
+		
+		
+
 	};
 	//전화번호 체크
 	//전화번호 입력시 숫자가 아니면 지움
@@ -357,5 +398,9 @@
 			}
 		});
 	});
+	
+
+	
+	
 </script>
 <%@ include file="/views/common/footer.jsp"%>

@@ -13,7 +13,7 @@
 			<ul>
                	<li><a href="<%=request.getContextPath()%>/member/memberMyPage.do?mId=<%=m.getmId()%>" class="appro-aTag">마이페이지</a></li>
                	<li><a href="<%=request.getContextPath()%>/member/mypageModify.do?mId=<%=m.getmId()%>" class="appro-aTag">내정보수정</a></li>
-               	<li><a href="<%=request.getContextPath()%>/member/studyList.do?mNum=<%=m.getmNum()%>" class="appro-aTag">신청한강의</a></li>
+               	<li><a href="<%=request.getContextPath()%>/order/orderList.do?mNum=<%=m.getmNum()%>" class="appro-aTag">신청한강의</a></li>
                	<li><a href="<%=request.getContextPath()%>/member/likeList.do?mNum=<%=m.getmNum()%>" class="appro-aTag">즐겨찾기목록</a></li>
                	<%if(mt != null && m.getmNum() == mt.getmNum()) { %>
                                 
@@ -22,7 +22,7 @@
               	<%} %>
                 <%if(mt != null && m.getmNum() == mt.getmNum()) { %>
                 <li><a href="<%=request.getContextPath()%>/mento/mentoMyPage.do?getmNum=<%=mt.getmNum()%>&getMtNum=<%=mt.getMtNum() %>" class="appro-aTag">멘토페이지</a></li>
-                <li><a href="<%=request.getContextPath()%>/mento/mypageModify.do?mtnum=<%=mt.getMtNum()%>" class="appro-aTag">멘토정보수정</a></li>
+                <li><a href="<%=request.getContextPath()%>/mento/myPageModify.do?mtnum=<%=mt.getMtNum()%>" class="appro-aTag">멘토정보수정</a></li>
                 <%if(mt.getMtCheck() != 'N') {%>
                 <li><a href="<%=request.getContextPath()%>/mento/studyList.do?mtnum=<%=mt.getMtNum()%>" class="appro-aTag">내강의목록</a></li>
                 <li><a href="<%=request.getContextPath()%>/mento/enrollLecture.do?mtNum=<%=mt.getMtNum()%>" class="appro-aTag">강의만들기</a></li>

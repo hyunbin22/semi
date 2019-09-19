@@ -1,4 +1,4 @@
-package com.semi.member.controller;
+package com.semi.order.controller;
 
 import java.io.IOException;
 import java.util.List;
@@ -15,14 +15,14 @@ import com.semi.order.model.vo.Order;
 /**
  * Servlet implementation class MemberStudyList
  */
-@WebServlet("/member/studyList.do")
-public class MemberStudyList extends HttpServlet {
+@WebServlet("/order/orderList.do")
+public class OrderListServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public MemberStudyList() {
+    public OrderListServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -82,7 +82,7 @@ public class MemberStudyList extends HttpServlet {
 		request.setAttribute("pageBar", pageBar);
 		request.setAttribute("cPage", cPage);
 		request.setAttribute("list", list);
-		request.getRequestDispatcher("/views/member/studyList.jsp").forward(request, response);
+		request.getRequestDispatcher("/views/order/orderList.jsp").forward(request, response);
 		
 		
 	}

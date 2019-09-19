@@ -148,9 +148,9 @@ public class LectureService {
 	}
 
 	//결제 완료시 강의 누적 수강인원 증가
-	public int updateStudentCount(int oNum) {
+	public int updateStudentCount(int oNum, String type) {
 		Connection conn = getConnection();
-		int result = dao.updateStudentCount(conn, oNum);
+		int result = dao.updateStudentCount(conn, oNum, type);
 		if(result > 0) commit(conn);
 		else rollback(conn);
 		close(conn);

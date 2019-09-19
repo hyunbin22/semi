@@ -161,38 +161,23 @@ public class OrderDao {
 		}return list;
 	}
 
-	public Order seeMoreStudyList(Connection conn, int lecNum) {
-		PreparedStatement pstmt=null;
-		ResultSet rs=null;
-		String sql=prop.getProperty("selectOrder");
-		Order o = null;
-		Lecture l = new Lecture();
-		LectureDao dao = new LectureDao();
+	public int orderPayReset(Connection conn, int oNum) {
+		PreparedStatement pstmt = null;
+		int result = 0;
+		String sql = "update tb_order set oPayment='N', paydate=null where onum=?";
 		try {
-			pstmt=conn.prepareStatement(sql);
-			pstmt.setInt(1,lecNum);
-			rs=pstmt.executeQuery();
-			if(rs.next()) {
-				o = new Order();
-				o.setoNum(rs.getInt("onum"));
-				o.setmNum(rs.getInt("mnum"));
-				o.setLecNum(rs.getInt("lecnum"));
-				o.setLecture(dao.selectLectureName(conn, rs.getInt("lecnum")));
-				o.setoText(rs.getString("otext").replaceAll(" ", "&nbsp;").replaceAll("<", "&lt;").replaceAll(">", "&gt;").replaceAll("\n", "<br>"));
-				o.setoTot(rs.getString("otot"));
-				o.setoPrice(rs.getInt("oprice"));
-				o.setoPayment(rs.getString("opayment").charAt(0));
-				o.setoCheck(rs.getString("ocheck").charAt(0));  
-				o.setOrderDate(rs.getDate("orderDate"));
-				o.setPayDate(rs.getDate("payDate"));
-			}
-		}catch(SQLException e) {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, oNum);
+			result = pstmt.executeUpdate();
+			
+		} catch(SQLException e) {
 			e.printStackTrace();
-		}finally {
-			close(rs);
+		} finally {
 			close(pstmt);
 		}
-		return o;
+		return result;
+		
+		
 	}
 
 

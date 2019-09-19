@@ -167,7 +167,7 @@
 	function getInfiniteChat() {
 		setInterval(function() {
 			chatListFunction(lastId);
-		}, 500);
+		}, 1000);
 	}
 	
 	//안읽은메세지수 출력
@@ -187,7 +187,7 @@
 					}
 				}
 			});
-		},500);
+		},2000);
 		
 	});
 	function showUnread(result){

@@ -13,35 +13,41 @@ import com.semi.message.model.service.MessageService;
 import com.semi.order.model.service.OrderService;
 
 /**
- * Servlet implementation class OrderUpdatePaymentServlet
+ * Servlet implementation class OrderPayResetServlet
  */
-@WebServlet("/order/orderUpdatePayment.do")
-public class OrderUpdatePaymentServlet extends HttpServlet {
+@WebServlet("/order/orderPayReset.do")
+public class OrderPayResetServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-
-    public OrderUpdatePaymentServlet() {
+       
+    public OrderPayResetServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
 		int oNum = Integer.parseInt(request.getParameter("oNum"));
-		int result = new OrderService().updatePayment(oNum);
-		String type = "add";
+		int result = new OrderService().orderPayReset(oNum);
+		String type = "minus";
+		String loc = "";
+		String msg = "";
 		if(result > 0) {
-			//누적수강인원 증가
-			int addStudentCount = new LectureService().updateStudentCount(oNum, type);
-			if(addStudentCount > 0) {
-				response.getWriter().write(result+"");
+			int minusStudentCount = new LectureService().updateStudentCount(oNum, type);
+			if(minusStudentCount > 0) {
 				
 				//멘토한테 결제되었다는 메세지 보내기
 				String userId = new OrderService().selectOrder(oNum).getLecture().getLecMento().getMember().getmId();
-				new MessageService().insertMessage("msgAdmin", userId, "[ 신청번호 '"+oNum+"' ] 결제 완료 되었습니다.");
+				new MessageService().insertMessage("msgAdmin", userId, "[ 신청번호 "+oNum+" ] 결제 취소 되었습니다.");
+				msg = "[ 신청번호 "+oNum+" ]결제 취소 되었습니다.";
+				
 			}
+		} else {	//결제취소 실패시
+			msg = "[ 신청번호  " + oNum + " ]결제 취소 실패되었습니다. 관리자에게 문의해주세요.";
 		}
 		
-		response.getWriter().write("0");
+		loc = "/order/orderView.do?oNum=" + oNum;
+		request.setAttribute("msg", msg);
+		request.setAttribute("loc", loc);
+		request.getRequestDispatcher("/views/common/msg.jsp").forward(request, response);
 		
 		
 	}

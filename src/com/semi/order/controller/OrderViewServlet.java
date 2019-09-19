@@ -1,4 +1,4 @@
-package com.semi.member.controller;
+package com.semi.order.controller;
 
 import java.io.IOException;
 
@@ -15,14 +15,14 @@ import com.semi.order.model.vo.Order;
 /**
  * Servlet implementation class MemberSeeMoreStudy
  */
-@WebServlet("/member/seeMoreStudy.do")
-public class MemberSeeMoreStudy extends HttpServlet {
+@WebServlet("/order/orderView.do")
+public class OrderViewServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public MemberSeeMoreStudy() {
+    public OrderViewServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -32,14 +32,19 @@ public class MemberSeeMoreStudy extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		int lecNum = Integer.parseInt(request.getParameter("lecNum"));
+		int oNum = Integer.parseInt(request.getParameter("oNum"));
 		
+		String str = "";
 		OrderService service = new OrderService();
-		Order o = service.seeMoreStudy(lecNum);
-		
+		Order o = service.selectOrder(oNum);
+		if(o.getoPayment()=='Y') {
+			str="Y";
+		} else {
+			str="N";
+		}
+		request.setAttribute("str", str);
 		request.setAttribute("order", o);
-		System.out.println(o);
-		request.getRequestDispatcher("/views/member/studyListView.jsp").forward(request, response);
+		request.getRequestDispatcher("/views/order/orderView.jsp").forward(request, response);
 	}
 
 	/**

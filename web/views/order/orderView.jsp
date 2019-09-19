@@ -1,6 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8" import = "com.semi.order.model.vo.Order"%>
- <% Order o = (Order)request.getAttribute("order"); %>
+ <% 
+ 	Order o = (Order)request.getAttribute("order"); 
+ 	String str = (String)request.getAttribute("str");
+ %>
 <%@ include file="/views/common/header.jsp"%>
 	<%@ include file="/views/common/myPageAside.jsp" %>
 <section>
@@ -40,17 +43,25 @@
 												<%=o.getOrderDate() %>
 											</td>
 										</tr>
-
+										<%if(str.equals("Y")) { %>
+										<tr>
+											<th style = "background-color: lightpink; text-align: center;" >결제 날짜</th>
+											<td>
+												<%=o.getPayDate() %>
+											</td>
+										</tr>
+										<%} %>
 									</table>
 									<br><br>
 									<div class="center1">
 								   		<button onclick="back();" class="next center1" >목록으로</button>
-								   		<button class = "next" onclick = "location.href='<%=request.getContextPath()%>/order/orderPaymentView.do?lecNum=<%=o.getLecNum()%>'">결제하기</button>
+								   		<%if(str.equals("N")) { %>
+								   			<button class = "next" onclick = "location.href='<%=request.getContextPath()%>/order/orderPaymentView.do?oNum=<%=o.getoNum()%>'">결제하기</button>
+								   		<%} else {%>
+								   			<button class = "next" id="btnPayReset">결제취소</button>
+								   		<%} %>
 									</div>
                  					<br>
-
-         
-  
   					</div>
                 </div>
             </div>
@@ -61,6 +72,14 @@
 			var url="<%=request.getContextPath()%>/member/studyList.do?mNum=<%=m.getmNum() %>";
 			location.href=url;
 		}
+		
+		$(function(){
+			$('#btnPayReset').click(function(){
+				if(confirm('결제 취소하시겠습니까?')) {
+					location.href="<%=request.getContextPath()%>/order/orderPayReset.do?oNum=<%=o.getoNum()%>";
+				}
+			});
+		});
 	</script>
 
 <%@ include file="/views/common/footer.jsp"%>

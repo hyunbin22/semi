@@ -156,7 +156,7 @@ public class MentoService {
 	public int nicknameDupliCheck(String nickname) {
 		Connection conn = JDBCTemplate.getConnection();
 		int check = dao.idDupliCheck(conn, nickname);
-		
+		close(conn);
 		return check;
 	}
 

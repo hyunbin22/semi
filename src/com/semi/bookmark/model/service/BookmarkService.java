@@ -19,7 +19,7 @@ public class BookmarkService {
 	private BookmarkDao dao = new BookmarkDao();
 
 	public int selectBookmarkListCount() {
-		Connection conn = JDBCTemplate.getConnection();
+		Connection conn = getConnection();
 		int result = dao.selectListCount(conn);
 		close(conn);
 		return result;
@@ -27,8 +27,9 @@ public class BookmarkService {
 	}
 
 	public List<Bookmark> selectBookMarkList(int cPage, int numPerPage, int mNum) {
-		Connection conn = JDBCTemplate.getConnection();
+		Connection conn = getConnection();
 		List<Bookmark> list = dao.selectList(conn, cPage, numPerPage, mNum);
+		close(conn);
 		return list;
 	}
 
