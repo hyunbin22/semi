@@ -47,9 +47,18 @@
 					placeholder="수업정원을 입력하세요."> <input type="radio"
 					name="classType" id="r1" value="1:1"><label for="r1">1:1수업</label>
 				<br> <br>
-				 커버사진등록 <input type="file" name="file1" 	accept="image/*" multiple /> <br> <br> <br>
+				 커버사진등록
+				 <br>
+				 <input type='file' id="file1" name="file1" />
+				 <br>
+				  <div id='View_area' style='position: relative; width: 100px; height: 100px; color: black; border: 0px solid black; dispaly: inline; margin:0;'>
+						        <img id="image_section1" src="#" alt="미리보기" style='position: relative; width: 250px; height: 200px; color: black; border: 0px solid black; dispaly: inline;'/>
+			         </div>
+					<br><br><br>
+
+				<br><br>
 				사진등록(최대3개)
-				<table width="400" border="0" cellspacing="0" cellpadding="0">
+				<table width="400" border="0" cellspacing="0" cellpadding="0" style= 'margin:0;'>
 					<tr>
 						<td colspan="2" align="left" bgcolor="#FFFFFF">
 							<table width="100%" border="0" cellpadding="0" cellspacing="0">
@@ -68,17 +77,21 @@
 											<tr>
 												<br>
 												<td>
-												<input type="file" name="addImg"></td>
+												  <input type='file' id="addImg" name="addImg"/></td>
+																						  
 												<td align="left"></td>
 											</tr>
 										</table>
+										<div id='View_area' style='position: relative; width: 100px; height: 100px; color: black; border: 0px solid black; dispaly: inline; margin:0;'>
+						        <img id="image_section2" src="#" alt="미리보기" style='position: relative; width: 250px; height: 200px; color: black; border: 0px solid black; dispaly: inline;'/>
+			         </div>
 									</td>
 								</tr>
 							</table>
 						</td>
 					</tr>
 				</table>
-				
+				  <br><br><br>		
 				<input type="hidden" value=<%=mt.getMtNum() %> name="mtNum">
 
 				<br> <br>
@@ -177,6 +190,41 @@
 	</div>
 </section>
 <script>
+
+//커버사진 미리보기
+function readURL(input) {
+	  if (input.files && input.files[0]) {
+	   var reader = new FileReader();
+	   
+	   reader.onload = function (e) {
+	    $('#image_section1').attr('src', e.target.result);  
+	   }
+	   
+	   reader.readAsDataURL(input.files[0]);
+	   }
+	 }   
+	 
+	 $("#file1").change(function(){
+	    readURL(this);
+	 });
+	 
+  //수업사진 미리보기
+  function readURL2(input) {
+	  if (input.files && input.files[0]) {
+	   var reader = new FileReader();
+	   
+	   reader.onload = function (ee) {
+	    $('#image_section2').attr('src', ee.target.result);  
+	   }
+	   
+	   reader.readAsDataURL(input.files[0]);
+	   }
+	 }   
+	 
+	 $("#addImg").change(function(){
+	    readURL2(this);
+	 });
+
 
        //장르선택 카테고리
       $(function(){

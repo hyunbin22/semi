@@ -157,5 +157,13 @@ public class LectureService {
 		return result;
 	}
 
+		public List<Lecture> lectureAllListByLecNum(int lecNum) {
+		Connection conn= getConnection();
+		List<Lecture> list=dao.lectureAllListByLecNum(conn, lecNum);
+		close(conn);
+		return list;
+	}
+
+
 
 }

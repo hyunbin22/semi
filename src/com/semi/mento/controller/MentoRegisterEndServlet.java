@@ -50,7 +50,7 @@ public class MentoRegisterEndServlet extends HttpServlet {
 		String root=getServletContext().getRealPath("/");
 		System.out.println(root);
 		
-		String saveDir=root+"/upload/mentoUpload";
+		String saveDir=root+"/upload/mento";
 		
 		int maxSize=1024*1024*1024;
 		

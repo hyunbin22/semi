@@ -465,7 +465,7 @@ public class LectureDao {
 				lt.setLecLectureContent(rs.getString("lecLectureContent"));
 				lt.setLectureUpList(new LectureUploadDao().lectureUpList(conn, lecNum));
 				System.out.println(new LectureUploadDao().lectureUpList(conn, lecNum));
-
+				
 			}	
 
 		}catch(SQLException e) {
@@ -530,5 +530,25 @@ public class LectureDao {
 		return result;
 	}
 
-
+	public List<Lecture> lectureAllListByLecNum(Connection conn, int lecNum) {
+		Statement stmt=null;
+		ResultSet rs=null;
+		List<Lecture> list=new ArrayList();
+		String sql="select * from tb_lecture where lecNum="+lecNum;
+		try {
+			stmt=conn.createStatement();
+			rs=stmt.executeQuery(sql);
+			while(rs.next()) {
+				Lecture l=new Lecture();
+				l.setLecWeek(rs.getString("lecWeek"));
+				list.add(l);
+			}
+		}catch(Exception e) {
+			e.printStackTrace();
+		}finally {
+			close(rs);
+			close(stmt);
+		}
+		return list;
+	}
 }
