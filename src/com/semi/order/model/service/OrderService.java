@@ -22,16 +22,18 @@ private OrderDao dao = new OrderDao();
 		Connection conn = getConnection();
 
 		int result = dao.insertOrder(conn, mId, order);
+		int result2=0;
 		
 		System.out.println("서비스 result : "+result);
 		if(result>0) {
 			commit(conn);
-//			int result2 = dao.selectOrder(conn, result).getsNum();
+			result2 = dao.getOnum(conn);
+			System.out.println("OrderService의 result2 :"+result2);
 		} else {
 			rollback(conn);
 		}
 		close(conn);
-		return result;
+		return result2;
 	}
 	
 	//결제 전 신청내역 가져오기

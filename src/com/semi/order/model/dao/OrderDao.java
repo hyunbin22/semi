@@ -32,32 +32,39 @@ public class OrderDao {
 		
 	}
 	
-	//수업신청
-//	public int insertOrder(Connection conn, Order order) {
-//		
-//		PreparedStatement pstmt = null;
-//		String sql = prop.getProperty("insertOrder");
-//		int result = 0;
-//		try {
-//			pstmt = conn.prepareStatement(sql);
-//			pstmt.setString(1, order.getoTot());
-//			pstmt.setInt(2, );
-//			pstmt.setString(3, );
-//			pstmt.setString(4, text);
-//			pstmt.setInt(5, price);
-//			
-//			result = pstmt.executeUpdate();
-//		} catch(SQLException e) {
-//			e.printStackTrace();
-//		} finally {
-//			close(pstmt);
-//		}
-//		return result;
-//
-//		
-//	}
+	// 수업신청
+	public int insertOrder(Connection conn, String mId, Order order) {
+		PreparedStatement pstmt = null;
+		String sql = "insert into tb_order values(seq_order.nextval,(select mnum from tb_member where mid=?),?,?,?,?,default,default,default, null)";
+		int result=0;
+		ResultSet rs =null;
+		System.out.println("dao의 order : "+order);
+		try {
+			
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, mId);
+			pstmt.setInt(2, order.getLecNum());
+			pstmt.setString(3, order.getoTot());
+			pstmt.setString(4, order.getoText());
+			pstmt.setInt(5, order.getoPrice());
+			
+			result=pstmt.executeUpdate();
+			
+		} catch(SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		
+		System.out.println("dao의 result : "+result);
+		
+		return result;
+	}
+	
+	
 
-	//신청 등록 후 신청내용 검색(return sNum)
+
+	//신청 등록 후 신청내용 검색(return oNum)
 	public Order selectOrder(Connection conn, int oNum) {
 
 		PreparedStatement pstmt = null;
@@ -83,6 +90,8 @@ public class OrderDao {
 				
 				order.setLecture(new LectureService().lectureView(rs.getInt("lecNum")));
 				order.setMember(new MemberService().selectMember(rs.getInt("mnum")));
+				
+				System.out.println("Dao의 order :"+order);
 			}
 			
 		} catch(SQLException e) {
@@ -195,31 +204,26 @@ public class OrderDao {
 		return o;
 	}
 
-	public int insertOrder(Connection conn, String mId, Order order) {
-		PreparedStatement pstmt = null;
-		String sql = "insert into tb_order values(seq_order.nextval,(select mnum from tb_member where mid=?),?,?,?,?,default,default,default, null)";
+	// oNum 검색
+	public int getOnum(Connection conn) {
+		Statement stmt = null;
 		int result=0;
-		System.out.println("dao의 order : "+order);
+		ResultSet rs = null;
+		String sql="select seq_order.currval from dual";
 		try {
-			pstmt = conn.prepareStatement(sql);
-			pstmt.setString(1, mId);
-			pstmt.setInt(2, order.getLecNum());
-			pstmt.setString(3, order.getoTot());
-			pstmt.setString(4, order.getoText());
-			pstmt.setInt(5, order.getoPrice());
-			result = pstmt.executeUpdate();
-
-
-		} catch(SQLException e) {
+			stmt=conn.createStatement();
+			rs = stmt.executeQuery(sql);
+			if(rs.next()) {
+				result=rs.getInt(1);
+			}
+		}catch(SQLException e) {
 			e.printStackTrace();
-		} finally {
-			close(pstmt);
+		}finally {
+			close(stmt);
 		}
 		
-		System.out.println("dao의 result : "+result);
 		return result;
 	}
 
-	
 
 }

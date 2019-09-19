@@ -834,7 +834,47 @@ input#apply {
     margin-left:100px;
     margin-top:0px;
     background-color: #f24365;
+    color:white;
+    border-radius: 30px;
 }
+
+/*lectureList floatmenu-radio*/
+.lecFViewTot-group{
+	display: flex;
+	align-items: center;
+	margin-bottom: 2em;
+	position: relative;
+    width: 160px;
+    height: 32px;
+    margin: 10px 20px 30px 20px;
+    background-color: white;
+    color:black;
+    font-weight: 600;
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+.lecFViewTot{
+	display: block;
+	margin-left:20px;
+	margin-right:5px;
+	
+}
+
+.lecFViewTot:checked{
+	background-color:#f24365;
+}
+
+
+/* .lecFViewTot-group input[type="radio"]{
+	
+	position: absolute;
+	opacity: 0;
+	color:black;
+} */
+
+
+
 
 .floatMenu {
 	position: absolute;
@@ -884,6 +924,7 @@ input#apply {
 }
 
 div#select_box {
+
     position: relative;
     width: 160px;
     height: 32px;
@@ -894,6 +935,8 @@ div#select_box {
     border-radius: 10px;
   }
   
+
+  
   div#select_box label {
     position: absolute;
     font-size: 14px;
@@ -902,8 +945,10 @@ div#select_box {
     left: 12px;
     letter-spacing: 1px;
   }
+
   
   div#select_box select#color {
+
     width: 100%;
     height: 32px;
     min-height: 32px;
@@ -1451,18 +1496,20 @@ div.myPage-content-wrap {
     border-radius: 10px;
     font-family: "나눔스퀘어";
     font-weight: 900;
-    
 }
 
-// lectureMemberRegist
+
 #lecMemRegistTable{
+	table-layout: fixed;
 	width: 800px;
 	height:500px;
 }
 
+
 #LecMemRegistTable tr td{
 	padding: 10px;
 	text-align: center;
+	
 }
 
 
@@ -1482,10 +1529,11 @@ div.myPage-content-wrap {
 }
 
 .lecMemRegImage{
-	width:300px;
-	height:300px;
+	width: 200px;
+	height:200px;
 	float:left;
 	align-content: center;
+	margin-left:105px;
 }
 
 .lecMemRegTitle{
@@ -1494,4 +1542,26 @@ div.myPage-content-wrap {
     font-size: 24px;
     font-family: '나눔스퀘어';
 }
+
+.lecType{
+    font-family: "나눔스퀘어";
+    font-weight: 600;
+    font-size: 20px;
+    text-align: center;
+    margin : 10px 0px 10px 0px;
+    color:#f24365;
+}
+
+#orderTalk{
+	text-align: left;
+	font-family: "나눔스퀘어";
+    font-weight: 600;
+    font-size: 20px;
+    text-align: center;
+    color:#f24365;
+}
+
+#oText{
+	width:fit-content;
 	
+}

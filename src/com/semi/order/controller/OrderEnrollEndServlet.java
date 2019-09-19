@@ -45,10 +45,25 @@ public class OrderEnrollEndServlet extends HttpServlet {
 		int mNum = memberLogin.getmNum();
 		String mId = memberLogin.getmId();
 		Order order = new Order(mNum, lecNum, oTot, oText, oPrice);
-		System.out.println("서블릿 order :"+order);
 		int result= new OrderService().insertOrder(order, mId);
 		
+		System.out.println("서블릿 result : "+result);
 		
+	    String msg="";
+	    String loc="";
+	      
+		if(result>0) {
+	         msg="강의신청이 완료됐습니다.";
+	         request.setAttribute("msg", msg);
+	         request.getRequestDispatcher("/member/studyList.do?mNum="+mNum).forward(request, response);
+	      }
+	      else{
+	         msg="강의신청이 실패했습니다.";
+	         loc="/";
+	         request.setAttribute("msg", msg);
+		     request.setAttribute("loc", loc);
+		     request.getRequestDispatcher("/views/common/msg.jsp").forward(request, response);
+	      }
 		
 //		Order order, int mNum, int lecNum, String mId, int price
 		
