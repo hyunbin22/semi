@@ -143,15 +143,15 @@ public class MemberDao {
 	}
 
 	//회원정보수정
-	public int updateMember(Connection conn, String mPw, String mEmail, String mPhone, String mId) {
+	public int updateMember(Connection conn, String mPw, String mEmail, String phone,String mId) {
 		PreparedStatement pstmt=null;
 		int result=0;
 		String sql=prop.getProperty("updateMember");
 		try {
-			pstmt=conn.prepareStatement(sql);
+			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, mPw);
 			pstmt.setString(2, mEmail);
-			pstmt.setString(3, mPhone);
+			pstmt.setString(3, phone);
 			pstmt.setString(4, mId);
 			result=pstmt.executeUpdate();
 		}catch(SQLException e) {

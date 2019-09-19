@@ -40,7 +40,7 @@ public class MemberReportHistoryServlet extends HttpServlet {
 		}
 		int numPerPage=10;
 		ReportService service=new ReportService();
-		int totalReport = service.selectReportCount3(mNum);
+		int totalReport = service.selectReportCount3();
 
 		
 		List<Report> list = new ReportService().reportHistoyry(cPage,numPerPage,mNum);

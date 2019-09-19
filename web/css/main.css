@@ -108,6 +108,7 @@ div#loginmenu2 {
 	width: 450px;
 	top: 190px;
 	margin-left:22.5px;
+	padding: 0px;
 }
 
 input#id, input#pwd {
@@ -119,10 +120,10 @@ input#id, input#pwd {
 
 span#join, span#findId, span#findPw {
 	width: 120px;
-	height: 23px;
+	height: 35px;
 	background-color: #eb9f9f;
 	color: black;
-	margin: 5px;
+	margin: 10px;
 	padding: 5px;
 	text-align: center;
 	display: inline-block;
@@ -1493,5 +1494,36 @@ table.mtStudyList{
     font-weight: 900;
     font-size: 24px;
     font-family: '나눔스퀘어';
+}
+
+/* 마이페이지 css */
+
+.lecture{
+   width: 250px;
+    color: #333;
+     font-weight: 500;
+      font-size: 16px;
+       padding: 14px;
+        font-weight: bold;
+        box-sizing: border-box;
+        margin:0px;
+}
+
+.title2{
+   padding: 12px 15px; font-size: 14px; border-radius: 4px; border: 1px solid #ddd; box-sizing: border-box;
+}
+
+.box{
+   display:flex;
+}
+.lecturebutton{
+       background: #ff005a;
+       color: #fff;
+    padding: 20px 30px;
+    width: 230px;
+    margin: 40px auto;
+    font-size: 16px;
+    border-radius: 6px;
+    text-align: center;
 }
 	

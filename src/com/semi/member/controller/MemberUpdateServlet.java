@@ -33,15 +33,16 @@ public class MemberUpdateServlet extends HttpServlet {
 		String mId=request.getParameter("mId");
 		String mPw = request.getParameter("mPw");
 		String mEmail = request.getParameter("email");
-		String mPhone = request.getParameter("tel1") + request.getParameter("tel2") + request.getParameter("tel3");
+		String phone = request.getParameter("tel1");
+		phone+=request.getParameter("tel2");
+		phone+=request.getParameter("tel3");
 		
-		System.out.println(mId);
-		System.out.println(mPw);
-		System.out.println(mEmail);
-		System.out.println(mPhone);
+		System.out.println(phone);
+
+	
 		
-		int result=new MemberService().updateMember(mPw, mEmail, mPhone, mId);
-		System.out.println(result);
+		int result=new MemberService().updateMember(mPw, mEmail,phone,mId);
+
 		
 		String msg=result>0?"회원수정이 완료되었습니다.":"회원수정을 실패하였습니다.";
 		String loc="/";

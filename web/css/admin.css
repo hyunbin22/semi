@@ -52,6 +52,7 @@ div#EmptyListWrap{
     width: 80px;
     background-color:#eb9f9f;
     color:white;
+    border : none;
 }
 
 header1{

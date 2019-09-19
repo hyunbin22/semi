@@ -23,7 +23,7 @@
                 <form action="<%=request.getContextPath()%>/Report.do?mNum=<%=m.getmNum()%>" method="POST" onsubmit="return checkValue();" enctype="multipart/form-data">
                     <table class="tblreg">
                         <tr>
-                            <td>작성자 ID</td>
+                            <td class = "lecture" colspan = 1>작성자 ID</td>
                             <td>
                                 <%=m.getmId() %>
                             </td>
@@ -34,7 +34,7 @@
                         <tr>
                         </tr>
                         <tr>
-                            <td>신고할 사용자 ID</td>
+                            <td class = "lecture" colspan = 1>신고 대상 ID</td>
                             <td>
                                 <input class="textfield" type="text" name="rId" id = "reportId1" placeholder="신고할 사용자의 ID 입력">
                             </td>
@@ -42,7 +42,7 @@
                         <tr>
                         </tr>
                         <tr>
-                            <td>제목</td>
+                            <td class = "lecture" colspan = 1>제목</td>
                             <td>
                                 <input class="textfield" type="text" name="rTitle" id = "reportTitle1">
                             </td>
@@ -50,20 +50,20 @@
                         <tr>
                         </tr>
                         <tr>
-                            <td>내용</td>
-                            <td>신고 사유를 정확하게 작성해주세요.</td>
+                            <td class = "lecture" colspan = 1>내용</td>
+                            <td><strong>신고 사유를 정확하게 작성해주세요.</strong></td>
                         </tr>
                         <tr>
  							<td>
  							</td>
                             <td>
-                               <textarea id = "reportContent1" name = "rContent" rows="30" cols="50" style="resize: none;" placeholder="날짜 및 상황을 자세하게 작성해주세요."></textarea>
+                               <textarea id = "reportContent1" name = "rContent" rows="30" cols="50" style="resize: none;" placeholder="날짜 및 상황을 자세하게 작성해주세요." class = "title2"></textarea>
                             </td>
                         </tr>
                         <tr>
-                            <td>첨부 파일</td>
+                            <td class = "lecture" colspan = 1>첨부 파일</td>
                             <td>
-                                <input id="reportPhoto1" type="file" name="reportPhoto" onchange="previewImage(this,'View_area')">
+                                <input id="reportPhoto1" type="file" name="reportPhoto" onchange="previewImage(this,'View_area')" class = "title2">
                             </td>
                         </tr>
                         <tr>
