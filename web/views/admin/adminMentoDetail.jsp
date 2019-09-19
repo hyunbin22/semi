@@ -11,7 +11,6 @@
 		<div class="admin-mento-detailwrap">
 			<br><br><h1>멘토 상세보기</h1>
 			<div class="admin-detail-frm-wrap">
-			<form id="admin-mento-detail-frm" method="post" >
 				<input type="hidden" name="mtNum" value="<%=mt.getMtNum()%>" id="mtNum">
 				<div class="mento_info_child">
 					<h1 class="mento-info-title"><%=mt.getMember().getmName()%> (<%=mt.getMember().getmId() %>)</h1>
@@ -61,12 +60,13 @@
 	
 					<%}
 					 }%>
-					
+					<h2>입금받을 은행 / 계좌번호</h2>
+					<p><%=mt.getMtBank() %> / <%=mt.getMtAccountNumber() %></p>
 					<%
 						if (mt.getMtReason() != null) {
 					%>
 					<h2>거절사유</h2>
-					<p><%=mt.getMtReason() %></p>
+					<textarea id="refusalContent" cols="107" rows="5" style="resize: none;" maxlength="100" placeholder="거절사유를 입력하세요."><%=mt.getMtReason() %></textarea>
 	
 					<%
 						}
@@ -77,16 +77,18 @@
 					<%if(temp==1) {%>
 					<div class="appro-btn-wrap">
 						<input type="button" value="승인" class="next" id="btnclassAppro" onclick="checkAppro();">
-						<input type="button" value="거절" class="next" id="btnclassRefusal" onclick="openRefusal();">
+						<button class="next" id="btnclassRefusal" onclick="btnRefusal();">거절</button>
 						<br><br><br>
 					</div>
 					<%} %>
 				</div>
-			</form>
-	
+			
+			<!-- 거절시 보낼 데이터 -->
 			<form name="saveRefusalFrm" method="post">
-				<input type="hidden" name="mtNum" id="inputMtNum">
+				<input type="hidden" name="mtNum" id="inputMtNum" value=<%=mt.getMtNum() %>>
+				<input type="hidden" name="mtLec" value="mt">
 			</form>
+
 			</div>
 		</div>
 	</article>
@@ -95,32 +97,18 @@
 	<%} %>
 </section>
 <script>
-	$(function(){
-		<%if(temp==0) {%>
-			$('#admin-mento-wrap').css('float','none');
-			$('#admin-mento-wrap').addClass('center1');
-			
-		<%} else if(temp==1) {%>
-			$('#btnclassAppro').addClass('mentosubmit');
-			$('#btnclassAppro').addClass('mentosubmit');
-			
-		<%}%>
-	});
 	//거절버튼 눌렀을때
-	function openRefusal(){
-		var mtNum = $("#mtNum").val().trim();
-		var url = "<%=request.getContextPath()%>/mento/mentoRefusalView.do?mtNum="+mtNum;
-		var status = "width=500, height=500, resizable=no, scrollbars=no, status=no;";
-		var title="거절상세"
-		var popUp = open("", title, status);
-		window.name="parentWin";
-		saveRefusalFrm.mtNum.value = mtNum;
-		saveRefusalFrm.target = title;
-		saveRefusalFrm.action=url;
-		saveRefusalFrm.submit();
-
-	};
-
+	function btnRefusal() {
+		var reason = $('#refusalContent').val();
+		if(reason.length > 0) {
+			var url = "<%=request.getContextPath()%>/admin/saveRefusal.do?reason="+reason;
+			saveRefusalFrm.action=url;
+			saveRefusalFrm.submit();
+		} else {
+			alert("거절사유를 입력하세요.");
+		}
+		
+	}
  	function checkAppro(){
 		if(confirm('승인하시겠습니까?')) {
 			var mtNum = <%=mt.getMtNum()%>;

@@ -48,42 +48,35 @@
 							<%
 							for (int i = 0; i < list.size(); i++) {
 							%>
-							<div class="mentoAppro-frm" style="height: 280px">
-								<!-- 멘토목록 -->
-										
-								<div class="card-header mtAppro-name"><%=list.get(i).getMember().getmName()%>
-									(<%=list.get(i).getMember().getmId()%>)
-								</div>
-								<div class="card-body">
-									<table class="tbl-appro">
-										<tr>
-											<td><h5 class="card-title">멘토신청합니다.</h5></td>
-										</tr>
-										<tr>
-											<td rowspan="2"><img
-												src="<%=request.getContextPath()%>/upload/mento/<%=list.get(i).getList().get(0).getUpMentoReName() %>"
-												class="approImg"></td>
-											<td><p class="approDate"><%=list.get(i).getMtaDate()%></p></td>
-											<td>
-												<button type="submit" class="btn btn-primary btn-appro-view"
-													onclick="location.href='<%=request.getContextPath()%>/admin/AdminMentoDetailServlet.do?mtNum=<%=list.get(i).getMtNum()%>'">
-													More</button>
-											</td>
-										</tr>
-									</table>
-								</div>
-							</div>
-							<%
-							}	
-							%>
+							<div class="card appro-frm-wrap" style = "height: 110px;">
+			                     <div class="lectureAppro-frm">
+			                        <!-- 멘토(승인완료)목록 -->
+			                        <div class="card-header mtAppro-name">멘토 ID . [<%=list.get(i).getMember().getmId()%>] &emsp;/&emsp; 멘토승인 날짜 : [<%=list.get(i).getMtHireDate() %>]
+			                        </div>
+			
+			                           <table class="tbl-appro" style = "text-align: center">
+			                              <tr>
+			                                 <td style = "margin-top: 13.5px; margin-left: 10px; text-align: center; width: 150px;"><%=list.get(i).getMtNickName() %></td>
+			                                 <td>
+												<button id ="seeMore" name = "seeMore"  onclick="location.href='<%=request.getContextPath()%>/admin/AdminMentoDetailServlet.do?mtNum=<%=list.get(i).getMtNum()%>'">자세히보기</button>
+			                                 </td>
+			                              </tr>        
+			                           </table>
+									<br>
+			                     </div>
+			                     <%} %>
+			                     <% if(list.size()==0) {%>
+									<div class="card appro-frm-wrap"></div>
+								<%} 
+			                     %>
+		                    <div id="admin-appro-pageBar">
+		         				<%=request.getAttribute("pageBar")%>
+		      				</div>
+		                  </div>
 						</div>
 					</div>
 				</div>
 			</div>
-		</div>
-		<div id="admin-appro-pageBar">
-			<%=request.getAttribute("pageBar")%>
-		</div>
 	<br><br>
 	</article>
 
@@ -103,11 +96,11 @@ $(function(){
 	
 });
 
-	$(function(){
-		if(<%=list.size()%>==0) {
-			alert("조회 결과가 없습니다.");
-		} 		
-	});
+$(function(){
+	if(<%=list.size()%>==0) {
+		alert("조회 결과가 없습니다.");
+	} 		
+});
 
 </script>
 

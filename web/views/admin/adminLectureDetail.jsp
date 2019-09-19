@@ -14,7 +14,6 @@
 		<div class="admin-mento-detailwrap">
 		<br><br><h1>강의 상세보기</h1>
 		<div class="admin-detail-frm-wrap">
-			<form id="admin-mento-detail-frm" method="post">
 			<input type="hidden" name="lecNum" id="lecNum" value="<%=lec.getLecNum()%>">
 			<br>
 			<%for(int i = 0; i < lec.getLectureUpList().size(); i++) {
@@ -58,9 +57,7 @@
 					<%if(temp==2) {%>
 						<p class="refusalinfo">
 							<h2>거절사유</h2>
-							<p>
-								<%=lec.getLecReason() %>
-							</p>
+							<textarea id="refusalContent" cols="107" rows="5" style="resize: none;" maxlength="100" placeholder="거절사유를 입력하세요."><%=lec.getLecReason() %></textarea>
 						</p>
 					<%} %>
 				</div>
@@ -68,15 +65,17 @@
 			<%if(temp!=0) {%>
 			<div class="appro-btn-wrap">
 				<button type="submit" class="next" id="btnclassAppro" onclick="checkAppro();">승인</button>
-				<button class="next" id="btnclassRefusal" onclick="popOpen();">거절</button>
+				<button class="next" id="btnclassRefusal" onclick="btnRefusal();">거절</button>
 			<br><br><br>
 			</div>
 			<%} %>
+			
+			<!-- 거절시 보낼 데이터 -->
+			<form name="saveRefusalFrm" method="post">
+				<input type="hidden" name="lecNum" id="inputlecNum" value=<%=lec.getLecNum() %>>
+				<input type="hidden" name="mtLec" value="lec">
 			</form>
 			
-			<form name="saveRefusalFrm" method="post">
-				<input type="hidden" name="lecNum" id="inputlecNum">
-			</form>
 			<button class="mentosubmit" id="sendMessage">문의하기</button>
 			
 			<form name="openMessageFrm" method="post">
@@ -93,29 +92,19 @@
 	<%} %>
 </section>
 	<script>
-		$(function(){
-			<%if(temp==0) {%>
-				$('#admin-mento-wrap').css('float','none');
-				$('#admin-mento-wrap').addClass('center1');
+		
+		function btnRefusal() {
+			var reason = $('#refusalContent').val();
+			if(reason.length > 0) {
+				var url = "<%=request.getContextPath()%>/admin/saveRefusal.do?reason="+reason;
+				saveRefusalFrm.action=url;
+				saveRefusalFrm.submit();
 				
-			<%} else {%>
-				$('#btnclassAppro').addClass('mentosubmit');
-				$('#btnclassAppro').addClass('mentosubmit');
-				
-			<%}%>
-		});
-        function popOpen(){
-    		var lecNum = $("#lecNum").val().trim();
-    		var url = "<%=request.getContextPath()%>/lecture/lectureRefusalView.do?lecNum="+lecNum;
-    		var status = "width=500, height=500, resizable=no, scrollbars=no, status=no;";
-    		var title="거절상세"
-    		var popUp = open("", title, status);
-    		window.name="parentWin";
-    		saveRefusalFrm.lecNum.value = lecNum;
-    		saveRefusalFrm.target = title;
-    		saveRefusalFrm.action=url;
-    		saveRefusalFrm.submit();
-		};
+			} else {
+				alert("거절사유를 입력하세요.");
+			}
+			
+		}
 		
 		function checkAppro() {
 			if(confirm('승인하시겠습니까?')){
