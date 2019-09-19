@@ -94,10 +94,10 @@
                             </td>
                         </tr>
                         <tr class = "notice-top">
-                        <td colspan="1">
+                        <td colspan="2">
                         	ID 사용정지 처리 :
                         </td>
-                        <td colspan="3">
+                        <td colspan="2">
                         
                         <%if(rp2.getMember().getmUse() != 'Y'){ %>
                         	이용정지 O

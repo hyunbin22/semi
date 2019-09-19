@@ -139,11 +139,11 @@ public class ReportDao {
 		}return result;
 	}
 	
-	public int selectReportCount3(Connection conn, int mNum) {
+	public int selectReportCount3(Connection conn) {
 		Statement stmt=null;
 		ResultSet rs=null;
 		int result=0;
-		String sql="select count(*) from tb_report where mreporter_num = '" + mNum + "'";
+		String sql="select count(*) from tb_report";
 		try {
 			stmt=conn.createStatement();
 			rs=stmt.executeQuery(sql);

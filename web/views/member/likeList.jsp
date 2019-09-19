@@ -38,7 +38,7 @@
 					</tr>
 					<%} %>
                     </table>
-                 <br>
+                 <br><br>
 			 	<%if(count > 0){ %>
 					<div id="admin-appro-pageBar">
          				<%=request.getAttribute("pageBar")%>

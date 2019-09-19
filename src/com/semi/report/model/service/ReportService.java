@@ -72,9 +72,9 @@ public class ReportService {
 		return result;
 	}
 	
-	public int selectReportCount3(int mNum) {
+	public int selectReportCount3() {
 		Connection conn=getConnection();
-		int result=dao.selectReportCount3(conn,mNum);
+		int result=dao.selectReportCount3(conn);
 		close(conn);
 		return result;
 	}

@@ -14,49 +14,49 @@
                 <form action="member/memberUpdate.do" method="POST" id = "memberFrm" onsubmit="return checkValue();">
                    <table class="tblreg center1">
 					<tr>
-						<td colspan="1">아이디</td>
-						<td><%=m.getmId() %></td>
+						<td colspan="2" class = "lecture">아이디</td>
+						<td ><%=m.getmId() %></td>
 						<td></td>
 						<td></td>
 					</tr>
 					<tr>
-						<td colspan="1">비밀번호 변경</td>
-						<td><input class="textfield" type="password" name="mPw"
+						<td colspan="2" class = "lecture">비밀번호 변경</td>
+						<td><input class="textfield title2" type="password" name="mPw"
 							id="newPw" placeholder="변경하실 비밀번호를 입력해주세요" required></td>
 						<td></td>
 						<td></td>
 					</tr>
 					<tr>
-						<td colspan="1">비밀번호 재입력</td>
-						<td><input class="textfield" type="password" name="userPwd2"
+						<td colspan="2" class = "lecture">비밀번호 재입력</td>
+						<td><input class="textfield title2" type="password" name="userPwd2"
 							id="newPw2" placeholder="" required></td>
 						<td></td>
 						<td></td>
 					</tr>
 					<tr>
-						<td colspan="1">이메일 변경</td>
-						<td><input class="textfield" type="email" name="email"
+						<td colspan="2" class = "lecture">이메일 변경</td>
+						<td><input class="textfield title2" type="email" name="email"
 							id="email" placeholder="변경하실 이메일을 입력해주세요" required></td>
 							<td></td>
 					</tr>
 					<tr>
-						<td colspan='1'>연락처</td>
+						<td colspan='2' class = "lecture">연락처</td>
 						<td><%=m.getmPhone() %></td>
 						<td><button class = "next" onclick = "seeChangePhone();">연락처 변경</button></td>
 					</tr>
 					</table>
 					<table id = "changePhone1" style = "visibility: collapse;" class="tblreg center1">
 					<tr>
-						<td colspan='1'>변경할 연락처</td>
+						<td colspan='1' class = "lecture">변경할 연락처</td>
 						<td>
-							<input type="text" name="tel1" id="tel1" class="phone" list="data" required> - 
+							<input type="text" name="tel1" id="tel1" class="phone title2" list="data" required> - 
 							<datalist id="data">
 								<option value="010"></option>
 								<option value="011"></option>
 								<option value="019"></option>
 							</datalist> 
-							<input type="text" name="tel2" id="tel2" class="phone" maxlength=4 required> - 
-							<input type="text" name="tel3" id="tel3" class="phone" maxlength=4 required>
+							<input type="text" name="tel2" id="tel2" class="phone title2" maxlength=4 required> - 
+							<input type="text" name="tel3" id="tel3" class="phone title2" maxlength=4 required>
 						</td>
 					</tr>
 					<tr>
@@ -64,8 +64,8 @@
 						<td><input type="button" value="인증번호받기" class="inputbtn" id="sendSms"></td>
 					</tr>
 					<tr>
-						<td colspan='1'>인증번호</td>
-						<td><input class="textfield" type="text" name="number"
+						<td colspan='1' class = "lecture">인증번호</td>
+						<td><input class="textfield title2" type="text" name="number"
 							placeholder="인증번호를 입력해주세요" id="checkNum"></td>
 						<td></td>
 					</tr>

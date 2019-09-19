@@ -8,6 +8,7 @@
     	List<Report> rp = (List)request.getAttribute("reportHistory");
 		int cPage=(int)request.getAttribute("cPage");
 		String pageBar=(String)request.getAttribute("pageBar");
+		int count = 0;
     %>
 	<section class = "center1">
             <div class="wrap">
@@ -42,11 +43,19 @@
                             <td class = "listCheck"><%=rp.get(i).getReportCheck() %></td>
                             <td class = "listCheck"><button id ="seeMore" name = "seeMore"  onclick="location.href='<%=request.getContextPath()%>/member/seeReport?reportTitle=<%=rp.get(i).getReportTitle()%>'">자세히</button></td>
                         </tr>
-                    <%} %>
+                    <% count++;} %>
+                    <%if(count == 0){ %>
+					<tr class = "list">
+					<td colspan="5">신청한 강의 목록이 없습니다.</td>
+					</tr>
+					<%} %>
                     </table>
-                    <div id="admin-appro-pageBar" class = "center1">
+                    <br><br>
+			 	<%if(count > 0){ %>
+					<div id="admin-appro-pageBar">
          				<%=request.getAttribute("pageBar")%>
       				</div>
+      			<%} %>
                 </div>
                 </div>
     </section>
