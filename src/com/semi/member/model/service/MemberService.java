@@ -88,9 +88,9 @@ public class MemberService {
 	}
 
 	//회원 수정
-	public int updateMember(String mPw , String mEmail, String mId) {
+	public int updateMember(String mPw , String mEmail, String phone, String mId) {
 		Connection conn= getConnection();
-		int result=dao.updateMember(conn,mPw,mEmail, mId);
+		int result=dao.updateMember(conn,mPw,mEmail, phone, mId);
 		if(result>0) 
 		{
 			commit(conn);
