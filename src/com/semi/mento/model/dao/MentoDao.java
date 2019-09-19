@@ -41,7 +41,6 @@ public class MentoDao {
 		String sql=prop.getProperty("registerMento");
 		try {
 			pstmt=conn.prepareStatement(sql);
-			System.out.println("m.getmNum() : "+m.getmNum());
 			pstmt.setInt(1, m.getmNum());
 			pstmt.setString(2, mt.getMtNickName());
 			pstmt.setString(3, mt.getMtHowConfirm());
