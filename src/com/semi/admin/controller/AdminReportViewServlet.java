@@ -43,6 +43,8 @@ public class AdminReportViewServlet extends HttpServlet {
 		request.setAttribute("reportUp", rpu);
 		request.setAttribute("report", rp);
 		request.setAttribute("report2", rp2);
+		
+		System.out.println(reportNo + " / " + " / " + rp + " / " + rpu + " / " + rp2);
 
 		request.getRequestDispatcher("/views/admin/reportView.jsp").forward(request, response);
 		

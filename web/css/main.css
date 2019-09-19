@@ -758,7 +758,7 @@ input#apply {
 
 .detailimg{
     width:500px;
-    height:300px;
+    height:500px;
 }
 
 .pricewrap{
@@ -849,7 +849,7 @@ input#apply {
 	width: 200px;
     height: 740px;
     /* top:52%; */
-    margin-top: 50px;
+    margin-top: -250px;
     margin-left:100px;
 	background-color: #f24365;
     color: #fff;
@@ -899,6 +899,7 @@ div#select_box {
     background-color: black;
     color:white;
     font-weight: 600;
+    border-radius: 10px;
   }
   
   div#select_box label {
@@ -1279,5 +1280,218 @@ table.mtStudyList{
 } */
 
 
+.LectureMainFrame{
+	width:1024px;
+	heigth:1600px;
+	border-left:340px;
+}
 
 
+
+.lectureFix{
+    position:fixed;
+    width:200px;
+    height:400px;
+    top:10px;
+    margin-left:40px;
+    margin-top:0px;
+    background-color: #f24365;
+    color:#fff;
+    border-radius: 30px;
+}
+
+
+.lectureFix div select {
+    position: relative;
+    width: 160px;
+    height: 32px;
+    margin-top: 10px;
+    margin-bottom: 15px;
+    margin-left: 20px;
+    border: 0px;
+    border-radius: 10px;
+    font-family: "나눔스퀘어";
+    font-weight: 900;
+}
+
+.width100{
+	width:100%;
+}
+
+.lectureFloatMenu {
+	position: absolute;
+	width: 200px;
+    height: 400px;
+    /* top:52%; */
+    margin-top: 50px;
+    margin-left:40px;
+	background-color: #f24365;
+    color: #fff;
+    border-radius: 30px;
+}
+
+.lectureFloatTitle{
+    text-align: center;
+    margin : 20px 10px 10px 10px;
+    font-size: 30px;
+    font-weight: 900;
+    font-family: "나눔스퀘어";
+}
+
+.lectureSubmit{
+    width: 100px;
+    height: 30px;
+    margin-left: 50px;
+    background-color: black;
+    color: white;
+    font-weight: 900;
+    border: 0px;
+    border-radius: 20px;
+}
+
+.lectureFloatTitle hr{
+    display: block;
+    border: white 0 none;
+    border-top:5px solid white;
+    height: 10px;
+    border-radius: 5px;
+    
+}
+
+.lectureFloatsubtitle{
+    margin-left: 20px;
+    font-family: "나눔스퀘어";
+    font-weight: 600;
+    font-size: 20px;
+}
+
+
+.lectureFloatMenu div select{
+	position: relative;
+	width: 160px;
+	height: 32px;
+	margin-top:10px;
+	margin-bottom:15px;
+	margin-left:20px;
+	border:0px;
+	border-radius:10px;
+	font-family: "나눔스퀘어";
+	font-weight: 900;
+}
+
+.lectureFloatMenu div selecet option{
+	margin-left:10px;
+}
+
+.lectureListText{
+	color: #f24365;
+    font-weight: 900;
+    font-size: 36px;
+    font-family: '나눔스퀘어';
+    text-align: center;
+    margin-left: 40px;
+    margin-top: -300px;
+    margin-bottom: 10px;
+}
+
+.lectureTable {
+	font-family: Arial, Helvetica, sans-serif;
+	display: block;
+	float: left;
+	cursor: pointer;
+	position: relative;
+	width:341.3px;
+	height: 560px;
+	border: solid #a79c8e 0.3px;
+	border-collapse: collapse;
+
+}
+
+.lectureTable:nth-child(2n-1) {
+	margin-left: 260px;
+}
+
+.lectureTable:nth-child(2n){
+	margin-left: 10px;
+}
+
+.img300px{
+	weight:340px;
+	height:340px;
+}
+
+.lectureListName{
+	text-align:center;
+	padding: 5%;
+	font-weight: 900;
+	color: #f24365;
+	font-size: 24px;
+}
+
+.page1{
+	
+	min-height:22px;
+	text-align:center;
+	color:white;
+	font-weight: 500;
+}
+
+.page{
+	display:inline-block;
+	padding: 8px 0 6px;
+	vertical-align: top;
+}
+
+#select_box select {
+	position: relative;
+    width: 160px;
+    height: 32px;
+    margin-bottom: 15px;
+    border: 0px;
+    border-radius: 10px;
+    font-family: "나눔스퀘어";
+    font-weight: 900;
+    
+}
+
+// lectureMemberRegist
+#lecMemRegistTable{
+	width: 800px;
+	height:500px;
+}
+
+#LecMemRegistTable tr td{
+	padding: 10px;
+	text-align: center;
+}
+
+
+.lecMemRegButton{
+	width: 800px;
+    height: 40px;
+    font-size:24px;
+    background-color: #f24365;
+    color: white;
+    font-weight: 900;
+    border: 0px;
+    border-radius: 20px;
+}
+
+.lecMemRegButton:hover{
+	text-shadow: 0px 0px 3px white;
+}
+
+.lecMemRegImage{
+	width:300px;
+	height:300px;
+	float:left;
+	align-content: center;
+}
+
+.lecMemRegTitle{
+    color: #f24365;
+    font-weight: 900;
+    font-size: 24px;
+    font-family: '나눔스퀘어';
+}
+	

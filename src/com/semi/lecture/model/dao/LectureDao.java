@@ -174,6 +174,7 @@ public class LectureDao {
 		return list;
 	}
 
+
 	//강의 상세보기
 	public Lecture lectureView(Connection conn, int lecNum) {
 

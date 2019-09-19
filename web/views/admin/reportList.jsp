@@ -3,9 +3,10 @@
 <%@ include file="/views/common/adminHeader.jsp"%>
 <%@ page
    import="com.semi.report.model.vo.Report, com.semi.mento.model.vo.Mento, java.util.*"%>
-   <% List<Report> list = (List)request.getAttribute("list"); 
+   <% 	List<Report> list = (List)request.getAttribute("list"); 
 		int cPage=(int)request.getAttribute("cPage");
 		String pageBar=(String)request.getAttribute("pageBar");
+		int count = 0;
    %>
    <%@ include file="/views/common/adminAside.jsp"%>
 <section>
@@ -35,7 +36,10 @@
                            </table>
 						<br>
                      </div>
-                     <% }  %>
+                     <% count++;}  if(count==0) {
+							%>
+						<div class="card appro-frm-wrap"></div>
+					<%} %>
                     <div id="admin-appro-pageBar">
          				<%=request.getAttribute("pageBar")%>
       				</div>
@@ -48,5 +52,14 @@
 
 </div>
 </section>
+
+<script>
+$(function(){
+	if(<%=count%>==0) {
+		alert("조회 결과가 없습니다.");
+			
+	}
+});
+</script>
 
 <%@ include file="/views/common/adminFooter.jsp"%>
