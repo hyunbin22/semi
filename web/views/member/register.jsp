@@ -60,7 +60,6 @@
 					<tr>
 						<td>휴대폰번호</td>
 						<td>
-							<!-- <input placeholder="01012345678(-제외)" id="phone_number" class="textfield"/> -->
 							<input type="text" name="tel1" id="tel1" class="phone" list="data" required> - 
 							<datalist id="data">
 								<option value="010"></option>
@@ -95,57 +94,9 @@
 	</div>
 </section>
 <script>
-	//핸드폰 번호 인증 facebook
-	  // initialize Account Kit with CSRF protection
-/* 	  AccountKit_OnInteractive = function(){
-	    AccountKit.init(
-	      {
-	    	debug:true,
-	        appId:2351518755115588, 
-	        state:"12345", 
-	        version:"v1.1",
-	        fbAppEventsEnabled:true,
-	        redirect:""
-	      }
-	    );
-	  };
-	
-	  // login callback
-	  function loginCallback(response) {
-	    if (response.status === "PARTIALLY_AUTHENTICATED") {
-	      var code = response.code;
-	      var csrf = response.state;
-	      $('#phone_number').readOnly=true;
-	      console.log(code);
-	      console.log(scrf);
-	    }
-	    else if (response.status === "NOT_AUTHENTICATED") {
-	    	alert("정상적인 방법이 아닙니다.");
-			$("input[name=phone_number]").val("");
-	    }
-	    else if (response.status === "BAD_PARAMS") {
-	    	alert("정상적인 방법이 아닙니다.");
-			$("input[name=phone_number]").val("");
-	    }
-	  }
-	
-	  // phone form submission handler
-	  function smsLogin() {
-	    var countryCode = "+82";
-	    var phoneNumber = document.getElementById("phone_number").value;
-	    console.log(phoneNumber);
-	    AccountKit.login('PHONE', 
-	      {
-	    	countryCode: countryCode, 
-	      	phoneNumber: phoneNumber
-	      }, // will use default values if not specified
-	      loginCallback
-	    );
-	  } */
-
 	var count = 0;	//핸드폰인증이 됐는지 확인
 	  //핸드폰번호 인증
-	<%-- $(function(){
+	$(function(){
 		var key = "";
 		$('#sendSms').click(function(){
 			var tel1 = $('#tel1').val();
@@ -196,7 +147,7 @@
 			} 
 			
 		});
-	});	//핸드폰번호 인증 끝 --%> 
+	});	//핸드폰번호 인증 끝 
 	
 
 	
@@ -380,11 +331,11 @@
 		}
 		
 		//핸드폰인증을 진행하지 않았을때
-/* 		if(count!=1) {
+ 		if(count!=1) {
 			alert("핸드폰번호 인증을 진행해주세요.");
 			$('#checkNum').focus();
 			return false;
-		} */
+		}
 		return true;
 	};
 	//전화번호 체크

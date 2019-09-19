@@ -70,6 +70,11 @@ public class AdminMentoApprovalServlet extends HttpServlet {
 					"/admin/AdminMentoApproval.do?cPage="+(pageNo)+">[다음]</a>";
 		}
 		
+		for(int i = 0; i < mentoList.size(); i++) {
+			System.out.println("멘토 업로드 확인 : " + i + "번째 " +  mentoList.get(i).getList());
+		}
+		
+		
 		//view페이지에 데이터 전송
 		request.setAttribute("pageBar", pageBar);
 		request.setAttribute("cPage", cPage);

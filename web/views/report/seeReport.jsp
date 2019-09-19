@@ -24,7 +24,7 @@
                         </td>
                         <td class="notice-date"><%=rp.getReportDate() %></td>
                        	<td class="notice-title"><%=rp.getReportTitle() %></td>
-                        <td class="notice-id"><%=rp.getMember().getmId() %></td>
+                        <td class="notice-id"><%=m.getmId()%></td>
                         <tr>
                         <td colspan = "4"><hr></td>
                         </tr>
