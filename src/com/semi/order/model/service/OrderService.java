@@ -17,20 +17,22 @@ public class OrderService {
 	
 private OrderDao dao = new OrderDao();
 	
-//	수업신청
-//	public int insertAppForClass(Order order) {
-//		Connection conn = getConnection();
-//
-//		int result = dao.insertOrder(conn, order);
-//		if(result>0) {
-//			commit(conn);
-//			result = dao.selectOrder(conn, lecNum, mId, price).getsNum();
-//		} else {
-//			rollback(conn);
-//		}
-//		close(conn);
-//		return result;
-//	}
+	//수업신청
+	public int insertOrder(Order order, String mId) {
+		Connection conn = getConnection();
+
+		int result = dao.insertOrder(conn, mId, order);
+		
+		System.out.println("서비스 result : "+result);
+		if(result>0) {
+			commit(conn);
+//			int result2 = dao.selectOrder(conn, result).getsNum();
+		} else {
+			rollback(conn);
+		}
+		close(conn);
+		return result;
+	}
 	
 	//결제 전 신청내역 가져오기
 	public Order noPayOrder(int oNum) {

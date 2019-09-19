@@ -465,7 +465,6 @@ public class LectureDao {
 				lt.setLecMentoContent(rs.getString("lecMentoContent"));
 				lt.setLecLectureContent(rs.getString("lecLectureContent"));
 				lt.setLectureUpList(new LectureUploadDao().lectureUpList(conn, lecNum));
-				System.out.println(new LectureUploadDao().lectureUpList(conn, lecNum));
 
 			}	
 

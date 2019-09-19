@@ -29,15 +29,15 @@ public class OrderEnrollServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-	      String lectureNo = request.getParameter("lecnum");
-	      String days = request.getParameter("day");
+		String lectureNo = request.getParameter("lecnum"); // 강의번호
+	      String days = request.getParameter("day"); // 요일
+	      String lecTot = request.getParameter("lectot"); // 시간
 	      Lecture lec=new LectureService().selectLecture(lectureNo);
-	      
-	      System.out.println("lecMemreg 서블릿 lec : "+lec);
 	      
 	      request.setAttribute("day", days);
 	      request.setAttribute("lecture", lec);
-	      request.getRequestDispatcher("/views/lecture/lectureMemberRegist.jsp").forward(request, response);
+	      request.setAttribute("lecTot", lecTot);
+	      request.getRequestDispatcher("/views/lecture/orderEnroll.jsp").forward(request, response);
 	}
 
 	/**

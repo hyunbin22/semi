@@ -195,5 +195,31 @@ public class OrderDao {
 		return o;
 	}
 
+	public int insertOrder(Connection conn, String mId, Order order) {
+		PreparedStatement pstmt = null;
+		String sql = "insert into tb_order values(seq_order.nextval,(select mnum from tb_member where mid=?),?,?,?,?,default,default,default, null)";
+		int result=0;
+		System.out.println("dao의 order : "+order);
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, mId);
+			pstmt.setInt(2, order.getLecNum());
+			pstmt.setString(3, order.getoTot());
+			pstmt.setString(4, order.getoText());
+			pstmt.setInt(5, order.getoPrice());
+			result = pstmt.executeUpdate();
+
+
+		} catch(SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		
+		System.out.println("dao의 result : "+result);
+		return result;
+	}
+
+	
 
 }

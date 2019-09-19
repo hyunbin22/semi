@@ -7,8 +7,11 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
-import com.semi.lecture.model.service.LectureService;
+import com.semi.member.model.vo.Member;
+import com.semi.order.model.service.OrderService;
+import com.semi.order.model.vo.Order;
 
 /**
  * Servlet implementation class OrderEnrollEndServlet
@@ -29,8 +32,25 @@ public class OrderEnrollEndServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+		HttpSession session = request.getSession();
+		Member memberLogin = (Member) session.getAttribute("loginMember");
+		
+//		int mNum = Integer.parseInt(request.getParameter("mNum"));
+		int lecNum = Integer.parseInt(request.getParameter("lecNum"));
+		String oTot = request.getParameter("oTot");
+		String oText = request.getParameter("oText");
+		System.out.println("서블릿 oText : "+oText);
+		int oPrice = Integer.parseInt(request.getParameter("oPrice"));
+		int mNum = memberLogin.getmNum();
+		String mId = memberLogin.getmId();
+		Order order = new Order(mNum, lecNum, oTot, oText, oPrice);
+		System.out.println("서블릿 order :"+order);
+		int result= new OrderService().insertOrder(order, mId);
 		
 		
+		
+//		Order order, int mNum, int lecNum, String mId, int price
 		
 	}
 

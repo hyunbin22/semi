@@ -203,19 +203,18 @@
 
       <div class="wrap">
          <div class="floatMenu">
-            <form action="<%=request.getContextPath()%>/lecture/OrderEnroll.do?lecnum=<%=lec.getLecNum() %>"
-      method="post" enctype="multipart/form-data">
+            <form action="<%=request.getContextPath()%>/lecture/OrderEnroll.do"
+      method="post" >
+      <input type="hidden" value="<%=lec.getLecNum()%>" name="lecnum">
             <div class="floatTitle">
                결제
                <hr>
             </div>
             <div class="floatsubtitle">수업시간</div>
             <div id="select_box">
-               <li>
-               		<ol value="<%=lec.getLecTot()%>"><%=lec.getLecTot() %></ol>
-               		<ol value="<%=lec.getLecTot2()%>"><%=lec.getLecTot2() %></ol>
-               	
-               </li>
+               <input name="lectot" type="radio" value="<%=lec.getLecTot()%>"><%=lec.getLecTot() %><br>
+               <input name="lectot" type="radio" value="<%=lec.getLecTot2()%>"><%=lec.getLecTot2()%>
+               
                <!-- <select id="color" title="select color">
                         <option selected="selected">asdf</option>
                     </select> -->
@@ -233,10 +232,10 @@
             <div class="floatsubtitle">요일</div>
             <div id="select_box">
             	<select id="week" name="day">
-            		<option value="<%=lec.getLecWeek() %>"><%=lec.getLecWeek() %></option>
-            		<%-- <%for (int i=0; i<vars.length;i++){ %>
+            		<%-- <option value="<%=lec.getLecWeek() %>"><%=lec.getLecWeek() %></option> --%>
+            		<%for (int i=0; i<vars.length;i++){ %>
             		<option value="<%=vars[i]%>"><%=vars[i]%></option>
-            		<%} %> --%>
+            		<%} %>
             	</select>
             </div>
             
