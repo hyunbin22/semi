@@ -85,6 +85,83 @@
          frm.attr("action",url);
          frm.submit();
          }
-        </script>
+     
+
+     function enrollMento(){
+         var frm=$('#mentoFrm');
+         var url="<%=request.getContextPath()%>/mento/mentoRegisterEnd.do?mNum=<%=m.getmNum()%>";
+         frm.attr("action",url);
+         frm.submit();
+         }
+        
+     // 빈칸 체크
+     function checkNull(){
+        
+        var profile =$('#profile');
+        var nick=$('#nick');
+        
+        // 대학인증, 신분증인증
+        var school1=$('#school1');
+        var school2=$('#school2');
+        
+        // 학교, 학과
+        var school3=$('#school3');
+        var school4=$('#school4');
+        
+        // 재학, 졸업
+        var school5=$('#school5');
+        var school6=$('#school6');
+        
+        // 신분인증사진
+        var photo=$('#photo');
+        
+        // 은행, 계좌번호
+        var bank=$('#bank');
+        var accountNumber=$('#accountNumber');
+        
+        if(profile.val()==null){
+           alert('프로필 사진을 등록하세요.');
+           profile.focus();
+           return false;
+        }
+        if(nick.val().length()<2){
+           alert('닉네임은 2글자 이상 가능합니다.');
+           nick.focus();
+           return false;
+        }
+        if(school1.val()==null&&school2.val()==null){
+           alert('인증방법을 선택하세요.');
+           return false;
+        }
+        if(school3.val()==null){
+           alert('학교를 입력하세요.');
+           school3.focus();
+           return false;
+        }
+        if(school4.val()==null){
+           alert('학과를 입력하세요.');
+           scholl4.focus();
+           return false;
+        }
+        if(school5.val()==null&&school6.val()==null){
+           alert('재학 혹은 졸업을 선택하세요.');
+           return false;
+        }
+        if(photo.val()=null){
+           alert('신분인증사진을 등록하세요.')
+           return false;
+        }
+        if(bank.val()=null){
+           alert('은행을 선택하세요.');
+           return false;
+        }
+        if(accountNumber()==null){
+           alert('계좌번호를 선택하세요.');
+           return false;
+        }
+        
+        return true;
+     }
+       </script>
 </section>
 <%@ include file="/views/common/footer.jsp"%>

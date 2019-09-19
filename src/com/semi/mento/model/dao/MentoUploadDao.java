@@ -84,8 +84,9 @@ private Properties prop = new Properties();
 
 		//프로필 사진 불러오기
 		public List<MentoUpload> mentoUpProList(Connection conn, int mtNum) {
+
 			PreparedStatement pstmt = null;
-			String sql = prop.getProperty("mentoUpProList");
+			String sql = "select * from tb_upload_mento where mtnum=? and up_mento_category='profile'";
 			List<MentoUpload> list = new ArrayList();
 			ResultSet rs = null;
 			try {
@@ -109,7 +110,9 @@ private Properties prop = new Properties();
 			} finally {
 				close(rs);
 				close(pstmt);
-			} return list;
+			} 
+			
+			return list;
 		}
 
 		//여러개 들어오는 자격증
