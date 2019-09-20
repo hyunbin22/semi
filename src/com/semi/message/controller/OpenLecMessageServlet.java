@@ -25,7 +25,7 @@ public class OpenLecMessageServlet extends HttpServlet {
 		String lecName = request.getParameter("lectureName");
 		request.setAttribute("toId", toId);
 		request.setAttribute("lecName", lecName);
-		request.getRequestDispatcher("/views/common/webMessageView.jsp?toId="+toId).forward(request, response);;
+		request.getRequestDispatcher("/views/common/webMessageView.jsp?toId="+toId).forward(request, response);
 		
 	}
 

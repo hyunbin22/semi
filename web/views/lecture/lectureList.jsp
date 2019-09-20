@@ -49,13 +49,14 @@
 
             <script>
             
+            
+            
+            
             $(window).scroll(function() {
-               if ($(window).scrollTop() > 420) {
-            	   console.log($(window).scrollTop());
+               if ($(window).scrollTop() > 360) {
                   $('.lectureFloatMenu').addClass("lectureFix");
                   $('.lectureFloatMenu').addClass("right");
                   $('.lectureFloatMenu').removeClass("lectureFloatMenu");
-
                } else {
                   $('.lectureFix').addClass("lectureFloatMenu");
                   $('.lectureFix').removeClass("lectureFix");
@@ -96,6 +97,18 @@
             		});
             	});
             });
+            
+           <%--  $("#subCategory").click(function(){
+            	$.ajax({
+            		url : "<%=request.getContextPath()%>/selectSubCategory?subNum="$("#subCategory").val(),
+            		type : "post",
+            		dataType:"html",
+            		successfunction(data){
+            			console.log(data);
+            		}
+            	});
+            }); --%>
+            
                $(function() {
                   var select = $("select#color");
 
@@ -148,9 +161,8 @@
             </tr>
             <tr>
                 <td colspan="4" class="classinfo">
-
-                    멘토사진 
-
+				<%=lec.getLecMento().getMtNickName() %>
+				<br><br>
                     <hr>
                     
                 </td>

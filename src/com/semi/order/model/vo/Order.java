@@ -25,6 +25,12 @@ public class Order {
 		// TODO Auto-generated constructor stub
 	}
 
+	
+	
+	
+
+
+
 	public Order(int oNum, int mNum, int lecNum, String oTot, String oText, int oPrice, char oPayment, char oCheck,
 			Lecture lecture, Member member, Date orderDate, Date payDate) {
 		super();

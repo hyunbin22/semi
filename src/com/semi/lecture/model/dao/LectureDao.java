@@ -371,12 +371,16 @@ public class LectureDao {
 				lec.setLecType(rs.getString("lectype"));
 				lec.setLecPrice(rs.getInt("lecprice"));
 				lec.setMtNum(rs.getInt("mtnum"));
+				lec.setLecMeet(rs.getString("lecmeet"));
 
 				LectureUpload lecUp = new LectureUploadDao().lectureUpCover2(conn, rs.getInt("lecnum"));
+				Mento m = new MentoDao().mentoView(conn, rs.getInt("mtnum"));
+				lec.setLecMento(m);
 				lec.setLectureUpload(lecUp);
 				lecturelist.add(lec);
 
 			}
+			
 		}catch(Exception e) {
 			e.printStackTrace();
 		}finally {

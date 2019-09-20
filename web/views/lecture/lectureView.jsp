@@ -4,31 +4,30 @@
 <%@ page import="com.semi.lecture.model.vo.LectureReview"%>
 <%@ page import="java.util.List"%>
 <%
-   Lecture lec = (Lecture) request.getAttribute("lecture");
-
-   List<LectureReview> list = (List) request.getAttribute("list");
-	
-   String coverImage = "";
-   String profileImage = "";
+	Lecture lec = (Lecture) request.getAttribute("lecture");
+	Member m = null;
+	if (session.getAttribute("loginMember") != null) {
+		m = (Member) session.getAttribute("loginMember");
+	}
+	System.out.println("View m :" + m);
+	List<LectureReview> list = (List) request.getAttribute("list");
+	String toId = lec.getLecMento().getMember().getmId();
+	String coverImage = "";
+	String profileImage = "";
 	String lectureImage[] = null;
-   for(int i=0;i<lec.getLectureUpList().size();i++){
-		if(lec.getLectureUpList().get(i).getUpLectureCategory().equals("cover")){
+	for (int i = 0; i < lec.getLectureUpList().size(); i++) {
+		if (lec.getLectureUpList().get(i).getUpLectureCategory().equals("cover")) {
 			coverImage = lec.getLectureUpList().get(i).getUpLectureReName();
-		}/* else if (lec.getLectureUpList().get(i).getUpLectureCategory().equals("lecimage")){
+		} /* else if (lec.getLectureUpList().get(i).getUpLectureCategory().equals("lecimage")){
 			lectureImage[i] = lec.getLectureUpList().get(i).getUpLectureReName();
-		} */
-		else if(lec.getLecMento().getList().get(i).getUpMentoCategory().equals("profile")){
+			} */
+		else if (lec.getLecMento().getList().get(i).getUpMentoCategory().equals("profile")) {
 			profileImage = lec.getLecMento().getList().get(i).getUpMentoReName();
 		}
 	}
-   
-	
-	   
-   
-   
-   
-   String var = lec.getLecWeek();
-   String [] vars = var.split(",");
+
+	String var = lec.getLecWeek();
+	String[] vars = var.split(",");
 %>
 
 
@@ -44,7 +43,8 @@
          <!--card-img-top -->
          <div class="detailbody">
             <div class="class_info">
-               <h5 class="" name="lectype">
+            <br><br>
+               <h5 class="lecType" name="lectype">
                   [
                   <%=lec.getLecType()%>
                   ]
@@ -211,10 +211,10 @@
                <hr>
             </div>
             <div class="floatsubtitle">수업시간</div>
-            <div id="select_box">
-               <input name="lectot" type="radio" value="<%=lec.getLecTot()%>"><%=lec.getLecTot() %><br>
-               <input name="lectot" type="radio" value="<%=lec.getLecTot2()%>"><%=lec.getLecTot2()%>
-               
+            <div class="lecFViewTot-group">
+	               <input class="lecFViewTot"name="lectot" type="radio" value="<%=lec.getLecTot()%>"><%=lec.getLecTot() %>
+	               <input class="lecFViewTot" name="lectot" type="radio" value="<%=lec.getLecTot2()%>"><%=lec.getLecTot2()%>
+
                <!-- <select id="color" title="select color">
                         <option selected="selected">asdf</option>
                     </select> -->
@@ -266,11 +266,18 @@
 	        </div>
 	           </form>
             <br>
-            <form action="<%=request.getContextPath()%>/lectureMewmberRegist">
-	            <div>
-               <input type="submit" value="문의하기" class="classSubmit">
-            </div>
-            </form>
+            <div>
+				<button class="classSubmit" id="sendMessage">문의하기</button>
+
+			</div>
+			<%if(m!=null){ %>
+				<form name="openMessageFrm" method="post">
+					<input type="hidden" name="toId" value="<%=lec.getLecMento().getMember().getmId()%>">
+					<input type="hidden" name="fromId" value="<%=m.getmId()%>">
+
+					<input type="hidden" name="lectureName" value="<%=lec.getLecName() %>">
+				</form>
+			<%} %>
 
          </div>
       </div>
@@ -279,6 +286,29 @@
 </aside>
 
 <script>
+$(function(){
+    $('#sendMessage').click(function(){
+ 	   
+       var toId = "<%=toId%>";
+       if(<%=m!=null%>){
+       	var fromId = "<%=m.getmId()%>";
+       }
+       if(fromId==null||fromId==""){
+     	  alert("로그인 후 사용이 문의가 가능합니다.");
+     	  $('#id').focus();
+       }else{
+           var url = "<%=request.getContextPath()%>/message/openLecMessage.do?toId="+toId;
+           var status = "width=400, height=600, resizable=no, status=no, toolbars=no, menubar=no";
+           var title="ABLINGTALK"
+           var popUp = open("", title, status);
+           window.name="parentWin"; 
+           openMessageFrm.target = title;
+           openMessageFrm.action=url;
+           openMessageFrm.submit();
+       }
+    });
+ });
+ 
    $(window).scroll(function() {
       if ($(window).scrollTop() > 371) {
          $('.floatMenu').addClass("fix");

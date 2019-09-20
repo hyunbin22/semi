@@ -60,7 +60,15 @@
 			<td colspan="4"><%=lec.getLecPrice() %>원</td>
 		</tr>
 		<tr>
-			<input type="text" row="10" name="oText">
+			<td colspan="10"><hr></td>
+		</tr>
+		<tr>
+			<td colspan="10" id="orderTalk">멘토에게 남기고 싶은 말</td>
+		</tr>
+		<tr>
+			<td colspan="10">
+			<textarea id="oText" name="oText" cols="110" rows="5" ></textarea>
+			</td>
 		</tr>
 		<tr>
 			<td colspan="4"><input class="lecMemRegButton" type="submit" value="신청하기" ></td>

@@ -148,7 +148,6 @@ public class LectureEnrollEndServlet extends HttpServlet {
 	    	  String upLectureReCover = mr.getFilesystemName("file1");
 	    	  LectureUpload lecup1 = new LectureUpload(result, category, upLectureOriCover, upLectureReCover);
 	    	  result2=new LectureUploadService().insertLectureImage(lecup1, result, category);
-	    	  System.out.println("카테고리 : "+category+", 파일이름"+upLectureReCover);
 	      }
 	      if(mr.getOriginalFileName("addImg")!=null) {
 	    	  category="lecimage";
@@ -156,7 +155,6 @@ public class LectureEnrollEndServlet extends HttpServlet {
 	    	  String upLectureRelecimage = mr.getFilesystemName("addImg");
 	    	  LectureUpload lecup2 = new LectureUpload(result, category, upLectureOrilecimage, upLectureRelecimage);
 	    	  result2=new LectureUploadService().insertLectureImage(lecup2, result, category);
-	    	  System.out.println("카테고리 : "+category+", 파일이름"+upLectureRelecimage);
 	      }
 	      
 
