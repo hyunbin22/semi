@@ -69,13 +69,6 @@ public class ReportServlet extends HttpServlet {
 		String reReportReFile = mr.getFilesystemName("reportPhoto");
 		
 		
-		System.out.println(mNum);
-		System.out.println(reportId);
-		System.out.println(reportTitle);
-		System.out.println(reportContent);
-		System.out.println("파일 이름 : " + reReportOriFile);
-		System.out.println("변경된 파일 이름 : " + reReportReFile);
-		
 		
 		Report rp = new Report(reportId, reportTitle, reportContent);
 		Member m = new Member(mNum);

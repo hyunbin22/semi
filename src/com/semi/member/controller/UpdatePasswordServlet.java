@@ -31,12 +31,9 @@ public class UpdatePasswordServlet extends HttpServlet {
 		
 		String pwd = request.getParameter("mPw");
 		String mId = request.getParameter("mId");
-		System.out.println(pwd);
-		System.out.println(mId);
 		
 		MemberService service = new MemberService();
 		int result = service.updatePassword(mId,pwd);
-		System.out.println(result);
 		
 		String msg=result>0?"비밀번호변경완료":"비밀번호변경실패";
 		String loc="/";

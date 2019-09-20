@@ -44,9 +44,6 @@ public class MemberReportHistoryServlet extends HttpServlet {
 
 		
 		List<Report> list = new ReportService().reportHistoyry(cPage,numPerPage,mNum);
-		System.out.println("신고내역 조회 객체들 : " + list);
-		System.out.println("total : " + totalReport);
-		System.out.println("mNum : " + mNum);
 		
 		//페이징처리 구현
 				int totalPage=(int)Math.ceil((double)totalReport/numPerPage);

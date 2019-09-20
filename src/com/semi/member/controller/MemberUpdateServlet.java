@@ -36,8 +36,7 @@ public class MemberUpdateServlet extends HttpServlet {
 		String phone = request.getParameter("tel1");
 		phone+=request.getParameter("tel2");
 		phone+=request.getParameter("tel3");
-		
-		System.out.println(phone);
+	
 
 	
 		

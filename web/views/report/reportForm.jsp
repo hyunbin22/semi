@@ -36,7 +36,7 @@
                         <tr>
                             <td class = "lecture" colspan = 1>신고 대상 ID</td>
                             <td>
-                                <input class="textfield" type="text" name="rId" id = "reportId1" placeholder="신고할 사용자의 ID 입력">
+                                <input class="textfield title2" type="text" name="rId" id = "reportId1" placeholder="신고할 사용자의 ID 입력">
                             </td>
                         </tr>
                         <tr>
@@ -44,7 +44,7 @@
                         <tr>
                             <td class = "lecture" colspan = 1>제목</td>
                             <td>
-                                <input class="textfield" type="text" name="rTitle" id = "reportTitle1">
+                                <input class="textfield title2" type="text" name="rTitle" id = "reportTitle1">
                             </td>
                         </tr>
                         <tr>

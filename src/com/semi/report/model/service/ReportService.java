@@ -9,6 +9,7 @@ import java.sql.Connection;
 import java.util.List;
 
 import com.semi.member.model.vo.Member;
+import com.semi.mento.model.vo.Mento;
 import com.semi.report.model.dao.ReportDao;
 import com.semi.report.model.vo.Report;
 import com.semi.report.model.vo.ReportUpload;
@@ -136,6 +137,20 @@ public class ReportService {
 		int result = dao.memberBlack(conn,mAttackerNum);
 		close(conn);
 		return result;
+	}
+
+	public int countReportApproval(String type, String data) {
+		Connection conn = getConnection();
+		int result = dao.countReportApproval(conn, type, data);
+		close(conn);
+		return result;
+	}
+
+	public List<Report> reportFindList(String type, String data, int cPage, int numPerPage){
+	    Connection conn = getConnection();
+		List<Report> list = dao.reportFindList(conn, type, data, cPage, numPerPage);
+		close(conn);
+		return list;
 	}
 
 

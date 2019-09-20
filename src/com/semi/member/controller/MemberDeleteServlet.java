@@ -39,7 +39,6 @@ public class MemberDeleteServlet extends HttpServlet {
 		request.getRequestDispatcher("/views/common/msg.jsp")
 		.forward(request,response);
 		
-		System.out.println(result);
 	}
 
 	/**

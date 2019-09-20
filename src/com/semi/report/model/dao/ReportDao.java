@@ -16,6 +16,9 @@ import java.util.Properties;
 import com.semi.member.model.dao.MemberDao;
 import com.semi.member.model.vo.Member;
 import com.semi.mento.model.dao.MentoDao;
+import com.semi.mento.model.dao.MentoUploadDao;
+import com.semi.mento.model.vo.Mento;
+import com.semi.mento.model.vo.MentoUpload;
 import com.semi.report.model.vo.Report;
 import com.semi.report.model.vo.ReportUpload;
 
@@ -353,7 +356,7 @@ public class ReportDao {
 				rp.setReportContent(rs.getString("report_content").replaceAll(" ", "&nbsp;").replaceAll("<", "&lt;").replaceAll(">", "&gt;").replaceAll("\n", "<br>"));
 				rp.setReportCheck(rs.getString("report_check").charAt(0));
 				rp.setReportDate(rs.getDate("report_date"));
-				rp.setReportReason(rs.getString("report_reason").replaceAll(" ", "&nbsp;").replaceAll("<", "&lt;").replaceAll(">", "&gt;").replaceAll("\n", "<br>"));
+				rp.setReportReason(rs.getString("report_reason"));
 				list.add(rp);
 			}
 		}catch (Exception e) {
@@ -441,6 +444,73 @@ public class ReportDao {
 		
 		return rp;
 	}
+
+	public int countReportApproval(Connection conn, String type, String data) {
+		Statement stmt = null;
+		String sql = "select count(*) from tb_report join tb_member using(mId) "
+				+ "where " + type + " like '%" + data + "%'";
+		ResultSet rs = null;
+		int result = 0;
+		try {
+			stmt = conn.createStatement();
+			rs = stmt.executeQuery(sql);
+			if(rs.next()) {
+				result = rs.getInt(1);
+			}
+		} catch(SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rs);
+			close(stmt);
+		}
+		return result;
+	}
+
+	public List<Report> reportFindList(Connection conn, String type, String data, int cPage, int numPerPage) {
+		Report r = null;
+		List<ReportUpload> setUpList = new ArrayList();
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		List<Report> list = new ArrayList();
+		int start = (cPage-1)*numPerPage+1;
+		int end = cPage*numPerPage;
+		
+		Member m = new Member();
+		MemberDao dao = new MemberDao();
+		ReportUploadDao dao2 = new ReportUploadDao();
+
+		String sql = prop.getProperty("searchReportNId");
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, type);
+			pstmt.setString(1, data);
+			pstmt.setInt(1, cPage);
+			pstmt.setInt(1, numPerPage);
+			rs=pstmt.executeQuery();
+			while(rs.next()) {
+				Report rp = new Report();
+				rp.setReportNum(rs.getInt("report_num"));
+				rp.setmReporterNum(rs.getInt("mreporter_num"));
+				rp.setmAttackerNum(rs.getInt("mattacker_num"));
+				rp.setReportTitle(rs.getString("report_title"));
+				rp.setReportContent(rs.getString("report_content").replaceAll(" ", "&nbsp;").replaceAll("<", "&lt;").replaceAll(">", "&gt;").replaceAll("\n", "<br>"));
+				rp.setReportCheck(rs.getString("report_check").charAt(0));
+				rp.setReportDate(rs.getDate("report_date"));
+				rp.setMember(dao.selectMemberMnum(conn, rs.getInt("mreporter_num")));
+				List<ReportUpload> upList = dao2.reportUpProList(conn, rs.getInt("report_num"));
+				rp.setList(upList);
+				list.add(rp);
+			}
+		} catch(SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rs);
+			close(pstmt);
+		}
+		return list;
+	}
+
+
 	
 
 }
