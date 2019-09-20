@@ -68,18 +68,23 @@ public class MoimDao {
 			pstmt.setInt(2, cPage*numPerPage);
 			rs = pstmt.executeQuery();
 			while(rs.next()) {
-				Moim m = new Moim();
-				m.setMoimNum(rs.getInt("moim_num"));
-				m.setmNum(rs.getInt("mNum"));
-				m.setMoimKeyword(rs.getString("moim_keyword"));
-				m.setMoimTitle(rs.getString("moim_title"));
-				m.setMoimText(rs.getString("moim_text"));
-				m.setMoimReadCount(rs.getInt("moim_readcount"));
-				m.setMoimDate(rs.getDate("moim_date"));
-				
-				m.setMember(new MemberDao().selectMemberMnum(conn, rs.getInt("mNum")));
-				m.setMoimUpload(new MoimUploadDao().selectUpload(conn, rs.getInt("moim_num")));
-				list.add(m);
+				Moim moim = new Moim();
+				moim.setMoimNum(rs.getInt("moim_num"));
+				moim.setmNum(rs.getInt("mNum"));
+				moim.setMoimKeyword(rs.getString("moim_keyword"));
+				moim.setMoimTitle(rs.getString("moim_title").replaceAll(" ", "&nbsp;").replaceAll("<", "&lt;").replaceAll(">", "&gt;").replaceAll("\n", "<br>"));
+				moim.setMoimText(rs.getString("moim_text").replaceAll(" ", "&nbsp;").replaceAll("<", "&lt;").replaceAll(">", "&gt;").replaceAll("\n", "<br>"));
+				moim.setMoimReadCount(rs.getInt("moim_readcount"));
+				int moimTime = Integer.parseInt(rs.getString("moim_date").substring(11, 13));
+				String timeType = "오전";
+				if(moimTime > 12) {
+					timeType="오후";
+					moimTime -= 12;
+				}
+				moim.setMoimDate(rs.getString("moim_date").substring(0,11) + " " + timeType + " " + moimTime + ":" + rs.getString("moim_date").substring(14, 16));
+				moim.setMember(new MemberDao().selectMemberMnum(conn, rs.getInt("mNum")));
+				moim.setMoimUpload(new MoimUploadDao().selectUpload(conn, rs.getInt("moim_num")));
+				list.add(moim);
 			}
 		} catch(Exception e) {
 			e.printStackTrace();
@@ -150,7 +155,13 @@ public class MoimDao {
 				moim.setMoimTitle(rs.getString("moim_title").replaceAll(" ", "&nbsp;").replaceAll("<", "&lt;").replaceAll(">", "&gt;").replaceAll("\n", "<br>"));
 				moim.setMoimText(rs.getString("moim_text").replaceAll(" ", "&nbsp;").replaceAll("<", "&lt;").replaceAll(">", "&gt;").replaceAll("\n", "<br>"));
 				moim.setMoimKeyword(rs.getString("moim_keyword"));
-				moim.setMoimDate(rs.getDate("moim_date"));
+				int moimTime = Integer.parseInt(rs.getString("moim_date").substring(11, 13));
+				String timeType = "오전";
+				if(moimTime > 12) {
+					timeType="오후";
+					moimTime -= 12;
+				}
+				moim.setMoimDate(rs.getString("moim_date").substring(0,11) + " " + timeType + " " + moimTime + ":" + rs.getString("moim_date").substring(14, 16));
 				moim.setMoimReadCount(rs.getInt("moim_readcount"));
 				moim.setMoimUpload(new MoimUploadDao().selectUpload(conn, rs.getInt("moim_num")));
 				moim.setMember(new MemberDao().selectMemberMnum(conn, rs.getInt("mnum")));
@@ -225,18 +236,24 @@ public class MoimDao {
 			rs = stmt.executeQuery(sql);
 
 			while(rs.next()) {
-				Moim m = new Moim();
-				m.setMoimNum(rs.getInt("moim_num"));
-				m.setmNum(rs.getInt("mNum"));
-				m.setMoimKeyword(rs.getString("moim_keyword"));
-				m.setMoimTitle(rs.getString("moim_title"));
-				m.setMoimText(rs.getString("moim_text"));
-				m.setMoimReadCount(rs.getInt("moim_readcount"));
-				m.setMoimDate(rs.getDate("moim_date"));
+				Moim moim = new Moim();
+				moim.setMoimNum(rs.getInt("moim_num"));
+				moim.setmNum(rs.getInt("mNum"));
+				moim.setMoimKeyword(rs.getString("moim_keyword"));
+				moim.setMoimTitle(rs.getString("moim_title").replaceAll(" ", "&nbsp;").replaceAll("<", "&lt;").replaceAll(">", "&gt;").replaceAll("\n", "<br>"));
+				moim.setMoimText(rs.getString("moim_text").replaceAll(" ", "&nbsp;").replaceAll("<", "&lt;").replaceAll(">", "&gt;").replaceAll("\n", "<br>"));
+				moim.setMoimReadCount(rs.getInt("moim_readcount"));
+				int moimTime = Integer.parseInt(rs.getString("moim_date").substring(11, 13));
+				String timeType = "오전";
+				if(moimTime > 12) {
+					timeType="오후";
+					moimTime -= 12;
+				}
+				moim.setMoimDate(rs.getString("moim_date").substring(0,11) + " " + timeType + " " + moimTime + ":" + rs.getString("moim_date").substring(14, 16));
 				
-				m.setMember(new MemberDao().selectMemberMnum(conn, rs.getInt("mNum")));
-				m.setMoimUpload(new MoimUploadDao().selectUpload(conn, rs.getInt("moim_num")));
-				list.add(m);
+				moim.setMember(new MemberDao().selectMemberMnum(conn, rs.getInt("mNum")));
+				moim.setMoimUpload(new MoimUploadDao().selectUpload(conn, rs.getInt("moim_num")));
+				list.add(moim);
 			}
 		} catch(Exception e) {
 			e.printStackTrace();

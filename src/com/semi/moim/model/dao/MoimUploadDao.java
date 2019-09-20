@@ -5,6 +5,8 @@ import static common.template.JDBCTemplate.close;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.util.ArrayList;
+import java.util.List;
 
 import com.semi.moim.model.vo.MoimUpload;
 
@@ -30,22 +32,24 @@ public class MoimUploadDao {
 	}
 
 	//모임게시물 첨부파일 가져오기
-	public MoimUpload selectUpload(Connection conn, int moimNum) {
+	public List<MoimUpload> selectUpload(Connection conn, int moimNum) {
 		
 		PreparedStatement pstmt = null;
 		MoimUpload mu = null;
 		ResultSet rs = null;
+		List<MoimUpload> list = new ArrayList();
 		String sql = "select * from tb_upload_moim where moim_num=?";
 		try {
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setInt(1, moimNum);
 			rs = pstmt.executeQuery();
-			if(rs.next()) {
+			while(rs.next()) {
 				mu = new MoimUpload();
 				mu.setUpMoimNum(rs.getInt("up_moimnum"));
 				mu.setMoimNum(rs.getInt("moim_num"));
 				mu.setUpMoimOrgName(rs.getString("up_moim_org_filename"));
 				mu.setUpMoimReName(rs.getString("up_moim_re_filename"));
+				list.add(mu);
 			}
 			
 		} catch(Exception e) {
@@ -54,7 +58,7 @@ public class MoimUploadDao {
 			close(rs);
 			close(pstmt);
 		}
-		return mu;
+		return list;
 	}
 
 }

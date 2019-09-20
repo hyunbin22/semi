@@ -1,6 +1,7 @@
 package com.semi.moim.controller;
 
 import java.io.IOException;
+import java.util.Enumeration;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -47,6 +48,7 @@ public class MoimEnrollEndServlet extends HttpServlet {
 			
 			return;
 		}
+		
 		String root=getServletContext().getRealPath("/");
 
 		String saveDir=root+"/upload/moim";
@@ -61,18 +63,31 @@ public class MoimEnrollEndServlet extends HttpServlet {
 		String title = mr.getParameter("title");
 		String text = mr.getParameter("text");
 		String keyword = mr.getParameter("keyword");
-		String orgFile = mr.getOriginalFileName("moimFile");
-		String reFile = mr.getFilesystemName("moimFile");		
 		
 		Moim moim = new Moim(mNum, title, text, keyword);
 		
-		//reportDB에 저장
 		int result = new MoimService().moimEnroll(moim);
 		int result2=0;
+
+
+		Enumeration fileNames = null;
+		//reportDB에 저장
 		if(result>0) {
-			MoimUpload mu = new MoimUpload(orgFile, reFile);
-			result2 = new MoimUploadService().moimFileInsert(mu, result);
+			fileNames = mr.getFileNames();
+			if(fileNames!=null) {
+				while(fileNames.hasMoreElements()) {
+					String param = (String)fileNames.nextElement();
+					String orgFile = mr.getOriginalFileName(param);
+					String reFile = mr.getFilesystemName(param);
+					if(orgFile == null) continue;
+					MoimUpload mu = new MoimUpload(orgFile, reFile);
+					result2 = new MoimUploadService().moimFileInsert(mu, result);
+					
+				}
+			} else result2 = 1; 	//작성자가 파일업로드를 1개도 안한경우
 		}
+
+		
 		
 		
 		

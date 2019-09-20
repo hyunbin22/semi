@@ -5,7 +5,7 @@
 
 * {
   font-family: 'Nanum Gothic';
-  margin: 0 auto;
+ /*  margin: 0 auto; */
   padding: 0 auto;
 }
 /* h5 {
@@ -254,11 +254,10 @@ footer p{
     text-align: center;
 }
 
-nav, .footmenu {
+#menu nav, .footmenu {
 	margin-top: 20px;
 	list-style-type: none;
 	height: 50px;
-	width: 100%;
 	background-color: rgba(255, 212, 219, 0.87);
 }
 
@@ -369,19 +368,18 @@ textarea:focus::-webkit-input-placeholder {
 
 
 
-nav ul {
+#menu nav ul {
 
     z-index: 1;
     padding: 0 0px;
     list-style: none;
     position: absolute;
-    width: 100%;
     font-family: 'helvetica', arial;
     
     
    }
     
-   nav ul:after{
+   #menu nav ul:after{
     
     content: "";
     clear: both;
@@ -389,7 +387,7 @@ nav ul {
     
    }
     
-   nav ul li {
+   #menu nav ul li {
     
     width:170px;
     float: left;
@@ -397,7 +395,7 @@ nav ul {
 	height: 50px;
    }
     
-   nav ul li:hover {
+   #menu nav ul li:hover {
     
     background-color: pink;
     width:170px;
@@ -405,7 +403,7 @@ nav ul {
     
    }
     
-   nav ul li a {
+   #menu nav ul li a {
     
     display: block;
     padding: 15px 50px;
@@ -417,14 +415,14 @@ nav ul {
     
    }
     
-   nav ul li a:hover{
+   #menu nav ul li a:hover{
     
     color: #fff;
 
     
    }
     
-   nav ul ul {
+   #menu nav ul ul {
     
     display: none;
     background: lightpink;
@@ -435,7 +433,7 @@ nav ul {
 
    }
     
-   nav ul ul li {
+   #menu nav ul ul li {
     
     float: none;
     border-bottom: 1px solid rgba(0,0,0,.2);
@@ -443,26 +441,26 @@ nav ul {
     
    }
     
-   nav ul li:hover > ul {
+   #menu nav ul li:hover > ul {
     
     display: block;
     
    }
     
-   nav ul ul li a {
+   #menu nav ul ul li a {
     
     padding: 10px 40px;
     color: #fff;
     
    }
     
-   nav ul ul li a:hover {
+   #menu nav ul ul li a:hover {
     
     background:palevioletred;
     
    }
     
-   nav ul ul ul {
+   #menu nav ul ul ul {
     
     position: absolute;
     left: 100%;
@@ -526,6 +524,7 @@ span#unread{
 }
 
 .tbl-register2 td p {
+	text-align:left;
 	width: 700px;
 	height: 200px;
     font-size:11px;
@@ -1509,6 +1508,14 @@ table.mtStudyList{
 
 /* 모임게시판 */
 /* 모임게시판 검색버튼 */
+/* 페이지바 */
+.moimNav {
+	background-color: none;
+}
+
+.moimNav ul li {
+	
+}
 
 /* 검색 */
 div#search-moim_keyword {
@@ -1519,7 +1526,7 @@ div#search-mName {
 	display: none;
 }
 
-div#search-userId {
+div#search-mId {
 	display: inline-block;
 }
 
@@ -1532,5 +1539,10 @@ div#search-container {
 /* 글쓰기 버튼 */
 .moimWrite {
 	float: right;
-	margin-top: 30px;
+	margin-top: -50px;
+}
+
+.btnMoimFile {
+	width: 50px;
+	margin-bottom: 0;	
 }

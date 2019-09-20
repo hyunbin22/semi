@@ -13,15 +13,17 @@
 		<div class="center1">
 			<h2>모임게시판</h2>
 		</div>
-            <div class="notice-table">
-                <table class="notice-top2">
-                    <th class="notice-title"> 제목</th>
+            <div class="notice-table" style="width:760px;">
+                <table class="notice-top2" style="width:100%;">
+                	<th class="notice-id">No</th>
+                    <th class="notice-title" style="width:200px">제목</th>
                     <th class="notice-id">작성자</th>
                     <th class="notice-date">작성 날짜</th>
                     <th class="notice-id">조회수</th>
                 </table>
                 <table>
                     <tr class="click-notice">
+                    	<td class="notice-id"><%=moim.getMoimNum()%></td>
                        	<td class="notice-title"><%=moim.getMoimTitle()%></td>
                         <td class="notice-id"><%=moim.getMember().getmId()%></td>
                         <td class="notice-date"><%=moim.getMoimDate() %></td>
@@ -37,15 +39,23 @@
                                 <div class="notice-content2">
 	                                <div class = "report-content">
 	                                   		<%=moim.getMoimText() %>
-	                                   		<br><br>
-	                                   		<%if(moim.getMoimUpload().getUpMoimReName()!=null) {%>
-	                                   		<div class="center1">
-	                                   			<img src="<%=request.getContextPath() %>/upload/moim/<%=moim.getMoimUpload().getUpMoimReName() %>" style="width:300px">
-	                                   		</div>
-	                                   		<%} %>
+
 									</div>
                                 </div>
                             </td>
+                        </tr>
+                        <tr></tr>
+                        <tr style="float:left;"><td>첨부파일</td><td></td></tr>
+                        <tr style="float:left;">
+                        	<td style="float:left; text-align:left;">
+                        	<%if(moim.getMoimUpload().size()>0 || moim.getMoimUpload()!=null) {
+                         			for(int i = 0; i < moim.getMoimUpload().size(); i++) {%>
+                         		<%=i+1%>.&nbsp;&nbsp;<a href="javascript:fn_filedown('<%=moim.getMoimUpload().get(i).getUpMoimOrgName()%>','<%=moim.getMoimUpload().get(i).getUpMoimReName()%>')"><%=moim.getMoimUpload().get(i).getUpMoimOrgName() %></a>
+                         		<br>
+                         		<%} 
+                        		}%>
+                        	
+                        	</td>
                         </tr>
                         
                 </table>
@@ -102,9 +112,15 @@
 			}
 		}
 		
+	    function fn_filedown(ori, re) {
+	    	var file = encodeURIComponent(ori);
+	    	location.href="<%=request.getContextPath()%>/moim/filedown.do?oriFileName="+file+"&reFileName="+re;
+	    }
+		
 		$(function(){
 			$('.btnMessage').click(function(){
-				if('<%=m.getmId()%>'==null || '<%=m.getmId()%>'=="") {
+				<%-- if('<%=m.getmId()%>'==null || '<%=m.getmId()%>'=="") { --%>
+				if('<%=m%>'==null) {
 					alert("로그인 후 이용 가능합니다.");
 					$('#id').focus();
 				} else {

@@ -88,7 +88,7 @@ public class MoimService {
 		int result = dao.updateMoim(conn, moim);
 		if(result > 0) {
 			result = moim.getMoimNum();
-		} 
+		} else rollback(conn);
 		close(conn);
 		return result;
 	}

@@ -36,33 +36,40 @@ public class MoimListServlet extends HttpServlet {
 		int count = new MoimService().countMoimList();
 		List<Moim> list = new MoimService().moimList(cPage, numPerPage);
 		
-		int lectureTotalPage=(int)Math.ceil((double)count/numPerPage);
+		int totalPage=(int)Math.ceil((double)count/numPerPage);
 		String pageBar="";
 		int pageSizeBar=5;
 		int pageNo=((cPage-1)/pageSizeBar)*pageSizeBar+1;
 		int pageEnd=pageNo+pageSizeBar-1;
+		
+		pageBar += "<nav aria-label=\"...\" class=\"moimNav\">" + 
+				"  <ul class=\"pagination\">" + 
+				"  <li class=\"page-item disabled\">";
 		if(pageNo==1) {
-			pageBar+="<span>[이전]</span>&nbsp;";
+			pageBar+="<a class=\"page-link\" href=\"#\" tabindex=\"-1\" aria-disabled=\"true\">Previous</a></li>";
 		}
 		else {
-			pageBar+="<a href="+request.getContextPath()+"/moim/moimList.do?cPage="+(pageNo-1)+">[이전]</a>&nbsp;";
+			pageBar+="<a class=\"page-link\" href="+request.getContextPath()+"/moim/moimList.do?cPage="+(pageNo-1)+" tabindex=\"-1\" aria-disabled=\"true\">Previous</a></li>";
 		}
-		while(!(pageNo>pageEnd||pageNo>lectureTotalPage)) {
+		pageBar += "<li class=\"page-item active\" aria-current=\"page\">";
+		while(!(pageNo>pageEnd||pageNo>totalPage)) {
 			if(pageNo==cPage) {
-				pageBar+="<span class='admin-appro-cPage'>"+pageNo+"</span>&nbsp;";
+				pageBar+="<a class=\"page-link\" href=\"#\">"+pageNo+" <span class=\"sr-only\">(current)</span></a></li>";
 			}
 			else {
-				pageBar+="<a href="+request.getContextPath()+"/moim/moimList.do?cPage="+pageNo+">"+pageNo+"</a>&nbsp;";
+				pageBar+="<a href="+request.getContextPath()+"/moim/moimList.do?cPage="+pageNo+" class=\"page-link\">"+pageNo+"</a></li>";
 			}
 			pageNo++;
 		}
-		if(pageNo>lectureTotalPage) {
-			pageBar+="<span>[다음]</span>";
+		pageBar += "<li class=\"page-item\">";
+		if(pageNo>totalPage) {
+			pageBar+="<a class=\"page-link\" href=\"#\">Next</a></li>";
 		}
 		else {
 			pageBar+="<a href="+request.getContextPath()+
-			"/moim/moimList.do?cPage="+(pageNo)+">[다음]</a>";
+			"/moim/moimList.do?cPage="+(pageNo)+">Next</a></li>";
 		}
+		pageBar += "</ul></nav>";
 		//view페이지에 데이터 전송
 		request.setAttribute("pageBar", pageBar);
 		request.setAttribute("cPage", cPage);

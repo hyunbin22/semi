@@ -12,8 +12,10 @@
 	<article>
         <div>
         <br>
-        <div id="search-container">
-			<select id="searchType">
+        <!-- <div id="search-container"> -->
+        <div class="input-group mb-3">
+  			<div class="input-group-prepend">
+			<select id="searchType" class="btn btn-outline-secondary dropdown-toggle">
 				<option value="mId" <%="mId".equals(searchType)?"selected":"" %>>아이디</option>
 				<option value="mName" <%="mName".equals(searchType)?"selected":"" %>>이름</option>
 				<option value="moim_keyword" <%="keyword".equals(searchType)?"selected":"" %>>키워드</option>
@@ -22,65 +24,62 @@
 				<form action="<%=request.getContextPath()%>/moim/moimListFind.do">
 					<input type="hidden" name="searchType" value="mId">
 					<input type="hidden" name="cPage" value="<%=cPage%>">
-					<input type="text" name="searchKeyword" placeholder="작성자 아이디 입력"
+					<input type="text" class="form-control" name="searchKeyword" placeholder="작성자 아이디 입력"
 					value='<%="mId".equals(searchType)?searchKey:""%>'>
-					<button type="submit" class="next" style="height: 33px;">검색</button>
+					<input type="submit" class="form-control" value="검색">
 				</form>
 			</div>
 	 		<div id="search-mName">
 				<form action="<%=request.getContextPath()%>/moim/moimListFind.do">
 					<input type="hidden" name="searchType" value="mName">
 					<input type="hidden" name="cPage" value="<%=cPage%>"> 
-					<input type="text" name="searchKeyword" placeholder="작성자 이름 입력"
+					<input type="text" class="form-control" name="searchKeyword" placeholder="작성자 이름 입력"
 						value='<%="mName".equals(searchType)?searchKey:""%>'>
-					<button type="submit" class="next" style="height: 33px;">검색</button>
+					<input type="submit" class="form-control" value="검색">
 				</form>
 			</div> 
 			<div id="search-moim_keyword">
 				<form action="<%=request.getContextPath()%>/moim/moimListFind.do">
 					<input type="hidden" name="searchType" value="moim_keyword">
 					<input type="hidden" name="cPage" value="<%=cPage%>"> 
-					<input type="text" name="searchKeyword" placeholder="키워드 입력"
+					<input type="text" class="form-control" name="searchKeyword" placeholder="키워드 입력"
 						value='<%="moim_keyword".equals(searchType)?searchKey:""%>'>
-					<button type="submit" class="next" style="height: 33px;">검색</button>
+					<input type="submit" class="form-control" value="검색">
 				</form>
 			</div> 
 		</div>
+		</div></div>
         <%if(memberLogin != null){ %>
-            <div><a onclick = "location.href='<%=request.getContextPath()%>/moim/moimEnroll.do?'"><input class="notice-write next moimWrite" type="button" value="게시글 작성"></a></div>
+            <div><a onclick = "location.href='<%=request.getContextPath()%>/moim/moimEnroll.do?'"><input class="btn btn-outline-danger moimWrite" type="button" value="게시글 작성"></a></div>
             <%} %>
         
-        </div>
+        <!-- </div> -->
         <div class="class-pay-container">
-            <div class="notice-table">
-                <table class="notice-top">
-                    <th class="notice-no">No</th>
-                    <th class="notice-title">제목</th>
-                    <th class="notice-id">작성자</th>
-                    <th class="notice-date">작성일</th>
-                    <th class="notice-id">조회수</th>
+            <div class="notice-table" style="width:100%;">
+                <table class="table table-hover">
+                	<tr>
+	                    <th>No</th>
+	                    <th>제목</th>
+	                    <th>작성자</th>
+	                    <th>작성일</th>
+	                    <th>조회수</th>
+                    </tr>
+                    <%for(Moim moim : list){ %>
+                    <tr class="click-notice">
+		            <%if(list.size()>0 && list!=null) {%>
+		            	<td><%=moim.getMoimNum() %></td>
+			            <td><a href="<%=request.getContextPath()%>/moim/moimView.do?moimNum=<%=moim.getMoimNum() %>"><%=moim.getMoimTitle() %></a></td>
+			            <td><%=moim.getMember().getmId() %></td>
+			            <td><%=moim.getMoimDate() %></td>
+		         		<td><%=moim.getMoimReadCount() %></td>
+			         <%} else { %>
+			         <td>
+				         <div style="height:90px;">
+				         </div>
+			         </td>
+			         <%} 
+		            }%>         
                 </table>
-                <%for(Moim moim : list){ %>
-                	
-                <table>
-         <tr class="click-notice">
-            <%if(list.size()>0 && list!=null) {%>
-            	<td class="notice-no"><%=moim.getMoimNum() %></td>
-	            <td class="notice-title"><a href="<%=request.getContextPath()%>/moim/moimView.do?moimNum=<%=moim.getMoimNum() %>"><%=moim.getMoimTitle() %></a></td>
-	            <td class="notice-id"><%=moim.getMember().getmId() %></td>
-	            <td class="notice-date"><%=moim.getMoimDate() %></td>
-         		<td class="notice-id"><%=moim.getMoimReadCount() %></td>
-	         <%} else { %>
-	         <div style="height:90px;">
-	         	<td class="notice-date"></td>
-	            <td class="notice-title"></td>
-	            <td class="notice-id"></td>
-	         </div>
-	         <%} %>
-         </tr>
-         <tr class="null"><td colspan="4"></td></tr>
-                </table>
-                <%} %>
             </div>
             <br>
             </div>         <!-- class-pay-container 끝 -->

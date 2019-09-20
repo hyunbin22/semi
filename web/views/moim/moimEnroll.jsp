@@ -23,18 +23,19 @@
                                 <%=m.getmId() %>
                             </td>
                             <td>
-   
                             </td>
                         </tr>
                         <tr>
-                            <td>제목</td>
+                            <td style="width:503px;">제목</td>
                             <td>
-                                <input class="textfield" type="text" name="title" id = "title">
+                                <input class="textfield" type="text" name="title" id = "title" maxlength="30" placeholder="제목을 입력해주세요.">
                             </td>
+                            <td></td>
                         </tr>
                         <tr>
                             <td>내용</td>
-                            <td><textarea id = "reportContent1" name = "text" rows="20" cols="60" style="resize: none;" placeholder="내용을 입력해주세요."></textarea></td>
+                            <td><textarea id = "text" name = "text" rows="20" cols="60" style="resize: none;" placeholder="내용을 입력해주세요."></textarea></td>
+                        	<td></td>
                         </tr>
                         <tr>
                             <td>
@@ -43,14 +44,20 @@
                         <tr>
                             <td>첨부 파일</td>
                             <td>
-                                <input id="reportPhoto1" type="file" name="moimFile" onchange="previewImage(this,'View_area')">
+                            	<input type="button" name="addFile" class="next btnMoimFile" id="addFile" value="추가">
                             </td>
                         </tr>
                         <tr>
-                        	<td>검색키워드 작성<br>(,로 구분)</td>
+                        	<td></td>
+                        	<td id="boxFile">
+                            </td>
+                        </tr>
+                        <tr>
+                        	<td style="width:503px;">검색키워드<br>( , 로 구분)</td>
                             <td>
                                 <input class="textfield" type="text" name="keyword" id = "keyword">
                             </td>
+                            <td></td>
                         </tr>    
                     </table>
                    	<div class = "center1">
@@ -64,7 +71,7 @@
     function checkValue(){ 
   		var title = $('#title');
   		var text = $('#text');
-
+		var count = 1;
         if(title.val().length==0){
             alert('제목을 입력하세요');
             title.focus();
@@ -72,12 +79,51 @@
         	}
 
         if(text.val().length==0){
-			alert('신고 내용을 입력하세요');
+			alert('내용을 입력하세요');
 			text.focus();
             return false;
 			}
         return true;
         }
+    
+    	$(function(){
+    		var count = 1;
+    		$('#addFile').click(function(){
+    			var addWrap = '<div class="fileWrap">';
+        		addWrap += '<input id="inputMoimFile" type="file" name="moimFile' + count + '">';
+    	        addWrap += '<input type="button" name="removeFile" class="next btnMoimFile" id="btnRemove" value="삭제">';
+    	        addWrap += '</div>';
+                $('#boxFile').append(addWrap);
+                count++;
+    			
+    		}); 
+    	});
+
+    	$(function(){
+    		$(document).on("click","#btnRemove",function(event){
+    			var pa = $(this).parent();
+         		pa.remove();
+    		});
+    		
+    		//확장자, 정규식 검사
+    		$(document).on("change","input[name='moimFile']",function(event) {
+    			var ext = $(this).val().split('.').pop().toLowerCase();
+    			var fileSize = (this).files[0].size;
+    			var maxSize = 1024*1024*1024;
+    			
+    			if($.inArray(ext, ['gif','png','jpg','jpeg','doc','docx','xls','xlsx','hwp']) == -1) {
+    				alert("등록할 수 없는 확장자입니다.");
+    				$(this).val("");
+    				return;
+    			} 
+    			
+    			if(fileSize > maxSize) {
+    				alert("첨부파일 크기는 1GB 이내로 등록 가능합니다.");
+    				$(this).val("");
+    				return;
+    			}
+    		});
+    	});
 
     </script>
 

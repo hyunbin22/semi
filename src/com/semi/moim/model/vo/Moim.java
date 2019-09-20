@@ -1,6 +1,5 @@
 package com.semi.moim.model.vo;
 
-import java.sql.Date;
 import java.util.List;
 
 import com.semi.member.model.vo.Member;
@@ -12,17 +11,17 @@ public class Moim {
 	private String moimTitle;
 	private String moimText;
 	private int moimReadCount;
-	private Date moimDate;
+	private String moimDate;
 	private String moimKeyword;
 	private Member member;
-	private MoimUpload moimUpload;
+	private List<MoimUpload> moimUpload;
 
 	public Moim() {
 		// TODO Auto-generated constructor stub
 	}
 
-	public Moim(int moimNum, int mNum, String moimTitle, String moimText, int moimReadCount, Date moimDate,
-			String moimKeyword, Member member, MoimUpload moimUpload) {
+	public Moim(int moimNum, int mNum, String moimTitle, String moimText, int moimReadCount, String moimDate,
+			String moimKeyword, Member member, List<MoimUpload> moimUpload) {
 		super();
 		this.moimNum = moimNum;
 		this.mNum = mNum;
@@ -93,13 +92,19 @@ public class Moim {
 		this.moimReadCount = moimReadCount;
 	}
 
-	public Date getMoimDate() {
+	
+
+	public String getMoimDate() {
 		return moimDate;
 	}
 
-	public void setMoimDate(Date moimDate) {
+
+
+	public void setMoimDate(String moimDate) {
 		this.moimDate = moimDate;
 	}
+
+
 
 	public String getMoimKeyword() {
 		return moimKeyword;
@@ -117,11 +122,13 @@ public class Moim {
 		this.member = member;
 	}
 
-	public MoimUpload getMoimUpload() {
+
+
+	public List<MoimUpload> getMoimUpload() {
 		return moimUpload;
 	}
 
-	public void setMoimUpload(MoimUpload moimUpload) {
+	public void setMoimUpload(List<MoimUpload> moimUpload) {
 		this.moimUpload = moimUpload;
 	}
 
@@ -132,6 +139,6 @@ public class Moim {
 				+ ", member=" + member + ", moimUpload=" + moimUpload + "]";
 	}
 
-	
+
 	
 }
