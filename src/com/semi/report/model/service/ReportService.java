@@ -146,9 +146,16 @@ public class ReportService {
 		return result;
 	}
 
-	public List<Report> reportFindList(String type, String data, int cPage, int numPerPage){
+	public List<Report> reportFindList(String data, int cPage, int numPerPage){
 	    Connection conn = getConnection();
-		List<Report> list = dao.reportFindList(conn, type, data, cPage, numPerPage);
+		List<Report> list = dao.reportFindList(conn, data, cPage, numPerPage);
+		close(conn);
+		return list;
+	}
+
+	public List<Report> reportFindListCom(String data, int cPage, int numPerPage) {
+		Connection conn = getConnection();
+		List<Report> list = dao.reportFindListCom(conn, data, cPage, numPerPage);
 		close(conn);
 		return list;
 	}

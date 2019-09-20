@@ -9,7 +9,31 @@
 		int count = 0;
    %>
 <%@ include file="/views/common/adminAside.jsp"%>
+
 <section>
+<article id="search1">
+			<div id="adminSearchContainer">
+				<div id = "searchType">신고자 ID : </div>
+			<div id="search-mreporterId">
+				<form action="<%=request.getContextPath()%>/admin/reportApproFinderCom.do">
+					<input type="hidden" name="searchType" value="mId">
+					<input type="hidden" name="cPage" value="<%=cPage%>"> 
+					<input type="text" name="searchKeyword" placeholder="검색어 입력">
+					<button type="submit">검색</button>
+				</form>
+			</div>
+	 		<%-- <div id="search-reportTitle">
+				<form action="<%=request.getContextPath()%>/admin/reportApproFinder.do">
+					<input type="hidden" name="searchType" value="mName">
+					<input type="hidden" name="cPage" value="<%=cPage%>"> 
+					<input type="hidden" name="temp" value=0>
+					<input type="text" name="searchKeyword" placeholder="이름 입력"
+						value='<%="mName".equals(searchType)?searchKey:""%>'>
+					<button type="submit">검색</button>
+				</form>
+			</div>  --%>
+		</div>
+	</article>
 <div style = "height: 700px;">
    <article class="admin-list-container wrap">
       <div class="row">

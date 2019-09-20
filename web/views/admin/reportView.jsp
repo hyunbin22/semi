@@ -71,11 +71,10 @@
                         </td>
                         </tr>
                         <tr class = "notice-top">
-                        <td colspan="2">
+                        <td colspan="4">
+                        	ID 사용정지 처리 :
                         <input type = "radio" name = "check" id = "checkName1" value = "Y" style = "cursor: pointer;">
                         <label for = "checkName1" style = "cursor: pointer;">예</label>
-                        </td>
-                        <td colspan="2">
                         <input type = "radio" name = "check" id = "checkName" value = "N" style = "cursor: pointer;">
                         <label for = "checkName" style = "cursor: pointer;">아니오</label>
                         </td>

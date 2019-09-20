@@ -447,8 +447,7 @@ public class ReportDao {
 
 	public int countReportApproval(Connection conn, String type, String data) {
 		Statement stmt = null;
-		String sql = "select count(*) from tb_report join tb_member using(mId) "
-				+ "where " + type + " like '%" + data + "%'";
+		String sql = "select count(*) from tb_report a join tb_member b on(a.mreporter_num = b.mNum) where " + type + " like '%" + data + "%'";
 		ResultSet rs = null;
 		int result = 0;
 		try {
@@ -466,10 +465,58 @@ public class ReportDao {
 		return result;
 	}
 
-	public List<Report> reportFindList(Connection conn, String type, String data, int cPage, int numPerPage) {
+	public List<Report> reportFindList(Connection conn, String data, int cPage, int numPerPage) {
 		Report r = null;
 		List<ReportUpload> setUpList = new ArrayList();
-		PreparedStatement pstmt = null;
+		Statement stmt = null;
+		ResultSet rs = null;
+		List<Report> list = new ArrayList();
+		int start = (cPage-1)*numPerPage+1;
+		int end = cPage*numPerPage;
+		
+		System.out.println(start);
+		System.out.println(end);
+		
+		Member m = new Member();
+		MemberDao dao = new MemberDao();
+		ReportUploadDao dao2 = new ReportUploadDao();
+
+		String sql = "select * from ("
+				+ "select rownum as rnum, a.* from("
+				+ "select * from tb_report a join "
+				+ "tb_member b on a.mreporter_num = b.mnum where "
+				+ "report_check='N' and mId like '%"+data+"%')a) where rnum between "+ start + " and " + end;
+		try {
+			stmt = conn.createStatement();
+			rs=stmt.executeQuery(sql);
+			while(rs.next()) {
+				Report rp = new Report();
+				rp.setReportNum(rs.getInt("report_num"));
+				System.out.println(rp.getmReporterNum());
+				rp.setmReporterNum(rs.getInt("mreporter_num"));
+				rp.setmAttackerNum(rs.getInt("mattacker_num"));
+				rp.setReportTitle(rs.getString("report_title"));
+				rp.setReportContent(rs.getString("report_content"));
+				rp.setReportCheck(rs.getString("report_check").charAt(0));
+				rp.setReportDate(rs.getDate("report_date"));
+				rp.setMember(dao.selectMemberMnum(conn, rs.getInt("mreporter_num")));
+				List<ReportUpload> upList = dao2.reportUpProList(conn, rs.getInt("report_num"));
+				rp.setList(upList);
+				list.add(rp);
+			}
+		} catch(SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rs);
+			close(stmt);
+		}
+		return list;
+	}
+
+	public List<Report> reportFindListCom(Connection conn, String data, int cPage, int numPerPage) {
+		Report r = null;
+		List<ReportUpload> setUpList = new ArrayList();
+		Statement stmt = null;
 		ResultSet rs = null;
 		List<Report> list = new ArrayList();
 		int start = (cPage-1)*numPerPage+1;
@@ -479,14 +526,14 @@ public class ReportDao {
 		MemberDao dao = new MemberDao();
 		ReportUploadDao dao2 = new ReportUploadDao();
 
-		String sql = prop.getProperty("searchReportNId");
+		String sql = "select * from ("
+				+ "select rownum as rnum, a.* from("
+				+ "select * from tb_report a join "
+				+ "tb_member b on a.mreporter_num = b.mnum where "
+				+ "report_check='N' and mId like '%"+data+"%')a) where rnum between "+ start + " and " + end;
 		try {
-			pstmt = conn.prepareStatement(sql);
-			pstmt.setString(1, type);
-			pstmt.setString(1, data);
-			pstmt.setInt(1, cPage);
-			pstmt.setInt(1, numPerPage);
-			rs=pstmt.executeQuery();
+			stmt = conn.createStatement();
+			rs=stmt.executeQuery(sql);
 			while(rs.next()) {
 				Report rp = new Report();
 				rp.setReportNum(rs.getInt("report_num"));
@@ -505,7 +552,7 @@ public class ReportDao {
 			e.printStackTrace();
 		} finally {
 			close(rs);
-			close(pstmt);
+			close(stmt);
 		}
 		return list;
 	}
