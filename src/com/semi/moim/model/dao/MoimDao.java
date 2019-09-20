@@ -8,13 +8,13 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
 
 import com.semi.member.model.dao.MemberDao;
 import com.semi.moim.model.vo.Moim;
-import com.semi.moim.model.vo.MoimUpload;
 
 
 public class MoimDao {
@@ -133,7 +133,7 @@ public class MoimDao {
 	}
 
 
-
+	//모임상세보기
 	public Moim moinView(Connection conn, int moimNum) {
 		PreparedStatement pstmt = null;
 		Moim moim = null;
@@ -166,6 +166,7 @@ public class MoimDao {
 		
 	}
 
+	//조회수 올리기
 	public int addReadCount(Connection conn, int moimNum) {
 		PreparedStatement pstmt = null;
 		String sql = "update tb_moim set moim_readcount=moim_readcount+1 where moim_num=?";
@@ -175,6 +176,107 @@ public class MoimDao {
 			pstmt.setInt(1, moimNum);
 			result = pstmt.executeUpdate();
 			
+		} catch(Exception e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		return result;
+		
+	}
+
+	//모임게시판 검색
+	public int moimFindCount(Connection conn, String type, String data) {
+		Statement stmt = null;
+		String sql = "select count(*) as cnt from tb_moim join tb_member using(mnum) where " + type + " like '%" + data + "%'";
+		ResultSet rs = null;
+		int result = 0;
+		try {
+			stmt = conn.createStatement();
+			rs = stmt.executeQuery(sql);
+			if(rs.next()) {
+				result = rs.getInt(1);
+			}
+		} catch(SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rs);
+			close(stmt);
+		}
+		return result;
+	}
+
+	//모임게시판 검색
+	public List<Moim> moimFindList(Connection conn, String type, String data, int cPage, int numPerPage) {
+
+		List<Moim> list = new ArrayList();
+		Statement stmt = null;
+		int start = (cPage-1)*numPerPage+1;
+		int end = cPage*numPerPage;
+		String sql = "select * from ("
+				+ "select rownum as rnum, a.* from("
+				+ "select * "
+				+ "from tb_moim join tb_member using (mnum)"
+				+ " where " + type + " like '%" + data + "%' "
+				+ "order by moim_date)a) where rnum between "+ start + " and " + end;
+		ResultSet rs = null;
+		try {
+			stmt = conn.createStatement();
+			rs = stmt.executeQuery(sql);
+
+			while(rs.next()) {
+				Moim m = new Moim();
+				m.setMoimNum(rs.getInt("moim_num"));
+				m.setmNum(rs.getInt("mNum"));
+				m.setMoimKeyword(rs.getString("moim_keyword"));
+				m.setMoimTitle(rs.getString("moim_title"));
+				m.setMoimText(rs.getString("moim_text"));
+				m.setMoimReadCount(rs.getInt("moim_readcount"));
+				m.setMoimDate(rs.getDate("moim_date"));
+				
+				m.setMember(new MemberDao().selectMemberMnum(conn, rs.getInt("mNum")));
+				m.setMoimUpload(new MoimUploadDao().selectUpload(conn, rs.getInt("moim_num")));
+				list.add(m);
+			}
+		} catch(Exception e) {
+			e.printStackTrace();
+		} finally {
+			close(rs);
+			close(stmt);
+		} 
+		return list;
+	}
+
+	//모임 게시물 삭제
+	public int deleteMoim(Connection conn, int moimNum) {
+		PreparedStatement pstmt = null;
+		String sql = "delete from tb_moim where moim_num=?";
+		int result = 0;
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, moimNum);
+			result = pstmt.executeUpdate();
+		} catch(Exception e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+
+		return result;
+	}
+
+	//모임 게시물 수정
+	public int updateMoim(Connection conn, Moim moim) {
+		PreparedStatement pstmt = null;
+		String sql = "update tb_moim set moim_title=?, moim_keyword=?, moim_text=? where moim_num=?";
+		int result = 0;
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, moim.getMoimTitle());
+			pstmt.setString(2, moim.getMoimKeyword());
+			pstmt.setString(3, moim.getMoimText());
+			pstmt.setInt(4, moim.getMoimNum());
+			result = pstmt.executeUpdate();
 		} catch(Exception e) {
 			e.printStackTrace();
 		} finally {

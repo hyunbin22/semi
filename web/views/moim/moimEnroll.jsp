@@ -4,6 +4,7 @@
 <%@ include file="/views/common/header.jsp"%>
 <% 
    Member m = (Member) session.getAttribute("loginMember");
+	
 %>
   <section class = "center1">
             <div class="wrap">

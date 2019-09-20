@@ -10,11 +10,11 @@ import javax.servlet.http.HttpServletResponse;
 /**
  * Servlet implementation class OpenLecMessageServlet
  */
-@WebServlet("/message/openLecMessage.do")
-public class OpenLecMessageServlet extends HttpServlet {
+@WebServlet("/message/openToMessage.do")
+public class OpenToMessageServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
-    public OpenLecMessageServlet() {
+    public OpenToMessageServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -22,11 +22,12 @@ public class OpenLecMessageServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		String toId = request.getParameter("toId");
-		String lecName = request.getParameter("lectureName");
+		String lecName = request.getParameter("lectureName")!=null && !request.getParameter("lectureName").equals("") ? request.getParameter("lectureName"):"";
+		String moimTitle = request.getParameter("moimTitle")!=null && !request.getParameter("moimTitle").equals("") ? request.getParameter("moimTitle"):"";
 		request.setAttribute("toId", toId);
 		request.setAttribute("lecName", lecName);
-		request.getRequestDispatcher("/views/common/webMessageView.jsp?toId="+toId).forward(request, response);
-		
+		request.setAttribute("moimTitle", moimTitle);
+		request.getRequestDispatcher("/views/common/webMessageView.jsp?toId="+toId).forward(request, response);	
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

@@ -58,10 +58,10 @@ public class AdminLectureApproFinderServlet extends HttpServlet {
 			cPage = 1;
 		}
 		int numPerPage=10;
-		int countMentoApproval = new MentoService().countMentoApproval(type, data);
+		int countLectureApproval = new LectureService().countLectureApproval(type, data);
 		
 		List<Lecture> lectureList = new LectureService().lectureApproFindList(type, data, cPage, numPerPage);
-		int mentoTotalPage=(int)Math.ceil((double)countMentoApproval/numPerPage);
+		int mentoTotalPage=(int)Math.ceil((double)countLectureApproval/numPerPage);
 		String pageBar="";
 		int pageSizeBar=5;
 		int pageNo=((cPage-1)/pageSizeBar)*pageSizeBar+1;

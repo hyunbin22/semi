@@ -11,9 +11,12 @@
 		m = (Member)session.getAttribute("loginMember");
 		userId=m.getmId();
 	}
-	String lecName = "";
+	String str = "";
 	if(request.getAttribute("lecName")!=null && !request.getAttribute("lecName").equals("")) {
-		lecName = (String)request.getAttribute("lecName");
+		str = (String)request.getAttribute("lecName");
+	}
+	if(request.getAttribute("moimTitle")!=null && !request.getAttribute("moimTitle").equals("")) {
+		str = (String)request.getAttribute("moimTitle");
 	}
 	
 
@@ -60,8 +63,8 @@
 							<div class="row" style="height:90px;">
 								<div class="form-group col-xs-10">
 								<%if(!toId.equals("msgAdmin")) {%>
-									<%if(lecName!=null && !lecName.equals("")) {%> 
-										<textarea style="height: 70px;resize: none;" id="chatContent" class="form-control" maxlength="100">[<%=lecName %>] 수업 문의합니다!</textarea>
+									<%if(str!=null && !str.equals("")) {%> 
+										<textarea style="height: 70px;resize: none;" id="chatContent" class="form-control" maxlength="100">[<%=str %>] 문의합니다!</textarea>
 									<%} else { %>
 										<textarea style="height: 70px;resize: none;" id="chatContent" class="form-control" maxlength="100" placeholder="메세지를 입력하세요."></textarea>
 									<%} %>

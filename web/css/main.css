@@ -1070,6 +1070,7 @@ input.inputbtn , input.btnregister{
 .class-pay-container{
     margin-top: 30px;
     width: 800px;
+    min-height: 500px;
 	
 }
 
@@ -1504,4 +1505,32 @@ table.mtStudyList{
     font-size: 24px;
     font-family: '나눔스퀘어';
 }
-	
+
+
+/* 모임게시판 */
+/* 모임게시판 검색버튼 */
+
+/* 검색 */
+div#search-moim_keyword {
+	display: none;
+}
+
+div#search-mName {
+	display: none;
+}
+
+div#search-userId {
+	display: inline-block;
+}
+
+div#search-container {
+	margin: 0 0 10px 0;
+	padding: 3px;
+	float: left;
+}
+
+/* 글쓰기 버튼 */
+.moimWrite {
+	float: right;
+	margin-top: 30px;
+}

@@ -132,8 +132,7 @@
 		$(function(){
 			$('#sendMessage').click(function(){
 				var toId = "<%=toId%>";
-				var fromId = "<%=m.getmId()%>"
-				var url = "<%=request.getContextPath()%>/message/openLecMessage.do?toId="+toId;
+				var url = "<%=request.getContextPath()%>/message/openToMessage.do?toId="+toId;
 				var status = "width=400, height=600, resizable=no, status=no, toolbars=no, menubar=no";
 				var title="ABLINGTALK"
 				var popUp = open("", title, status);

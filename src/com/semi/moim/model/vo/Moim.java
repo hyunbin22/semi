@@ -34,11 +34,19 @@ public class Moim {
 		this.member = member;
 		this.moimUpload = moimUpload;
 	}
-	
-	
 
 	public Moim(int mNum, String moimTitle, String moimText, String moimKeyword) {
 		super();
+		this.mNum = mNum;
+		this.moimTitle = moimTitle;
+		this.moimText = moimText;
+		this.moimKeyword = moimKeyword;
+	}
+
+
+	public Moim(int moimNum, int mNum, String moimTitle, String moimText, String moimKeyword) {
+		super();
+		this.moimNum = moimNum;
 		this.mNum = mNum;
 		this.moimTitle = moimTitle;
 		this.moimText = moimText;

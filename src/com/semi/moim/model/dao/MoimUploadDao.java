@@ -29,6 +29,7 @@ public class MoimUploadDao {
 		return result;
 	}
 
+	//모임게시물 첨부파일 가져오기
 	public MoimUpload selectUpload(Connection conn, int moimNum) {
 		
 		PreparedStatement pstmt = null;

@@ -66,5 +66,51 @@ public class MoimService {
 		return moim;
 	}
 
+	//모임게시물 검색
+	public int moimFindCount(String type, String data) {
+		Connection conn = getConnection();
+		int result = dao.moimFindCount(conn, type, data);
+		close(conn);
+		return result;
+	}
+
+	public List<Moim> moimFindList(String type, String data, int cPage, int numPerPage) {
+		Connection conn = getConnection();
+		List<Moim> list = dao.moimFindList(conn, type, data, cPage, numPerPage);
+		close(conn);
+		return list;
+	}
+
+	
+	//모임게시물 수정
+	public int updateMoim(Moim moim) {
+		Connection conn = getConnection();
+		int result = dao.updateMoim(conn, moim);
+		if(result > 0) {
+			result = moim.getMoimNum();
+		} 
+		close(conn);
+		return result;
+	}
+	//모임 게시물 삭제
+	public int deleteMoim(int moimNum) {
+		Connection conn = getConnection();
+		int result = dao.deleteMoim(conn, moimNum);
+		if(result > 0) commit(conn);
+		else rollback(conn);
+		close(conn);
+		return result;
+	}
+	
+	//모임 데이터 가져오기(모임게시물 수정시 필요)
+	public Moim moimView(int moimNum) {
+		Connection conn = getConnection();
+		Moim moim = dao.moinView(conn, moimNum);
+		
+		close(conn);
+		return moim;
+	}
+
+
 
 }

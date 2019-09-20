@@ -40,6 +40,13 @@ public class LectureService {
 	}
 
 	//강의승인목록 검색
+	public int countLectureApproval(String type, String data) {
+		Connection conn = getConnection();
+		int result = dao.countLectureApproval(conn, type, data);
+		close(conn);
+		return result;
+	}
+	
 	public List<Lecture> lectureApproFindList(String type, String data, int cPage, int numPerPage) {
 		Connection conn = getConnection();
 		List<Lecture> list = dao.lectureApproList(conn, type, data, cPage, numPerPage);

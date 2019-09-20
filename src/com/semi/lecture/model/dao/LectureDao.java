@@ -109,6 +109,27 @@ public class LectureDao {
 	}
 
 	//관리자 강의신청목록 검색
+	public int countLectureApproval(Connection conn, String type, String data) {
+		Statement stmt = null;
+		String sql = "select count(*) from tb_lecture join tb_mento using(mtnum) "
+				+ "where " + type + " like '%" + data + "%'";
+		ResultSet rs = null;
+		int result = 0;
+		try {
+			stmt = conn.createStatement();
+			rs = stmt.executeQuery(sql);
+			if(rs.next()) {
+				result = rs.getInt("cnt");
+			}
+		} catch(SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rs);
+			close(stmt);
+		}
+		return result;
+	}
+	
 	public List<Lecture> lectureApproList(Connection conn, String type, String data, int cPage, int numPerPage) {
 
 		List<LectureUpload> setUpList = new ArrayList();
