@@ -4,7 +4,7 @@
 <%@ page
    import="com.semi.report.model.vo.Report, com.semi.mento.model.vo.Mento, java.util.*"%>
    <% 	
-   		List<Report> list = (List)request.getAttribute("list"); 
+   		List<Report> list = (List)request.getAttribute("reportList"); 
 		int cPage=(int)request.getAttribute("cPage");
 		String pageBar=(String)request.getAttribute("pageBar");
 		int count = 0;
@@ -16,7 +16,7 @@
 		<div id="adminSearchContainer">
 
 			<div id="search-mreporterId">
-				<form action="<%=request.getContextPath()%>/admin/reportApproFinderCom.do">
+				<form action="<%=request.getContextPath()%>/admin/reportApproFinder.do">
 					<input type="hidden" name="searchType" value="mId">
 					<input type="hidden" name="cPage" value="<%=cPage%>"> 
 					신고자 ID : <input type="text" name="searchKeyword" placeholder="검색어 입력">
@@ -38,7 +38,7 @@
    <article class="admin-list-container wrap">
     <div class="row">
          <div class="col">
-            <h3 class="admintitle">신고처리완료목록</h3>
+            <h3 class="admintitle">신고처리대기목록</h3>
             <div class="tab-content">
                <div class="tab-pane fade show active" id="lectureAppro">
 				    <% 

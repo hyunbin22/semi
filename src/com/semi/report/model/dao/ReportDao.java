@@ -530,7 +530,7 @@ public class ReportDao {
 				+ "select rownum as rnum, a.* from("
 				+ "select * from tb_report a join "
 				+ "tb_member b on a.mreporter_num = b.mnum where "
-				+ "report_check='N' and mId like '%"+data+"%')a) where rnum between "+ start + " and " + end;
+				+ "report_check='Y' and mId like '%"+data+"%')a) where rnum between "+ start + " and " + end;
 		try {
 			stmt = conn.createStatement();
 			rs=stmt.executeQuery(sql);
