@@ -38,7 +38,6 @@ public class MemberSeeMoreStudy extends HttpServlet {
 		Order o = service.seeMoreStudy(lecNum);
 		
 		request.setAttribute("order", o);
-		System.out.println(o);
 		request.getRequestDispatcher("/views/member/studyListView.jsp").forward(request, response);
 	}
 

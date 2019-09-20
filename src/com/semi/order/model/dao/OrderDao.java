@@ -32,30 +32,7 @@ public class OrderDao {
 		
 	}
 	
-	//수업신청
-//	public int insertOrder(Connection conn, Order order) {
-//		
-//		PreparedStatement pstmt = null;
-//		String sql = prop.getProperty("insertOrder");
-//		int result = 0;
-//		try {
-//			pstmt = conn.prepareStatement(sql);
-//			pstmt.setString(1, order.getoTot());
-//			pstmt.setInt(2, );
-//			pstmt.setString(3, );
-//			pstmt.setString(4, text);
-//			pstmt.setInt(5, price);
-//			
-//			result = pstmt.executeUpdate();
-//		} catch(SQLException e) {
-//			e.printStackTrace();
-//		} finally {
-//			close(pstmt);
-//		}
-//		return result;
-//
-//		
-//	}
+
 
 	//신청 등록 후 신청내용 검색(return sNum)
 	public Order selectOrder(Connection conn, int oNum) {

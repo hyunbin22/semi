@@ -15,9 +15,9 @@
                  <form action = "<%=request.getContextPath()%>/member/findId" method="POST">
                 <table class="tblreg">
                         <tr>
-                            <td colspan="3">이름</td>
+                            <td colspan="3" class = "lecture">이름</td>
                             <td>
-                                <input class="textfield" type="text" name="name" placeholder="이름을 입력해주세요">
+                                <input class="textfield title2" type="text" name="name" placeholder="이름을 입력해주세요" required>
                             </td>
                             <td>
                             </td>
@@ -25,8 +25,8 @@
                         <tr></tr>
                         <tr></tr>
                         <tr>
-						<td colspan="3">생년월일</td>
-						<td><input class="textfield" type="date" name="birth"
+						<td colspan="3" class = "lecture">생년월일</td>
+						<td><input class="textfield title2" type="date" name="birth"
 							id="birth" required></td>
                         </tr>
                         <tr>
@@ -35,9 +35,9 @@
                         </tr>
                         <tr></tr>
                         <tr>
-                            <td colspan="3">핸드폰 번호</td>
+                            <td colspan="3" class = "lecture">핸드폰 번호</td>
                             <td>
-							<input class="textfield" type="text" name="phone" placeholder="휴대폰번호를 입력해주세요. (-없이)">
+							<input class="textfield title2" type="text" name="phone" placeholder="휴대폰번호를 입력해주세요. (-없이)" required>
 							</td>
                         </tr>
                     

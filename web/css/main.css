@@ -169,15 +169,16 @@ header {
 }
 
 #most1_1 {
-	background-color: #a79c8e;
+	background-color: #f24365;
 	text-align: center;
 	height: 40px;
 	font-size: 20px;
 	color: white;
 	font-display: inline;
-	width: 339.3px;
+	width: 342px;
 	font-weight: bolder;
 	border: 1px solid gray;
+	font-family: 'Noto Sans KR', sans-serif;
 }
 
 .img1 {
@@ -1517,8 +1518,8 @@ table.mtStudyList{
    display:flex;
 }
 .lecturebutton{
-       background: #ff005a;
-       color: #fff;
+    background: #ff005a;
+	color: #fff;
     padding: 20px 30px;
     width: 230px;
     margin: 40px auto;
@@ -1526,4 +1527,19 @@ table.mtStudyList{
     border-radius: 6px;
     text-align: center;
 }
-	
+
+/* 메인 콘텐츠 */
+
+table.contentTable{
+	width : 1024px;
+	height: 200px;
+	background-color: #edf0f4;
+}
+
+td.contentTable2{
+	font-family: 'Noto Sans KR', sans-serif;
+	font-weight: bold;
+	font-size : 20px;
+	text-align: center;
+}
+

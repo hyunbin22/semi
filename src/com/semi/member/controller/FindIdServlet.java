@@ -44,7 +44,6 @@ public class FindIdServlet extends HttpServlet {
 		
 		MemberService service = new MemberService();
 		Member m = service.findMemberId(name , date , phone);
-		System.out.println(m);
 		
 		request.setAttribute("member", m);
 		request.getRequestDispatcher("/views/member/findIdView.jsp").forward(request, response);;

@@ -37,14 +37,10 @@ public class MentoMyPageServlet extends HttpServlet {
 		
 		int getMtNum=Integer.parseInt(request.getParameter("getMtNum"));
 		
-		System.out.println("넘어온거 " + getmNum + "/" + getMtNum);
-		
-//		MentoUpload mu = new MentoUploadService().selectMentoUpload(getMtNum);
 		Mento mt= new MentoService().mentoView(getmNum);
 		
 		request.setAttribute("mento", mt);
-//		request.setAttribute("mentoUpload", mu);
-//		System.out.println(mu);
+
 		
 		request.getRequestDispatcher("/views/mento/mentoPageView.jsp").forward(request,response);		
 	}

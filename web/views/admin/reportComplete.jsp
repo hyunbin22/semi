@@ -3,23 +3,46 @@
 <%@ include file="/views/common/adminHeader.jsp"%>
 <%@ page
    import="com.semi.report.model.vo.Report, com.semi.mento.model.vo.Mento, java.util.*"%>
-   <% List<Report> list = (List)request.getAttribute("list"); 
+   <% 	
+   		List<Report> list = (List)request.getAttribute("list"); 
 		int cPage=(int)request.getAttribute("cPage");
 		String pageBar=(String)request.getAttribute("pageBar");
 		int count = 0;
    %>
-<%@ include file="/views/common/adminAside.jsp"%>
+   <%@ include file="/views/common/adminAside.jsp"%>
 <section>
 <div style = "height: 700px;">
+<article id="search1">
+		<div id="adminSearchContainer">
+
+			<div id="search-mreporterId">
+				<form action="<%=request.getContextPath()%>/admin/reportApproFinderCom.do">
+					<input type="hidden" name="searchType" value="mId">
+					<input type="hidden" name="cPage" value="<%=cPage%>"> 
+					신고자 ID : <input type="text" name="searchKeyword" placeholder="검색어 입력">
+					<button type="submit">검색</button>
+				</form>
+			</div>
+	 		<%-- <div id="search-reportTitle">
+				<form action="<%=request.getContextPath()%>/admin/reportApproFinder.do">
+					<input type="hidden" name="searchType" value="mName">
+					<input type="hidden" name="cPage" value="<%=cPage%>"> 
+					<input type="hidden" name="temp" value=0>
+					<input type="text" name="searchKeyword" placeholder="이름 입력"
+						value='<%="mName".equals(searchType)?searchKey:""%>'>
+					<button type="submit">검색</button>
+				</form>
+			</div>  --%>
+		</div>
+	</article>
    <article class="admin-list-container wrap">
-      <div class="row">
+    <div class="row">
          <div class="col">
             <h3 class="admintitle">신고처리완료목록</h3>
             <div class="tab-content">
                <div class="tab-pane fade show active" id="lectureAppro">
-                     <%
+				    <% 
                      for (int i = 0; i < list.size(); i++) {
-					
                      %>
                   <div class="card appro-frm-wrap" style = "height: 110px;">
                      <div class="lectureAppro-frm">
@@ -37,11 +60,11 @@
                            </table>
 						<br>
                      </div>
-                      <% count++;}  if(count==0) {
+                     <% count++;}  if(count==0) {
 							%>
 						<div class="card appro-frm-wrap"></div>
 					<%} %>
-                    <div id="admin-appro-pageBar">
+                    <div id="admin-appro-pageBar" class = "center">
          				<%=request.getAttribute("pageBar")%>
       				</div>
                   </div>
@@ -51,14 +74,11 @@
       </div>
    </article>
 
-
-
- </div>
+</div>
 </section>
 
-<%@ include file="/views/common/adminFooter.jsp"%>
-
 <script>
+
 $(function(){
 	if(<%=count%>==0) {
 		alert("조회 결과가 없습니다.");
@@ -66,3 +86,5 @@ $(function(){
 	}
 });
 </script>
+
+<%@ include file="/views/common/adminFooter.jsp"%>

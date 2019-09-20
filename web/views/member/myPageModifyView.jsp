@@ -19,19 +19,28 @@
 						<td></td>
 						<td></td>
 					</tr>
+					<tr></tr>
 					<tr>
 						<td colspan="2" class = "lecture">비밀번호 변경</td>
 						<td><input class="textfield title2" type="password" name="mPw"
-							id="newPw" placeholder="변경하실 비밀번호를 입력해주세요" required></td>
+							id="password" placeholder="변경하실 비밀번호를 입력해주세요" required></td>
 						<td></td>
 						<td></td>
 					</tr>
 					<tr>
+					<td colspan="2" ></td>
+					<td id="pwCheck" class="rg-checkMsg"></td>
+					</tr>
+					<tr>
 						<td colspan="2" class = "lecture">비밀번호 재입력</td>
 						<td><input class="textfield title2" type="password" name="userPwd2"
-							id="newPw2" placeholder="" required></td>
+							id="password2" placeholder="" required></td>
 						<td></td>
 						<td></td>
+					</tr>
+					<tr>
+					<td colspan="2" ></td>
+					<td id="pwCheck2" class="rg-checkMsg"></td>
 					</tr>
 					<tr>
 						<td colspan="2" class = "lecture">이메일 변경</td>
@@ -39,6 +48,7 @@
 							id="email" placeholder="변경하실 이메일을 입력해주세요" required></td>
 							<td></td>
 					</tr>
+					<tr></tr>
 					<tr>
 						<td colspan='2' class = "lecture">연락처</td>
 						<td><%=m.getmPhone() %></td>
@@ -49,14 +59,14 @@
 					<tr>
 						<td colspan='1' class = "lecture">변경할 연락처</td>
 						<td>
-							<input type="text" name="tel1" id="tel1" class="phone title2" list="data" required> - 
+							<input type="text" name="tel1" id="tel1" class="phone title2" list="data"> - 
 							<datalist id="data">
 								<option value="010"></option>
 								<option value="011"></option>
 								<option value="019"></option>
 							</datalist> 
-							<input type="text" name="tel2" id="tel2" class="phone title2" maxlength=4 required> - 
-							<input type="text" name="tel3" id="tel3" class="phone title2" maxlength=4 required>
+							<input type="text" name="tel2" id="tel2" class="phone title2" maxlength=4 > - 
+							<input type="text" name="tel3" id="tel3" class="phone title2" maxlength=4 >
 						</td>
 					</tr>
 					<tr>
@@ -66,7 +76,7 @@
 					<tr>
 						<td colspan='1' class = "lecture">인증번호</td>
 						<td><input class="textfield title2" type="text" name="number"
-							placeholder="인증번호를 입력해주세요" id="checkNum"></td>
+							placeholder="인증번호를 입력해주세요" id="checkNum" required></td>
 						<td></td>
 					</tr>
 			        <tr>
@@ -90,48 +100,72 @@
             </div>
         </section>
         <script>
-        function checkValue(){ 
-    		var email = $('#email');
-    		var phone1 = $('#phone1');
-    		var phone2 = $('#phone2');
-    		var phone3 = $('#phone3');
-    		
-    		var pw = $('#newPw');
-    		var pw2 = $('#newPw2');
+        $(function() {
+    		var re = /^[a-zA-Z0-9]{6,12}$/ // 아이디와 패스워드가 적합한지 검사할 정규식
 
-    		if(phone1.val().length==0 || phone2.val().length==0 || phone3.val().lenght==0){
-                alert('전화번호를 입력하세요');
-                phone1.focus();
-                return false;
-            }
-    		
-    		if(email.val().length==0){
-    			alert('이메일을 입력하세요');
-                email.focus();
-                return false;
-    		}
-    		
-    		
-              if(pw.val().length==0){
-                  alert('비밀번호를 입력하세요');
-                  pw.focus();
-                  return false;
-              }
-              if(pw.val().length<=5){
-                  alert('비밀번호를 6글자 이상 입력하세요');
-                  pw.focus();
-                  return false;
-              }
-              /* if(pw.val()) */
-              if(pw.val()!=pw2.val()) {
-            	  alert('비밀번호가 맞지 않습니다.')
-            	  pw.focus();
-                  return false;
-              }
-              
-              
-              return true;
-    	}
+    		var pattern1 = /[0-9]/;
+    		var pattern2 = /[a-zA-Z]/;
+    		var pattern3 = /[~!@\#$%<>^&*]/;
+
+    		var pwCheck = $('#pwCheck');
+    		$('#password').blur(function() {
+    				var pw = $('#password').val();
+
+    				if (pw == "") {
+    					$(pwCheck).text('비밀번호를 입력해주세요.');
+    					$(pwCheck).css({
+    						"color" : "red",
+    						"font-size" : "11px"
+    					});
+    					$(pwCheck).prop("disabled", true);
+    				} else if (!pattern1.test(pw) || !pattern2.test(pw)	|| !pattern3.test(pw)) {
+    					$(pwCheck).text('비밀번호는 영문자와 숫자, 특수기호를 포함해주세요.');
+    					$(pwCheck).css({
+    						"color" : "red",
+    						"font-size" : "11px"
+    					});
+    					$(pwCheck).prop("disabled", true);
+    				} else if (pw.length < 6) {
+    					$(pwCheck).text('비밀번호는 6글자 이상 입력해주세요.');
+    					$(pwCheck).css({
+    						"color" : "red",
+    						"font-size" : "11px"
+    					});
+    					$(pwCheck).prop("disabled", true);
+    				} else {
+    					$(pwCheck).text("");
+    					$(pwCheck).prop("disabled", false);
+
+    				}
+    			});
+    	});
+
+    	$(function() {
+    		var pwCheck2 = $('#pwCheck2');
+    		$('#password2').blur(function() {
+    			var pw2 = $('#password2').val();
+    			if (pw2 == "") {
+    				$(pwCheck).text('비밀번호를 입력해주세요.');
+    				$(pwCheck).css({
+    					"color" : "red",
+    					"font-size" : "11px"
+    				});
+    				$(pwCheck).prop("disabled", true);
+    			} else if (!(pw2 == $('#password').val())) {
+    				$(pwCheck2).text("비밀번호확인이 일치하지 않습니다.");
+    				$(pwCheck2).css({
+    					"color" : "red",
+    					"font-size" : "11px"
+    				});
+    				$(pwCheck2).prop("disabled", true);
+    			} else {
+    				$(pwCheck2).text("");
+    				$(pwCheck2).prop("disabled", false);
+    			}
+
+    		});
+
+    	});
         
         function updateMember(){
         	

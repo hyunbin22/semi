@@ -15,9 +15,9 @@
                  <form action = "<%=request.getContextPath() %>/member/findPwd" method="POST">
                 <table class="tblreg">
                         <tr>
-                            <td>아이디</td>
+                            <td class = "lecture">아이디</td>
                             <td>
-                                <input class="textfield" type="text" name="mId" placeholder="아이디를 입력해주세요">
+                                <input class="textfield title2" type="text" name="mId" placeholder="아이디를 입력해주세요" required>
                             </td>
                             <td>
                             </td>
@@ -25,9 +25,9 @@
                         <tr></tr>
                         <tr></tr>
                         <tr>
-                            <td>이메일</td>
+                            <td class = "lecture">이메일</td>
                             <td>
-                                <input class="textfield" type="text" name="email" placeholder="이메일을 입력해주세요">
+                                <input class="textfield title2" type="text" name="email" placeholder="이메일을 입력해주세요" required>
                             </td>
                   
                         </tr>

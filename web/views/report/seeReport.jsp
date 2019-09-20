@@ -29,7 +29,7 @@
                         <td colspan = "4"><hr></td>
                         </tr>
                         <tr>
-                        <td colspan = "4">문의 내용</td>
+                        <td colspan = "4">신고 내용</td>
                         </tr>
                         <tr class="notice-content">
                             <td colspan="4">

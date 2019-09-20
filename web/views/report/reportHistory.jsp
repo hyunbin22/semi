@@ -46,13 +46,13 @@
                     <% count++;} %>
                     <%if(count == 0){ %>
 					<tr class = "list">
-					<td colspan="5">신청한 강의 목록이 없습니다.</td>
+					<td colspan="5">신고 목록이 없습니다.</td>
 					</tr>
 					<%} %>
                     </table>
                     <br><br>
 			 	<%if(count > 0){ %>
-					<div id="admin-appro-pageBar">
+					<div id="admin-appro-pageBar" class = "center1">
          				<%=request.getAttribute("pageBar")%>
       				</div>
       			<%} %>
