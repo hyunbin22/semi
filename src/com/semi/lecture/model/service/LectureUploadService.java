@@ -54,11 +54,7 @@ public class LectureUploadService {
 		Connection conn = getConnection();
 		int result=dao.deleteLectureImg(conn, lecNum);
 		
-		if(result>0) {
-			commit(conn);
-		}else {
-			rollback(conn);
-		}
+	
 		close(conn);
 		return result;
 	}

@@ -63,11 +63,11 @@
 				<%if(lt.getLecType().equals("그룹")) { %>
 							<input type="text" name="studentCount"	value="<%=lt.getLecMaxCount()%>" class="title2" >
 							<input type="radio" name="classType" id="r2" value="그룹" style='margin-top:19px;' checked><label	for="r2" style='margin-top:17px; margin:10px;'>그룹수업</label>
-							<input type="radio" name="classType" id="r1" value="1:1" style='margin-top:19px;'><label for="r1" style='margin-top:17px; margin:10px;'>1:1수 업</label>                             
+							<input type="radio" name="classType" id="r1" value="1대1" style='margin-top:19px;'><label for="r1" style='margin-top:17px; margin:10px;'>1대1수 업</label>                             
                             <%} else { %>
 							<input type="text" name="studentCount"	value="<%=lt.getLecMaxCount()%>" class="title2" >
 	                        <input type="radio" name="classType" id="r2" value="그룹" style='margin-top:19px;' ><label	for="r2" style='margin-top:17px; margin:10px;'>그룹수업</label>
-							<input type="radio" name="classType" id="r1" value="1:1" style='margin-top:19px;' checked><label for="r1" style='margin-top:17px; margin:10px;'>1:1수업</label>            
+							<input type="radio" name="classType" id="r1" value="1대1" style='margin-top:19px;' checked><label for="r1" style='margin-top:17px; margin:10px;'>1대1수업</label>            
                         <%} %>
 				<br> <br>
 				</div>
@@ -409,7 +409,7 @@ function readURL(input) {
                $("input:text[name=studentCount]").attr("disabled",false);
                // radio 버튼의 value 값이 1이라면 활성화
     
-           }else if($("input[name=classType]:checked").val() == "1:1"){
+           }else if($("input[name=classType]:checked").val() == "1대1"){
                  $("input:text[name=studentCount]").attr("disabled",true);
                // radio 버튼의 value 값이 0이라면 비활성화
            }

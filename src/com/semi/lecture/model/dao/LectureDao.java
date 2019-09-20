@@ -415,7 +415,7 @@ public class LectureDao {
 		Statement stmt=null;
 		ResultSet rs=null;
 		List<Lecture> list=new ArrayList();
-		String sql="select * from tb_lecture";
+		String sql="select * from tb_lecture where mtnum="+mtnum;
 		try {
 			stmt=conn.createStatement();
 			rs=stmt.executeQuery(sql);
