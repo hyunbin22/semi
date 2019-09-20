@@ -63,8 +63,12 @@ public class MentoRegisterEndServlet extends HttpServlet {
 		String mtacademic = mr.getParameter("mtacademic");
 		String mtacademicdept = mr.getParameter("mtacademicdept");
 		String mtgraduation = mr.getParameter("mtgraduation");
-		String bank = mr.getParameter("bank");
-		String accountNumber = mr.getParameter("accountNumber");
+		String bank = mr.getParameter("mtbank");
+		String accountNumber = mr.getParameter("mtAccountNumber");
+		
+		System.out.println("bank, accountNumber");
+		System.out.println(mr.getParameter("bank"));
+		System.out.println(mr.getParameter("accountNumber"));
 		
 		String upMentoOrgProfile=mr.getOriginalFileName("mtprofileimg");
 		String upMentoReProfile = mr.getFilesystemName("mtprofileimg");

@@ -154,7 +154,7 @@
      			alert('재학 혹은 졸업을 선택하세요.');
      			return false;
      		}
-     		if(photo.is(':checked')==false){
+     		if(photo.val()==""){
      			alert('신분인증사진을 등록하세요.')
      			return false;
      		}
@@ -162,8 +162,8 @@
      			alert('은행을 선택하세요.');
      			return false;
      		}
-     		if(accountNumber()==null){
-     			alert('계좌번호를 선택하세요.');
+     		if(accountNumber.val()==null){
+     			alert('계좌번호를 입력하세요.');
      			return false;
      		}
      		
