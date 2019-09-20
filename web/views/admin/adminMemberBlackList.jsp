@@ -55,7 +55,7 @@
                                  <td style = "margin-top: 13.5px; margin-left: 10px; text-align: left; width: 200px;"><%=members.get(i).getmEmail() %></td>
                                  <td style = "margin-top: 13.5px; margin-left: 10px; text-align: left; width: 100px;"><%=members.get(i).getmPhone() %></td>
                                  <td>
-								<button id ="seeMore" name = "seeMore"  onclick="location.href='<%=request.getContextPath()%>/admin/memberRebirth?mId=<%=members.get(i).getmId()%>'">계정 활성화</button>
+								<button id ="seeMore" name = "seeMore"  onclick="location.href='<%=request.getContextPath()%>/admin/memberRebirth?mId=<%=members.get(i).getmId()%>'">계정활성화</button>
                                  </td>
                               </tr>        
                            </table>
