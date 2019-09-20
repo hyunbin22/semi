@@ -50,10 +50,6 @@ public class MentoUpdateLectureServlet extends HttpServlet {
         List<Lecture> lList = (List)new LectureService().lectureAllListByLecNum(lecNum);
         Lecture lt=new LectureService().lectureListByLecNum(lecNum);
 
-				
-        System.out.println(lecNum);
-        System.out.println(lList);
-        System.out.println(lt);
         request.setAttribute("category", c);
         request.setAttribute("subcategory", sc);
         request.setAttribute("local", l);

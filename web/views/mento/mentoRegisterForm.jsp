@@ -11,8 +11,9 @@
                     <hr>
                 </div>
       <form action="<%=request.getContextPath()%>/mentoRegisterEnd" method="post" enctype="multipart/form-data" class = "center1" id = "mentoFrm">
-      
-         프로필 사진<input type=file name='mtprofileimg' style='display: none;'>
+      <div class="box">
+         <div class="lecture" style='margin-top:50px;'>프로필 사진</div>
+         <div style='margin:0;'><input type=file name='mtprofileimg' style='display: none;' class="title2">
          <img id="camera"
             src='https://dumielauxepices.net/sites/default/files/digital-camera-clipart-basic-camera-502592-7419029.jpg'
             onclick='document.all.mtprofileimg.click(); document.all.file2.value=document.all.file1.value'
@@ -23,6 +24,8 @@
             수강생 분들에게 신뢰감을 높이기 위해 <br>
             얼굴이 나온 사진이 필수 입니다.
          </p>
+            </div>
+         </div>
          <br> <br>
          아이디
          <input id="nick" type="text" name="mtnickname" value = "<%=m.getmId()%>" readonly="readonly" style = "border : none;">

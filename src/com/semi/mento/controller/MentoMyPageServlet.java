@@ -1,6 +1,8 @@
 package com.semi.mento.controller;
 
 import java.io.IOException;
+import java.sql.Connection;
+import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -39,12 +41,12 @@ public class MentoMyPageServlet extends HttpServlet {
 		
 		System.out.println("넘어온거 " + getmNum + "/" + getMtNum);
 		
-//		MentoUpload mu = new MentoUploadService().selectMentoUpload(getMtNum);
+		List<MentoUpload> muList = new MentoUploadService().mentoUpList(getMtNum);
 		Mento mt= new MentoService().mentoView(getmNum);
 		
 		request.setAttribute("mento", mt);
-//		request.setAttribute("mentoUpload", mu);
-//		System.out.println(mu);
+		request.setAttribute("mentoUpload", muList);
+		System.out.println(muList);
 		
 		request.getRequestDispatcher("/views/mento/mentoPageView.jsp").forward(request,response);		
 	}

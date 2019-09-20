@@ -85,7 +85,7 @@ public class LectureService {
 
 		if(result>0) {
 			commit(conn);
-			result = dao.selectSeqLecNum(conn, l.getMtNum());
+			result = dao.selectSeqLecNum(conn);
 		}else {
 			rollback(conn);
 		}
@@ -164,6 +164,12 @@ public class LectureService {
 		return list;
 	}
 
+		public List<LectureUpload> selectLectureUpload(int lecNum) {
+			Connection conn= getConnection();
+			List<LectureUpload> list=dao.selectLectureUpload(conn, lecNum);
+			close(conn);
+			return list;
+		}
 
 
 }

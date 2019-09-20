@@ -56,7 +56,7 @@ public class LectureUploadDao {
 			
 		}
 		
-		// 강의번호에 맞는 커버사진 불러오기 (LectureUpload) 하나
+		// 강의번호에 맞는 커버사진 불러오기 (LectulectureUpCover2reUpload) 하나
 	   public LectureUpload lectureUpCover2(Connection conn, int lecNum) {
 	      Statement stmt = null;
 	      ResultSet rs = null;

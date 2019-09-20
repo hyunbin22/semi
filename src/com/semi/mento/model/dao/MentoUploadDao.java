@@ -8,10 +8,12 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
 
+import com.semi.lecture.model.vo.Lecture;
 import com.semi.mento.model.vo.MentoUpload;
 
 public class MentoUploadDao {
@@ -59,6 +61,7 @@ private Properties prop = new Properties();
 			String sql = prop.getProperty("mentoUpList");
 			List<MentoUpload> list = new ArrayList();
 			ResultSet rs = null;
+			System.out.println(mtNum);
 			try {
 				pstmt = conn.prepareStatement(sql);
 				pstmt.setInt(1, mtNum);
@@ -79,7 +82,8 @@ private Properties prop = new Properties();
 			} finally {
 				close(rs);
 				close(pstmt);
-			} return list;
+			} 
+			return list;
 		}
 
 		//프로필 사진 불러오기
@@ -164,6 +168,23 @@ private Properties prop = new Properties();
 		
 		return result1;
 	}
-	
+
+	public int deleteMentoImg(Connection conn, int mtNum) {
+		PreparedStatement pstmt = null;
+		int result1=0;
+		String sql=prop.getProperty("deleteMentoImg");
+		try {
+			pstmt=conn.prepareStatement(sql);
+			pstmt.setInt(1, mtNum);
+			result1=pstmt.executeUpdate();
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}
+
+		return result1;
+	}
+
 
 }

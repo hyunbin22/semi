@@ -43,7 +43,7 @@ public class MentoUpdateLectureEndServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		 
 		if(!ServletFileUpload.isMultipartContent(request)) {
-	         request.setAttribute("msg", "등록 실패 ![form:ectype] 관리자에게 문의하세요!");
+	         request.setAttribute("msg", "강의수정 실패 ![form:ectype] 관리자에게 문의하세요!");
 	         request.setAttribute("loc", "/");
 	         request.getRequestDispatcher("/views/common/msg.jsp").forward(request, response);
 	         
@@ -158,6 +158,7 @@ public class MentoUpdateLectureEndServlet extends HttpServlet {
 	      System.out.println("이미지등록 : "+result2);
 	      System.out.println("이미지삭제 : "+result3);
 
+	      
 	      
 	      if(result>0 && result2>0 && result3>0) {
 	         msg="강의수정 완료";
