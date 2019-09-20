@@ -52,7 +52,7 @@
 
                            <table class="tbl-appro" style = "text-align: center">
                               <tr>
-                                 <td style = "margin-top: 13.5px; margin-left: 10px; text-align: center; width: 150px;"><%=list.get(i).getReportTitle() %></td>
+                                 <td style = "margin-top: 13.5px; margin-left: 10px; text-align: left; width: 200px;"><%=list.get(i).getReportTitle() %></td>
                                  <td>
 								<button id ="seeMore" name = "seeMore"  onclick="location.href='<%=request.getContextPath()%>/admin/reportView?reportNo=<%=list.get(i).getReportNum()%>'">자세히보기</button>
                                  </td>

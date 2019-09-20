@@ -249,7 +249,7 @@ public class MemberDao {
 			pstmt=conn.prepareStatement(sql);
 			rs=pstmt.executeQuery();
 			if(rs.next()) {
-				result=rs.getInt("cnt");
+				result=rs.getInt(1);
 			}
 		}catch(SQLException e) {
 			e.printStackTrace();
@@ -398,6 +398,60 @@ public class MemberDao {
 		}
 		finally {
 			close(pstmt);
+		}
+		return result;
+	}
+
+	public List<Member> selectBlackListPage(Connection conn, int cPage, int numPerPage) {
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		String sql=prop.getProperty("selectBlackListPage");
+		List<Member> list=new ArrayList();
+		try {
+			pstmt=conn.prepareStatement(sql);
+			pstmt.setInt(1,(cPage-1)*numPerPage+1);
+			pstmt.setInt(2,cPage*numPerPage);
+			rs=pstmt.executeQuery();
+			while(rs.next()) {
+				Member m=new Member();
+				m.setmNum(rs.getInt("mNum"));
+				m.setmId(rs.getString("mId"));
+				m.setmPassword(rs.getString("mPassword"));
+				m.setmName(rs.getString("mName"));
+				m.setmGender(rs.getString("mGender").charAt(0));
+				m.setmBirth(rs.getDate("mBirth"));
+				m.setmEmail(rs.getString("mEmail"));
+				m.setmPhone(rs.getString("mPhone"));
+				m.setmUse(rs.getString("mUse").charAt(0));
+				m.setmHireDate(rs.getDate("mHire_Date"));
+				list.add(m);
+			}
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rs);
+			close(pstmt);
+		}return list;
+	}
+
+	public int selectCountMember2(Connection conn) {
+		Statement stmt = null;
+		ResultSet rs = null;
+		int result = 0;
+		String sql = "select count(*) from tb_member where muse = 'N'";
+		try {
+			stmt = conn.createStatement();
+			rs = stmt.executeQuery(sql);
+			if(rs.next())
+			{
+				result = rs.getInt(1);
+			}
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}
+		finally {
+			close(rs);
+			close(stmt);
 		}
 		return result;
 	}

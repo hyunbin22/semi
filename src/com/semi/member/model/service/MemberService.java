@@ -159,4 +159,18 @@ public class MemberService {
 		return result;
 	}
 
+	public List<Member> selectBlackListPage(int cPage, int numPerPage) {
+		Connection conn=getConnection();
+		List<Member> list=dao.selectBlackListPage(conn,cPage,numPerPage);
+		close(conn);
+		return list;
+	}
+
+	public int selectCountBlackMember() {
+		Connection conn=getConnection();
+		int result=dao.selectCountMember2(conn);
+		close(conn);
+		return result;
+	}
+
 }
