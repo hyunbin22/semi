@@ -106,28 +106,28 @@
 		                <span onclick = "location.href='<%=request.getContextPath()%>/member/memberRegAgree.do'" id = "join">회원가입</span>
 		                <span onclick = "location.href='<%=request.getContextPath()%>/views/member/findId.jsp'" id = findId>아이디 찾기</span>
 		                <span onclick = "location.href='<%=request.getContextPath()%>/views/member/findPwd.jsp'" id = findPw>비밀번호 찾기</span>
+		                 	</div>
+		            </div> 
 		             <%} else { %>       
-		                <div id = loginWrap>
-		                <div id = "myPro">
-		                    <div id = "myPro2"><%=memberLogin.getmId()%>님 환영합니다!
-		                    <img src="<%=request.getContextPath() %>/image/messageIcon.png" id="messageIcon">
-                			<span id = "unread" class="label label-info"></span>
-		        
-		                    </div>
-		                </div>
-		                <div id = "mypromenu">
-		                    <button onclick = "location.href='<%=request.getContextPath()%>/memberLogoutServlet.do'" id = logout>로그아웃</button>
-		                    <button onclick = "location.href='<%=request.getContextPath()%>/member/memberMyPage.do?mId=<%=memberLogin.getmId()%>'" id = mypage>마이페이지</button>
-		                </div>
-		            </div>
+		        <div id = loginWrap>
+	                <div id = "myPro">
+	                    <div id = "myPro2"><%=memberLogin.getmId()%>님 환영합니다!
+	                    <img src="<%=request.getContextPath() %>/image/messageIcon.png" id="messageIcon">
+               			<span id = "unread" class="label label-info"></span>
+	        
+	                    </div>
+	                </div>
+	                <div id = "mypromenu">
+	                    <button onclick = "location.href='<%=request.getContextPath()%>/memberLogoutServlet.do'" id = logout>로그아웃</button>
+	                    <button onclick = "location.href='<%=request.getContextPath()%>/member/memberMyPage.do?mId=<%=memberLogin.getmId()%>'" id = mypage>마이페이지</button>
+ 	                	</div>
+		            </div> 
 		          
 	            <%} %>
 	            </div>
 	        </div>
-        </div>
-        <%if(memberLogin!=null) {%>
-		 <br><br><br><br><br><br><br><br><br><br><br>
-		<%} %>
+
+		 <br><br><br><br><br><br><br><br>
 		   <div id = menu class = "center1">
 		 
 				<nav>
@@ -135,7 +135,7 @@
 			        
 				        <li><a href="<%=request.getContextPath()%>">ABLING</a></li>
 				        <li><a href="<%=request.getContextPath()%>/lecture/lectureList.do">강의찾기</a></li>
-				        <li><a href="#">수업모임</a></li>
+				        <li><a href="<%=request.getContextPath()%>/moim/moimList.do">수업모임</a></li>
 				        <!-- <li><a href="#">이벤트</a></li> -->
 				        <li><a href="#">고객지원</a>
 			         <ul>

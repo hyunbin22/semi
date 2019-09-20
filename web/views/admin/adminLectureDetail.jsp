@@ -22,7 +22,9 @@
 			<br>
 			<%for(int i = 0; i < lec.getLectureUpList().size(); i++) {
 				if(lec.getLectureUpList().get(i).getUpLectureCategory().equals("cover")) {%>
-			<img src="<%=request.getContextPath()%>/upload/lecture/<%=lec.getLectureUpList().get(i).getUpLectureReName() %>" class="lecture-cover-img" alt="...">
+			<div class="center1">
+				<img src="<%=request.getContextPath()%>/upload/lecture/<%=lec.getLectureUpList().get(i).getUpLectureReName() %>" class="lecture-cover-img" alt="...">
+			</div>
 			<%}
 			}%>
 			<div class="detailbody">
@@ -41,16 +43,21 @@
 						</p>
 					</p>
 					<hr>
+					
 					<p class="classinfo">
+					
 						<h2>강의사진</h2>
 						<p>
 							<%for(int i = 0; i < lec.getLectureUpList().size(); i++) {
 								if(lec.getLectureUpList().get(i).getUpLectureCategory().equals("lecimage")) {%>
-							<img src='<%=request.getContextPath() %>/upload/lecture/<%=lec.getLectureUpList().get(i).getUpLectureReName() %>'>
+							<div class="center1">
+								<img src='<%=request.getContextPath() %>/upload/lecture/<%=lec.getLectureUpList().get(i).getUpLectureReName() %>'>
+							</div>
 							<%}
 							}%>
 						</p>
 					</p>
+					
 					<p class="classinfo">
 						<h2>커리큘럼</h2>
 						<p>
@@ -61,7 +68,9 @@
 					<%if(temp!=0) {%>
 						<p class="refusalinfo">
 							<h2>거절사유</h2>
-							<textarea id="refusalContent" cols="107" rows="5" style="resize: none;" maxlength="100" placeholder="거절사유를 입력하세요."><%=lec.getLecReason() %></textarea>
+							<div class="center1">
+								<textarea id="refusalContent" cols="107" rows="5" style="resize: none;" maxlength="200" placeholder="거절사유를 입력하세요."><%=reason %></textarea>
+							</div>
 						</p>
 					<%} %>
 				</div>

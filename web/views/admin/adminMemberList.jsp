@@ -5,17 +5,38 @@
 <%
    List<Member> members=(List)request.getAttribute("members");
    int cPage=(int)request.getAttribute("cPage");
+	String searchType = (String)request.getAttribute("searchType");
+	String searchKey = (String)request.getAttribute("searchKeyword");
    String pageBar=(String)request.getAttribute("pageBar");
 %>
     <section>
         <div>
-        <article class="search">
-            <select>
-                <option value="이름">이름</option>
-                <option value="이메일">이메일</option>
-                <option value="전화번호">전화번호</option>
-            </select>
-            <input type="text" placeholder="검색어 입력"> <button>검색</button>
+        <article class="search1">
+            <div id="adminSearchContainer">
+			<select id="searchType">
+				<option value="mId" <%="mId".equals(searchType)?"selected":"" %>>아이디</option>
+				<option value="mName" <%="mName".equals(searchType)?"selected":"" %>>이름</option>
+			</select> 
+			<div id="search-mId">
+				<form action="<%=request.getContextPath()%>/admin/lectureApproFinder.do">
+					<input type="hidden" name="searchType" value="mId">
+					<input type="hidden" name="cPage" value="<%=cPage%>">
+					<input type="hidden" name="temp" value=0> 
+					<input type="text" name="searchKeyword" placeholder="검색어 입력">
+					<button type="submit" class="next" style="height: 33px;">검색</button>
+				</form>
+			</div>
+	 		<div id="search-mName">
+				<form action="<%=request.getContextPath()%>/admin/lectureApproFinder.do">
+					<input type="hidden" name="searchType" value="mName">
+					<input type="hidden" name="cPage" value="<%=cPage%>"> 
+					<input type="hidden" name="temp" value=0> 
+					<input type="text" name="searchKeyword" placeholder="이름 입력"
+						value='<%="mName".equals(searchType)?searchKey:""%>'>
+					<button type="submit" class="next" style="height: 33px;">검색</button>
+				</form>
+			</div> 
+		</div>
         </article>
         <article>
             <div>

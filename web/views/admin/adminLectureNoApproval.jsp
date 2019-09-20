@@ -21,19 +21,19 @@
 				<form action="<%=request.getContextPath()%>/admin/lectureApproFinder.do">
 					<input type="hidden" name="searchType" value="mId">
 					<input type="hidden" name="cPage" value="<%=cPage%>">
-					<input type="hidden" name="temp" value=1> 
+					<input type="hidden" name="temp" value=2> 
 					<input type="text" name="searchKeyword" placeholder="검색어 입력">
-					<button type="submit">검색</button>
+					<button type="submit" class="next" style="height: 33px;">검색</button>
 				</form>
 			</div>
 	 		<div id="search-mName">
 				<form action="<%=request.getContextPath()%>/admin/lectureApproFinder.do">
 					<input type="hidden" name="searchType" value="mName">
 					<input type="hidden" name="cPage" value="<%=cPage%>"> 
-					<input type="hidden" name="temp" value=1> 
+					<input type="hidden" name="temp" value=2> 
 					<input type="text" name="searchKeyword" placeholder="이름 입력"
 						value='<%="mName".equals(searchType)?searchKey:""%>'>
-					<button type="submit">검색</button>
+					<button type="submit" class="next" style="height: 33px;">검색</button>
 				</form>
 			</div> 
 		</div>

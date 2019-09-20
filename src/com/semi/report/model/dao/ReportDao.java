@@ -81,7 +81,6 @@ public class ReportDao {
 
 	public int registerReportImage(Connection conn, ReportUpload ru, int reportNum) {
 		PreparedStatement pstmt = null;
-		System.out.println("reportNum : " + reportNum);
 		int result = 0;
 		String sql = prop.getProperty("registerReportImage");
 		try {

@@ -61,7 +61,6 @@ public class AdminLectureApproFinderServlet extends HttpServlet {
 		int countMentoApproval = new MentoService().countMentoApproval(type, data);
 		
 		List<Lecture> lectureList = new LectureService().lectureApproFindList(type, data, cPage, numPerPage);
-		System.out.println("LectureFinderServlet " + lectureList);
 		int mentoTotalPage=(int)Math.ceil((double)countMentoApproval/numPerPage);
 		String pageBar="";
 		int pageSizeBar=5;
@@ -92,12 +91,12 @@ public class AdminLectureApproFinderServlet extends HttpServlet {
 		//view페이지에 데이터 전송
 		request.setAttribute("pageBar", pageBar);
 		request.setAttribute("cPage", cPage);
-		request.setAttribute("lectureList",lectureList);
+		request.setAttribute("list",lectureList);
 		if(temp==0) {	//승인완료된 리스트
 			request.getRequestDispatcher("/views/admin/adminLectureList.jsp").forward(request, response);
-		} else if(temp==1){
+		} else if(temp==1){	//승인전 거절안된 리스트
 			request.getRequestDispatcher("/views/admin/adminLectureApproval.jsp").forward(request, response);
-		} else if(temp==2) {
+		} else if(temp==2) {	//승인전 거절된 리스트
 			request.getRequestDispatcher("/views/admin/adminLectureNoApproval.jsp").forward(request, response);
 		}
 

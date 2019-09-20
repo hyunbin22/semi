@@ -1,4 +1,4 @@
-package com.semi.message.controller;
+package com.semi.moim.controller;
 
 import java.io.IOException;
 import javax.servlet.ServletException;
@@ -8,25 +8,21 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- * Servlet implementation class OpenLecMessageServlet
+ * Servlet implementation class MoimEnrollServlet
  */
-@WebServlet("/message/openLecMessage.do")
-public class OpenLecMessageServlet extends HttpServlet {
+@WebServlet("/moim/moimEnroll.do")
+public class MoimEnrollServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
-    public OpenLecMessageServlet() {
+    public MoimEnrollServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		String toId = request.getParameter("toId");
-		String lecName = request.getParameter("lectureName");
-		request.setAttribute("toId", toId);
-		request.setAttribute("lecName", lecName);
-		request.getRequestDispatcher("/views/common/webMessageView.jsp?toId="+toId).forward(request, response);
-		
+		response.sendRedirect(request.getContextPath()+"/views/moim/moimEnroll.jsp");
+
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
