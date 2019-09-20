@@ -5,10 +5,8 @@
 <%@ page import="java.util.List"%>
 <%
 	Lecture lec = (Lecture) request.getAttribute("lecture");
-	Member m = null;
-	if (session.getAttribute("loginMember") != null) {
-		m = (Member) session.getAttribute("loginMember");
-	}
+	Member m = (Member) session.getAttribute("loginMember");
+
 	System.out.println("View m :" + m);
 	List<LectureReview> list = (List) request.getAttribute("list");
 	String toId = lec.getLecMento().getMember().getmId();
@@ -36,7 +34,7 @@
 <%-- <link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/css/classdetail.css">
    <link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/css/layout.css"> --%>
 
-<section class="center">
+<section class="center1">
    <div class="wrap">
       <article class="detailwrap">
          <img src="<%=request.getContextPath()%>/upload/lecture/<%=coverImage%>" class="detailimg" alt="...">
@@ -44,7 +42,7 @@
          <div class="detailbody">
             <div class="class_info">
             <br><br>
-               <h5 class="lecType" name="lectype">
+               <h5 class="lecType">
                   [
                   <%=lec.getLecType()%>
                   ]
@@ -82,14 +80,14 @@
                   <tr>
                      <td><img src="<%=request.getContextPath()%>/upload/lecture/<%=profileImage%>"></td>
                      <td>
-                        <ul class="tutorpro" name="lecmentocontent">
+                        <ul class="tutorpro">
                            <%=lec.getLecMentoContent()%>
                         </ul>
                      </td>
                   </tr>
                </table>
                <hr>
-               <p class="content" name="leclecturecontent"><%=lec.getLecLectureContent()%></p>
+               <p class="content"><%=lec.getLecLectureContent()%></p>
 
                <!-- <h2 class="subtext">커리큘럼</h2>
                             <ul>
@@ -199,57 +197,62 @@
 
 </section>
 
-<aside class="center">
+<aside>
 
-      <div class="wrap">
-         <div class="floatMenu">
-            <form action="<%=request.getContextPath()%>/lecture/OrderEnroll.do"
-      method="post" >
-      <input type="hidden" value="<%=lec.getLecNum()%>" name="lecnum">
-            <div class="floatTitle">
-               결제
-               <hr>
-            </div>
-            <div class="floatsubtitle">수업시간</div>
-            <div class="lecFViewTot-group">
-	               <input class="lecFViewTot"name="lectot" type="radio" value="<%=lec.getLecTot()%>"><%=lec.getLecTot() %>
-	               <input class="lecFViewTot" name="lectot" type="radio" value="<%=lec.getLecTot2()%>"><%=lec.getLecTot2()%>
+	<div>
+		<form action="<%=request.getContextPath()%>/lecture/OrderEnroll.do"
+			method="post">
+			<input type="hidden" value="<%=lec.getLecNum()%>" name="lecnum">
+			<div>
+				결제
+				<hr>
+			</div>
+			<div>수업시간</div>
+			<div >
+				<input name="lectot" type="radio"
+					value="<%=lec.getLecTot()%>"><%=lec.getLecTot()%>
+				<input name="lectot" type="radio"
+					value="<%=lec.getLecTot2()%>"><%=lec.getLecTot2()%>
 
-               <!-- <select id="color" title="select color">
+				<!-- <select id="color" title="select color">
                         <option selected="selected">asdf</option>
                     </select> -->
-            </div>
-            <div class="floatsubtitle">총 수업 횟수</div>
-            <div id="select_box">
-               <label for="color">한달 <%=lec.getLecCount()%>회
-               </label>
-            </div>
-            <div class="floatsubtitle">1회당</div>
-            <div id="select_box">
-               <label for="color"><%=lec.getLecTime()%>시간</label>
+			</div>
+			<div>총 수업 횟수</div>
+			<div id="select_box">
+				<label for="color">한달 <%=lec.getLecCount()%>회
+				</label>
+			</div>
+			<div class="floatsubtitle">1회당</div>
+			<div id="select_box">
+				<label for="color"><%=lec.getLecTime()%>시간</label>
 
-            </div>
-            <div class="floatsubtitle">요일</div>
-            <div id="select_box">
-            	<select id="week" name="day">
-            		<%-- <option value="<%=lec.getLecWeek() %>"><%=lec.getLecWeek() %></option> --%>
-            		<%for (int i=0; i<vars.length;i++){ %>
-            		<option value="<%=vars[i]%>"><%=vars[i]%></option>
-            		<%} %>
-            	</select>
-            </div>
-            
-            <div class="floatsubtitle">장소</div>
-            <div id="select_box">
-               <label for="color"><%=lec.getLecMeet()%></label>
+			</div>
+			<div class="floatsubtitle">요일</div>
+			<div id="select_box">
+				<select id="week">
+					<%-- <option value="<%=lec.getLecWeek() %>"><%=lec.getLecWeek() %></option> --%>
+					<%
+						for (int i = 0; i < vars.length; i++) {
+					%>
+					<option value="<%=vars[i]%>"><%=vars[i]%></option>
+					<%
+						}
+					%>
+				</select>
+			</div>
 
-            </div>
-            <div class="floatsubtitle">가격</div>
-            <div id="select_box">
-               <label for="color"><%=lec.getLecPrice()%></label>
+			<div class="floatsubtitle">장소</div>
+			<div id="select_box">
+				<label for="color"><%=lec.getLecMeet()%></label>
 
-            </div>
-            <script>
+			</div>
+			<div class="floatsubtitle">가격</div>
+			<div id="select_box">
+				<label for="color"><%=lec.getLecPrice()%></label>
+
+			</div>
+			<script>
                $(function() {
                   var select = $("select#color");
 
@@ -260,27 +263,31 @@
                   });
                });
             </script>
-            
-            <div>
-	            	<input type="submit" value="신청하기" class="classSubmit">
-	        </div>
-	           </form>
-            <br>
-            <div>
-				<button class="classSubmit" id="sendMessage">문의하기</button>
 
+			<div>
+				<input type="submit" value="신청하기" class="classSubmit">
 			</div>
-			<%if(m!=null){ %>
-				<form name="openMessageFrm" method="post">
-					<input type="hidden" name="toId" value="<%=lec.getLecMento().getMember().getmId()%>">
-					<input type="hidden" name="fromId" value="<%=m.getmId()%>">
+		</form>
+		<br>
+		<div>
+			<button class="classSubmit" id="sendMessage">문의하기</button>
 
-					<input type="hidden" name="lectureName" value="<%=lec.getLecName() %>">
-				</form>
-			<%} %>
+		</div>
+		<%
+			if (m != null) {
+		%>
+		<form name="openMessageFrm" method="post">
+			<input type="hidden" name="toId"
+				value="<%=lec.getLecMento().getMember().getmId()%>"> <input
+				type="hidden" name="fromId" value="<%=m.getmId()%>"> <input
+				type="hidden" name="lectureName" value="<%=lec.getLecName()%>">
+		</form>
+		<%
+			}
+		%>
 
-         </div>
-      </div>
+	</div>
+
 
 
 </aside>
@@ -288,39 +295,39 @@
 <script>
 $(function(){
     $('#sendMessage').click(function(){
- 	   
+
        var toId = "<%=toId%>";
-       if(<%=m!=null%>){
+       if(<%=m != null%>){
        	var fromId = "<%=m.getmId()%>";
        }
        if(fromId==null||fromId==""){
      	  alert("로그인 후 사용이 문의가 가능합니다.");
      	  $('#id').focus();
        }else{
-           var url = "<%=request.getContextPath()%>/message/openLecMessage.do?toId="+toId;
-           var status = "width=400, height=600, resizable=no, status=no, toolbars=no, menubar=no";
-           var title="ABLINGTALK"
-           var popUp = open("", title, status);
-           window.name="parentWin"; 
-           openMessageFrm.target = title;
-           openMessageFrm.action=url;
-           openMessageFrm.submit();
-       }
-    });
- });
- 
-   $(window).scroll(function() {
-      if ($(window).scrollTop() > 371) {
-         $('.floatMenu').addClass("fix");
-         $('.floatMenu').addClass("right");
-         $('.floatMenu').removeClass("floatMenu");
+           var url = "<%=request.getContextPath()%>message/openLecMessage.do?toId="+toId;
+								var status = "width=400, height=600, resizable=no, status=no, toolbars=no, menubar=no";
+								var title = "ABLINGTALK";
+								var popUp = open("", title, status);
+								window.name = "parentWin";
+								openMessageFrm.target = title;
+								openMessageFrm.action = url;
+								openMessageFrm.submit();
+							}
+						});
+	});
 
-      } else {
-         $('.fix').addClass("floatMenu");
-         $('.fix').removeClass("fix");
+	$(window).scroll(function() {
+		if ($(window).scrollTop() > 371) {
+			$('.floatMenu').addClass("fix");
+			$('.floatMenu').addClass("right");
+			$('.floatMenu').removeClass("floatMenu");
 
-      }
-   });
+		} else {
+			$('.fix').addClass("floatMenu");
+			$('.fix').removeClass("fix");
+
+		}
+	});
 </script>
 
 <script src="js/bootstrap.js"></script>
