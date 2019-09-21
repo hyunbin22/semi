@@ -247,8 +247,8 @@ div.appro-btn-wrap{
 
 div#picture-cover .mento-profile-img .lecture-cover-img{
     width:auto; height: auto;
-    min-width:400px; min-height: 400px;
-    max-width: 500px; max-height: 500px;
+	min-height: 300px;
+	max-height: 300px;
 	border: 1px solid gray;
 	margin-top: 10px;
 	margin-bottom: 10px;
@@ -284,8 +284,8 @@ form.admin-mento-detail-frm{
 
 .admin-mento-detailwrap img{
     width:auto; height: auto;
-    max-width: 500px; max-height: 500px;
-    min-width: 400px; min-height: 400px;
+	min-height: 300px;
+	max-height: 300px;
     margin-bottom: 10px;
 }
 

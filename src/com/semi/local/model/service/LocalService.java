@@ -60,4 +60,12 @@ public class LocalService {
 		return result;
 	}
 
+	//String으로 지역 받아오기
+	public String selectLocal(int localSubNum) {
+		Connection conn = getConnection();
+		String local = dao.selectLocal(conn, localSubNum);
+		close(conn);
+		return local;
+	}
+
 }

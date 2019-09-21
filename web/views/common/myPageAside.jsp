@@ -7,7 +7,7 @@
     	Member m = (Member) session.getAttribute("loginMember");
     %>
 <section class = "center1">
-	<div id="myPageWrap">
+	<div id="myPageWrap" class="mainMenu">
 	<aside id="myPageNavWrap">
 		<nav id="myPageNav">
 			<ul>

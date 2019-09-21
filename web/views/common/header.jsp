@@ -134,7 +134,7 @@
 	        </div>
 
 		 <br><br><br><br><br><br><br><br>
-		   <div id = menu class = "center1">
+		   <div id = menu class = "center1 mainMenu">
 		 
 				<nav>
 			        <ul class="center1">
@@ -190,22 +190,24 @@
 	
 	//안읽은메세지수 출력
 	$(function(){
-		timer = setInterval(function(){
-			$.ajax({
-				type:"post",
-				url: "<%=request.getContextPath()%>/message/readCount.do",
-				data: {
-					userId: encodeURIComponent('<%=userId%>'),
-				},
-				success: function(result) {
-					if(result>=1) {
-						showUnread(result);
-					} else {
-						showUnread('0');
+		if('<%=userId%>'!="" && '<%=userId%>'!=null) {
+			timer = setInterval(function(){
+				$.ajax({
+					type:"post",
+					url: "<%=request.getContextPath()%>/message/readCount.do",
+					data: {
+						userId: encodeURIComponent('<%=userId%>'),
+					},
+					success: function(result) {
+						if(result>=1) {
+							showUnread(result);
+						} else {
+							showUnread('0');
+						}
 					}
-				}
-			});
-		},2000);
+				});
+			},2000);
+		}
 		
 	});
 	

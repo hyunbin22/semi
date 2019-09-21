@@ -1,5 +1,7 @@
 package com.semi.category.model.vo;
 
+import com.semi.subcategory.model.vo.SubCategory;
+
 public class Category {
 	
 	private int scNum; //카테고리 번호

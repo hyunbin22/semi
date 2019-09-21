@@ -114,9 +114,11 @@
 				type:"get",
 				dataType:"text",
 				success:function(data) {
-					//$('#checkKey').html("인증번호 재발송");
-					$('#checkKey').prop("disabled", true);
+					alert("인증번호가 전송되었습니다.");
 					key = data;
+					$('#tel1').prop("readonly", true);
+					$('#tel2').prop("readonly", true);
+					$('#tel3').prop("readonly", true);
 										
 					setTimeout(function() {
 						if($('#keyCheck')) {
@@ -133,14 +135,17 @@
 		//인증번호 3분안에 입력 안하면 재발송 하게 처리
 		function setTime(){
 			if(count==0 || $('#keyCheck').prop('disabled')) {
-				$('#checkKey').html("인증번호 재발송");
+				$('#sendSms').value("인증번호 재발송");
 				alert("인증번호가 만료되었습니다. 재발송 해주세요.");
 				$('#keyCheck').text("핸드폰인증을 다시 진행해주세요");
 				$('#keyCheck').css({"color":"red","font-size":"11px"});
 				$('#keyCheck').prop("disabled", true);
+				$('#tel1').prop("readonly", false);
+				$('#tel2').prop("readonly", false);
+				$('#tel3').prop("readonly", false);
 				key="";
-			}
-		}
+			};
+		};
 		
 		//인증번호 확인
 		$('#checkKey').click(function(){
@@ -156,22 +161,16 @@
 				$('#keyCheck').prop("disabled", true);
 
 			} else if(key==userKey) {
-				$('#sendSms').prop("disabled", false);
-				$('#checkKey').prop("disabled", false);
+				alert("핸드폰 인증이 완료되었습니다.");
+				$('#sendSms').attr("disabled", false);
+				$('#checkKey').attr("disabled", false);
 				$('#tel1').prop("readonly", true);
 				$('#tel2').prop("readonly", true);
 				$('#tel3').prop("readonly", true);
-				$('#tel1').css({"background-color", "lightgray"});
-				$('#tel2').css({"background-color", "lightgray"});
-				$('#tel3').css({"background-color", "lightgray"});
-				
-				
-				
-				$('#checkNum').readOnly=true;
+
+				$('#checkNum').prop("readonly",true);
 				$('#keyCheck').prop("disabled",false);
 	
-				$('#sendSms').text("인증완료");
-				$('#sendSms').disab
 				count=1;
 			} 
 			

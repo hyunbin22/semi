@@ -4,6 +4,8 @@
 <%@ page import="com.semi.lecture.model.vo.Lecture, com.semi.member.model.vo.Member" %>
 <% 
 	Lecture lec = (Lecture)request.getAttribute("lecture");
+	String cate = (String)request.getAttribute("cate");
+	String local = (String)request.getAttribute("local");
 	int temp = (int)request.getAttribute("temp");
 	Member m = (Member)session.getAttribute("loginMember");
 	String toId = lec.getLecMento().getMember().getmId();
@@ -42,8 +44,31 @@
 							<%=lec.getLecMentoContent() %>
 						</p>
 					</p>
-					<hr>
-					
+					<p class="classinfo">
+						<h2>강의 기본정보</h2>
+						<p>
+							카테고리 : <%=cate %><br>
+							수업타입 : <%=lec.getLecLectureContent() %><br>
+							1회 수업 정원 : <%=lec.getLecMaxCount() %> 명 <br>
+							1회 수업 시간 : <%=lec.getLecTime() %> 시간<br>
+							1회 시간당 가격 : <%=lec.getLecPrice() %> 원<br>
+							수업 횟수 : <%=lec.getLecCount() %> 회<br>
+							수업 요일 : <%=lec.getLecWeek() %> <br>
+							수업 날자 : <%=lec.getLecMeet() %><br>
+							<%if(lec.getLecTot()!=null){%>
+							수업 시간 : <%=lec.getLecTot() %><br>
+							<%} if(lec.getLecTot2()!=null) {%>
+							수업 시간 : <%=lec.getLecTot2() %><br>
+							<%} %>
+							<%if(lec.getLecOpenDate()!=null){%>
+							개설 날자 : <%=lec.getLecOpenDate() %><br>
+							<%} if(lec.getLecOpenDate2()!=null) {%>
+							개설 날자 : <%=lec.getLecOpenDate2() %><br>
+							<%} %>
+							지역 : <%=local %><br>
+							상세지역 : <%=lec.getLecLocalContent()!=null?lec.getLecLocalContent():"협의" %>
+						</p>
+					</p>
 					<p class="classinfo">
 					
 						<h2>강의사진</h2>
@@ -57,15 +82,7 @@
 							}%>
 						</p>
 					</p>
-					<p class="classinfo">
-						<h2>강의 기본정보</h2>
-						<p>
-							수업타입 : <%=lec.getLecLectureContent() %><br>
-							1회 시간당 가격 : <br>
-							1회 수업 시간 : <br>
-							
-						</p>
-					</p>
+					
 					
 					<p class="classinfo">
 						<h2>커리큘럼</h2>
@@ -73,7 +90,6 @@
 							<%=lec.getLecLectureContent() %>
 						</p>
 					</p>
-					<hr>
 					<%if(temp!=0) {%>
 						<p class="refusalinfo">
 							<h2>거절사유</h2>

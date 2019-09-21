@@ -2,8 +2,9 @@ package com.semi.subcategory.model.vo;
 
 public class SubCategory {
 
-	private String subName;
 	private int subNum;
+	private String subName;
+	
 
 
 	public SubCategory() {

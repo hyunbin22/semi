@@ -119,4 +119,27 @@ public class CategoryDao {
 		}
 		return result;
 	}
+
+	//강의에서 카테고리 보여주기(문자열)
+	public String lecCategory(Connection conn, int lecNum) {
+		PreparedStatement pstmt = null;
+		String cate = null;
+		String sql = "select * from tb_category join tb_subcategory using(scnum) where subnum=(select subnum "
+				+ "from tb_lecture where lecnum=?)";
+		ResultSet rs = null;
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, lecNum);
+			rs = pstmt.executeQuery();
+			if(rs.next()) {
+				cate = rs.getString("scName") + " " + rs.getString("subName");
+			}
+		} catch(Exception e) {
+			e.printStackTrace();
+		} finally {
+			close(rs);
+			close(pstmt);
+		}
+		return cate;
+	}
 }
