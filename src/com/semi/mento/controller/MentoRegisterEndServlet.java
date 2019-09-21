@@ -48,7 +48,6 @@ public class MentoRegisterEndServlet extends HttpServlet {
 		}
 		
 		String root=getServletContext().getRealPath("/");
-		System.out.println(root);
 		
 		String saveDir=root+"/upload/mento";
 		
@@ -75,23 +74,11 @@ public class MentoRegisterEndServlet extends HttpServlet {
 		String upMentoReLicense= mr.getFilesystemName("mtlicenseimg");
 		
 		int mNum = Integer.parseInt(mr.getParameter("mNum"));
-		System.out.println(mNum);
 		
 		Mento mt = new Mento(mtnickname, mthowconfirm, mtacademic, mtacademicdept, mtgraduation, bank, accountNumber);
 		Member m = new Member(mNum);
 		
-		System.out.println(upMentoNameLicense);
-		System.out.println(upMentoOrgLicense);
-		System.out.println(upMentoReLicense);
-		
-		
-		
-
-		
-		
 		int result=new MentoService().registerMento(mt, m);
-//		MentoUpload mtu = new MentoUpload(result, upMentoOrgProfile, upMentoReProfile, upMentoOrgConfirm, upMentoReConfirm, upMentoNameLicense, upMentoOrgLicense, upMentoReLicense);
-//		int result2=new MentoService().registerMentoImage(mtu, result);
 		
 		String msg="";
 		String loc="";

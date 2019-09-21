@@ -38,8 +38,12 @@ public class CategoryDeleteServlet extends HttpServlet {
 		int selectbank = Integer.parseInt(request.getParameter("selectbank"));
 		int result= new CategoryService().deleteCategory(selectbank);
 		
+		System.out.println(sc);
+		System.out.println(selectbank);
+		System.out.println(result);
+		
 		String msg=result>0?"카테고리삭제완료":"카테고리삭제실패!! 등록된강의가있습니다.";
-		String loc="/";
+		String loc="/admin/categoryEnroll";
 		
 		request.setAttribute("msg", msg);
 		request.setAttribute("loc", loc);

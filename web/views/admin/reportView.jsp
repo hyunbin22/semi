@@ -67,15 +67,14 @@
                         </tr>
                         <tr>
                         <td colspan="4">
-                        <textarea rows="10" cols="110" style="resize: none;" name = "rReply"></textarea>
+                        <textarea rows="10" cols="110" style="resize: none;" name = "rReply" id = "rReply"></textarea>
                         </td>
                         </tr>
                         <tr class = "notice-top">
-                        <td colspan="2">
+                        <td colspan="4">
+                        	ID 사용정지 처리 :
                         <input type = "radio" name = "check" id = "checkName1" value = "Y" style = "cursor: pointer;">
                         <label for = "checkName1" style = "cursor: pointer;">예</label>
-                        </td>
-                        <td colspan="2">
                         <input type = "radio" name = "check" id = "checkName" value = "N" style = "cursor: pointer;">
                         <label for = "checkName" style = "cursor: pointer;">아니오</label>
                         </td>
@@ -94,10 +93,10 @@
                             </td>
                         </tr>
                         <tr class = "notice-top">
-                        <td colspan="1">
-                        	결과
+                        <td colspan="2">
+                        	ID 사용정지 처리 :
                         </td>
-                        <td colspan="3">
+                        <td colspan="2">
                         
                         <%if(rp2.getMember().getmUse() != 'Y'){ %>
                         	이용정지 O
@@ -127,7 +126,18 @@
             </div>
         </article>
     </section>
+    
 	<script>
+	function checkValue(){ 
+		var reportReply = $('#rReply');
+          if(reportReply.val().length==0){
+  			alert('답변을 입력하세요');
+  			reportId.focus();
+              return false;
+  			}
+          return true;
+          }
+	
 		function memberBlack(){
     	
 		var frm=$('#replyFrm');

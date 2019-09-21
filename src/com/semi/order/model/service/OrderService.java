@@ -17,21 +17,6 @@ public class OrderService {
 	
 private OrderDao dao = new OrderDao();
 	
-//	수업신청
-//	public int insertAppForClass(Order order) {
-//		Connection conn = getConnection();
-//
-//		int result = dao.insertOrder(conn, order);
-//		if(result>0) {
-//			commit(conn);
-//			result = dao.selectOrder(conn, lecNum, mId, price).getsNum();
-//		} else {
-//			rollback(conn);
-//		}
-//		close(conn);
-//		return result;
-//	}
-	
 	//신청내역 가져오기
 	public Order selectOrder(int oNum) {
 		Connection conn = getConnection();

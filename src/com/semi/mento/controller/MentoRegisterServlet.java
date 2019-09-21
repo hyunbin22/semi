@@ -30,12 +30,6 @@ public class MentoRegisterServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-//		
-//		String mId=request.getParameter("mId");
-//		
-//
-//		Member m= new MemberService().selectMember(mId);
-//		request.setAttribute("member", m);
 		
 		
 		request.getRequestDispatcher("/views/mento/mentoRegisterForm.jsp").forward(request, response);

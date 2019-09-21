@@ -49,7 +49,6 @@ public class MentoUpdateModifyServlet extends HttpServlet {
       }
       
       String root=getServletContext().getRealPath("/");
-      System.out.println(root);
       
       String saveDir=root+"/upload/mento";
       

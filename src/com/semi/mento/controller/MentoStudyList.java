@@ -35,17 +35,13 @@ public class MentoStudyList extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		int mtnum = Integer.parseInt(request.getParameter("mtnum"));
-		//int lecNum = Integer.parseInt(request.getParameter("lecNum"));
 		List<Lecture> list = new LectureService().lectureListByMtNum(mtnum);
-		//List<LectureUpload> lu = new LectureService().selectLectureUpload(lecNum);
 		
 		request.setAttribute("mtnum", mtnum);
 		request.setAttribute("list", list);
-		//request.setAttribute("lecNum", lecNum);
 
 		System.out.println(mtnum);
 		System.out.println(list);
-		//System.out.println(lecNum);
 		
 		request.getRequestDispatcher("/views/mento/mentoStudyList.jsp").forward(request, response);
 	}

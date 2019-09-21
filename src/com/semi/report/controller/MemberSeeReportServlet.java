@@ -35,8 +35,6 @@ public class MemberSeeReportServlet extends HttpServlet {
 		ReportService service = new ReportService();
 		Report rp = service.seeReport(title);
 		
-		System.out.println(title);
-		System.out.println(rp);
 		
 		request.setAttribute("seeReport", rp);
 		request.getRequestDispatcher("/views/report/seeReport.jsp").forward(request, response);

@@ -42,7 +42,7 @@
 	<article class="admin-list-container wrap">
 		<div class="row">
 			<div class="col">
-				<h3 class="admintitle">멘토승인거절목록</h3>
+				<h3 class="admintitle"><strong>멘토승인거절목록</strong></h3>
 				<div class="tab-content">
 					<div class="tab-pane fade show active" id="mentoAppro">
 						<div class="card appro-frm-wrap">

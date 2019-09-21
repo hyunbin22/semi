@@ -31,31 +31,6 @@ public class OrderDao {
 		}
 		
 	}
-	
-	//수업신청
-//	public int insertOrder(Connection conn, Order order) {
-//		
-//		PreparedStatement pstmt = null;
-//		String sql = prop.getProperty("insertOrder");
-//		int result = 0;
-//		try {
-//			pstmt = conn.prepareStatement(sql);
-//			pstmt.setString(1, order.getoTot());
-//			pstmt.setInt(2, );
-//			pstmt.setString(3, );
-//			pstmt.setString(4, text);
-//			pstmt.setInt(5, price);
-//			
-//			result = pstmt.executeUpdate();
-//		} catch(SQLException e) {
-//			e.printStackTrace();
-//		} finally {
-//			close(pstmt);
-//		}
-//		return result;
-//
-//		
-//	}
 
 	//신청 등록 후 신청내용 검색(return sNum)
 	public Order selectOrder(Connection conn, int oNum) {
@@ -94,6 +69,7 @@ public class OrderDao {
 		return order;
 	}
 
+	//결제처리
 	public int updatePayment(Connection conn, int oNum) {
 		PreparedStatement pstmt = null;
 		int result = 0;
@@ -110,6 +86,7 @@ public class OrderDao {
 		return result;
 	}
 
+	//신청목록(페이징)
 	public int selectStudyListCount(Connection conn) {
 		PreparedStatement pstmt = null;
 		int result = 0;
@@ -161,6 +138,7 @@ public class OrderDao {
 		}return list;
 	}
 
+	//결제취소
 	public int orderPayReset(Connection conn, int oNum) {
 		PreparedStatement pstmt = null;
 		int result = 0;
@@ -178,6 +156,41 @@ public class OrderDao {
 		return result;
 		
 		
+	}
+	
+	//강의번호로 신청내역 조회
+	public Order seeMoreStudyList(Connection conn, int lecNum) {
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		String sql=prop.getProperty("selectOrder");
+		Order o = null;
+		Lecture l = new Lecture();
+		LectureDao dao = new LectureDao();
+		try {
+			pstmt=conn.prepareStatement(sql);
+			pstmt.setInt(1,lecNum);
+			rs=pstmt.executeQuery();
+			if(rs.next()) {
+				o = new Order();
+				o.setoNum(rs.getInt("onum"));
+				o.setmNum(rs.getInt("mnum"));
+				o.setLecNum(rs.getInt("lecnum"));
+				o.setLecture(dao.selectLectureName(conn, rs.getInt("lecnum")));
+				o.setoText(rs.getString("otext").replaceAll(" ", "&nbsp;").replaceAll("<", "&lt;").replaceAll(">", "&gt;").replaceAll("\n", "<br>"));
+				o.setoTot(rs.getString("otot"));
+				o.setoPrice(rs.getInt("oprice"));
+				o.setoPayment(rs.getString("opayment").charAt(0));
+				o.setoCheck(rs.getString("ocheck").charAt(0));  
+				o.setOrderDate(rs.getDate("orderDate"));
+				o.setPayDate(rs.getDate("payDate"));
+			}
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rs);
+			close(pstmt);
+		}
+		return o;
 	}
 
 

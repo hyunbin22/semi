@@ -9,6 +9,7 @@ import java.sql.Connection;
 import java.util.List;
 
 import com.semi.member.model.vo.Member;
+import com.semi.mento.model.vo.Mento;
 import com.semi.report.model.dao.ReportDao;
 import com.semi.report.model.vo.Report;
 import com.semi.report.model.vo.ReportUpload;
@@ -25,7 +26,7 @@ public class ReportService {
 		if(result > 0)
 		{
 			commit(conn);
-			result = dao.selectSeqReport(conn, m.getmNum());
+			result = dao.selectSeqReport(conn);
 		}
 		else
 		{
@@ -72,9 +73,9 @@ public class ReportService {
 		return result;
 	}
 	
-	public int selectReportCount3(int mNum) {
+	public int selectReportCount3() {
 		Connection conn=getConnection();
-		int result=dao.selectReportCount3(conn,mNum);
+		int result=dao.selectReportCount3(conn);
 		close(conn);
 		return result;
 	}
@@ -137,6 +138,28 @@ public class ReportService {
 		close(conn);
 		return result;
 	}
+
+	public int countReportApproval(String type, String data) {
+		Connection conn = getConnection();
+		int result = dao.countReportApproval(conn, type, data);
+		close(conn);
+		return result;
+	}
+
+	public List<Report> reportFindList(String data, int cPage, int numPerPage){
+	    Connection conn = getConnection();
+		List<Report> list = dao.reportFindList(conn, data, cPage, numPerPage);
+		close(conn);
+		return list;
+	}
+
+	public List<Report> reportFindListCom(String data, int cPage, int numPerPage) {
+		Connection conn = getConnection();
+		List<Report> list = dao.reportFindListCom(conn, data, cPage, numPerPage);
+		close(conn);
+		return list;
+	}
+	
 
 
 

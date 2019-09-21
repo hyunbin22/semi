@@ -52,7 +52,7 @@ public class MemberService {
 		return check;
 	}
 
-
+	//멤버번호로 조회
 	public Member selectMember(int mNum) {
 		Connection conn=getConnection();
 		Member m = dao.selectMemberMnum(conn,mNum);
@@ -158,4 +158,59 @@ public class MemberService {
 		return result;
 	}
 
+	public List<Member> selectBlackListPage(int cPage, int numPerPage) {
+		Connection conn=getConnection();
+		List<Member> list=dao.selectBlackListPage(conn,cPage,numPerPage);
+		close(conn);
+		return list;
+	}
+
+	public int selectCountBlackMember() {
+		Connection conn=getConnection();
+		int result=dao.selectCountMember2(conn);
+		close(conn);
+		return result;
+	}
+
+	public int memberUse(String mId) {
+		Connection conn=getConnection();
+		int result = dao.memberUse(conn,mId);
+		close(conn);
+		return result;
+	}
+
+	public int rebirthMember(String mId) {
+		Connection conn=getConnection();
+		int result = dao.memberRebirth(conn,mId);
+		close(conn);
+		return result;
+	}
+
+	public int countMemberApproval(String type, String data) {
+		Connection conn = getConnection();
+		int result = dao.countMemberApproval(conn, type, data);
+		close(conn);
+		return result;
+	}
+
+	public List<Member> memberFindList(String data, int cPage, int numPerPage) {
+		Connection conn = getConnection();
+		List<Member> list = dao.memberFindList(conn, data, cPage, numPerPage);
+		close(conn);
+		return list;
+	}
+
+	public int countMemberBalckApproval(String type, String data) {
+		Connection conn = getConnection();
+		int result = dao.countMemberBlackApproval(conn, type, data);
+		close(conn);
+		return result;
+	}
+
+	public List<Member> memberFindBlackList(String data, int cPage, int numPerPage) {
+		Connection conn = getConnection();
+		List<Member> list = dao.memberFindBlackList(conn, data, cPage, numPerPage);
+		close(conn);
+		return list;
+	}
 }

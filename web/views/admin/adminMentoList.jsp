@@ -41,7 +41,7 @@
 	<article class="center1 admin-list">
 		<div class="row mentoListRow">
 			<div class="col">
-				<h3 class="admintitle">멘토목록</h3>
+				<h3 class="admintitle"><strong>멘토목록</strong></h3>
 				<div class="tab-content">
 					<div class="tab-pane fade show active" id="mentoAppro">
 						<div class="card appro-frm-wrap">

@@ -31,12 +31,9 @@ public class MentoMyPageModifyServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		int mtnum=Integer.parseInt(request.getParameter("mtnum"));
-//		MentoUpload mu = new MentoUploadService().selectMentoUpload(mtnum);
-//		
-//		request.setAttribute("mu", mu);
-//		System.out.println(mu);
+
 		
-		request.getRequestDispatcher("/views/mento/mentoPage_modifyView.jsp").forward(request,response);	
+		request.getRequestDispatcher("/views/mento/mentoPageModifyView.jsp").forward(request,response);	
 	}
 
 	/**

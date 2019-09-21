@@ -30,7 +30,9 @@ public class LectureDao {
 			e.printStackTrace();
 		}
 	}
-
+	
+	
+	//승인신청한 강의목록
 	public int countLectureApproval(Connection conn) {
 		PreparedStatement pstmt = null;
 		String sql = prop.getProperty("countLectureApproval");
@@ -407,7 +409,7 @@ public class LectureDao {
 		return lecturelist;
 	}
 
-
+	//강의 이름
 	public Lecture selectLectureName(Connection conn, int int1) {
 		PreparedStatement pstmt=null;
 		ResultSet rs=null;
@@ -431,7 +433,7 @@ public class LectureDao {
 	}
 
 
-
+	//멘토번호로 강의조회
 	public List<Lecture> lectureListByMtNum(Connection conn, int mtnum) {
 		Statement stmt=null;
 		ResultSet rs=null;
@@ -454,7 +456,44 @@ public class LectureDao {
 		}
 		return list;
 	}
+	
+	//강의수정
+	public int updateLecture(Connection conn, Lecture l, int lecNum) {
+		PreparedStatement pstmt = null;
+		int result=0;
+		String sql=prop.getProperty("updateLecture");
+		try {
+			pstmt=conn.prepareStatement(sql);
+			pstmt.setInt(1, l.getSubNum());
+			pstmt.setInt(2, l.getLocalSubNum());
+			pstmt.setString(3, l.getLecName());
+			pstmt.setString(4, l.getLecType());
+			pstmt.setInt(5, l.getLecMaxCount());
+			pstmt.setInt(6, l.getLecPrice());
+			pstmt.setInt(7, l.getLecTime());
+			pstmt.setInt(8, l.getLecCount());
+			pstmt.setString(9, l.getLecWeek());
+			pstmt.setString(10, l.getLecMeet());
+			pstmt.setString(11, l.getLecTot());
+			pstmt.setString(12, l.getLecTot2());
+			pstmt.setDate(13, l.getLecOpenDate());
+			pstmt.setDate(14, l.getLecOpenDate2());
+			pstmt.setString(15, l.getLecLocalContent());
+			pstmt.setString(16, l.getLecMentoContent());
+			pstmt.setString(17, l.getLecLectureContent());
+			pstmt.setInt(18, lecNum);
+			result=pstmt.executeUpdate();
 
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}
+
+		return result;
+	}
+	
+	//강의번호로 
 	public Lecture lectureListByLecNum(Connection conn, int lecNum) {
 		PreparedStatement pstmt=null;
 		ResultSet rs=null;
@@ -497,41 +536,6 @@ public class LectureDao {
 			close(pstmt);
 		}
 		return lt;
-	}
-
-	public int updateLecture(Connection conn, Lecture l, int lecNum) {
-		PreparedStatement pstmt = null;
-		int result=0;
-		String sql=prop.getProperty("updateLecture");
-		try {
-			pstmt=conn.prepareStatement(sql);
-			pstmt.setInt(1, l.getSubNum());
-			pstmt.setInt(2, l.getLocalSubNum());
-			pstmt.setString(3, l.getLecName());
-			pstmt.setString(4, l.getLecType());
-			pstmt.setInt(5, l.getLecMaxCount());
-			pstmt.setInt(6, l.getLecPrice());
-			pstmt.setInt(7, l.getLecTime());
-			pstmt.setInt(8, l.getLecCount());
-			pstmt.setString(9, l.getLecWeek());
-			pstmt.setString(10, l.getLecMeet());
-			pstmt.setString(11, l.getLecTot());
-			pstmt.setString(12, l.getLecTot2());
-			pstmt.setDate(13, l.getLecOpenDate());
-			pstmt.setDate(14, l.getLecOpenDate2());
-			pstmt.setString(15, l.getLecLocalContent());
-			pstmt.setString(16, l.getLecMentoContent());
-			pstmt.setString(17, l.getLecLectureContent());
-			pstmt.setInt(18, lecNum);
-			result=pstmt.executeUpdate();
-
-		}catch(SQLException e) {
-			e.printStackTrace();
-		}finally {
-			close(pstmt);
-		}
-
-		return result;
 	}
 
 	//결제 완료시 강의 누적 수강인원 증가/취소시 감소

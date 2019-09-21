@@ -37,8 +37,8 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src="<%=request.getContextPath() %>/js/jquery-3.4.1.js"></script>
-    <script src="https://sdk.accountkit.com/en_US/sdk.js"></script>	<!-- sms인증 -->
-    <script src="//developers.kakao.com/sdk/js/kakao.min.js"></script>	<!-- kakao -->
+    <!-- <script src="https://sdk.accountkit.com/en_US/sdk.js"></script>	sms인증 -->
+    <!-- <script src="//developers.kakao.com/sdk/js/kakao.min.js"></script>	kakao -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.1.5.js"></script> <!-- 결제인증 -->
     <link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/css/main.css">
@@ -139,7 +139,7 @@
 				<nav>
 			        <ul class="center1">
 			        
-				        <li><a href="<%=request.getContextPath()%>">ABLING</a></li>
+				        <li><a href="<%=request.getContextPath()%>/views/common/abling.jsp">ABLING</a></li>
 				        <li><a href="<%=request.getContextPath()%>/lecture/lectureList.do">강의찾기</a></li>
 				        <li><a href="<%=request.getContextPath()%>/moim/moimList.do">수업모임</a></li>
 				        <!-- <li><a href="#">이벤트</a></li> -->
@@ -206,7 +206,7 @@
 						}
 					}
 				});
-			},2000);
+			},1000);
 		}
 		
 	});
@@ -223,6 +223,7 @@
 
 
 </script>
+
 
 
     <br>

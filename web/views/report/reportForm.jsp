@@ -23,7 +23,7 @@
                 <form action="<%=request.getContextPath()%>/Report.do?mNum=<%=m.getmNum()%>" method="POST" onsubmit="return checkValue();" enctype="multipart/form-data">
                     <table class="tblreg">
                         <tr>
-                            <td>작성자 ID</td>
+                            <td class = "lecture" colspan = 1>작성자 ID</td>
                             <td>
                                 <%=m.getmId() %>
                             </td>
@@ -34,34 +34,34 @@
                         <tr>
                         </tr>
                         <tr>
-                            <td>신고할 사용자 ID</td>
+                            <td class = "lecture" colspan = 1>신고 대상 ID</td>
                             <td>
-                                <input class="textfield" type="text" name="rId" id = "reportId1" placeholder="신고할 사용자의 ID 입력">
+                                <input class="textfield title2" type="text" name="rId" id = "reportId1" placeholder="신고할 사용자의 ID 입력">
                             </td>
                         </tr>
                         <tr>
                         </tr>
                         <tr>
-                            <td>제목</td>
+                            <td class = "lecture" colspan = 1>제목</td>
                             <td>
-                                <input class="textfield" type="text" name="rTitle" id = "reportTitle1">
+                                <input class="textfield title2" type="text" name="rTitle" id = "reportTitle1">
                             </td>
                         </tr>
                         <tr>
                         </tr>
                         <tr>
-                            <td>내용</td>
-                            <td>신고 사유를 정확하게 작성해주세요.</td>
+                            <td class = "lecture" colspan = 1>내용</td>
+                            <td><strong>신고 사유를 정확하게 작성해주세요.</strong></td>
                         </tr>
                         <tr>
  							<td>
  							</td>
                             <td>
-                               <textarea id = "reportContent1" name = "rContent" rows="30" cols="50" style="resize: none;" placeholder="날짜 및 상황을 자세하게 작성해주세요."></textarea>
+                               <textarea id = "reportContent1" name = "rContent" rows="30" cols="50" style="resize: none;" placeholder="날짜 및 상황을 자세하게 작성해주세요." class = "title2"></textarea>
                             </td>
                         </tr>
                         <tr>
-                            <td>첨부 파일</td>
+                            <td class = "lecture" colspan = 1>첨부 파일</td>
                             <td>
                                 <input id="reportPhoto1" type="file" name="reportPhoto" onchange="previewImage(this,'View_area')">
                             </td>
@@ -103,8 +103,31 @@
       			}
               return true;
               }
+    
+    $(function(){
+        
+        //확장자, 정규식 검사
+        $(document).on("change","input[name='reportPhoto']",function(event) {
+           var ext = $(this).val().split('.').pop().toLowerCase();
+           var fileSize = (this).files[0].size;
+           var maxSize = 1024*1024*1024;
+           
+           if($.inArray(ext, ['gif','png','jpg','jpeg','doc','docx','xls','xlsx','hwp']) == -1) {
+              alert("등록할 수 없는 확장자입니다.");
+              $(this).val("");
+              return;
+           } 
+           
+           if(fileSize > maxSize) {
+              alert("첨부파일 크기는 1GB 이내로 등록 가능합니다.");
+              $(this).val("");
+              return;
+           }
+        });
+     });
               
 
     	
     </script>
+>>>>>>> cd775fe7606f768061ec6a245c816946f0c292f7
     <%@ include file = "/views/common/footer.jsp" %>

@@ -39,9 +39,6 @@ public class SelectSublocalServlet extends HttpServlet {
 		List<SubLocal> list = service.selectSublocal(localNum);
 		
 		
-		System.out.println(localNum);
-		System.out.println(list);
-		
 		String csv = "";
 		if(!list.isEmpty() ) {
 			for(int i = 0; i < list.size(); i++)

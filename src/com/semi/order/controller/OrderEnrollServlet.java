@@ -32,12 +32,11 @@ public class OrderEnrollServlet extends HttpServlet {
 	      String lectureNo = request.getParameter("lecnum");
 	      String days = request.getParameter("day");
 	      Lecture lec=new LectureService().selectLecture(lectureNo);
-	      
-	      System.out.println("lecMemreg 서블릿 lec : "+lec);
+	     
 	      
 	      request.setAttribute("day", days);
 	      request.setAttribute("lecture", lec);
-	      request.getRequestDispatcher("/views/lecture/lectureMemberRegist.jsp").forward(request, response);
+	      request.getRequestDispatcher("/views/order/orderEnroll.jsp").forward(request, response);
 	}
 
 	/**

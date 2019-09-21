@@ -35,7 +35,7 @@ public class CategoryUpdateServlet extends HttpServlet {
 		int result=new CategoryService().updateCategory(selectbank,inputcategory);
 		
 		String msg=result>0?"카테고리 수정이 완료되었습니다.":"카테고리 수정이 실패하였습니다.";
-		String loc="/";
+		String loc="/admin/categoryEnroll";
 		
 		request.setAttribute("msg", msg);
 		request.setAttribute("loc", loc);

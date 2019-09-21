@@ -7,7 +7,7 @@
             <div class="wrap">
                 <div class="bar">
                     <br>
-                    <h1 style="font-size: 40px; text-align: center;">아이디 찾기</h1>
+                    <h1 style="font-size: 40px; text-align: center;"><strong>아이디 찾기</strong></h1>
                     <hr>
                     <br><br>
                 </div>
@@ -33,4 +33,5 @@
             </div>
         </section>
         
+>>>>>>> cd775fe7606f768061ec6a245c816946f0c292f7
 <%@ include file="/views/common/footer.jsp"%>

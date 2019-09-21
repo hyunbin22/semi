@@ -33,12 +33,9 @@ public class FindPasswordServlet extends HttpServlet {
 		String mId = request.getParameter("mId");
 		String email = request.getParameter("email");
 		
-		System.out.println(mId);
-		System.out.println(email);
 		
 		MemberService service = new MemberService();
 		Member m = service.findMemberPwd(mId, email);
-		System.out.println(m);
 		
 		String msg = "";
 		String loc = "";

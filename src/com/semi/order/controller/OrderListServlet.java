@@ -33,7 +33,6 @@ public class OrderListServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		int mNum = Integer.parseInt(request.getParameter("mNum"));
-		System.out.println(mNum);
 		int cPage;
 		try {
 			cPage=Integer.parseInt(request.getParameter("cPage"));
@@ -42,7 +41,6 @@ public class OrderListServlet extends HttpServlet {
 		}
 		int numPerPage=10;
 		int totalStudy = new OrderService().selectStudyListCount();
-		System.out.println(totalStudy);
 		List<Order> list=new OrderService().selectOrderList(cPage,numPerPage,mNum);
 		
 		//페이징처리 구현
@@ -96,3 +94,4 @@ public class OrderListServlet extends HttpServlet {
 	}
 
 }
+

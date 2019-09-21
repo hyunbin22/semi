@@ -36,7 +36,7 @@ public class CategoryEnrollEndServlet extends HttpServlet {
 		int result=new CategoryService().enrollCategory(inputcategory);
 
 		String msg="";
-		String loc="/";
+		String loc="/admin/categoryEnroll";
 		msg=result>0?"카테고리 등록 성공":"카테고리 등록 실패";
 		request.setAttribute("msg", msg);
 		request.setAttribute("loc", loc);

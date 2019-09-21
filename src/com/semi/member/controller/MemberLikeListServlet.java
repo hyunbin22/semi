@@ -34,7 +34,6 @@ public class MemberLikeListServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 	
 		int mNum = Integer.parseInt(request.getParameter("mNum"));
-		System.out.println(mNum);
 		int cPage;
 		try {
 			cPage=Integer.parseInt(request.getParameter("cPage"));

@@ -6,7 +6,7 @@
             <div class="wrap">
                 <div class="bar">
                     <br>
-                    <h1 style="font-size: 40px; text-align: center;">비밀번호 찾기</h1>
+                    <h1 style="font-size: 40px; text-align: center;"><strong>비밀번호 찾기</strong></h1>
                     <h5 class = "center1">찾으시려는 비밀번호의 정보를 입력해주세요</h5>
                     <hr>
                     <br><br>
@@ -15,9 +15,9 @@
                  <form action = "<%=request.getContextPath() %>/member/findPwd" method="POST">
                 <table class="tblreg">
                         <tr>
-                            <td>아이디</td>
+                            <td class = "lecture">아이디</td>
                             <td>
-                                <input class="textfield" type="text" name="mId" placeholder="아이디를 입력해주세요">
+                                <input class="textfield title2" type="text" name="mId" placeholder="아이디를 입력해주세요" required>
                             </td>
                             <td>
                             </td>
@@ -25,9 +25,9 @@
                         <tr></tr>
                         <tr></tr>
                         <tr>
-                            <td>이메일</td>
+                            <td class = "lecture">이메일</td>
                             <td>
-                                <input class="textfield" type="text" name="email" placeholder="이메일을 입력해주세요">
+                                <input class="textfield title2" type="text" name="email" placeholder="이메일을 입력해주세요" required>
                             </td>
                   
                         </tr>
@@ -49,4 +49,5 @@
             </div>
         </section>
         
+>>>>>>> cd775fe7606f768061ec6a245c816946f0c292f7
 <%@ include file="/views/common/footer.jsp"%>

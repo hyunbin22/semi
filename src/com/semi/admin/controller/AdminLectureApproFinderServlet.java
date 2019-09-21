@@ -2,9 +2,7 @@ package com.semi.admin.controller;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -39,7 +37,7 @@ public class AdminLectureApproFinderServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String type = request.getParameter("searchType");
-		String data = request.getParameter("searchKeyword");
+		String data = request.getParameter("searchKeyword").trim();
 		int temp = Integer.parseInt(request.getParameter("temp"));
 		String path = "";
 		if(temp==0) {

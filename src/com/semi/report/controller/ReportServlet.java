@@ -1,7 +1,6 @@
 package com.semi.report.controller;
 
 import java.io.IOException;
-
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -12,10 +11,8 @@ import javax.servlet.http.HttpSession;
 import org.apache.tomcat.util.http.fileupload.servlet.ServletFileUpload;
 
 import com.oreilly.servlet.MultipartRequest;
+import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 import com.semi.member.model.vo.Member;
-import com.semi.moim.model.service.MoimService;
-import com.semi.moim.model.vo.Moim;
-import com.semi.moim.model.vo.MoimUpload;
 import com.semi.report.model.service.ReportService;
 import com.semi.report.model.vo.Report;
 import com.semi.report.model.vo.ReportUpload;
@@ -42,6 +39,7 @@ public class ReportServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
 		if(!ServletFileUpload.isMultipartContent(request)) {
 			request.setAttribute("msg", "신고 실패 ![form:ectype] 관리자에게 문의하세요!");
 			request.setAttribute("loc", "/");
@@ -61,14 +59,14 @@ public class ReportServlet extends HttpServlet {
 		MultipartRequest mr = new MultipartRequest(request, saveDir, maxSize, "UTF-8", new AblingFileRenamePolicy(memberLogin.getmId()));
 		
 		int mNum = Integer.parseInt(mr.getParameter("mNum"));	
-		String reportId = mr.getParameter("rId");
+		String reportId = mr.getParameter("rId").trim();
 		String reportTitle = mr.getParameter("rTitle");
 		String reportContent = mr.getParameter("rContent");
 		
 		
 		String reReportOriFile = mr.getOriginalFileName("reportPhoto");
 		String reReportReFile = mr.getFilesystemName("reportPhoto");
-
+		
 		
 		
 		Report rp = new Report(reportId, reportTitle, reportContent);
@@ -76,6 +74,7 @@ public class ReportServlet extends HttpServlet {
 		
 		//reportDB에 저장
 		int result = new ReportService().regsterReport(rp, m);
+
 		
 		ReportUpload ru = new ReportUpload(reReportOriFile, reReportReFile);
 		int result2 = new ReportService().regsterReportImage(ru, result);
@@ -100,8 +99,12 @@ public class ReportServlet extends HttpServlet {
 		request.getRequestDispatcher("views/common/msg.jsp").forward(request, response);
 		
 		
-	}
 		
+	}
+
+	/**
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		doGet(request, response);

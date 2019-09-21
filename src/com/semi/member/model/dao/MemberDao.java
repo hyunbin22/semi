@@ -128,7 +128,6 @@ public class MemberDao {
 		PreparedStatement pstmt=null;
 		int result=0;
 		String sql=prop.getProperty("deleteMember");
-		System.out.println(sql);
 		try {
 			pstmt=conn.prepareStatement(sql);
 			pstmt.setString(1, mId);
@@ -162,7 +161,7 @@ public class MemberDao {
 		}
 		return result;
 	}
-
+	//멤버번호로 멤버조회
 	public Member selectMemberMnum(Connection conn, int mNum) {
 		PreparedStatement pstmt=null;
 		ResultSet rs=null;
@@ -249,7 +248,7 @@ public class MemberDao {
 			pstmt=conn.prepareStatement(sql);
 			rs=pstmt.executeQuery();
 			if(rs.next()) {
-				result=rs.getInt("cnt");
+				result=rs.getInt(1);
 			}
 		}catch(SQLException e) {
 			e.printStackTrace();
@@ -260,6 +259,7 @@ public class MemberDao {
 		}
 		return result;
 	}
+	//멤버리스트(페이징)
 	public List<Member> selectListPage(Connection conn, int cPage, int numPerPage){
 		PreparedStatement pstmt=null;
 		ResultSet rs=null;
@@ -295,129 +295,316 @@ public class MemberDao {
 
 
 	//비밀번호 찾기
-	public Member findMemberPwd(Connection conn, String mId, String email) {
-		PreparedStatement pstmt=null;
-		ResultSet rs=null;
-		Member m = null;
-		String sql = prop.getProperty("findPwd");
-		try 
-		{
-			pstmt=conn.prepareStatement(sql);
-			pstmt.setString(1, mId);
-			pstmt.setString(2, email);
-			rs=pstmt.executeQuery();
-			while(rs.next()) {
-				m = new Member();
-				m.setmNum(rs.getInt("mNum"));
-				m.setmId(rs.getString("mId"));
-				m.setmPassword(rs.getString("mPassword"));
-				m.setmName(rs.getString("mName"));
-				m.setmGender(rs.getString("mGender").charAt(0));
-				m.setmBirth(rs.getDate("mBirth"));
-				m.setmEmail(rs.getString("mEmail"));
-				m.setmPhone(rs.getString("mPhone"));
-				m.setmUse(rs.getString("mUse").charAt(0));
-				m.setmHireDate(rs.getDate("mHire_Date"));
+		public Member findMemberPwd(Connection conn, String mId, String email) {
+			PreparedStatement pstmt=null;
+			ResultSet rs=null;
+			Member m = null;
+			String sql = prop.getProperty("findPwd");
+			try 
+			{
+				pstmt=conn.prepareStatement(sql);
+				pstmt.setString(1, mId);
+				pstmt.setString(2, email);
+				rs=pstmt.executeQuery();
+				while(rs.next()) {
+					m = new Member();
+					m.setmNum(rs.getInt("mNum"));
+					m.setmId(rs.getString("mId"));
+					m.setmPassword(rs.getString("mPassword"));
+					m.setmName(rs.getString("mName"));
+					m.setmGender(rs.getString("mGender").charAt(0));
+					m.setmBirth(rs.getDate("mBirth"));
+					m.setmEmail(rs.getString("mEmail"));
+					m.setmPhone(rs.getString("mPhone"));
+					m.setmUse(rs.getString("mUse").charAt(0));
+					m.setmHireDate(rs.getDate("mHire_Date"));
+				}
+			}catch(SQLException e) {
+				e.printStackTrace();
 			}
-		}catch(SQLException e) {
-			e.printStackTrace();
-		}
-		finally {
-			close(pstmt);
-		}
-		return m;
-
-	}
-
-	//비밀번호 변경
-	public int updatePwd(Connection conn, String mId, String pwd) {
-		PreparedStatement pstmt = null;
-		int result = 0;
-		String sql = prop.getProperty("updatePassword");
-		try {
-			pstmt=conn.prepareStatement(sql);
-			pstmt.setString(1, pwd);
-			pstmt.setString(2, mId);
-			result=pstmt.executeUpdate();
-		}catch(SQLException e) {
-			e.printStackTrace();
-		}
-		finally {
-			close(pstmt);
-		}
-		return result;
-	}
-
-	//아이디 찾기
-	public Member findMemberId(Connection conn, String name, String date, String phone) {
-		PreparedStatement pstmt=null;
-		ResultSet rs=null;
-		Member m = null;
-		String sql = prop.getProperty("findId");
-		try 
-		{
-			pstmt=conn.prepareStatement(sql);
-			pstmt.setString(1, name);
-			pstmt.setString(2, date);
-			pstmt.setString(3, phone);
-			rs=pstmt.executeQuery();
-			while(rs.next()) {
-				m = new Member();
-				m.setmNum(rs.getInt("mNum"));
-				m.setmId(rs.getString("mId"));
-				m.setmPassword(rs.getString("mPassword"));
-				m.setmName(rs.getString("mName"));
-				m.setmGender(rs.getString("mGender").charAt(0));
-				m.setmBirth(rs.getDate("mBirth"));
-				m.setmEmail(rs.getString("mEmail"));
-				m.setmPhone(rs.getString("mPhone"));
-				m.setmUse(rs.getString("mUse").charAt(0));
-				m.setmHireDate(rs.getDate("mHire_Date"));
+			finally {
+				close(pstmt);
 			}
-		}catch(SQLException e) {
-			e.printStackTrace();
+			return m;
+
 		}
-		finally {
-			close(pstmt);
+
+		//비밀번호 변경
+		public int updatePwd(Connection conn, String mId, String pwd) {
+			PreparedStatement pstmt = null;
+			int result = 0;
+			String sql = prop.getProperty("updatePassword");
+			try {
+				pstmt=conn.prepareStatement(sql);
+				pstmt.setString(1, pwd);
+				pstmt.setString(2, mId);
+				result=pstmt.executeUpdate();
+			}catch(SQLException e) {
+				e.printStackTrace();
+			}
+			finally {
+				close(pstmt);
+			}
+			return result;
 		}
-		return m;
-	}
-	
-	//멤버 정지 시키기
-	public int memberUse(Connection conn, int mAttackerNum) {
-		PreparedStatement pstmt=null;
-		ResultSet rs=null;
-		int result = 0;
-		String sql=prop.getProperty("memberUse");
-		try {
-			pstmt=conn.prepareStatement(sql);
-			pstmt.setInt(1, mAttackerNum);
-			result=pstmt.executeUpdate();
-		}catch(SQLException e) {
-			e.printStackTrace();
+
+		//아이디 찾기
+		public Member findMemberId(Connection conn, String name, String date, String phone) {
+			PreparedStatement pstmt=null;
+			ResultSet rs=null;
+			Member m = null;
+			String sql = prop.getProperty("findId");
+			try 
+			{
+				pstmt=conn.prepareStatement(sql);
+				pstmt.setString(1, name);
+				pstmt.setString(2, date);
+				pstmt.setString(3, phone);
+				rs=pstmt.executeQuery();
+				while(rs.next()) {
+					m = new Member();
+					m.setmNum(rs.getInt("mNum"));
+					m.setmId(rs.getString("mId"));
+					m.setmPassword(rs.getString("mPassword"));
+					m.setmName(rs.getString("mName"));
+					m.setmGender(rs.getString("mGender").charAt(0));
+					m.setmBirth(rs.getDate("mBirth"));
+					m.setmEmail(rs.getString("mEmail"));
+					m.setmPhone(rs.getString("mPhone"));
+					m.setmUse(rs.getString("mUse").charAt(0));
+					m.setmHireDate(rs.getDate("mHire_Date"));
+				}
+			}catch(SQLException e) {
+				e.printStackTrace();
+			}
+			finally {
+				close(pstmt);
+			}
+			return m;
 		}
-		finally {
-			close(pstmt);
+		
+		//멤버 정지 시키기
+		public int memberUse(Connection conn, int mAttackerNum) {
+			PreparedStatement pstmt=null;
+			ResultSet rs=null;
+			int result = 0;
+			String sql=prop.getProperty("memberUse");
+			try {
+				pstmt=conn.prepareStatement(sql);
+				pstmt.setInt(1, mAttackerNum);
+				result=pstmt.executeUpdate();
+			}catch(SQLException e) {
+				e.printStackTrace();
+			}
+			finally {
+				close(pstmt);
+			}
+			return result;
 		}
-		return result;
-	}
+
+		public List<Member> selectBlackListPage(Connection conn, int cPage, int numPerPage) {
+			PreparedStatement pstmt=null;
+			ResultSet rs=null;
+			String sql=prop.getProperty("selectBlackListPage");
+			List<Member> list=new ArrayList();
+			try {
+				pstmt=conn.prepareStatement(sql);
+				pstmt.setInt(1,(cPage-1)*numPerPage+1);
+				pstmt.setInt(2,cPage*numPerPage);
+				rs=pstmt.executeQuery();
+				while(rs.next()) {
+					Member m=new Member();
+					m.setmNum(rs.getInt("mNum"));
+					m.setmId(rs.getString("mId"));
+					m.setmPassword(rs.getString("mPassword"));
+					m.setmName(rs.getString("mName"));
+					m.setmGender(rs.getString("mGender").charAt(0));
+					m.setmBirth(rs.getDate("mBirth"));
+					m.setmEmail(rs.getString("mEmail"));
+					m.setmPhone(rs.getString("mPhone"));
+					m.setmUse(rs.getString("mUse").charAt(0));
+					m.setmHireDate(rs.getDate("mHire_Date"));
+					list.add(m);
+				}
+			}catch(SQLException e) {
+				e.printStackTrace();
+			}finally {
+				close(rs);
+				close(pstmt);
+			}return list;
+		}
+
+		public int selectCountMember2(Connection conn) {
+			Statement stmt = null;
+			ResultSet rs = null;
+			int result = 0;
+			String sql = "select count(*) from tb_member where muse = 'N'";
+			try {
+				stmt = conn.createStatement();
+				rs = stmt.executeQuery(sql);
+				if(rs.next())
+				{
+					result = rs.getInt(1);
+				}
+			}catch(SQLException e) {
+				e.printStackTrace();
+			}
+			finally {
+				close(rs);
+				close(stmt);
+			}
+			return result;
+		}
+
+		public int memberUse(Connection conn, String mId) {
+			PreparedStatement pstmt=null;
+			ResultSet rs=null;
+			int result = 0;
+			String sql=prop.getProperty("memberUse2");
+			try {
+				pstmt=conn.prepareStatement(sql);
+				pstmt.setString(1, mId);
+				result=pstmt.executeUpdate();
+			}catch(SQLException e) {
+				e.printStackTrace();
+			}
+			finally {
+				close(pstmt);
+			}
+			return result;
+		}
+
+		public int memberRebirth(Connection conn, String mId) {
+			PreparedStatement pstmt=null;
+			ResultSet rs=null;
+			int result = 0;
+			String sql=prop.getProperty("memberUse3");
+			try {
+				pstmt=conn.prepareStatement(sql);
+				pstmt.setString(1, mId);
+				result=pstmt.executeUpdate();
+			}catch(SQLException e) {
+				e.printStackTrace();
+			}
+			finally {
+				close(pstmt);
+			}
+			return result;
+		}
+
+		public int countMemberApproval(Connection conn, String type, String data) {
+			Statement stmt = null;
+			String sql = "select count(*) from tb_member where " + type + " like '%" + data + "%'";
+			ResultSet rs = null;
+			int result = 0;
+			try {
+				stmt = conn.createStatement();
+				rs = stmt.executeQuery(sql);
+				if(rs.next()) {
+					result = rs.getInt(1);
+				}
+			} catch(SQLException e) {
+				e.printStackTrace();
+			} finally {
+				close(rs);
+				close(stmt);
+			}
+			return result;
+		}
+
+		public List<Member> memberFindList(Connection conn, String data, int cPage, int numPerPage) {
+			Member m = null;
+			Statement stmt = null;
+			ResultSet rs = null;
+			List<Member> list = new ArrayList();
+			int start = (cPage-1)*numPerPage+1;
+			int end = cPage*numPerPage;
+
+			String sql = "select * from ("
+					+ "select rownum as rnum, a.* from("
+					+ "select * from tb_member where mId like '%"+data+"%')a) where rnum between "+ start + " and " + end;
+			try {
+				stmt = conn.createStatement();
+				rs=stmt.executeQuery(sql);
+				while(rs.next()) {
+					m = new Member();
+					m.setmNum(rs.getInt("mNum"));
+					m.setmId(rs.getString("mId"));
+					m.setmPassword(rs.getString("mPassword"));
+					m.setmName(rs.getString("mName"));
+					m.setmGender(rs.getString("mGender").charAt(0));
+					m.setmBirth(rs.getDate("mBirth"));
+					m.setmEmail(rs.getString("mEmail"));
+					m.setmPhone(rs.getString("mPhone"));
+					m.setmUse(rs.getString("mUse").charAt(0));
+					m.setmHireDate(rs.getDate("mHire_Date"));
+					list.add(m);
+				}
+			} catch(SQLException e) {
+				e.printStackTrace();
+			} finally {
+				close(rs);
+				close(stmt);
+			}
+			return list;
+		}
+
+		public int countMemberBlackApproval(Connection conn, String type, String data) {
+			Statement stmt = null;
+			String sql = "select count(*) from tb_member where " + type + " like '%" + data + "%' and muse = 'N'";
+			ResultSet rs = null;
+			int result = 0;
+			try {
+				stmt = conn.createStatement();
+				rs = stmt.executeQuery(sql);
+				if(rs.next()) {
+					result = rs.getInt(1);
+				}
+			} catch(SQLException e) {
+				e.printStackTrace();
+			} finally {
+				close(rs);
+				close(stmt);
+			}
+			return result;
+		}
+
+		public List<Member> memberFindBlackList(Connection conn, String data, int cPage, int numPerPage) {
+			Member m = null;
+			Statement stmt = null;
+			ResultSet rs = null;
+			List<Member> list = new ArrayList();
+			int start = (cPage-1)*numPerPage+1;
+			int end = cPage*numPerPage;
+
+			String sql = "select * from ("
+					+ "select rownum as rnum, a.* from("
+					+ "select * from tb_member where mId like '%"+data+"%' and muse = 'N')a) where rnum between "+ start + " and " + end;
+			try {
+				stmt = conn.createStatement();
+				rs=stmt.executeQuery(sql);
+				while(rs.next()) {
+					m = new Member();
+					m.setmNum(rs.getInt("mNum"));
+					m.setmId(rs.getString("mId"));
+					m.setmPassword(rs.getString("mPassword"));
+					m.setmName(rs.getString("mName"));
+					m.setmGender(rs.getString("mGender").charAt(0));
+					m.setmBirth(rs.getDate("mBirth"));
+					m.setmEmail(rs.getString("mEmail"));
+					m.setmPhone(rs.getString("mPhone"));
+					m.setmUse(rs.getString("mUse").charAt(0));
+					m.setmHireDate(rs.getDate("mHire_Date"));
+					list.add(m);
+				}
+			} catch(SQLException e) {
+				e.printStackTrace();
+			} finally {
+				close(rs);
+				close(stmt);
+			}
+			return list;
+		}
 
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 

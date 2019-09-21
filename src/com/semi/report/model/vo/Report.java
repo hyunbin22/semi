@@ -18,7 +18,7 @@ public class Report {
 	private String reportReason; // 신고 답변
 	private Member member;
 	
-	private List<ReportUpload> reportUpList;
+	private List<ReportUpload> list;
 	
 
 
@@ -37,7 +37,7 @@ public class Report {
 		this.reportDate = reportDate;
 		this.reportReason = reportReason;
 		this.member = member;
-		this.reportUpList = reportUpList;
+		this.list = list;
 	}
 
 
@@ -75,13 +75,16 @@ public class Report {
 	}
 
 
-	public List<ReportUpload> getReportUpList() {
-		return reportUpList;
+
+
+
+	public List<ReportUpload> getList() {
+		return list;
 	}
 
 
-	public void setReportUpList(List<ReportUpload> reportUpList) {
-		this.reportUpList = reportUpList;
+	public void setList(List<ReportUpload> list) {
+		this.list = list;
 	}
 
 
@@ -164,20 +167,8 @@ public class Report {
 		return "Report [reportNum=" + reportNum + ", mReporterNum=" + mReporterNum + ", mAttackerNum=" + mAttackerNum
 				+ ", reportId=" + reportId + ", reportTitle=" + reportTitle + ", reportContent=" + reportContent
 				+ ", reportCheck=" + reportCheck + ", reportDate=" + reportDate + ", member=" + member
-				+ ", reportUpList=" + reportUpList + "]";
+				+ ", reportUpList=" + list + "]";
 	}
 
-
-	
-	
-	
-
-
-
-
-	
-	
-	
-	
 
 }

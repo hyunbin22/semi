@@ -40,6 +40,8 @@ public class FindIdServlet extends HttpServlet {
 		
 		String phone = request.getParameter("phone");
 		
+		System.out.println(name + " / " + date + " / " + phone);
+		
 		MemberService service = new MemberService();
 		Member m = service.findMemberId(name , date , phone);
 		
