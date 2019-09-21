@@ -3,7 +3,7 @@
 <%@ include file="/views/common/adminHeader.jsp"%>
 <%@ page import="java.util.List, com.semi.member.model.vo.Member"%>
 <%
-   List<Member> members=(List)request.getAttribute("members");
+   List<Member> members=(List)request.getAttribute("memberList");
    int cPage=(int)request.getAttribute("cPage");
    String pageBar=(String)request.getAttribute("pageBar");
    int count = 0;
@@ -15,10 +15,10 @@
 		<div id="adminSearchContainer">
 
 			<div id="search-mreporterId">
-				<form action="<%=request.getContextPath()%>/admin/memberBlackApproFinder.do">
+				<form action="<%=request.getContextPath()%>/admin/memberApproFinder.do">
 					<input type="hidden" name="searchType" value="mId">
 					<input type="hidden" name="cPage" value="<%=cPage%>"> 
-					ID 검색 : <input type="text" name="searchKeyword" placeholder="검색어 입력">
+					ID 검색 :  <input type="text" name="searchKeyword" placeholder="검색어 입력">
 					<button type="submit" class = "next">검색</button>
 				</form>
 			</div>
@@ -37,17 +37,19 @@
    <article class="admin-list-container wrap">
     <div class="row">
          <div class="col">
-            <h3 class="admintitle"><strong>계정 이용 정지 회원</strong></h3>
+            <h3 class="admintitle"><strong>회원 목록</strong></h3>
             <div class="tab-content">
                <div class="tab-pane fade show active" id="lectureAppro">
 				    <% 
                      for (int i = 0; i < members.size(); i++) {
                      %>
-                  <div class="card appro-frm-wrap" style = "height: 110px;">
+                  <div class="card appro-frm-wrap" style = "height: 130px;">
                      <div class="lectureAppro-frm">
                         <!-- 강의승인신청목록 -->
                         <div class="card-header mtAppro-name">회원 ID . [<%=members.get(i).getmId()%>] &emsp;/&emsp; 가입 날짜 : [<%=members.get(i).getmHireDate() %>]
+                        	<div>계정 사용 여부 : <%=members.get(i).getmUse() %></div>
                         </div>
+                        
 
                            <table class="tbl-appro" style = "text-align: center">
                               <tr>
@@ -55,7 +57,7 @@
                                  <td style = "margin-top: 13.5px; margin-left: 10px; text-align: left; width: 200px;"><%=members.get(i).getmEmail() %></td>
                                  <td style = "margin-top: 13.5px; margin-left: 10px; text-align: left; width: 100px;"><%=members.get(i).getmPhone() %></td>
                                  <td>
-								<button id ="seeMore" name = "seeMore"  onclick="location.href='<%=request.getContextPath()%>/admin/memberRebirth.do?mId=<%=members.get(i).getmId()%>'">계정 활성화</button>
+								<button id ="seeMore" name = "seeMore"  onclick= "location.href='<%=request.getContextPath()%>/admin/memberDelete.do?mId=<%=members.get(i).getmId()%>'">이용 정지</button>
                                  </td>
                               </tr>        
                            </table>
@@ -65,7 +67,9 @@
 							%>
 						<div class="card appro-frm-wrap"></div>
 					<%} %>
-
+                    <div id="admin-appro-pageBar" class = "center">
+         				<%=request.getAttribute("pageBar")%>
+      				</div>
                   </div>
                </div>
             </div>
@@ -75,13 +79,11 @@
 
 </div>
 </section>
- <script>
- $(function(){
-		if(<%=count%>==0) {
-			alert("조회 결과가 없습니다.");
-				
-		}
-	});
- </script>
-</body>
-</html>
+<script>
+$(function(){
+	if(<%=count%>==0) {
+		alert("조회 결과가 없습니다.");
+			
+	}
+});
+</script>

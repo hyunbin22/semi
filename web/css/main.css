@@ -4,7 +4,7 @@
 @import url(http://fonts.googleapis.com/earlyaccess/hanna.css);
 
 * {
-  font-family: 'Nanum Gothic';
+  font-family: 'Noto Sans KR', sans-serif;
   margin: 0 auto;
   padding: 0 auto;
 }
@@ -471,7 +471,7 @@ nav ul {
     
    }
 .bar h1 {
-	font-family: "Black+Han+Sans";
+
 	font-size: 50px;
 }
 
@@ -482,7 +482,6 @@ nav ul {
 	font-size: 16px;
 	color: rgb(255, 255, 255);
 	text-align: center;
-	line-height: 2em;
 	border-radius: 4px;
 	background-color: #eb9f9f;
 	border: none;

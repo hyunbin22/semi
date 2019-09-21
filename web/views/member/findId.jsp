@@ -6,7 +6,7 @@
             <div class="wrap">
                 <div class="bar">
                     <br>
-                    <h1 style="font-size: 40px; text-align: center;">아이디 찾기</h1>
+                    <h1 style="font-size: 40px; text-align: center;"><strong>아이디 찾기</strong></h1>
                     <h5 class = "center1">찾으시려는 아이디의 정보를 입력해주세요</h5>
                     <hr>
                     <br><br>

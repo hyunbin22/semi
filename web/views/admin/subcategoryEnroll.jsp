@@ -12,12 +12,14 @@
   <br>
   <br>
   <br>
-    <div id="search1">수업카테고리(Sub)</div>
+  <div style = "margin-left: 200px; font-family: 'Noto Sans KR', sans-serif;">
+    <div id="search1"><strong>수업카테고리(Sub)</strong></div>
+    <br>
 	<form id="subcategoryFrm" action="<%=request.getContextPath() %>/admin/subcategoryEnrollEnd" method="post">
 		<table border="1" width="500"  bgcolor="" align="center" cellspacing="0" cellpadding="3" 
 		 bordercolor="" bordercolordark="" bordercolorlight="#fddc78">
 		    <tr>
-		    <td align="left" width="120" bgcolor="">
+		    <td align="left" width="120" style = "background-color: lavender">
 			<font color="#0000ff">*</font>카테고리선택</td>
 		    <td width="400">
 				<select name="maincategory" id="maincategory">
@@ -36,7 +38,7 @@
 		    </td>
 		    </tr>
 		    <tr>
-		    <td align="left" width="120" bgcolor="">
+		    <td align="left" width="120" style = "background-color: lavender">
 			<font color="#0000ff">*</font>카테고리입력</td>
 		    <td width="400">
 			<input name="inputsubcategory" type="text" size="50" maxlength="50">
@@ -44,11 +46,13 @@
 		    </tr>
 		</table>
 	</form>
-
+</div>
            <br>
-           <button type="submit" id="subName" name="subName" onclick="enrollSubCategory();">등록</button>
-           <button type="submit" id="submit2">수정</button>
-           <button type="submit" id="submit3">삭제</button>
+           <div style = "margin-left: -20px">
+           <button type="submit" id="subName" name="subName" onclick="enrollSubCategory();" class = "next">등록</button>
+           <button type="submit" id="submit2" class = "next">수정</button>
+           <button type="submit" id="submit3" class = "next">삭제</button>
+           </div>
            
         </section>
         <br>

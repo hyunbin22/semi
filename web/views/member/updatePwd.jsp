@@ -7,7 +7,7 @@
             <div class="wrap">
                 <div class="bar">
                     <br>
-                    <h1 style="font-size: 40px; text-align: center;">비밀번호 변경</h1>
+                    <h1 style="font-size: 40px; text-align: center;"><strong>비밀번호 변경</strong></h1>
                     <h5 class = "center1">변경할 비밀번호를 입력해주세요.</h5>
                     <hr>
                     <br><br>

@@ -26,7 +26,7 @@ public class ReportService {
 		if(result > 0)
 		{
 			commit(conn);
-			result = dao.selectSeqReport(conn, m.getmNum());
+			result = dao.selectSeqReport(conn);
 		}
 		else
 		{

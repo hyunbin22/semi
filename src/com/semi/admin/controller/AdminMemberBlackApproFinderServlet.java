@@ -9,22 +9,20 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.semi.mento.model.service.MentoService;
-import com.semi.mento.model.vo.Mento;
-import com.semi.report.model.service.ReportService;
-import com.semi.report.model.vo.Report;
+import com.semi.member.model.service.MemberService;
+import com.semi.member.model.vo.Member;
 
 /**
- * Servlet implementation class AmdinReportApprovalServlet
+ * Servlet implementation class AdminMemberBlackApproFinderServlet
  */
-@WebServlet("/admin/reportApproFinderCom.do")
-public class AdminReportCompleteApprovalFindServlet extends HttpServlet {
+@WebServlet("/admin/memberBlackApproFinder.do")
+public class AdminMemberBlackApproFinderServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
-     *
-    public AmdinReportApprovalServlet() {
+     */
+    public AdminMemberBlackApproFinderServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -33,9 +31,9 @@ public class AdminReportCompleteApprovalFindServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String type = request.getParameter("searchType").trim();
-		String data = request.getParameter("searchKeyword");
-			
+		String type = request.getParameter("searchType");
+		String data = request.getParameter("searchKeyword").trim();
+		
 		int cPage;
 		try {
 			cPage = Integer.parseInt(request.getParameter("cPage"));
@@ -43,11 +41,11 @@ public class AdminReportCompleteApprovalFindServlet extends HttpServlet {
 			cPage = 1;
 		}
 		int numPerPage=10;
-		int countReportApproval = new ReportService().countReportApproval(type, data);
-		List<Report> reportList = new ReportService().reportFindListCom(data, cPage, numPerPage);
-		System.out.println("완료 리스트 : " + reportList);
+		int countMemberBlackApproval = new MemberService().countMemberBalckApproval(type, data);
+		List<Member> memberBlackList = new MemberService().memberFindBlackList(data, cPage, numPerPage);
+		System.out.println("리스트 : " + memberBlackList);
 		
-		int reportTotalPage=(int)Math.ceil((double)countReportApproval/numPerPage);
+		int reportTotalPage=(int)Math.ceil((double)countMemberBlackApproval/numPerPage);
 		String pageBar="";
 		int pageSizeBar=5;
 		int pageNo=((cPage-1)/pageSizeBar)*pageSizeBar+1;
@@ -56,14 +54,14 @@ public class AdminReportCompleteApprovalFindServlet extends HttpServlet {
 			pageBar+="<span>[이전]</span>&nbsp;";
 		}
 		else {
-			pageBar+="<a href="+request.getContextPath()+"/admin/reportApproFinderCom.do?cPage="+(pageNo-1)+">[이전]</a>&nbsp;";
+			pageBar+="<a href="+request.getContextPath()+"/admin/memberBlackApproFinder.do?cPage="+(pageNo-1)+">[이전]</a>&nbsp;";
 		}
 		while(!(pageNo>pageEnd||pageNo>reportTotalPage)) {
 			if(pageNo==cPage) {
 				pageBar+="<span class='admin-appro-cPage'>"+pageNo+"</span>&nbsp;";
 			}
 			else {
-				pageBar+="<a href="+request.getContextPath()+"/admin/reportApproFinderCom.do?cPage="+pageNo+">"+pageNo+"</a>&nbsp;";
+				pageBar+="<a href="+request.getContextPath()+"/admin/memberBlackApproFinder.do?cPage="+pageNo+">"+pageNo+"</a>&nbsp;";
 			}
 			pageNo++;
 		}
@@ -72,14 +70,13 @@ public class AdminReportCompleteApprovalFindServlet extends HttpServlet {
 		}
 		else {
 			pageBar+="<a href="+request.getContextPath()+
-			"/admin/reportApproFinderCom.do?cPage="+(pageNo)+">[다음]</a>";
+			"/admin/memberBlackApproFinder.do?cPage="+(pageNo)+">[다음]</a>";
 		}
 		
-		//view페이지에 데이터 전송
 		request.setAttribute("pageBar", pageBar);
 		request.setAttribute("cPage", cPage);
-		request.setAttribute("reportList",reportList);
-		request.getRequestDispatcher("/views/admin/reportListFindCom.jsp").forward(request, response);
+		request.setAttribute("memberList",memberBlackList);
+		request.getRequestDispatcher("/views/admin/adminBlackListFind.jsp").forward(request, response);
 	}
 
 	/**

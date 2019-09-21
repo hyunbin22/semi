@@ -67,7 +67,7 @@
                         </tr>
                         <tr>
                         <td colspan="4">
-                        <textarea rows="10" cols="110" style="resize: none;" name = "rReply"></textarea>
+                        <textarea rows="10" cols="110" style="resize: none;" name = "rReply" id = "rReply"></textarea>
                         </td>
                         </tr>
                         <tr class = "notice-top">
@@ -126,7 +126,20 @@
             </div>
         </article>
     </section>
+    
 	<script>
+	function checkValue(){ 
+		var reportReply = $('#rReply');
+
+
+          if(reportReply.val().length==0){
+  			alert('답변을 입력하세요');
+  			reportId.focus();
+              return false;
+  			}
+          return true;
+          }
+	
 		function memberBlack(){
     	
 		var frm=$('#replyFrm');

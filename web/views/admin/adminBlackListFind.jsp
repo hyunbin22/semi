@@ -3,7 +3,7 @@
 <%@ include file="/views/common/adminHeader.jsp"%>
 <%@ page import="java.util.List, com.semi.member.model.vo.Member"%>
 <%
-   List<Member> members=(List)request.getAttribute("members");
+   List<Member> members=(List)request.getAttribute("memberList");
    int cPage=(int)request.getAttribute("cPage");
    String pageBar=(String)request.getAttribute("pageBar");
    int count = 0;
@@ -75,13 +75,14 @@
 
 </div>
 </section>
- <script>
- $(function(){
-		if(<%=count%>==0) {
-			alert("조회 결과가 없습니다.");
-				
-		}
-	});
- </script>
+<script>
+$(function(){
+	if(<%=count%>==0) {
+		alert("조회 결과가 없습니다.");
+			
+	}
+});
+</script>
+   
 </body>
 </html>

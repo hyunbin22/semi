@@ -17,6 +17,9 @@ import com.semi.lecture.model.dao.LectureDao;
 import com.semi.lecture.model.vo.Lecture;
 import com.semi.member.model.vo.Member;
 import com.semi.order.model.vo.Order;
+import com.semi.report.model.dao.ReportUploadDao;
+import com.semi.report.model.vo.Report;
+import com.semi.report.model.vo.ReportUpload;
 
 public class MemberDao {
 
@@ -454,6 +457,156 @@ public class MemberDao {
 			close(stmt);
 		}
 		return result;
+	}
+
+	public int memberUse(Connection conn, String mId) {
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		int result = 0;
+		String sql=prop.getProperty("memberUse2");
+		try {
+			pstmt=conn.prepareStatement(sql);
+			pstmt.setString(1, mId);
+			result=pstmt.executeUpdate();
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}
+		finally {
+			close(pstmt);
+		}
+		return result;
+	}
+
+	public int memberRebirth(Connection conn, String mId) {
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		int result = 0;
+		String sql=prop.getProperty("memberUse3");
+		try {
+			pstmt=conn.prepareStatement(sql);
+			pstmt.setString(1, mId);
+			result=pstmt.executeUpdate();
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}
+		finally {
+			close(pstmt);
+		}
+		return result;
+	}
+
+	public int countMemberApproval(Connection conn, String type, String data) {
+		Statement stmt = null;
+		String sql = "select count(*) from tb_member where " + type + " like '%" + data + "%'";
+		ResultSet rs = null;
+		int result = 0;
+		try {
+			stmt = conn.createStatement();
+			rs = stmt.executeQuery(sql);
+			if(rs.next()) {
+				result = rs.getInt(1);
+			}
+		} catch(SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rs);
+			close(stmt);
+		}
+		return result;
+	}
+
+	public List<Member> memberFindList(Connection conn, String data, int cPage, int numPerPage) {
+		Member m = null;
+		Statement stmt = null;
+		ResultSet rs = null;
+		List<Member> list = new ArrayList();
+		int start = (cPage-1)*numPerPage+1;
+		int end = cPage*numPerPage;
+
+		String sql = "select * from ("
+				+ "select rownum as rnum, a.* from("
+				+ "select * from tb_member where mId like '%"+data+"%')a) where rnum between "+ start + " and " + end;
+		try {
+			stmt = conn.createStatement();
+			rs=stmt.executeQuery(sql);
+			while(rs.next()) {
+				m = new Member();
+				m.setmNum(rs.getInt("mNum"));
+				m.setmId(rs.getString("mId"));
+				m.setmPassword(rs.getString("mPassword"));
+				m.setmName(rs.getString("mName"));
+				m.setmGender(rs.getString("mGender").charAt(0));
+				m.setmBirth(rs.getDate("mBirth"));
+				m.setmEmail(rs.getString("mEmail"));
+				m.setmPhone(rs.getString("mPhone"));
+				m.setmUse(rs.getString("mUse").charAt(0));
+				m.setmHireDate(rs.getDate("mHire_Date"));
+				list.add(m);
+			}
+		} catch(SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rs);
+			close(stmt);
+		}
+		return list;
+	}
+
+	public int countMemberBlackApproval(Connection conn, String type, String data) {
+		Statement stmt = null;
+		String sql = "select count(*) from tb_member where " + type + " like '%" + data + "%' and muse = 'N'";
+		ResultSet rs = null;
+		int result = 0;
+		try {
+			stmt = conn.createStatement();
+			rs = stmt.executeQuery(sql);
+			if(rs.next()) {
+				result = rs.getInt(1);
+			}
+		} catch(SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rs);
+			close(stmt);
+		}
+		return result;
+	}
+
+	public List<Member> memberFindBlackList(Connection conn, String data, int cPage, int numPerPage) {
+		Member m = null;
+		Statement stmt = null;
+		ResultSet rs = null;
+		List<Member> list = new ArrayList();
+		int start = (cPage-1)*numPerPage+1;
+		int end = cPage*numPerPage;
+
+		String sql = "select * from ("
+				+ "select rownum as rnum, a.* from("
+				+ "select * from tb_member where mId like '%"+data+"%' and muse = 'N')a) where rnum between "+ start + " and " + end;
+		try {
+			stmt = conn.createStatement();
+			rs=stmt.executeQuery(sql);
+			while(rs.next()) {
+				m = new Member();
+				m.setmNum(rs.getInt("mNum"));
+				m.setmId(rs.getString("mId"));
+				m.setmPassword(rs.getString("mPassword"));
+				m.setmName(rs.getString("mName"));
+				m.setmGender(rs.getString("mGender").charAt(0));
+				m.setmBirth(rs.getDate("mBirth"));
+				m.setmEmail(rs.getString("mEmail"));
+				m.setmPhone(rs.getString("mPhone"));
+				m.setmUse(rs.getString("mUse").charAt(0));
+				m.setmHireDate(rs.getDate("mHire_Date"));
+				list.add(m);
+			}
+		} catch(SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rs);
+			close(stmt);
+		}
+		return list;
 	}
 
 }

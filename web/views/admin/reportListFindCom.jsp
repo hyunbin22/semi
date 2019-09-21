@@ -20,7 +20,7 @@
 					<input type="hidden" name="searchType" value="mId">
 					<input type="hidden" name="cPage" value="<%=cPage%>"> 
 					신고자 ID : <input type="text" name="searchKeyword" placeholder="검색어 입력">
-					<button type="submit">검색</button>
+					<button type="submit" class = "next">검색</button>
 				</form>
 			</div>
 	 		<%-- <div id="search-reportTitle">
@@ -38,7 +38,7 @@
    <article class="admin-list-container wrap">
     <div class="row">
          <div class="col">
-            <h3 class="admintitle">신고처리완료목록</h3>
+            <h3 class="admintitle"><strong>신고처리완료목록</strong></h3>
             <div class="tab-content">
                <div class="tab-pane fade show active" id="lectureAppro">
 				    <% 

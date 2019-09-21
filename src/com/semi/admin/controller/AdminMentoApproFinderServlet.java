@@ -26,7 +26,7 @@ public class AdminMentoApproFinderServlet extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String type = request.getParameter("searchType");
-		String data = request.getParameter("searchKeyword");
+		String data = request.getParameter("searchKeyword").trim();
 		int temp = Integer.parseInt(request.getParameter("temp"));
 		
 		int cPage;
