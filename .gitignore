@@ -1,0 +1,16 @@
+gitignore
+
+.class
+.classpath
+.git
+.bin/
+*.swp
+*~.nib
+
+local.properties
+
+.settings/
+
+.loadpath
+
+.recommenders
