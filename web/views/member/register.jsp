@@ -97,9 +97,9 @@
 </section>
 <script>
 	var count = 0;	//핸드폰인증이 됐는지 확인
+	var key = "";
 	  //핸드폰번호 인증
 	$(function(){
-		var key = "";
 		$('#sendSms').click(function(){
 			var tel1 = $('#tel1').val();
 			var tel2 = $('#tel2').val();
@@ -114,14 +114,33 @@
 				type:"get",
 				dataType:"text",
 				success:function(data) {
-					$('#checkKey').html("인증번호 재발송");
+					//$('#checkKey').html("인증번호 재발송");
+					$('#checkKey').prop("disabled", true);
 					key = data;
+										
+					setTimeout(function() {
+						if($('#keyCheck')) {
+							setTime();	//3분
+						}
+					}, 180000);
 				},
 				error:function(request,status,error){
 			        alert("code = "+ request.status + " message = " + request.responseText + " error = " + error); // 실패 시 처리
 			    }
 			});
 		});
+		
+		//인증번호 3분안에 입력 안하면 재발송 하게 처리
+		function setTime(){
+			if(count==0 || $('#keyCheck').prop('disabled')) {
+				$('#checkKey').html("인증번호 재발송");
+				alert("인증번호가 만료되었습니다. 재발송 해주세요.");
+				$('#keyCheck').text("핸드폰인증을 다시 진행해주세요");
+				$('#keyCheck').css({"color":"red","font-size":"11px"});
+				$('#keyCheck').prop("disabled", true);
+				key="";
+			}
+		}
 		
 		//인증번호 확인
 		$('#checkKey').click(function(){
@@ -140,15 +159,23 @@
 				$('#sendSms').prop("disabled", false);
 				$('#checkKey').prop("disabled", false);
 				
-				$('#keyCheck2').text("인증번호가 일치합니다.");
+				/* $('#keyCheck2').text("인증번호가 일치합니다.");
 				$('#keyCheck2').css({"color":"green","font-size":"11px"});
-				$('#keyCheck2').prop("disabled", true);
-				
+				$('#keyCheck2').prop("disabled", true); */
 				$('#tel1').prop("readonly", true);
 				$('#tel2').prop("readonly", true);
 				$('#tel3').prop("readonly", true);
+				$('#tel1').css({"background-color", "lightgray"});
+				$('#tel2').css({"background-color", "lightgray"});
+				$('#tel3').css({"background-color", "lightgray"});
+				
+				
+				
 				$('#checkNum').readOnly=true;
 				$('#keyCheck').prop("disabled",false);
+				
+				$('#sendSms').text("인증완료");
+				$('#sendSms').disab
 				count=1;
 			} 
 			
@@ -351,7 +378,7 @@
 		}
 
 		//인증번호 체크글자가 보일때
-		if ($('#keyCheck').prop('disabled')) {
+		if ($('#keyCheck').prop('disabled') && $('#keyCheck').attr("color")=="red") {
 			alert("인증번호를 확인하세요.");
 			return false;
 		} 
