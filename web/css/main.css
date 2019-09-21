@@ -4,8 +4,8 @@
 @import url(http://fonts.googleapis.com/earlyaccess/hanna.css);
 
 * {
-  font-family: 'Noto Sans KR', sans-serif;
-  margin: 0 auto;
+  font-family: 'Nanum Gothic';
+ /*  margin: 0 auto; */
   padding: 0 auto;
 }
 /* h5 {
@@ -17,16 +17,16 @@ h4 {
 }
 h3 {
 	font-family: 'Hanna';
-}
+}*/
 h2 {
 	font-family: 'Hanna';
 }
 h1 {
 	font-family: 'Hanna';
-} */
+} 
 
 header {
-	min-height: 300px;
+	min-height: 200px;
 }
 
 div#profile1 {
@@ -58,7 +58,7 @@ button#logout, button#mypage {
 }
 
 div#myPro {
-	top:110px;
+	top:70px;
 	position:absolute;
 	width:450px;
 	float:right;
@@ -74,7 +74,7 @@ div#myPro2 {
 
 div#mypromenu {
 	position:absolute;
-	top:160px;
+	top:110px;
 	width:450px;
 }
 
@@ -86,61 +86,62 @@ div.images {
 }
 
 input#login {
-	width: 430px;
 	height: 33px;
 	margin: 10px;
 	background-color: #eb9f9f;
 	color: black;
 	border: none;
+	font-family: 'Noto Sans KR', sans-serif;
+	font-weight: bold;
+	cursor:pointer;
 	border-radius: 5px;
 }
 
 div#loginmenu {
 	position: absolute;
-	width: 450px;
-	top: 95px;
+	width: 430px;
+	top: 75px;
 	float: right;
-	margin-left: 15px;
+	margin-left: 40px;
 }
 
 div#loginmenu2 {
 	position: absolute;
-	width: 450px;
-	top: 190px;
-	margin-left:22.5px;
-	padding: 0px;
+	width: 430px;
+	top: 130px;
+	margin-left:50px;
 }
 
 input#id, input#pwd {
-	width: 200px;
+	width: 150px;
 	height: 30px;
 	margin: 5px;
 	margin-left: 10px;
 }
 
 span#join, span#findId, span#findPw {
-	width: 120px;
-	height: 35px;
+	width: 130px;
+	height: 23px;
 	background-color: #eb9f9f;
 	color: black;
-	margin: 10px;
-	padding: 5px;
 	text-align: center;
 	display: inline-block;
 	border-radius: 5px;
+	font-family: 'Noto Sans KR', sans-serif;
+	font-weight: bold;
 	cursor: pointer;
 }
 #logoWrap {
 	float: left;
 	width: 300px;
-	height: 230px;
+	height: 150px;
 }
 
 #logoImg {
 	float: left;
 	position: absolute;
-	top: 15px;
 	width: 300px;
+	top : 60px;
 }
 
 #topWrap{
@@ -150,7 +151,7 @@ span#join, span#findId, span#findPw {
 
 #loginWrap {
 	width: 450px;
-	height: 230px;
+	height: 200px;
 	float:right;
 }
 
@@ -169,16 +170,15 @@ header {
 }
 
 #most1_1 {
-	background-color: #f24365;
+	background-color: #a79c8e;
 	text-align: center;
 	height: 40px;
 	font-size: 20px;
 	color: white;
 	font-display: inline;
-	width: 342px;
+	width: 339.3px;
 	font-weight: bolder;
 	border: 1px solid gray;
-	font-family: 'Noto Sans KR', sans-serif;
 }
 
 .img1 {
@@ -254,11 +254,10 @@ footer p{
     text-align: center;
 }
 
-nav, .footmenu {
+#menu nav, .footmenu, .mainMenu nav {
 	margin-top: 20px;
 	list-style-type: none;
 	height: 50px;
-	width: 100%;
 	background-color: rgba(255, 212, 219, 0.87);
 }
 
@@ -367,21 +366,18 @@ textarea:focus::-webkit-input-placeholder {
 	color: transparent;
 }
 
-
-
-nav ul {
+.mainMenu nav ul {
 
     z-index: 1;
     padding: 0 0px;
     list-style: none;
     position: absolute;
-    width: 100%;
     font-family: 'helvetica', arial;
     
     
    }
     
-   nav ul:after{
+   .mainMenu nav ul:after{
     
     content: "";
     clear: both;
@@ -389,7 +385,7 @@ nav ul {
     
    }
     
-   nav ul li {
+   .mainMenu nav ul li {
     
     width:170px;
     float: left;
@@ -397,7 +393,7 @@ nav ul {
 	height: 50px;
    }
     
-   nav ul li:hover {
+   .mainMenu nav ul li:hover {
     
     background-color: pink;
     width:170px;
@@ -405,7 +401,7 @@ nav ul {
     
    }
     
-   nav ul li a {
+   .mainMenu nav ul li a {
     
     display: block;
     padding: 15px 50px;
@@ -417,14 +413,14 @@ nav ul {
     
    }
     
-   nav ul li a:hover{
+   .mainMenu nav ul li a:hover{
     
     color: #fff;
 
     
    }
     
-   nav ul ul {
+  .mainMenu nav ul ul {
     
     display: none;
     background: lightpink;
@@ -435,7 +431,7 @@ nav ul {
 
    }
     
-   nav ul ul li {
+  .mainMenu nav ul ul li {
     
     float: none;
     border-bottom: 1px solid rgba(0,0,0,.2);
@@ -443,26 +439,26 @@ nav ul {
     
    }
     
-   nav ul li:hover > ul {
+   .mainMenu nav ul li:hover > ul {
     
     display: block;
     
    }
     
-   nav ul ul li a {
+   .mainMenu nav ul ul li a {
     
     padding: 10px 40px;
     color: #fff;
     
    }
     
-   nav ul ul li a:hover {
+   .mainMenu nav ul ul li a:hover {
     
     background:palevioletred;
     
    }
     
-   nav ul ul ul {
+  .mainMenu nav ul ul ul {
     
     position: absolute;
     left: 100%;
@@ -471,7 +467,6 @@ nav ul {
     
    }
 .bar h1 {
-
 	font-size: 50px;
 }
 
@@ -482,6 +477,7 @@ nav ul {
 	font-size: 16px;
 	color: rgb(255, 255, 255);
 	text-align: center;
+	line-height: 2em;
 	border-radius: 4px;
 	background-color: #eb9f9f;
 	border: none;
@@ -522,10 +518,11 @@ span#unread{
 
 .tbl-register2 th{
 	width:50px;
-	height: 200px;
+	height: 50px;
 }
 
 .tbl-register2 td p {
+	text-align:left;
 	width: 700px;
 	height: 200px;
     font-size:11px;
@@ -536,6 +533,10 @@ span#unread{
 
 .tbl-register2 td{
 	text-align: center;
+}
+
+.lblAgree{
+	float:left;
 }
 
 
@@ -554,8 +555,8 @@ span#unread{
 	text-align:center;	
 }
 .phone{
-    width:80px;
-    height: 20px;
+    width:90px;
+    height: 30px;
 
 }
 .emailfield
@@ -570,6 +571,11 @@ span#unread{
     border-radius: 4px; 
     background-color: #eb9f9f;
 }
+
+.btnPhone {
+	margin-bottom: 0;	
+}
+
 .tblreg td:first-child{
 	width: 130px;
 }
@@ -581,7 +587,7 @@ span#unread{
 
 .tblreg td .textfield {
 	width: 305px;
-	height: 20px;
+	height: 30px;
 }
 
 /* .tblreg td .textfield{
@@ -605,6 +611,7 @@ span#unread{
 #myPageContentWrap {
 	width: 864px;
 	margin-right: 0px;
+	float: right;
 }
 
 
@@ -1061,6 +1068,7 @@ input.inputbtn , input.btnregister{
 .class-pay-container{
     margin-top: 30px;
     width: 800px;
+    min-height: 500px;
 	
 }
 
@@ -1455,7 +1463,7 @@ table.mtStudyList{
     
 }
 
-// lectureMemberRegist
+/* lectureMemberRegist */
 #lecMemRegistTable{
 	width: 800px;
 	height:500px;
@@ -1542,3 +1550,47 @@ td.contentTable2{
 	text-align: center;
 }
 
+
+/* 모임게시판 */
+/* 모임게시판 검색버튼 */
+/* 페이지바 */
+.moimNav {
+	background-color: none;
+}
+
+.tblMoim tr{
+	height: auto;
+}
+
+.pagination {
+	padding-left:40px;
+}
+
+/* 검색 */
+div#search-moim_keyword {
+	display: none;
+}
+
+div#search-mName {
+	display: none;
+}
+
+div#search-mId {
+	display: inline-block;
+}
+
+div#search-container {
+	margin: 0 0 10px 0;
+	padding: 3px;
+	float: left;
+}
+
+/* 글쓰기 버튼 */
+.moimWrite {
+	float: right;
+}
+
+.btnMoimFile {
+	width: 50px;
+	margin-bottom: 0;	
+}

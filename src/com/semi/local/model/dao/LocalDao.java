@@ -100,4 +100,26 @@ public class LocalDao {
 		}
 		return result;
 	}
+
+	//String형식 지역 받아오기
+	public String selectLocal(Connection conn, int localSubNum) {
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		String sql = "select * from tb_location join tb_sub_location using(localNum) where sublocalnum=?";
+		String local = "";
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, localSubNum);
+			rs = pstmt.executeQuery();
+			if(rs.next()) {
+				local = rs.getString("local_city") + " " + rs.getString("local_country");
+			}
+		} catch(Exception e) {
+			e.printStackTrace();
+		} finally {
+			close(rs);
+			close(pstmt);
+		}
+		return local;
+	}
 }

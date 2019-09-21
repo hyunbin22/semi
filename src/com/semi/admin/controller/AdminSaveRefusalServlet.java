@@ -31,7 +31,6 @@ public class AdminSaveRefusalServlet extends HttpServlet {
 		
 		String msg = "";
 		String loc = "";
-		
 		if(mtLec.equals("mt")) {
 			int mtNum = Integer.parseInt(request.getParameter("mtNum"));
 			String reason = request.getParameter("reason");

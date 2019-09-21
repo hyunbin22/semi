@@ -36,7 +36,7 @@ public class OrderEnrollServlet extends HttpServlet {
 	      
 	      request.setAttribute("day", days);
 	      request.setAttribute("lecture", lec);
-	      request.getRequestDispatcher("/views/lecture/lectureMemberRegist.jsp").forward(request, response);
+	      request.getRequestDispatcher("/views/order/orderEnroll.jsp").forward(request, response);
 	}
 
 	/**

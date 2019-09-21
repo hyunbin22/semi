@@ -1,0 +1,599 @@
+=======
+@charset "UTF-8";
+@import url('https://fonts.googleapis.com/css?family=Noto+Sans+KR&display=swap');
+@import url(http://fonts.googleapis.com/earlyaccess/nanumgothic.css);
+@import url(http://fonts.googleapis.com/earlyaccess/hanna.css);
+
+.center1{
+    width:fit-content;
+    left:0;
+    right:0;
+    margin: 0 auto;
+}
+h3 {
+	font-family: 'Noto Sans KR', sans-serif;
+}
+h1, h2 {
+	font-family: 'Hanna';
+}
+/* admin */
+body{
+    width: 1024px
+}
+
+/* list가 0일때 */
+div#EmptyListWrap{
+	height: 500px;
+	border: none;
+}
+
+
+#header-line{
+    list-style: none;
+    width: 1024px;
+    height: 70px;
+    border-bottom: 2px solid whitesmoke;
+    background-color: rgba(255, 212, 219, 0.87);
+}
+.admin-header ul li{
+	line-height: 70px;
+	font-size: 1.6em;
+	font-weight: 900;
+    display: inline;
+    margin-right: 50px;
+    
+}
+
+.admin-header ul li a{
+	color: #f24365;
+	font-family: 'Noto Sans KR', sans-serif;
+}
+
+#exit{
+	line-height:40px;
+    float: right;
+    margin-top: 10px;
+    margin-right: 30px;
+    width: 80px;
+    background-color:#eb9f9f;
+    color:white;
+    border : none;
+}
+
+header1{
+    height: 150px;
+}
+
+.adminWrap{
+    width:1024px;
+    min-height:800px;
+    position: absolute;
+    
+}
+
+footer{
+    background-color:rgba(255, 212, 219, 0.87);
+    clear:both;height:75px;text-align:center;
+    padding-top:30px;
+}
+
+
+/* 검색창 */
+#searchType{
+	height: 30px;
+}
+
+.btnSearch{
+	height: 33px;
+}
+
+
+/* 회원관리 */
+
+.border-test{
+    border: 1px solid blue;
+}
+
+.search1{
+    padding-left: 30px;
+    float: left;
+}
+
+.person-table{
+    border: 1px solid red;
+    width: 1000px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* 멘토관리 */
+article.admin-list{
+	width: 700px;
+}
+/* 관리자승인관리 */
+
+/* 승인list꾸미기 */
+div#adminSearchContainer {
+	float:left;
+}
+.card-header{
+	background-color: lavender;
+	font-weight: bold;
+}
+
+button.btn-appro-view:hover, button.btn-appro-view:checked{
+	background-color: #afafef;
+	font-weight: bold;
+}
+
+button.btn-appro-view{
+	height: 40px;
+	background-color: #c5c5f3;
+}
+
+div#search-mId{
+	display: inline-block;
+}
+div#search-mName{
+	display:none;
+}
+
+div#admin-appro-pageBar{
+	margin-top:10px; 
+	text-align:center;
+}
+div#admin-appro-pageBar span.admin-appro-cPage{
+	color: darkgray;
+}
+
+.approImg{
+	width: 150px;
+	height: 150px;
+	border-radius: 30px;
+}
+
+
+.admin-list-container{
+	float: right;
+	width: 780px;
+}
+
+table.tbl-appro{
+	width:100%;
+}
+
+table.tbl-appro tr td:first-child{
+	float:left;
+}
+
+.admin-floatTitle>h3 {
+	font-family: 'Noto Sans KR', sans-serif;
+	color: #f24365;
+	font-weight: bold;
+}
+
+a.appro-aTag {
+	text-decoration: none;	
+	color: #f24365;
+	font-weight:bold;
+	font-family: 'Noto Sans KR', sans-serif;
+	
+}
+
+.admin-floatTitle {
+	text-align: center;
+}
+.admin-floatMenu {
+	position: absolute;
+	width: 200px;
+    margin-top: 50px;
+	background-color: #fff;
+	color: darkgray;
+	
+}
+
+.admin-floatMenu ul li {
+	list-style: none;
+	margin-bottom: 10px;
+	text-align: left;
+	font-weight: 800;
+	color: #f24365;
+}
+
+.admin-floatMenu ul li a:hover {
+	
+	background-color: pink;
+	color: #fff;
+	list-style: none;
+	margin-left: 10px;
+	text-align: center;
+	font-weight: 900;
+	color: black;
+	text-decoration: none;
+}
+
+.admintitle{
+	text-align: center;
+	margin-bottom:30px;
+	margin-top : 30px;
+	font-family: 'Noto Sans KR', sans-serif;
+}
+
+div.approContent .card-title{
+	text-align:left;
+}
+
+
+/* 멘토상세보기 */
+article#admin-mento-wrap{
+	width: 780px;
+	float:right;
+}
+
+div.appro-btn-wrap{
+	text-align:center;
+}
+
+.mento_info_child{
+    padding-top: 20px;
+}
+
+.mento_info_child h1{
+    padding-left: 20px;
+    margin-bottom: 25px;
+}
+
+div#picture-cover .mento-profile-img .lecture-cover-img{
+    width:auto; height: auto;
+	min-height: 300px;
+	max-height: 300px;
+	border: 1px solid gray;
+	margin-top: 10px;
+	margin-bottom: 10px;
+	margin-left: 0;
+}
+
+div.admin-detail-frm-wrap{
+	border: 1px solid lavender;
+	
+}
+div.admin-mento-detailwrap>h1{
+	text-align:center;
+	background-color: lavender;
+	margin-bottom: 0;
+	height: 60px;
+}
+
+div.admin-mento-detailwrap h2{
+	text-align:center;
+	background-color: lavender;
+	margin-bottom: 0;
+	height: 40px;
+	width: 100%;
+}
+
+form.admin-mento-detail-frm{
+	border : 1px solid rgb(255, 207, 207);
+}
+.admin-mento-detailwrap{
+    width: 780px;
+    float:right;
+    font-family: 'Noto Sans KR', sans-serif;
+    text-align: center;
+}
+
+.admin-mento-detailwrap img{
+    width:auto; height: auto;
+    max-width: 500px; max-height: 500px;
+    min-width: 400px; min-height: 400px;
+    margin-left: 40px;
+    margin-top : 30px;
+    margin-bottom: 30px;
+}
+
+.admin-mento-detailwrap hr{
+	width: 100%;
+	margin-left: 0;
+}
+.admin-mento-detailwrap p{
+	margin-left: 20px;
+	font-size: 25px;
+
+}
+
+.admin-mento-detailwrap ul{
+    list-style: none;
+}
+
+.admin-mento-detailwrap label{
+    margin-top: 10px;
+    margin-bottom: 10px;
+    font-weight: 900;
+
+}
+
+/* .checkbutton{
+    width: 150px;
+    font-size: 16px;
+    color: rgb(255, 255, 255);
+    text-align: center; 
+    line-height: 2em; 
+    border-radius: 4px; 
+    background-color: #96938f;
+} */
+
+
+.inputbtn, .next {
+	width: 130px;
+	height: 30px;
+	margin-bottom: 10px;
+	font-size: 16px;
+	color: rgb(255, 255, 255);
+	text-align: center;
+	border-radius: 4px;
+	background-color: #eb9f9f;
+	border: none;
+}
+
+
+div#mento_info h5 {
+	padding-left: 30px;
+} 
+
+/* 강의상세보기 */
+
+
+.detailwrap{
+    width:700px;
+    background-color:rgba(211, 211, 211, 0.486);
+
+}
+
+img.detailimg{
+    width:700px;
+    height:400px;
+}
+
+.pricewrap{
+    float:right;
+}
+
+.detailbar{
+    border: 1px solid rgba(0, 0, 0, 0.125);
+    border-right:1px solid rgba(0, 0, 0, 0.125);
+    background-color: black;
+    width:100%;
+    height: 50px;
+    font-size: 15px;
+    font-weight: 900;
+    text-align: center;
+    vertical-align: middle;
+    color:#f24365;
+    font-family: "나눔스퀘어";
+    cursor: pointer;
+}
+
+.detailbar2{
+    position: fixed;
+    /* border: 1px solid rgba(0, 0, 0, 0.125); */
+    background-color: black;
+    width:500px;
+    height: 50px;
+    top:0px;
+    font-size: 15px;
+    font-weight: 900;
+    text-align: center;
+    vertical-align: middle;
+    color:#f24365;
+    font-family: "나눔스퀘어";
+    cursor: pointer;  
+}
+
+.detailbar tr td a{
+    color:#f24365;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+
+
+.detailbar2 tr td a{
+    color:#f24365;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+
+.floatMenu {
+	position: absolute;
+	width: 200px;
+    height: 740px;
+    /* top:52%; */
+    margin-top: 50px;
+    margin-left:100px;
+	background-color: #f24365;
+	color: #fff;
+}
+
+.right2{
+    right:100px;
+}
+
+.title{
+    color:#f24365;
+    font-weight: 900;
+    font-size: 60px;
+    font-family: '나눔스퀘어';
+    text-align: center;
+    margin: 30px 10px 30px 10px;
+}
+
+.content{
+    margin: 0px 10px 10px 10px;
+    text-align: center;
+    font-size: 15px;
+}
+
+.card-text{
+    float:right;
+    margin-right: 10px;
+    
+}
+
+.proinfo{
+    width:100%;
+}
+
+.proinfo tr td img{
+    width:300px;
+    height:300px;
+}
+
+.subtext{
+    color: #f24365;
+    font-weight: 900;
+    font-size: 36px;
+    font-family: '나눔스퀘어';
+    text-align: left;
+    margin-left: 20px;
+    margin-top:10px;
+    margin-bottom: 10px;
+}
+
+/*-- 신고 상세보기 페이지 report */
+#notice-nav{
+    float: left;
+    margin-left: 20px;
+    border: 1px solid red;
+}
+.notice-highlight1{
+
+}
+.notice-highlight-span{
+    width: 50px;
+}
+.notice-table{ /* 공지사항내용목록 */
+    margin : 20px 0 0;
+    float: left;
+    text-align: center;
+}
+.notice-top{
+    font-size: 20px;
+    margin-bottom: 15px;
+    border-bottom: 2px solid #cacaca;
+    background-color: #eb9f9f;
+    width : 800px;
+}
+
+.notice-top2{
+    font-size: 20px;
+    margin-bottom: 15px;
+    border-bottom: 2px solid #cacaca;
+    background-color: #eb9f9f;
+    width : 685px;
+}
+
+.notice-table-div{
+    border: 1px solid #f24365;
+}
+.null td{
+    height: 30px;
+    border-top: 1px solid #cacaca; 
+}
+.notice-highlight1{ /* 필독텍스트 */
+    width : 60px;
+}
+.notice-highlight{
+    width : 60px;
+    text-align: center;
+}
+.notice-highlight-div{
+    width: 30px;
+    height: 20px;
+    border-radius: 5px;
+    border: 1px solid #f24365;
+    background-color: #ffc6d1;
+    
+}
+/* .notice-highlight-str{
+    background-color: #e96a83;
+}*/
+.notice-highlight-span{
+    color : #f24365;
+    font-size: 10px;
+    border-bottom: 20px;
+} 
+.notice-date{ /* 작성일 */
+    width: 110px;
+}
+.notice-title{ /* 제목 */
+    width : 380px;
+
+}
+.notice-id{ /* 작성자 */
+    width: 120px;
+    text-align: center;
+}
+.notice-banner{
+    float: left;
+    width: 100px;
+    height: 100%;
+    border : 1px solid red;
+    margin : 0 0 0 50px;
+}
+.notice-content2{
+    border-radius: 20px;
+    height: 300px;;
+    background-color: #e7e7e7;
+    text-align: left;
+    font-size: 15pt;
+}
+
+.report-content{
+	margin: 20px;	
+}    
+
+.notice-content3{
+	border : solid 1px black;
+    height: 300px;;
+    font-size: 15pt;
+}
+
+button#seeMore , input#seeMore{
+	width: 120px;
+	height: 33px;
+	margin: 10px;
+	background-color: #eb9f9f;
+	color: black;
+	border: none;
+	border-radius: 5px;
+	cursor: pointer;
+}
+
+/* 카테고리  */
+#search1{
+	text-align:center;
+	font-family: 'Noto Sans KR', sans-serif;
+}
+#scName{
+	margin-left:440px;
+}
+#subName{
+	margin-left:440px;
+}
+#localCountry{
+	margin-left:440px;
+}
+#localCity{
+	margin-left:440px;
+}
+table{
+	width:fit-content;
+    left:0;
+    right:0;
+    margin: 0 auto;
+}
+
+.tab-content{
+	    font-family: 'Noto Sans KR', sans-serif;
+}

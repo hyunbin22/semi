@@ -8,8 +8,10 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.semi.category.model.service.CategoryService;
 import com.semi.lecture.model.service.LectureService;
 import com.semi.lecture.model.vo.Lecture;
+import com.semi.local.model.service.LocalService;
 
 /**
  * Servlet implementation class AdminClassDetailServlet
@@ -34,6 +36,9 @@ public class AdminLectureDetailServlet extends HttpServlet {
 		int lecNum = Integer.parseInt(request.getParameter("lecNum"));
 		int temp = 0;
 		Lecture lec = new LectureService().lectureView(lecNum);
+		String cate = new CategoryService().lecCategory(lecNum);
+		String local = new LocalService().selectLocal(lec.getLocalSubNum());
+		
 
 		if(lec.getLecCheck()=='N') {
 			temp = 1;
@@ -43,6 +48,8 @@ public class AdminLectureDetailServlet extends HttpServlet {
 		} else {
 			temp = 0;
 		}
+		request.setAttribute("cate", cate);
+		request.setAttribute("local", local);
 		request.setAttribute("temp", temp);
 		request.setAttribute("lecture", lec);
 		request.getRequestDispatcher("/views/admin/adminLectureDetail.jsp").forward(request, response);

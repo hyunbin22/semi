@@ -22,9 +22,10 @@ public class OrderPaySuccessEndServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		String msg = request.getParameter("msg");
-		String loc = "/";
-		request.setAttribute("msg", msg);
+		int oNum = Integer.parseInt(request.getParameter("oNum"));
+		String loc = "/order/orderView.do?oNum="+oNum;
 		request.setAttribute("loc", loc);
+		request.setAttribute("msg", msg);
 		request.getRequestDispatcher("/views/common/msg.jsp").forward(request, response);
 	}
 

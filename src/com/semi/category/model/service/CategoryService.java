@@ -75,4 +75,12 @@ public class CategoryService {
 		close(conn);
 		return result;
 	}
+	
+	//강의에서 카테고리 보여주기
+	public String lecCategory(int lecNum) {
+		Connection conn = getConnection();
+		String cate = dao.lecCategory(conn, lecNum);
+		close(conn);
+		return cate;
+	}
 }

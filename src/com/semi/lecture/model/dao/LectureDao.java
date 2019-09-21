@@ -30,7 +30,9 @@ public class LectureDao {
 			e.printStackTrace();
 		}
 	}
-
+	
+	
+	//승인신청한 강의목록
 	public int countLectureApproval(Connection conn) {
 		PreparedStatement pstmt = null;
 		String sql = prop.getProperty("countLectureApproval");
@@ -109,6 +111,27 @@ public class LectureDao {
 	}
 
 	//관리자 강의신청목록 검색
+	public int countLectureApproval(Connection conn, String type, String data) {
+		Statement stmt = null;
+		String sql = "select count(*) from tb_lecture join tb_mento using(mtnum) "
+				+ "where " + type + " like '%" + data + "%'";
+		ResultSet rs = null;
+		int result = 0;
+		try {
+			stmt = conn.createStatement();
+			rs = stmt.executeQuery(sql);
+			if(rs.next()) {
+				result = rs.getInt("cnt");
+			}
+		} catch(SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rs);
+			close(stmt);
+		}
+		return result;
+	}
+	
 	public List<Lecture> lectureApproList(Connection conn, String type, String data, int cPage, int numPerPage) {
 
 		List<LectureUpload> setUpList = new ArrayList();
@@ -386,7 +409,7 @@ public class LectureDao {
 		return lecturelist;
 	}
 
-
+	//강의 이름
 	public Lecture selectLectureName(Connection conn, int int1) {
 		PreparedStatement pstmt=null;
 		ResultSet rs=null;
@@ -410,12 +433,12 @@ public class LectureDao {
 	}
 
 
-
+	//멘토번호로 강의조회
 	public List<Lecture> lectureListByMtNum(Connection conn, int mtnum) {
 		Statement stmt=null;
 		ResultSet rs=null;
 		List<Lecture> list=new ArrayList();
-		String sql="select * from tb_lecture where mtnum =" + mtnum;
+		String sql="select * from tb_lecture";
 		try {
 			stmt=conn.createStatement();
 			rs=stmt.executeQuery(sql);
@@ -433,7 +456,44 @@ public class LectureDao {
 		}
 		return list;
 	}
+	
+	//강의수정
+	public int updateLecture(Connection conn, Lecture l, int lecNum) {
+		PreparedStatement pstmt = null;
+		int result=0;
+		String sql=prop.getProperty("updateLecture");
+		try {
+			pstmt=conn.prepareStatement(sql);
+			pstmt.setInt(1, l.getSubNum());
+			pstmt.setInt(2, l.getLocalSubNum());
+			pstmt.setString(3, l.getLecName());
+			pstmt.setString(4, l.getLecType());
+			pstmt.setInt(5, l.getLecMaxCount());
+			pstmt.setInt(6, l.getLecPrice());
+			pstmt.setInt(7, l.getLecTime());
+			pstmt.setInt(8, l.getLecCount());
+			pstmt.setString(9, l.getLecWeek());
+			pstmt.setString(10, l.getLecMeet());
+			pstmt.setString(11, l.getLecTot());
+			pstmt.setString(12, l.getLecTot2());
+			pstmt.setDate(13, l.getLecOpenDate());
+			pstmt.setDate(14, l.getLecOpenDate2());
+			pstmt.setString(15, l.getLecLocalContent());
+			pstmt.setString(16, l.getLecMentoContent());
+			pstmt.setString(17, l.getLecLectureContent());
+			pstmt.setInt(18, lecNum);
+			result=pstmt.executeUpdate();
 
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}
+
+		return result;
+	}
+	
+	//강의번호로 
 	public Lecture lectureListByLecNum(Connection conn, int lecNum) {
 		PreparedStatement pstmt=null;
 		ResultSet rs=null;
@@ -478,45 +538,15 @@ public class LectureDao {
 		return lt;
 	}
 
-	public int updateLecture(Connection conn, Lecture l, int lecNum) {
+	//결제 완료시 강의 누적 수강인원 증가/취소시 감소
+	public int updateStudentCount(Connection conn, int oNum, String type) {
 		PreparedStatement pstmt = null;
-		int result=0;
-		String sql=prop.getProperty("updateLecture");
-		try {
-			pstmt=conn.prepareStatement(sql);
-			pstmt.setInt(1, l.getSubNum());
-			pstmt.setInt(2, l.getLocalSubNum());
-			pstmt.setString(3, l.getLecName());
-			pstmt.setString(4, l.getLecType());
-			pstmt.setInt(5, l.getLecMaxCount());
-			pstmt.setInt(6, l.getLecPrice());
-			pstmt.setInt(7, l.getLecTime());
-			pstmt.setInt(8, l.getLecCount());
-			pstmt.setString(9, l.getLecWeek());
-			pstmt.setString(10, l.getLecMeet());
-			pstmt.setString(11, l.getLecTot());
-			pstmt.setString(12, l.getLecTot2());
-			pstmt.setDate(13, l.getLecOpenDate());
-			pstmt.setDate(14, l.getLecOpenDate2());
-			pstmt.setString(15, l.getLecLocalContent());
-			pstmt.setString(16, l.getLecMentoContent());
-			pstmt.setString(17, l.getLecLectureContent());
-			pstmt.setInt(18, lecNum);
-			result=pstmt.executeUpdate();
-
-		}catch(SQLException e) {
-			e.printStackTrace();
-		}finally {
-			close(pstmt);
+		String sql ="";
+		if(type.equals("add")) {
+			sql = "update tb_lecture set lecstudentcount=lecstudentcount+1 where lecnum=(select lecnum from tb_order where onum=?)";
+		} else {
+			sql = "update tb_lecture set lecstudentcount=lecstudentcount-1 where lecnum=(select lecnum from tb_order where onum=?)";
 		}
-
-		return result;
-	}
-
-	//결제 완료시 강의 누적 수강인원 증가
-	public int updateStudentCount(Connection conn, int oNum) {
-		PreparedStatement pstmt = null;
-		String sql = "update tb_lecture set lecstudentcount=lecstudentcount+1 where lecnum=(select lecnum from tb_order where onum=?)";
 		int result = 0;
 		try {
 			pstmt = conn.prepareStatement(sql);

@@ -64,7 +64,6 @@ public class ReportDao {
 
 	public int registerReportImage(Connection conn, ReportUpload ru, int reportNum) {
 		PreparedStatement pstmt = null;
-		System.out.println("reportNum : " + reportNum);
 		int result = 0;
 		String sql = prop.getProperty("registerReportImage");
 		try {
@@ -454,8 +453,6 @@ public class ReportDao {
 		int start = (cPage-1)*numPerPage+1;
 		int end = cPage*numPerPage;
 		
-		System.out.println(start);
-		System.out.println(end);
 		
 		Member m = new Member();
 		MemberDao dao = new MemberDao();
@@ -472,7 +469,6 @@ public class ReportDao {
 			while(rs.next()) {
 				Report rp = new Report();
 				rp.setReportNum(rs.getInt("report_num"));
-				System.out.println(rp.getmReporterNum());
 				rp.setmReporterNum(rs.getInt("mreporter_num"));
 				rp.setmAttackerNum(rs.getInt("mattacker_num"));
 				rp.setReportTitle(rs.getString("report_title"));

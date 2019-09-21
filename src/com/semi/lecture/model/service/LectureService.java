@@ -40,6 +40,13 @@ public class LectureService {
 	}
 
 	//강의승인목록 검색
+	public int countLectureApproval(String type, String data) {
+		Connection conn = getConnection();
+		int result = dao.countLectureApproval(conn, type, data);
+		close(conn);
+		return result;
+	}
+	
 	public List<Lecture> lectureApproFindList(String type, String data, int cPage, int numPerPage) {
 		Connection conn = getConnection();
 		List<Lecture> list = dao.lectureApproList(conn, type, data, cPage, numPerPage);
@@ -148,9 +155,9 @@ public class LectureService {
 	}
 
 	//결제 완료시 강의 누적 수강인원 증가
-	public int updateStudentCount(int oNum) {
+	public int updateStudentCount(int oNum, String type) {
 		Connection conn = getConnection();
-		int result = dao.updateStudentCount(conn, oNum);
+		int result = dao.updateStudentCount(conn, oNum, type);
 		if(result > 0) commit(conn);
 		else rollback(conn);
 		close(conn);

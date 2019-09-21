@@ -23,12 +23,11 @@ public class AdminReportCompleteApprovalFindServlet extends HttpServlet {
        
     /**
      * @see HttpServlet#HttpServlet()
-     *
-    public AmdinReportApprovalServlet() {
+     */
+    public AdminReportCompleteApprovalFindServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
-
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */

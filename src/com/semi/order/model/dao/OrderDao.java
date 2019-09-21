@@ -31,8 +31,6 @@ public class OrderDao {
 		}
 		
 	}
-	
-
 
 	//신청 등록 후 신청내용 검색(return sNum)
 	public Order selectOrder(Connection conn, int oNum) {
@@ -71,6 +69,7 @@ public class OrderDao {
 		return order;
 	}
 
+	//결제처리
 	public int updatePayment(Connection conn, int oNum) {
 		PreparedStatement pstmt = null;
 		int result = 0;
@@ -87,6 +86,7 @@ public class OrderDao {
 		return result;
 	}
 
+	//신청목록(페이징)
 	public int selectStudyListCount(Connection conn) {
 		PreparedStatement pstmt = null;
 		int result = 0;
@@ -138,6 +138,27 @@ public class OrderDao {
 		}return list;
 	}
 
+	//결제취소
+	public int orderPayReset(Connection conn, int oNum) {
+		PreparedStatement pstmt = null;
+		int result = 0;
+		String sql = "update tb_order set oPayment='N', paydate=null where onum=?";
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, oNum);
+			result = pstmt.executeUpdate();
+			
+		} catch(SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		return result;
+		
+		
+	}
+	
+	//강의번호로 신청내역 조회
 	public Order seeMoreStudyList(Connection conn, int lecNum) {
 		PreparedStatement pstmt=null;
 		ResultSet rs=null;
