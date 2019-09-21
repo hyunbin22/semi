@@ -24,7 +24,7 @@
 					<input type="hidden" name="cPage" value="<%=cPage%>"> 
 					<input type="hidden" name="temp" value=2>
 					<input type="text" name="searchKeyword" placeholder="검색어 입력">
-					<button type="submit">검색</button>
+					<button type="submit" class = "next">검색</button>
 				</form>
 			</div>
 	 		<div id="search-mName">
@@ -34,7 +34,7 @@
 					<input type="hidden" name="temp" value=2>
 					<input type="text" name="searchKeyword" placeholder="이름 입력"
 						value='<%="mName".equals(searchType)?searchKey:""%>'>
-					<button type="submit">검색</button>
+					<button type="submit" class = "next">검색</button>
 				</form>
 			</div> 
 		</div>
@@ -42,7 +42,7 @@
 	<article class="admin-list-container wrap">
 		<div class="row">
 			<div class="col">
-				<h3 class="admintitle">멘토승인거절목록</h3>
+				<h3 class="admintitle"><strong>멘토승인거절목록</strong></h3>
 				<div class="tab-content">
 					<div class="tab-pane fade show active" id="mentoAppro">
 						<div class="card appro-frm-wrap">

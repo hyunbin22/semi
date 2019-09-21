@@ -6,17 +6,20 @@
 	List<Category> list = (List)request.getAttribute("category");
 %>
    
-	<form name = "form" id="categoryFrm"method="post">
+	
     <%@ include file="/views/common/adminCateAside.jsp"%>
 	<section>
   <br>
   <br>
   <br>
-    <div id="search1">수업카테고리(Main)</div>
+  <div style = "margin-left: 200px">
+    <div id="search1"><strong>수업카테고리(Main)</strong></div>
+    <br>
+    <form name = "form" id="categoryFrm"method="post" style = "font-family: 'Noto Sans KR', sans-serif;">
 		<table border="1" width="500"  bgcolor="" align="center" cellspacing="0" cellpadding="3"
 		 bordercolor="" bordercolordark="" bordercolorlight="#fddc78">
 		    <tr>
-		    <td align="left" width="120" bgcolor="">
+		    <td align="left" width="120" style = "background-color: lavender">
 			<font color="#0000ff">*</font>카테고리선택</td>
 		    <td width="400">
 		    
@@ -34,7 +37,7 @@
 		    </td>
 		    </tr>
 		    <tr>
-		    <td align="left" width="120" bgcolor="">
+		    <td align="left" width="120" style = "background-color: lavender">
 			<font color="#0000ff">*</font>카테고리입력</td>
 		    <td width="400">
 			<input name="inputcategory" type="text" size="50" maxlength="50"></td>
@@ -42,11 +45,13 @@
 		</table>
 
 	</form>
+	</div>
            <br>
-                <button type="submit" id="scName" name="scName" onclick="enrollCategory();">등록</button>
-           <input type="submit" value="수정" id="submit2" onclick="updateCategory();">
-          <input type="submit" value="삭제" id="submit2" onclick="deleteCategory();">
-           
+           <div style = "margin-left: -20px;">
+           <button type="submit" id="scName" name="scName" onclick="enrollCategory();" class = "next">등록</button>
+           <input type="submit" value="수정" id="submit2" onclick="updateCategory();" class = "next">
+           <input type="submit" value="삭제" id="submit2" onclick="deleteCategory();" class = "next">
+           </div>
         </section>
         <br>
         <br>

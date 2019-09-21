@@ -9,7 +9,7 @@
 	  	<div id="myPageContentWrap">
              <div class="bar">
 				<br>
-                <h1 class="center1">신청한 강의 상세</h1>
+                <h1 class="center1"><strong>신청한 강의 상세</strong></h1>
                 <br><br>
                 <hr>
                 <br>

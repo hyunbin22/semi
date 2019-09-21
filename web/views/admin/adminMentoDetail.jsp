@@ -9,13 +9,13 @@
 <section>
 	<article id="admin-mento-wrap">
 		<div class="admin-mento-detailwrap">
-			<br><br><h1>멘토 상세보기</h1>
+			<br><br><h1><strong>멘토 상세보기</strong></h1>
 			<div class="admin-detail-frm-wrap">
 			<form id="admin-mento-detail-frm" method="post" >
 				<input type="hidden" name="mtNum" value="<%=mt.getMtNum()%>" id="mtNum">
 				<div class="mento_info_child">
 					<h1 class="mento-info-title"><%=mt.getMember().getmName()%> (<%=mt.getMember().getmId() %>)</h1>
-					<h2>프로필사진</h2>
+					<h2><strong>프로필사진</strong></h2>
 					<div id="picture-cover" class="picture center1">
 					<%for(int j = 0; j < mt.getList().size(); j++) {
 						if(mt.getList().get(j).getUpMentoCategory().equals("profile")) {%>
@@ -23,24 +23,24 @@
 					<%} 
 					}%>
 					</div>
-					<h2>별명</h2>
+					<h2><strong>별명</strong></h2>
 					<p><%=mt.getMtNickName()%></p>
-					<h2>휴대폰 번호</h2>
+					<h2><strong>휴대폰 번호</strong></h2>
 					<p><%=mt.getMember().getmPhone()%></p>
-					<h2>신분/학력</h2>
+					<h2><strong>신분/학력</strong></h2>
 					<p>
-						인증방법 :
+						<strong>인증방법</strong> :
 						<%=mt.getMtHowConfirm()%></p>
 					<%
 						if (!mt.getMtHowConfirm().equals("신분증인증")) {
 					%>
 					<p>
-						소속대학 :
+						<strong>소속대학</strong> :
 						<%=mt.getMtAcademic()%>
 						<%=mt.getMtAcademicDept()%>
 					</p>
 					<p>
-						상태여부 :
+						<strong>상태여부</strong> :
 						<%=mt.getMtGraduation()%></p>
 					<%
 						}
@@ -54,7 +54,7 @@
 					<br /> <br />
 					<%for(int j = 0; j < mt.getList().size(); j++) {
 					 	if(mt.getList().get(j).getUpMentoCategory().equals("license")) {%>
-					<h2>자격증</h2>
+					<h2><strong>자격증</strong></h2>
 					<p><%=mt.getList().get(j).getUpMentoNameLicense() %></p>
 					<img src="<%=request.getContextPath() %>/upload/mento/<%=mt.getList().get(j).getUpMentoReName()%>">
 					<br> <br>
@@ -65,7 +65,7 @@
 					<%
 						if (mt.getMtReason() != null) {
 					%>
-					<h2>거절사유</h2>
+					<h2><strong>거절사유</strong></h2>
 					<p><%=mt.getMtReason() %></p>
 	
 					<%

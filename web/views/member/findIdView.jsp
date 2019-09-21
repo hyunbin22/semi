@@ -7,7 +7,7 @@
             <div class="wrap">
                 <div class="bar">
                     <br>
-                    <h1 style="font-size: 40px; text-align: center;">아이디 찾기</h1>
+                    <h1 style="font-size: 40px; text-align: center;"><strong>아이디 찾기</strong></h1>
                     <hr>
                     <br><br>
                 </div>

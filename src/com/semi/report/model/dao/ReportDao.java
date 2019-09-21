@@ -60,27 +60,7 @@ public class ReportDao {
 		return result;
 	}
 
-	public int selectSeqReport(Connection conn, int mNum) {
-		
-		Statement stmt = null;
-		ResultSet rs = null;
-		int result = 0;
-		String sql = "select report_num from tb_report where MREPORTER_NUM = " + mNum;
-		try {
-			stmt = conn.createStatement();
-			rs = stmt.executeQuery(sql);
-			if(rs.next())
-			{
-				result = rs.getInt(1);
-			}
-		}catch(SQLException e) {
-			e.printStackTrace();
-		}finally {
-			close(rs);
-			close(stmt);
-		}
-		return result;
-	}
+	
 
 	public int registerReportImage(Connection conn, ReportUpload ru, int reportNum) {
 		PreparedStatement pstmt = null;

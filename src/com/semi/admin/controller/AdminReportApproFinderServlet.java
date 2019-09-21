@@ -45,7 +45,6 @@ public class AdminReportApproFinderServlet extends HttpServlet {
 		int numPerPage=10;
 		int countReportApproval = new ReportService().countReportApproval(type, data);
 		List<Report> reportList = new ReportService().reportFindList(data, cPage, numPerPage);
-		System.out.println("리스트 : " + reportList);
 		
 		int reportTotalPage=(int)Math.ceil((double)countReportApproval/numPerPage);
 		String pageBar="";

@@ -23,7 +23,7 @@
 					<input type="hidden" name="cPage" value="<%=cPage%>"> 
 					<input type="hidden" name="temp" value=0>
 					<input type="text" name="searchKeyword" placeholder="검색어 입력">
-					<button type="submit">검색</button>
+					<button type="submit" class = "next">검색</button>
 				</form>
 			</div>
 	 		<div id="search-mName">
@@ -33,7 +33,7 @@
 					<input type="hidden" name="temp" value=0>
 					<input type="text" name="searchKeyword" placeholder="이름 입력"
 						value='<%="mName".equals(searchType)?searchKey:""%>'>
-					<button type="submit">검색</button>
+					<button type="submit" class = "next">검색</button>
 				</form>
 			</div> 
 		</div>
@@ -41,7 +41,7 @@
 	<article class="center1 admin-list">
 		<div class="row">
 			<div class="col">
-				<h3 class="admintitle">멘토목록</h3>
+				<h3 class="admintitle"><strong>멘토목록</strong></h3>
 				<div class="tab-content">
 					<div class="tab-pane fade show active" id="mentoAppro">
 						<div class="card appro-frm-wrap">
@@ -102,13 +102,9 @@ $(function(){
 	$("#searchType").trigger('change');
 	
 });
-
 	$(function(){
 		if(<%=list.size()%>==0) {
 			alert("조회 결과가 없습니다.");
 		} 		
 	});
-
 </script>
-
-<%@ include file="/views/common/adminFooter.jsp"%>

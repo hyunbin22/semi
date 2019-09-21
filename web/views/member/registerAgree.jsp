@@ -6,7 +6,7 @@
 		<div class="bar center1">
 			<br>
 			<br>
-			<h1>이용약관</h1>
+			<h1><strong>이용약관</strong></h1>
 			<br>
 		</div>
 			<hr>

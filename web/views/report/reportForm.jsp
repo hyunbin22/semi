@@ -63,7 +63,7 @@
                         <tr>
                             <td class = "lecture" colspan = 1>첨부 파일</td>
                             <td>
-                                <input id="reportPhoto1" type="file" name="reportPhoto" onchange="previewImage(this,'View_area')" class = "title2">
+                                <input id="reportPhoto1" type="file" name="reportPhoto" onchange="previewImage(this,'View_area')">
                             </td>
                         </tr>
                         <tr>
@@ -103,6 +103,28 @@
       			}
               return true;
               }
+    
+    $(function(){
+        
+        //확장자, 정규식 검사
+        $(document).on("change","input[name='reportPhoto']",function(event) {
+           var ext = $(this).val().split('.').pop().toLowerCase();
+           var fileSize = (this).files[0].size;
+           var maxSize = 1024*1024*1024;
+           
+           if($.inArray(ext, ['gif','png','jpg','jpeg','doc','docx','xls','xlsx','hwp']) == -1) {
+              alert("등록할 수 없는 확장자입니다.");
+              $(this).val("");
+              return;
+           } 
+           
+           if(fileSize > maxSize) {
+              alert("첨부파일 크기는 1GB 이내로 등록 가능합니다.");
+              $(this).val("");
+              return;
+           }
+        });
+     });
               
 
     	

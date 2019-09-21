@@ -3,26 +3,23 @@ package com.semi.admin.controller;
 import java.io.IOException;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.semi.report.model.service.ReportService;
-import com.semi.report.model.vo.Report;
-import com.semi.report.model.vo.ReportUpload;
+import com.semi.member.model.service.MemberService;
 
 /**
- * Servlet implementation class AdminReportViewServlet
+ * Servlet implementation class AdminMemberDeleteServlet
  */
-@WebServlet(asyncSupported = true, urlPatterns = { "/admin/reportView" })
-public class AdminReportViewServlet extends HttpServlet {
+@WebServlet("/admin/memberDelete.do")
+public class AdminMemberDeathServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public AdminReportViewServlet() {
+    public AdminMemberDeathServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -32,20 +29,28 @@ public class AdminReportViewServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		int reportNo = Integer.parseInt(request.getParameter("reportNo"));
-
-			
-		Report rp = new ReportService().selectReportContent(reportNo);
-		Report rp2 = new ReportService().selectReportContent2(reportNo);
-		ReportUpload rpu = new ReportService().selectReportUpload(reportNo);
+		String mId = request.getParameter("mId");
+		
+		MemberService service = new MemberService();
+		int result = service.memberUse(mId);
+		
+		String msg = "";
+		String loc = "/admin/memberList.do";
+		
+		if(result > 0)
+		{
+			msg = "계정 이용 정지 처리 완료";
+		}
+		else
+		{
+			msg = "오류 발생! 재시도 바랍니다!";
+		}
+		
+		request.setAttribute("msg", msg);
+		request.setAttribute("loc", loc);
+		request.getRequestDispatcher("/views/common/msg.jsp").forward(request, response);
 		
 		
-		request.setAttribute("reportUp", rpu);
-		request.setAttribute("report", rp);
-		request.setAttribute("report2", rp2);
-	
-
-		request.getRequestDispatcher("/views/admin/reportView.jsp").forward(request, response);
 		
 	}
 

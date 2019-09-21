@@ -6,7 +6,7 @@
         <div id="myPageContentWrap">
             <div class="bar">
                     <br>
-                    <h1 class="center1">내정보수정</h1>
+                    <h1 class="center1"><strong>내정보수정</strong></h1>
                     <br><br>
                     <hr>
                 </div>
@@ -78,6 +78,10 @@
 						<td><input class="textfield title2" type="text" name="number"
 							placeholder="인증번호를 입력해주세요" id="checkNum" required></td>
 						<td></td>
+					</tr>
+					<tr>
+						<td></td>
+						<td id="keyCheck"></td>
 					</tr>
 			        <tr>
 						<td></td>
@@ -167,6 +171,8 @@
 
     	});
         
+    	
+    	
         function updateMember(){
         	
 				var frm=$('#memberFrm');
@@ -181,6 +187,8 @@
         }
 		
 
+    
+    
         </script>
     
 

@@ -7,7 +7,7 @@
             <div class="bar">
                 <br>
                     
-                <h1 class="center1">마이페이지</h1>
+                <h1 class="center1"><strong>마이페이지</strong></h1>
                 <br><br>
                 <hr>
             </div>
@@ -71,7 +71,7 @@
         
         <script>
         function deleteMember(){
-			if(confirm("정말로 삭제하시겠습니까?")){
+			if(confirm("정말로 탈퇴하시겠습니까?")){
 				var url="<%=request.getContextPath()%>/member/memberDelete.do?mId=<%=m.getmId()%>";
 				location.href=url;
 			}

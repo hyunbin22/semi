@@ -7,7 +7,7 @@
 	<div class="wrap">
 		<div class="bar center1">
 			<br> <br>
-			<h1>회원가입</h1>
+			<h1><strong>회원가입</strong></h1>
 			<br>
 		</div>
 			<hr>
@@ -17,65 +17,65 @@
 				method="POST" id="registerFrm" onsubmit="return checkValue();">
 				<table class="tblreg center1">
 					<tr>
-						<td>아이디</td>
-						<td><input class="textfield" type="text" name="id"
+						<td class = "lecture">아이디</td>
+						<td><input class="textfield title2" type="text" name="id"
 							id="userId" placeholder="아이디를 입력해주세요" required></td>
 						<td id="idCheck" class="rg-checkMsg"></td>
 					</tr>
 					<tr>
-						<td>비밀번호</td>
-						<td><input class="textfield" type="password" name="pw"
+						<td class = "lecture">비밀번호</td>
+						<td><input class="textfield title2" type="password" name="pw"
 							id="password" placeholder="비밀번호를 입력해주세요" required></td>
 						<td id="pwCheck" class="rg-checkMsg"></td>
 					</tr>
 					<tr>
-						<td>비밀번호확인</td>
-						<td><input class="textfield" type="password" name="pw2"
+						<td class = "lecture">비밀번호확인</td>
+						<td><input class="textfield title2" type="password" name="pw2"
 							id="password2" placeholder="비밀번호를 입력해주세요" required></td>
 						<td id="pwCheck2" class="rg-checkMsg"></td>
 					</tr>
 					<tr>
-						<td>이름</td>
-						<td><input class="textfield" type="text" name="name"
+						<td class = "lecture">이름</td>
+						<td><input class="textfield title2" type="text" name="name"
 							id="userName" placeholder="이름을 입력해주세요" required></td>
 					</tr>
 					<tr>
-						<td>성별</td>
+						<td class = "lecture">성별</td>
 						<td><label class="rdGender"><input type="radio"
 								name="gender" id="mgender" value="M" checked>남자</label> <label
 							class="rdGender"><input type="radio" name="gender"
 								id="fgender" value="F">여자</label></td>
 					</tr>
 					<tr>
-						<td>생년월일</td>
-						<td><input class="textfield" type="date" name="birth"
+						<td class = "lecture">생년월일</td>
+						<td><input class="textfield title2" type="date" name="birth"
 							id="birth" required></td>
 					</tr>
 					<tr>
-						<td>이메일</td>
-						<td><input class="textfield" type="email" name="email"
+						<td class = "lecture">이메일</td>
+						<td><input class="textfield title2" type="email" name="email"
 							id="email" placeholder="이메일을 입력해주세요" required></td>
 						<td id="emailCheck" class="rg-checkMsg"></td>
 					</tr>
 					<tr>
-						<td>휴대폰번호</td>
+						<td class = "lecture">휴대폰번호</td>
 						<td>
-							<input type="text" name="tel1" id="tel1" class="phone" list="data" required> - 
+							<input type="text" name="tel1" id="tel1" class="phone title2" list="data" required> - 
 							<datalist id="data">
 								<option value="010"></option>
 								<option value="011"></option>
 								<option value="019"></option>
 							</datalist> 
-							<input type="text" name="tel2" id="tel2" class="phone" maxlength=4 required> - 
-							<input type="text" name="tel3" id="tel3" class="phone" maxlength=4 required>
+							<input type="text" name="tel2" id="tel2" class="phone title2" maxlength=4 required> - 
+							<input type="text" name="tel3" id="tel3" class="phone title2" maxlength=4 required>
 						</td>
 
-						<td><input type="button" value="인증번호받기" class="inputbtn"
+						<td ><input type="button" value="인증번호받기" class="inputbtn"
 							id="sendSms"></td>
 					</tr>
 					<tr>
-						<td>인증번호</td>
-						<td><input class="textfield" type="text" name="number"
+						<td class = "lecture">인증번호</td>
+						<td><input class="textfield title2" type="text" name="number"
 							placeholder="인증번호를 입력해주세요" id="checkNum" required></td>
 						<td><input type="button" value="인증번호확인" class="inputbtn"
 							id="checkKey"></td>

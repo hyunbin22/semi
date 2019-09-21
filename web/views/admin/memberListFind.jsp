@@ -1,25 +1,24 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-   pageEncoding="UTF-8"%>
+    pageEncoding="UTF-8"%>
 <%@ include file="/views/common/adminHeader.jsp"%>
-<%@ page
-   import="com.semi.report.model.vo.Report, com.semi.mento.model.vo.Mento, java.util.*"%>
-   <% 	
-   		List<Report> list = (List)request.getAttribute("list"); 
-		int cPage=(int)request.getAttribute("cPage");
-		String pageBar=(String)request.getAttribute("pageBar");
-		int count = 0;
-   %>
-   <%@ include file="/views/common/adminAside.jsp"%>
+<%@ page import="java.util.List, com.semi.member.model.vo.Member"%>
+<%
+   List<Member> members=(List)request.getAttribute("memberList");
+   int cPage=(int)request.getAttribute("cPage");
+   String pageBar=(String)request.getAttribute("pageBar");
+   int count = 0;
+%>
+<%@ include file="/views/common/adminMemberAside.jsp"%>
 <section>
 <div style = "height: 700px;">
 <article id="search1">
 		<div id="adminSearchContainer">
 
 			<div id="search-mreporterId">
-				<form action="<%=request.getContextPath()%>/admin/reportApproFinder.do">
+				<form action="<%=request.getContextPath()%>/admin/memberApproFinder.do">
 					<input type="hidden" name="searchType" value="mId">
 					<input type="hidden" name="cPage" value="<%=cPage%>"> 
-					신고자 ID : <input type="text" name="searchKeyword" placeholder="검색어 입력">
+					ID 검색 :  <input type="text" name="searchKeyword" placeholder="검색어 입력">
 					<button type="submit" class = "next">검색</button>
 				</form>
 			</div>
@@ -38,23 +37,27 @@
    <article class="admin-list-container wrap">
     <div class="row">
          <div class="col">
-            <h3 class="admintitle"><strong>신고처리대기목록</strong></h3>
+            <h3 class="admintitle"><strong>회원 목록</strong></h3>
             <div class="tab-content">
                <div class="tab-pane fade show active" id="lectureAppro">
 				    <% 
-                     for (int i = 0; i < list.size(); i++) {
+                     for (int i = 0; i < members.size(); i++) {
                      %>
-                  <div class="card appro-frm-wrap" style = "height: 110px;">
+                  <div class="card appro-frm-wrap" style = "height: 130px;">
                      <div class="lectureAppro-frm">
                         <!-- 강의승인신청목록 -->
-                        <div class="card-header mtAppro-name">신고자 ID . [<%=list.get(i).getMember().getmId()%>] &emsp;/&emsp; 신고 날짜 : [<%=list.get(i).getReportDate() %>]
+                        <div class="card-header mtAppro-name">회원 ID . [<%=members.get(i).getmId()%>] &emsp;/&emsp; 가입 날짜 : [<%=members.get(i).getmHireDate() %>]
+                        	<div>계정 사용 여부 : <%=members.get(i).getmUse() %></div>
                         </div>
+                        
 
                            <table class="tbl-appro" style = "text-align: center">
                               <tr>
-                                 <td style = "margin-top: 13.5px; margin-left: 10px; text-align: left; width: 200px;"><%=list.get(i).getReportTitle() %></td>
+                              	 <td style = "margin-top: 13.5px; margin-left: 10px; text-align: left; width: 100px;"><%=members.get(i).getmName() %></td>
+                                 <td style = "margin-top: 13.5px; margin-left: 10px; text-align: left; width: 200px;"><%=members.get(i).getmEmail() %></td>
+                                 <td style = "margin-top: 13.5px; margin-left: 10px; text-align: left; width: 100px;"><%=members.get(i).getmPhone() %></td>
                                  <td>
-								<button id ="seeMore" name = "seeMore"  onclick="location.href='<%=request.getContextPath()%>/admin/reportView?reportNo=<%=list.get(i).getReportNum()%>'">자세히보기</button>
+								<button id ="seeMore" name = "seeMore"  onclick= "location.href='<%=request.getContextPath()%>/admin/memberDelete.do?mId=<%=members.get(i).getmId()%>'">이용 정지</button>
                                  </td>
                               </tr>        
                            </table>
@@ -76,9 +79,7 @@
 
 </div>
 </section>
-
 <script>
-
 $(function(){
 	if(<%=count%>==0) {
 		alert("조회 결과가 없습니다.");
@@ -86,5 +87,3 @@ $(function(){
 	}
 });
 </script>
-
-<%@ include file="/views/common/adminFooter.jsp"%>

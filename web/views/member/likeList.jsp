@@ -11,7 +11,7 @@
 	  	<div id="myPageContentWrap">
              <div class="bar">
 				<br>
-                <h1 class="center1">즐겨찾기</h1>
+                <h1 class="center1"><strong>즐겨찾기</strong></h1>
                 <br><br>
                 <hr>
                 <br>

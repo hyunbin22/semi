@@ -20,7 +20,7 @@
 					<input type="hidden" name="searchType" value="mId">
 					<input type="hidden" name="cPage" value="<%=cPage%>"> 
 					신고자 ID : <input type="text" name="searchKeyword" placeholder="검색어 입력">
-					<button type="submit">검색</button>
+					<button type="submit" class = "next">검색</button>
 				</form>
 			</div>
 	 		<%-- <div id="search-reportTitle">
@@ -38,7 +38,7 @@
    <article class="admin-list-container wrap">
     <div class="row">
          <div class="col">
-            <h3 class="admintitle">신고처리대기목록</h3>
+            <h3 class="admintitle"><strong>신고처리대기목록</strong></h3>
             <div class="tab-content">
                <div class="tab-pane fade show active" id="lectureAppro">
 				    <% 
@@ -52,7 +52,7 @@
 
                            <table class="tbl-appro" style = "text-align: center">
                               <tr>
-                                 <td style = "margin-top: 13.5px; margin-left: 10px; text-align: center; width: 150px;"><%=list.get(i).getReportTitle() %></td>
+                                 <td style = "margin-top: 13.5px; margin-left: 10px; text-align: left; width: 200px;"><%=list.get(i).getReportTitle() %></td>
                                  <td>
 								<button id ="seeMore" name = "seeMore"  onclick="location.href='<%=request.getContextPath()%>/admin/reportView?reportNo=<%=list.get(i).getReportNum()%>'">자세히보기</button>
                                  </td>

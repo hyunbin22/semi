@@ -10,6 +10,7 @@ import java.util.List;
 import com.semi.member.model.dao.MemberDao;
 import com.semi.member.model.vo.Member;
 import com.semi.order.model.vo.Order;
+import com.semi.report.model.vo.Report;
 
 import static common.template.JDBCTemplate.getConnection;
 
@@ -157,6 +158,62 @@ public class MemberService {
 		int result = dao.memberUse(conn,mAttackerNum);
 		close(conn);
 		return result;
+	}
+
+	public List<Member> selectBlackListPage(int cPage, int numPerPage) {
+		Connection conn=getConnection();
+		List<Member> list=dao.selectBlackListPage(conn,cPage,numPerPage);
+		close(conn);
+		return list;
+	}
+
+	public int selectCountBlackMember() {
+		Connection conn=getConnection();
+		int result=dao.selectCountMember2(conn);
+		close(conn);
+		return result;
+	}
+
+	public int memberUse(String mId) {
+		Connection conn=getConnection();
+		int result = dao.memberUse(conn,mId);
+		close(conn);
+		return result;
+	}
+
+	public int rebirthMember(String mId) {
+		Connection conn=getConnection();
+		int result = dao.memberRebirth(conn,mId);
+		close(conn);
+		return result;
+	}
+
+	public int countMemberApproval(String type, String data) {
+		Connection conn = getConnection();
+		int result = dao.countMemberApproval(conn, type, data);
+		close(conn);
+		return result;
+	}
+
+	public List<Member> memberFindList(String data, int cPage, int numPerPage) {
+		Connection conn = getConnection();
+		List<Member> list = dao.memberFindList(conn, data, cPage, numPerPage);
+		close(conn);
+		return list;
+	}
+
+	public int countMemberBalckApproval(String type, String data) {
+		Connection conn = getConnection();
+		int result = dao.countMemberBlackApproval(conn, type, data);
+		close(conn);
+		return result;
+	}
+
+	public List<Member> memberFindBlackList(String data, int cPage, int numPerPage) {
+		Connection conn = getConnection();
+		List<Member> list = dao.memberFindBlackList(conn, data, cPage, numPerPage);
+		close(conn);
+		return list;
 	}
 
 }

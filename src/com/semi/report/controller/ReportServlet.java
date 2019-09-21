@@ -60,7 +60,7 @@ public class ReportServlet extends HttpServlet {
 		MultipartRequest mr = new MultipartRequest(request, saveDir, maxSize, "UTF-8", new AblingFileRenamePolicy(memberLogin.getmId()));
 		
 		int mNum = Integer.parseInt(mr.getParameter("mNum"));	
-		String reportId = mr.getParameter("rId");
+		String reportId = mr.getParameter("rId").trim();
 		String reportTitle = mr.getParameter("rTitle");
 		String reportContent = mr.getParameter("rContent");
 		
@@ -75,6 +75,7 @@ public class ReportServlet extends HttpServlet {
 		
 		//reportDB에 저장
 		int result = new ReportService().regsterReport(rp, m);
+
 		
 		ReportUpload ru = new ReportUpload(reReportOriFile, reReportReFile);
 		int result2 = new ReportService().regsterReportImage(ru, result);
