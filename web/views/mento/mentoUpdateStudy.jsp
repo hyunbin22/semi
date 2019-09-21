@@ -29,20 +29,23 @@
 			<br>
 			<br>
 			<h1 class="center1">멘토 강의수정</h1>
-			<%=lt.getLecNum() %>
 			<br>
 			<br>
 			<hr>
 		</div>
 		<div class="regdata center1">
+			<div class="lecture">필수입력<b style='color:#ff005a;'> *</b>표시</div>
 			<form action="<%=request.getContextPath()%>/mento/updateLecture.do?lecNum=<%=lt.getLecNum()%>" method="POST" enctype="multipart/form-data">
 				<div class="box">
 				<div class="lecture" >수업제목</div>
+			
 				<input type="text" id="title" name="className" value="<%=lt.getLecName()%>" class="title2" >
+				
 				</div>
 				<br> <br> <br>
+				<hr>
 				<div class="box">
-				<div class="lecture" >수업카테고리</div>
+				<div class="lecture" >수업카테고리<b style='color:#ff005a;'>*</b></div>
 				<select name="maincategory" id="maincategory" class="title2" >
 					<option value="0">카테고리선택</option>
 					<%
@@ -53,11 +56,13 @@
 						}
 					%>
 				</select>
+				
 			    <select id="good" name="subcategory" class="title2" >
 					<option>과목선택</option>
 				</select>
 				</div>
 				 <br> <br>
+				 <hr>
 				<div class="box">
 				<div class="lecture">수업형태</div>
 				<%if(lt.getLecType().equals("그룹")) { %>
@@ -72,8 +77,9 @@
 				<br> <br>
 				</div>
 				<br><br>
+				<hr>
 				<div class="box">
-				<div class="lecture">커버사진등록</div>
+				<div class="lecture">커버사진등록<b style='color:#ff005a;'>*</b></div>
 				<br>
 				 <div id='View_area' style='position: relative; width: 100px; height: 100px; color: black; border: 0px solid black; dispaly: inline; margin:0;'>
 				 <input type='file' id="file1" name="file1" /> <br> <br>
@@ -82,9 +88,10 @@
 						        
 		         </div>
 		         </div>
-		         <br><br><br><br><br><br>
+		         <br><br><br><br><br><br><br>
+		         <hr>
 				<div class="box">
-				<div class="lecture">수업사진등록</div>
+				<div class="lecture">수업사진등록<b style='color:#ff005a;'>*</b></div>
 				<table width="400" border="0" cellspacing="0" cellpadding="0" style= 'margin:0;'>
 					<tr>
 						<td colspan="2" align="left" bgcolor="#FFFFFF">
@@ -122,23 +129,25 @@
 				<br><br><br>
 				
 				<input type="hidden" value=<%=mt.getMtNum() %> name="mtNum">
-
 				<br> <br>
+				<hr>
 				<div class="box">
 				<div class="lecture">멘토소개</div>
 				<textarea id="" cols="30" rows="10" name="mentoIntroduce" class="title2"><%=lt.getLecMentoContent()%></textarea></div>
-				<br> <br> <br>
+				<br> <br>
+				<hr>
 				<div class="box">
 				<div class="lecture">강의소개</div>
 				<textarea id="" cols="30" rows="10" name="classIntroduce" class="title2"><%=lt.getLecLectureContent()%></textarea></div>
-				<br> <br> <br>
+				<br> <br>
+				<hr>
 				<div class="box">
 				<div class="lecture">시간당가격</div>
 				<input type="text" name="price" id="hourPrice" value="<%=lt.getLecPrice()%>" class="title2"> 원 <br>
 				</div>
 				<br> <br>
 				<div class="box">
-				<div class="lecture">기본수업시간</div>
+				<div class="lecture">기본수업시간<b style='color:#ff005a;'>*</b></div>
 				<select name="time" id="time" class="title2">
 					<option value="0"><%=lt.getLecTime() %>시간</option>
 					<option value="1">1시간</option>
@@ -156,6 +165,7 @@
 					value="<%=lt.getLecCount()%>" onkeyup="total()" class="title2">회 
 				</div>
 				<br><br><br>
+				<hr>
 				<div class="lecture">총가격</div>
 					<div class="calc-total" style=' border-radius: 4px;  padding: 12px 24px; width: 100%; text-align: right; float: right; color: #555; font-size: 15px; background: #edf0f4;'>
 					<dl>
@@ -174,8 +184,9 @@
 				</div>
 				<br>				
 				<br><br><br><br><br><br>
+				<hr>
 				<div class="box">
-				<div class="lecture">장소</div>
+				<div class="lecture">장소<b style='color:#ff005a;'>*</b></div>
 				<select name="local1" id="local1" class="title2">
 					<option value="0">지역선택</option>
 					<%
@@ -193,8 +204,9 @@
 					value="<%=lt.getLecLocalContent()%>" class="title2"> <br> <br> <br>
 				</div>		
 				<br><br>
+				<hr>
 				<div class="box">
-				<div class="lecture">가능 요일별 시간대(복수선택)</div>
+				<div class="lecture">가능 요일별 시간대(복수선택)<b style='color:#ff005a;'>*</b></div>
 				</div>
 				<input type="checkbox" name="yo" value="월요일">월요일
 				
@@ -215,6 +227,7 @@
 				</div></small>
 				
 				<br> <br>
+				<hr>
 				<div class="box">
 				<%
 						if(lt.getLecTot()==null) {

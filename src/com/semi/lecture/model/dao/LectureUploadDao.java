@@ -198,4 +198,31 @@ public class LectureUploadDao {
 		} return list;
 	}
 
+	public LectureUpload searchLectureImg(Connection conn, int lecNum) {
+		  Statement stmt = null;
+	      ResultSet rs = null;
+	      LectureUpload lecUp = null;
+	      String sql = "select * from tb_upload_lecture where lecNum="+lecNum;
+	      try {
+	         stmt = conn.createStatement();
+	         rs=stmt.executeQuery(sql);
+	         while(rs.next()) {
+	            lecUp = new LectureUpload();
+	            lecUp.setUpLectureNum(rs.getInt("up_lecturenum"));
+	            lecUp.setLecNum(rs.getInt("lecnum"));
+	            lecUp.setUpLectureCategory(rs.getString("up_Lecture_Category"));
+	            lecUp.setUpLectureOrgName(rs.getString("up_Lecture_Org_Name"));
+	            lecUp.setUpLectureReName(rs.getString("up_lecture_re_name"));
+	            
+	         }
+	      }catch(Exception e) {
+	         e.printStackTrace();
+	      } finally {
+	         close(rs);
+	         close(stmt);
+	      }
+	      
+	      return lecUp;
+	}
+
 }

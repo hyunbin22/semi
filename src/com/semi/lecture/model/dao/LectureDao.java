@@ -577,4 +577,33 @@ public class LectureDao {
 		}
 		return list;
 	}
+
+	public List<Lecture> lectureMentoList(Connection conn, int cPage, int numPerPage, int mtnum) {
+		PreparedStatement pstmt=null;
+		String sql=prop.getProperty("lectureMentoList");
+		ResultSet rs = null;
+		List<Lecture> lecturelist = new ArrayList();
+
+		try {
+			
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1,mtnum);
+			pstmt.setInt(2, (cPage-1)*numPerPage+1);
+			pstmt.setInt(3, cPage*numPerPage);
+			rs = pstmt.executeQuery();
+			
+			while(rs.next()) {
+				Lecture l=new Lecture();
+				l.setLecName(rs.getString("lecName"));
+				l.setLecNum(rs.getInt("lecNum"));
+				lecturelist.add(l);
+			}
+		}catch(Exception e) {
+			e.printStackTrace();
+		}finally {
+			close(rs);
+			close(pstmt);
+		}
+		return lecturelist;
+	}
 }

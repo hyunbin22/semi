@@ -118,10 +118,11 @@ public class LectureService {
 		return lec;
 	}
 
-	public List<Lecture> lectureListByMtNum(int mtnum) {
-		Connection conn= getConnection();
-		List<Lecture> list=dao.lectureListByMtNum(conn, mtnum);
+	public List<Lecture> lectureListByMtNum(int cPage, int numPerPage, int mtnum) {
+		Connection conn=getConnection();
+		List<Lecture> list=dao.lectureMentoList(conn, cPage, numPerPage, mtnum);
 		close(conn);
+
 		return list;
 	}
 

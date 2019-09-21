@@ -57,6 +57,9 @@ public class MentoUpdateLectureServlet extends HttpServlet {
 		request.setAttribute("lecture", lt);
 		request.setAttribute("lList", lList);
 		
+		System.out.println(lt);
+		System.out.println(lList);
+		
 		request.getRequestDispatcher("/views/mento/mentoUpdateStudy.jsp").forward(request, response);
 		
 	}

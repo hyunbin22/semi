@@ -12,16 +12,16 @@
   <br>
   <br>
   <br>
-    <div id="search1">수업카테고리(Sub)</div>
+    <div id="search1">수업카테고리(Sub)등록</div>
 	<form id="subcategoryFrm" action="<%=request.getContextPath() %>/admin/subcategoryEnrollEnd" method="post">
-		<table border="1" width="500"  bgcolor="" align="center" cellspacing="0" cellpadding="3" 
+	<table border="1" width="500"  bgcolor="" align="center" cellspacing="0" cellpadding="3" 
 		 bordercolor="" bordercolordark="" bordercolorlight="#fddc78">
 		    <tr>
 		    <td align="left" width="120" bgcolor="">
 			<font color="#0000ff">*</font>카테고리선택</td>
 		    <td width="400">
 				<select name="maincategory" id="maincategory">
-					<option value="0">카테고리선택</option>
+					<option value="0">메인카테고리선택</option>
 					<%
 						for (Category c : cList) {
 					%>
@@ -30,9 +30,7 @@
 						}
 					%>
 				</select>
-			    <select id="good" name="subcategory">
-					<option>과목선택</option>
-				</select> 
+
 		    </td>
 		    </tr>
 		    <tr>
@@ -43,13 +41,44 @@
 			</td>
 		    </tr>
 		</table>
+		<br>
+		<button type="submit" id="subName" name="subName" onclick="enrollSubCategory();">등록</button>
+		<br><br><br><br>
+		<div id="search1">수업카테고리(Sub)수정삭제</div>
+		<table border="1" width="500"  bgcolor="" align="center" cellspacing="0" cellpadding="3" 
+		 bordercolor="" bordercolordark="" bordercolorlight="#fddc78">
+		    <tr>
+		    <td align="left" width="120" bgcolor="">
+			<font color="#0000ff">*</font>카테고리선택</td>
+		    <td width="400">
+				<select name="subcategory" id="subcategory">
+					<option value="0">서브카테고리선택</option>
+					<%
+						for (SubCategory sc : scList) {
+					%>
+					<option value="<%=sc.getSubNum()%>"><%=sc.getSubName()%></option>
+					<%
+						}
+					%>
+				</select>
+
+		    </td>
+		    </tr>
+		    <tr>
+		    <td align="left" width="120" bgcolor="">
+			<font color="#0000ff">*</font>카테고리입력</td>
+		    <td width="400">
+			<input name="inputsubcategory2" type="text" size="50" maxlength="50">
+			</td>
+		    </tr>
+		</table>
 	</form>
 
            <br>
-           <button type="submit" id="subName" name="subName" onclick="enrollSubCategory();">등록</button>
-           <button type="submit" id="submit2">수정</button>
-           <button type="submit" id="submit3">삭제</button>
-           
+			<div class="center1">
+           <input type="submit" value="수정" id="subName" name="subName" onclick="updateSubCategory();">
+           <input type="submit" value="삭제" id="subName" name="subName" onclick="deleteSubCategory();">
+           </div>
         </section>
         <br>
         <br>
@@ -64,30 +93,24 @@
 	      frm.attr("action",url);
 	      frm.submit();
 	   }
+	 
+	   function updateSubCategory(){
+	       
+		      var frm=$('#subcategoryFrm');
+		      var url="<%=request.getContextPath() %>/admin/subcategoryUpdate";
+		      frm.attr("action",url);
+		      frm.submit();
+		   }
+		   
+	   function deleteSubCategory(){
+	       
+	      var frm=$('#subcategoryFrm');
+	      var url="<%=request.getContextPath()%>/admin/subcategoryDelete";
+	      frm.attr("action",url);
+	      frm.submit();
+	   }
 
-	 $(function(){
-         $("#maincategory").click(function(){
-            $.ajax({
-               url : "<%=request.getContextPath()%>/selectSubCategory?scNum=" + $('#maincategory').val(),
-               type : "post",
-               dataType : "html",
-               success:function(data){
-                  $("#good").find("option").remove();
 
-                  var datas = data.split(",");
-            
-                       for(var i = 0; i < datas.length; i++){    
-                          if(data==0){
-                             $("#good").append("<option value='1'>과목선택</option>");
-                          }else{
-                       console.log(datas[i]);                        
-                          $('<option value="' + (i+1) +'">' + datas[i] + '</option>').appendTo('#good');
-                    }
-                       }
-               }
-            });
-         });
-      });
     
         </script>
 

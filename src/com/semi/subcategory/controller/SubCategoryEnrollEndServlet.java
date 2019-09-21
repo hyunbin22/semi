@@ -38,7 +38,7 @@ public class SubCategoryEnrollEndServlet extends HttpServlet {
 
 		String msg="";
 		String loc="/";
-		msg=result>0?"카테고리 등록 성공":"카테고리 등록 실패";
+		msg=result>0?"서브카테고리 등록 성공":"서브카테고리 등록 실패";
 		request.setAttribute("msg", msg);
 		request.setAttribute("loc", loc);
 		request.getRequestDispatcher("/views/common/msg.jsp").forward(request, response);

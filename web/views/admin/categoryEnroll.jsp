@@ -43,8 +43,8 @@
 
 	</form>
            <br>
-                <button type="submit" id="scName" name="scName" onclick="enrollCategory();">등록</button>
-           <input type="submit" value="수정" id="submit2" onclick="updateCategory();">
+          <button type="submit" id="scName" name="scName" onclick="enrollCategory();">등록</button>
+          <input type="submit" value="수정" id="submit2" onclick="updateCategory();">
           <input type="submit" value="삭제" id="submit2" onclick="deleteCategory();">
            
         </section>

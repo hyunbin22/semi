@@ -109,8 +109,6 @@ public class MentoUpdateModifyEndServlet extends HttpServlet {
          result2=new MentoUploadService().updateMentoImage(mtu2, mtNum, category);
          System.out.println("카테고리 : "+category+", 파일이름 :"+upMentoOrgConfirm);
       }
-
-      
       if(mr.getOriginalFileName("mtlicenseimg")!=null) {
          category="license";
          String upMentoOrgLicense =mr.getOriginalFileName("mtlicenseimg");
@@ -127,6 +125,9 @@ public class MentoUpdateModifyEndServlet extends HttpServlet {
 	     request.getRequestDispatcher("/views/common/msg.jsp").forward(request, response);
       }
       
+      System.out.println("등록"+result);
+      System.out.println("수정"+result2);
+      System.out.println("삭제"+result3);
       
       
       if(result>0 && result2>0 && result3>0) {

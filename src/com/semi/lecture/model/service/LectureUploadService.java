@@ -54,9 +54,15 @@ public class LectureUploadService {
 		Connection conn = getConnection();
 		int result=dao.deleteLectureImg(conn, lecNum);
 		
-	
 		close(conn);
 		return result;
+	}
+
+	public LectureUpload searchLectureImg(int lecNum) {
+		Connection conn = getConnection();
+		LectureUpload lu = dao.searchLectureImg(conn,lecNum);
+		close(conn);
+		return lu;
 	}
 
 }

@@ -26,9 +26,22 @@
 			<form action="<%=request.getContextPath()%>/lectureEnrollEnd?mtNum=<%=mt.getMtNum()%>" method="POST" enctype="multipart/form-data">
 			<div class="box">
 				<div class="lecture" >수업제목</div>
+				<div>
 				<input type="text" id="title" class="title2" name="className" >
+				<br> <br>
+				<div style='background: #edf0f4; border-radius: 4px; padding: 12px 24px; width: 630px;'>
+				<b style='color:#ff005a;'>TIP</b>
+				<ul>
+					<li>누구를 대상으로 어떤 취미를 공유하나요?</li>
+					<li>수업을 통해 어떤것을 얻어갈 수 있나요?</li>
+					<li>예시:내 일상을 영상속으로/단 몇번의 수업으로
+					 유튜브 영상을 내가직접 업로드♥</li>
+				</ul>
 				</div>
-				<br> <br> <br>
+				</div>
+				</div>
+				<br><br><br>
+				<hr>
 				<div class="box">
 				<div class="lecture" >수업카테고리</div>
 				<select name="maincategory" id="maincategory" class="title2">
@@ -46,6 +59,7 @@
 				</select> 
 				</div>
 				<br><br>
+				<hr>
 				<div class="box">
 				<div class="lecture">수업형태</div>
 				 <input type="text" name="studentCount"	placeholder="수업정원을 입력하세요." class="title2">
@@ -54,6 +68,7 @@
 				<br> <br>
 				</div>
 				<br><br>
+				<hr>
 				<div class="box">
 				<div class="lecture">커버사진등록</div>
 				 <br>
@@ -62,7 +77,8 @@
 				 <img id="image_section1" src="#" alt="미리보기" style='position: relative; width: 250px; height: 200px; color: black; border: 0px solid black; dispaly: inline;' />
 			     </div>
 				</div>
-				<br><br><br><br><br><br>
+				<br><br><br><br><br><br><br>
+				<hr>
 				<div class="box">
 				<div class="lecture">수업사진등록</div>
 				<table width="400" border="0" cellspacing="0" cellpadding="0" style= 'margin:0;'>
@@ -104,19 +120,22 @@
 				<input type="hidden" value=<%=mt.getMtNum() %> name="mtNum">
 
 				<br> <br>
+				<hr>
 				<div class="box">
 				<div class="lecture">멘토소개</div>
 				<textarea id="" cols="30" rows="10" name="mentoIntroduce"
 					placeholder="내용을 입력해주세요." class="title2"></textarea>
 					</div>
 				
-				<br> <br> <br>
+				<br> 
+				<hr>
 				<div class="box">
 				<div class="lecture">강의소개</div>
 				<textarea id="" cols="30" rows="10" name="classIntroduce"
 					placeholder="내용을 입력해주세요." class="title2"></textarea>
 				</div>
-				<br> <br> <br>
+				<br> 
+				<hr>
 				<div class="box">
 				<div class="lecture">시간당가격</div>
 				<input type="text" name="price" id="hourPrice" class="title2"> 원 <br>
@@ -140,7 +159,8 @@
 				<input type="text" name="totaltime" id="totalTime"
 					placeholder="예) 20회" onkeyup="total()" class="title2">회 
 				</div>
-				<br> <br> <br>
+				<br> <br> 
+				<hr>
 				<div class="lecture">총가격</div>
 
 				<div class="calc-total" style=' border-radius: 4px;  padding: 12px 24px; width: 100%; text-align: right; float: right; color: #555; font-size: 15px; background: #edf0f4;'>
@@ -164,6 +184,7 @@
 				</div>
 				<br>				
 				<br><br><br><br><br><br>
+				<hr>
 				<div class="box">
 				<div class="lecture">장소</div>
 				<select name="local1" id="local1" class="title2">
@@ -183,6 +204,7 @@
 					placeholder="세부장소를 입력하세요.">
 				</div>
 				<br><br>
+				<hr>
 				<div class="box">
 				<div class="lecture">가능 요일별 시간대(복수선택)</div>
 				</div>
@@ -201,6 +223,7 @@
 				<input type="checkbox" name="yo" value="일요일">일요일
 				</option>
 				<br><br>
+				<hr>
 				<div class="box">
 				<br> <br> <input type="text" name="day1" placeholder="ex>오후7시~오후9시" class="title2"> 
 				<input type="radio"	name="week1" id="f1" value="선택" style='margin-top:17px; ' checked><label for="f1" style='margin:10px;'></label>
@@ -227,131 +250,152 @@
 </section>
 <script>
 
-//커버사진 미리보기
-function readURL(input) {
-	  if (input.files && input.files[0]) {
-	   var reader = new FileReader();
-	   
-	   reader.onload = function (e) {
-	    $('#image_section1').attr('src', e.target.result);  
-	   }
-	   
-	   reader.readAsDataURL(input.files[0]);
-	   }
-	 }   
-	 
-	 $("#file1").change(function(){
-	    readURL(this);
-	 });
-	 
-  //수업사진 미리보기
-  function readURL2(input) {
-	  if (input.files && input.files[0]) {
-	   var reader = new FileReader();
-	   
-	   reader.onload = function (ee) {
-	    $('#image_section2').attr('src', ee.target.result);  
-	   }
-	   
-	   reader.readAsDataURL(input.files[0]);
-	   }
-	 }   
-	 
-	 $("#addImg").change(function(){
-	    readURL2(this);
-	 });
+			//확장자, 정규식 검사
+			$(document).on("change","input[name='file1']",function(event) {
+			   var ext = $(this).val().split('.').pop().toLowerCase();
+			   var fileSize = (this).files[0].size;
+			   var maxSize = 1024*1024*1024;
+			   
+			   if($.inArray(ext, ['gif','png','jpg','jpeg']) == -1) {
+			      alert("등록할 수 없는 확장자입니다.");
+			      $(this).val("");
+			      return;
+			   } 
+			   
+			   if(fileSize > maxSize) {
+			      alert("첨부파일 크기는 1GB 이내로 등록 가능합니다.");
+			      $(this).val("");
+			      return;
+			   }
+			});
+			
 
 
-       //장르선택 카테고리
-      $(function(){
-         $("#maincategory").click(function(){
-            $.ajax({
-               url : "<%=request.getContextPath()%>/selectSubCategory?scNum=" + $('#maincategory').val(),
-               type : "post",
-               dataType : "html",
-               success:function(data){
-                  $("#good").find("option").remove();
-
-                  var datas = data.split(",");
-            
-                       for(var i = 0; i < datas.length; i++){    
-                          if(data==0){
-                             $("#good").append("<option value='1'>과목선택</option>");
-                          }else{
-                       console.log(datas[i]);                        
-                          $('<option value="' + datas[i] +'">' + datas[i] + '</option>').appendTo('#good');
-                    }
-                       }
-               }
-            });
-         });
-      });
-             
-       //기본수업시간선택
-      $("#time").on("propertychange change keyup paste input",
-            function() {
-               var currentVal = $(this).val();
-               var opt = document.getElementById("time2");
-               opt.innerHTML=currentVal;
-                        
-      })
-      
-      //시간당가격입력
-      $("#hourPrice").on("propertychange change keyup paste input",
-            function() {
-               var currentVal = $(this).val();
-               var opt = document.getElementById("price2");
-               opt.innerHTML=currentVal;
-                        
-      })
-      
-      //한달 기준 총수업
-      $("#totalTime").on("propertychange change keyup paste input",
-            function() {
-               var currentVal = $(this).val();
-               var opt = document.getElementById("totalTime2");
-               opt.innerHTML=currentVal;
-                        
-      })
-      
-      //연결수수료
-      $("#hourPrice").on("propertychange change keyup paste input",
-            function() {
-               var currentVal = $(this).val();
-               var opt = document.getElementById("fee2");
-               opt.innerHTML=currentVal;
-                        
-      })
-      
-      //총액계산
-      function total() //total()함수 부분
-
-      {
-      
-        var hourPrice1=document.getElementById("hourPrice"); //<body>부분에서 num1변수를 getElementById를 이용하여 값을 가져온다.
-      
-        var hourPrice1s=hourPrice1.value; // num1에서 가져온 값을 num1s에 저장해주고,
-      
-        var hourPrice1b=parseInt(hourPrice1s); // 계산을 하기위해 그 값을 int형으로 바꿔준다.
-      
-        var totalTime2=document.getElementById("totalTime"); //위 방법과 같음..
-      
-        var totalTime2s=totalTime2.value;
-      
-        var totalTime2b=parseInt(totalTime2s);   
-      
-        var time1=document.getElementById("time"); //역시 op값을 가져오고
-      
-        var times=time1.value;
-        
-        var time2b=parseInt(times);
-        
-        var totalPrice = hourPrice1b * time2b * totalTime2b;
-        document.getElementById("totalPrice2").innerHTML=totalPrice;
-      
-   
-      }
-       
+		//커버사진 미리보기
+		function readURL(input) {
+			  if (input.files && input.files[0]) {
+			   var reader = new FileReader();
+			   
+			   reader.onload = function (e) {
+			    $('#image_section1').attr('src', e.target.result);  
+			   }
+			   
+			   reader.readAsDataURL(input.files[0]);
+			   }
+			 }   
+			 
+			 $("#file1").change(function(){
+			    readURL(this);
+			 });
+			 
+		  //수업사진 미리보기
+		  function readURL2(input) {
+			  if (input.files && input.files[0]) {
+			   var reader = new FileReader();
+			   
+			   reader.onload = function (ee) {
+			    $('#image_section2').attr('src', ee.target.result);  
+			   }
+			   
+			   reader.readAsDataURL(input.files[0]);
+			   }
+			 }   
+			 
+			 $("#addImg").change(function(){
+			    readURL2(this);
+			 });
+		
+		
+		       //장르선택 카테고리
+		      $(function(){
+		         $("#maincategory").click(function(){
+		            $.ajax({
+		               url : "<%=request.getContextPath()%>/selectSubCategory?scNum=" + $('#maincategory').val(),
+		               type : "post",
+		               dataType : "html",
+		               success:function(data){
+		                  $("#good").find("option").remove();
+		
+		                  var datas = data.split(",");
+		            
+		                       for(var i = 0; i < datas.length; i++){    
+		                          if(data==0){
+		                             $("#good").append("<option value='1'>과목선택</option>");
+		                          }else{
+		                       console.log(datas[i]);                        
+		                          $('<option value="' + datas[i] +'">' + datas[i] + '</option>').appendTo('#good');
+		                    }
+		                       }
+		               }
+		            });
+		         });
+		      });
+		             
+		       //기본수업시간선택
+		      $("#time").on("propertychange change keyup paste input",
+		            function() {
+		               var currentVal = $(this).val();
+		               var opt = document.getElementById("time2");
+		               opt.innerHTML=currentVal;
+		                        
+		      })
+		      
+		      //시간당가격입력
+		      $("#hourPrice").on("propertychange change keyup paste input",
+		            function() {
+		               var currentVal = $(this).val();
+		               var opt = document.getElementById("price2");
+		               opt.innerHTML=currentVal;
+		                        
+		      })
+		      
+		      //한달 기준 총수업
+		      $("#totalTime").on("propertychange change keyup paste input",
+		            function() {
+		               var currentVal = $(this).val();
+		               var opt = document.getElementById("totalTime2");
+		               opt.innerHTML=currentVal;
+		                        
+		      })
+		      
+		      //연결수수료
+		      $("#hourPrice").on("propertychange change keyup paste input",
+		            function() {
+		               var currentVal = $(this).val();
+		               var opt = document.getElementById("fee2");
+		               opt.innerHTML=currentVal;
+		                        
+		      })
+		      
+		      //총액계산
+		      function total() //total()함수 부분
+		
+		      {
+		      
+		        var hourPrice1=document.getElementById("hourPrice"); //<body>부분에서 num1변수를 getElementById를 이용하여 값을 가져온다.
+		      
+		        var hourPrice1s=hourPrice1.value; // num1에서 가져온 값을 num1s에 저장해주고,
+		      
+		        var hourPrice1b=parseInt(hourPrice1s); // 계산을 하기위해 그 값을 int형으로 바꿔준다.
+		      
+		        var totalTime2=document.getElementById("totalTime"); //위 방법과 같음..
+		      
+		        var totalTime2s=totalTime2.value;
+		      
+		        var totalTime2b=parseInt(totalTime2s);   
+		      
+		        var time1=document.getElementById("time"); //역시 op값을 가져오고
+		      
+		        var times=time1.value;
+		        
+		        var time2b=parseInt(times);
+		        
+		        var totalPrice = hourPrice1b * time2b * totalTime2b;
+		        document.getElementById("totalPrice2").innerHTML=totalPrice;
+		      
+		   
+		      }
+		       
        //수업타입 라디오버튼
        $(document).ready(function(){
  
