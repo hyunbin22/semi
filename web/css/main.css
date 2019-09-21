@@ -1554,3 +1554,17 @@ div.myPage-content-wrap {
 	width:fit-content;
 	
 }
+
+
+
+/*주미 9월 20일*/
+#seeOrder{
+	width: 120px;
+	height: 33px;
+	margin: 10px;
+	background-color: #eb9f9f;
+	color: white;
+	border: none;
+	border-radius: 5px;
+	cursor: pointer;
+}

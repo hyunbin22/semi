@@ -16,7 +16,9 @@ import java.util.Properties;
 import com.semi.lecture.model.dao.LectureDao;
 import com.semi.lecture.model.service.LectureService;
 import com.semi.lecture.model.vo.Lecture;
+import com.semi.member.model.dao.MemberDao;
 import com.semi.member.model.service.MemberService;
+import com.semi.member.model.vo.Member;
 import com.semi.order.model.vo.Order;
 
 public class OrderDao {
@@ -45,7 +47,7 @@ public class OrderDao {
 			pstmt.setString(1, mId);
 			pstmt.setInt(2, order.getLecNum());
 			pstmt.setString(3, order.getoTot());
-			pstmt.setString(4, order.getoText());
+			pstmt.setString(4, order.getoText().replaceAll(" ", "&nbsp;").replaceAll("<", "&lt;").replaceAll(">", "&gt;").replaceAll("\n", "<br>"));
 			pstmt.setInt(5, order.getoPrice());
 			
 			result=pstmt.executeUpdate();
@@ -224,6 +226,88 @@ public class OrderDao {
 		
 		return result;
 	}
+
+	// 멘토 신청자 목록 확인
+	public List<Order> orderListByLecnum(Connection conn, int lecnum, int cPage, int numPerPage) {
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		String sql=prop.getProperty("selectOrderListLecnum");
+		Order o = null;
+		List<Order> list=new ArrayList();
+		Lecture l = new Lecture();
+		LectureDao dao = new LectureDao();
+		try {
+			pstmt=conn.prepareStatement(sql);
+			pstmt.setInt(1,lecnum);
+			pstmt.setInt(2,(cPage-1)*numPerPage+1);
+			pstmt.setInt(3,cPage*numPerPage);
+			rs=pstmt.executeQuery();
+			while(rs.next()) {
+				o = new Order();
+				o.setoNum(rs.getInt("onum"));
+				o.setmNum(rs.getInt("mnum"));
+				o.setLecNum(lecnum);
+				o.setoTot(rs.getString("otot").replaceAll(" ", "&nbsp;").replaceAll("<", "&lt;").replaceAll(">", "&gt;").replaceAll("\n", "<br>"));
+				o.setoText(rs.getString("otext").replaceAll(" ", "&nbsp;").replaceAll("<", "&lt;").replaceAll(">", "&gt;").replaceAll("\n", "<br>"));
+				o.setoPrice(rs.getInt("oprice"));
+				o.setoPayment(rs.getString("opayment").charAt(0));
+				o.setoCheck(rs.getString("ocheck").charAt(0));
+				o.setOrderDate(rs.getDate("orderdate"));
+
+				Member m = new MemberDao().selectMemberMnum(conn, rs.getInt("mnum"));
+				Lecture lec = new LectureDao().lectureView(conn, rs.getInt("lecNum"));
+				o.setMember(m);
+				o.setLecture(lec);
+				list.add(o);
+			}
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rs);
+			close(pstmt);
+		}
+		
+		System.out.println("OrderDao의 selectOrder(강의넘버 일치하는 오더 가져오기) :"+list);
+		return list;
+	}
+
+	// 쿼리문 update tb_order set ocheck='Y' where onum=2;
+	public int orderCheckY(Connection conn, int oNum) {
+		PreparedStatement pstmt=null;
+		int result=0;
+		String sql=prop.getProperty("orderCheckY");
+		try {
+			pstmt=conn.prepareStatement(sql);
+			pstmt.setInt(1, oNum);
+			result=pstmt.executeUpdate();
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}
+		return result;
+	}
+
+	// 쿼리문 update tb_order set ocheck='N' where onum=2;
+	public int orderCheckN(Connection conn, int oNum) {
+		PreparedStatement pstmt=null;
+		int result=0;
+		String sql=prop.getProperty("orderCheckN");
+		try {
+			pstmt=conn.prepareStatement(sql);
+			pstmt.setInt(1, oNum);
+			result=pstmt.executeUpdate();
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}
+		return result;
+	}
+
+	
+
+
 
 
 }

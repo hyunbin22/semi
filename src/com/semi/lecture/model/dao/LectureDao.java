@@ -291,9 +291,9 @@ public class LectureDao {
 			pstmt.setString(13, l.getLecTot2());
 			pstmt.setDate(14, l.getLecOpenDate());
 			pstmt.setDate(15, l.getLecOpenDate2());
-			pstmt.setString(16, l.getLecLocalContent());
-			pstmt.setString(17, l.getLecMentoContent());
-			pstmt.setString(18, l.getLecLectureContent());
+			pstmt.setString(16, l.getLecLocalContent().replaceAll(" ", "&nbsp;").replaceAll("<", "&lt;").replaceAll(">", "&gt;").replaceAll("\n", "<br>"));
+			pstmt.setString(17, l.getLecMentoContent().replaceAll(" ", "&nbsp;").replaceAll("<", "&lt;").replaceAll(">", "&gt;").replaceAll("\n", "<br>"));
+			pstmt.setString(18, l.getLecLectureContent().replaceAll(" ", "&nbsp;").replaceAll("<", "&lt;").replaceAll(">", "&gt;").replaceAll("\n", "<br>"));
 			result = pstmt.executeUpdate();
 		}catch(SQLException e) {
 			e.printStackTrace();
@@ -465,9 +465,9 @@ public class LectureDao {
 				lt.setLecTot2(rs.getString("lecTot2"));
 				lt.setLecOpenDate(rs.getDate("lecOpenDate"));
 				lt.setLecOpenDate2(rs.getDate("lecOpenDate2"));
-				lt.setLecLocalContent(rs.getString("lecLocalContent"));
-				lt.setLecMentoContent(rs.getString("lecMentoContent"));
-				lt.setLecLectureContent(rs.getString("lecLectureContent"));
+				lt.setLecLocalContent(rs.getString("lecLocalContent").replaceAll(" ", "&nbsp;").replaceAll("<", "&lt;").replaceAll(">", "&gt;").replaceAll("\n", "<br>"));
+				lt.setLecMentoContent(rs.getString("lecMentoContent").replaceAll(" ", "&nbsp;").replaceAll("<", "&lt;").replaceAll(">", "&gt;").replaceAll("\n", "<br>"));
+				lt.setLecLectureContent(rs.getString("lecLectureContent").replaceAll(" ", "&nbsp;").replaceAll("<", "&lt;").replaceAll(">", "&gt;").replaceAll("\n", "<br>"));
 				lt.setLectureUpList(new LectureUploadDao().lectureUpList(conn, lecNum));
 
 			}	
@@ -501,9 +501,9 @@ public class LectureDao {
 			pstmt.setString(12, l.getLecTot2());
 			pstmt.setDate(13, l.getLecOpenDate());
 			pstmt.setDate(14, l.getLecOpenDate2());
-			pstmt.setString(15, l.getLecLocalContent());
-			pstmt.setString(16, l.getLecMentoContent());
-			pstmt.setString(17, l.getLecLectureContent());
+			pstmt.setString(15, l.getLecLocalContent().replaceAll(" ", "&nbsp;").replaceAll("<", "&lt;").replaceAll(">", "&gt;").replaceAll("\n", "<br>"));
+			pstmt.setString(16, l.getLecMentoContent().replaceAll(" ", "&nbsp;").replaceAll("<", "&lt;").replaceAll(">", "&gt;").replaceAll("\n", "<br>"));
+			pstmt.setString(17, l.getLecLectureContent().replaceAll(" ", "&nbsp;").replaceAll("<", "&lt;").replaceAll(">", "&gt;").replaceAll("\n", "<br>"));
 			pstmt.setInt(18, lecNum);
 			result=pstmt.executeUpdate();
 

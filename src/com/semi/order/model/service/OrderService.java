@@ -8,6 +8,7 @@ import static common.template.JDBCTemplate.rollback;
 import java.sql.Connection;
 import java.util.List;
 
+import com.semi.lecture.model.vo.Lecture;
 import com.semi.order.model.dao.OrderDao;
 import com.semi.order.model.vo.Order;
 
@@ -83,6 +84,44 @@ private OrderDao dao = new OrderDao();
 		Order o = dao.seeMoreStudyList(conn, lecNum);
 		close(conn);
 		return o;
+	}
+
+	//lecnum가 일치하는 order 불러오기
+	public List<Order> orderListByLecNum(int lecnum,int cPage, int numPerPage) {
+		Connection conn = getConnection();
+		List<Order> list = dao.orderListByLecnum(conn, lecnum, cPage, numPerPage);
+		close(conn);
+		return list;
+	}
+
+	public int checkY(int oNum) {
+		Connection conn=getConnection();
+		int result=dao.orderCheckY(conn,oNum);
+		if(result>0) 
+		{
+			commit(conn);
+		}
+		else 
+		{
+			rollback(conn);
+		}
+		close(conn);
+		return result;
+	}
+	
+	public int checkN(int oNum) {
+		Connection conn=getConnection();
+		int result=dao.orderCheckN(conn,oNum);
+		if(result>0) 
+		{
+			commit(conn);
+		}
+		else 
+		{
+			rollback(conn);
+		}
+		close(conn);
+		return result;
 	}
 
 }

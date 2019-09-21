@@ -11,10 +11,13 @@
    List<Lecture> list = (List)request.getAttribute("list");
    List<Category> category = (List)request.getAttribute("category");
    List<SubCategory> subCategory = (List)request.getAttribute("subcategory");
+	System.out.println("서브카테고리 : "+subCategory);
    
 %>
 
 <%@ include file="/views/common/header.jsp"%>
+
+
 
 <section class="center ">
 <aside>
@@ -25,6 +28,7 @@
                검색
                <hr>
             </div>
+            <br><br>
             <div class="lectureFloatsubtitle">메인 카테고리</div>
             <div id="select_box1">
                <select id="category" class="color" title="select color" name="category">
@@ -42,10 +46,7 @@
 	               </div>
                </select>
             </div>
-            <div class="lectureFloatsubtitle">1회 시간</div>
-            <div id="select_box">
 
-            </div>
 
             <script>
             
@@ -74,7 +75,6 @@
             			type:"post",
             			dataType:"html",
             			success:function(data){
-            				
             				var datas=data.split(",");
             				$('#subCategory').find("option").remove();
             				for(var i = 0; i < datas.length; i++){    
@@ -84,44 +84,18 @@
 	                             	console.log(datas[i]);
 	                             	 // 이전에 있던 option들 삭제
 	                                $('<option value="' + (i+1) +'">' + datas[i] + '</option>').appendTo('#subCategory');
+	                             	 
                           		}
                              }
 
-            				
-            				/* if($("#category").val()!=$("#subCategory").val()){
-            					console.log($("#category").val());
-            					console.log($("#subCategory").val());
-            					$("#subCategory").find("option").remove();
-            				} */
             			}
             		});
             	});
             });
-            
-           <%--  $("#subCategory").click(function(){
-            	$.ajax({
-            		url : "<%=request.getContextPath()%>/selectSubCategory?subNum="$("#subCategory").val(),
-            		type : "post",
-            		dataType:"html",
-            		successfunction(data){
-            			console.log(data);
-            		}
-            	});
-            }); --%>
-            
-               $(function() {
-                  var select = $("select#color");
-
-                  select.change(function() {
-                     var select_name = $(this).children(
-                           "option:selected").text();
-                     $(this).siblings("label").text(select_name);
-                  });
-               });
             </script>
             <div>
                <!-- <input type=""> -->
-               <input type="submit" value="확인" class="classSubmit">
+               <button class="classSubmit">검색</button>
             </div>
             <section class= "page1">
 			    <div class="page" id="pageBar">
@@ -145,11 +119,7 @@
     <div class="LectureMainFrame">
         
         
-        <%for(Lecture lec : list){ 
-        %>
-        
-        
-
+        <%for(Lecture lec : list){ %>
                   
         <table class="lectureTable"  style="cursor:pointer;" onclick="location.href='<%=request.getContextPath() %>/lecture/lectureView?lecnum=<%=lec.getLecNum()%>'">
             <tr>
@@ -173,33 +143,11 @@
             </tr>
             
         </table>
-        
-        
+      
         <%} %>
 
+		
 
-
-      <!-- 원래 틀
-      <table class="classtable">
-            
-            <tr>
-                <td colspan="4"><img src="사이즈300_300.png"></td>
-            </tr>
-            <tr>
-                <td colspan="3"class="className" >강좌제목가나다라마바사아자aaaa지금은 5시 21분aaaaaaaaaaa차카타파하</td>
-                <td class="classplace">위치 | 경기수원</td>
-            </tr>
-            <tr>
-                <td colspan="4" class="classinfo">
-                    소개설명<br>제매력에 빠져보실래요?<br>개피곤하다우<hr>
-                    
-                </td>
-            </tr>
-            <tr>
-                <td colspan="2" class="classScore"><b>평점</b><br>4.4/5.0</td>
-                <td colspan="2" class="classmoneytime"><b>돈/시간</b><br>20000원/1시간</td>
-            </tr>
-        </table> -->
         
     </div>
 </section>
