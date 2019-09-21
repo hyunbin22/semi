@@ -28,8 +28,10 @@ public class OrderUpdatePaymentServlet extends HttpServlet {
 		
 		int oNum = Integer.parseInt(request.getParameter("oNum"));
 		int result = new OrderService().updatePayment(oNum);
+		String type = "add";
 		if(result > 0) {
-			int addStudentCount = new LectureService().updateStudentCount(oNum);
+			//누적수강인원 증가
+			int addStudentCount = new LectureService().updateStudentCount(oNum, type);
 			if(addStudentCount > 0) {
 				response.getWriter().write(result+"");
 				

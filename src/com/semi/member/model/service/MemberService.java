@@ -10,7 +10,6 @@ import java.util.List;
 import com.semi.member.model.dao.MemberDao;
 import com.semi.member.model.vo.Member;
 import com.semi.order.model.vo.Order;
-import com.semi.report.model.vo.Report;
 
 import static common.template.JDBCTemplate.getConnection;
 
@@ -33,7 +32,7 @@ public class MemberService {
 	public int idDupliCheck(String userId) {
 		Connection conn = getConnection();
 		int check = dao.idDupliCheck(conn, userId);
-
+		close(conn);
 		return check;
 	}
 
@@ -53,7 +52,7 @@ public class MemberService {
 		return check;
 	}
 
-
+	//멤버번호로 조회
 	public Member selectMember(int mNum) {
 		Connection conn=getConnection();
 		Member m = dao.selectMemberMnum(conn,mNum);
@@ -81,7 +80,6 @@ public class MemberService {
 		else 
 		{
 			rollback(conn);
-			System.out.println("서비스");
 		}
 		close(conn);
 		return result;
@@ -89,9 +87,9 @@ public class MemberService {
 	}
 
 	//회원 수정
-	public int updateMember(String mPw , String mEmail, String phone, String mId) {
+	public int updateMember(String mPw , String mEmail, String mPhone, String mId) {
 		Connection conn= getConnection();
-		int result=dao.updateMember(conn,mPw,mEmail, phone, mId);
+		int result=dao.updateMember(conn,mPw,mEmail,mPhone, mId);
 		if(result>0) 
 		{
 			commit(conn);
@@ -215,5 +213,4 @@ public class MemberService {
 		close(conn);
 		return list;
 	}
-
 }

@@ -17,8 +17,6 @@ public class OrderService {
 	
 private OrderDao dao = new OrderDao();
 	
-
-	
 	//신청내역 가져오기
 	public Order selectOrder(int oNum) {
 		Connection conn = getConnection();
@@ -42,15 +40,7 @@ private OrderDao dao = new OrderDao();
 	public int selectStudyListCount() {
 		Connection conn = getConnection();
 		int result = dao.selectStudyListCount(conn);
-		if(result > 0)
-		{
-			commit(conn);
-		}
-		else
-		{
-			rollback(conn);
-		}
-
+		close(conn);
 		return result;
 	}
 
@@ -61,11 +51,14 @@ private OrderDao dao = new OrderDao();
 		return list;
 	}
 
-	public Order seeMoreStudy(int lecNum) {
+	//결제취소
+	public int orderPayReset(int oNum) {
 		Connection conn = getConnection();
-		Order o = dao.seeMoreStudyList(conn, lecNum);
+		int result = dao.orderPayReset(conn, oNum);
+		if(result > 0) commit(conn);
+		else rollback(conn);
 		close(conn);
-		return o;
+		return result;
 	}
 
 }

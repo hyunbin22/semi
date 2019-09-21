@@ -171,16 +171,4 @@ public class Report {
 	}
 
 
-	
-	
-	
-
-
-
-
-	
-	
-	
-	
-
 }
