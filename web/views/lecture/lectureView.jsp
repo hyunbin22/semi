@@ -296,5 +296,4 @@
 
 <script src="js/bootstrap.js"></script>
 
-
 <%@ include file="/views/common/footer.jsp"%>

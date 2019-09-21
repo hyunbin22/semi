@@ -8,15 +8,35 @@ import static common.template.JDBCTemplate.rollback;
 import java.sql.Connection;
 import java.util.List;
 
+import com.semi.lecture.model.vo.Lecture;
 import com.semi.order.model.dao.OrderDao;
 import com.semi.order.model.vo.Order;
 
 import common.template.JDBCTemplate;
 
 public class OrderService {
-	
-private OrderDao dao = new OrderDao();
-	
+
+	private OrderDao dao = new OrderDao();
+
+	//수업신청
+	public int insertOrder(Order order, String mId) {
+		Connection conn = getConnection();
+
+		int result = dao.insertOrder(conn, mId, order);
+		int result2=0;
+
+		System.out.println("서비스 result : "+result);
+		if(result>0) {
+			commit(conn);
+			result2 = dao.getOnum(conn);
+			System.out.println("OrderService의 result2 :"+result2);
+		} else {
+			rollback(conn);
+		}
+		close(conn);
+		return result2;
+	}
+
 	//신청내역 가져오기
 	public Order selectOrder(int oNum) {
 		Connection conn = getConnection();
@@ -51,12 +71,57 @@ private OrderDao dao = new OrderDao();
 		return list;
 	}
 
+	public Order seeMoreStudy(int lecNum) {
+		Connection conn = getConnection();
+		Order o = dao.seeMoreStudyList(conn, lecNum);
+		close(conn);
+		return o;
+	}
+
 	//결제취소
 	public int orderPayReset(int oNum) {
 		Connection conn = getConnection();
 		int result = dao.orderPayReset(conn, oNum);
 		if(result > 0) commit(conn);
 		else rollback(conn);
+		close(conn);
+		return result;
+	}
+
+	//lecnum가 일치하는 order 불러오기
+	public List<Order> orderListByLecNum(int lecnum,int cPage, int numPerPage) {
+		Connection conn = getConnection();
+		List<Order> list = dao.orderListByLecnum(conn, lecnum, cPage, numPerPage);
+		close(conn);
+		return list;
+	}
+
+	public int checkY(int oNum) {
+		Connection conn=getConnection();
+		int result=dao.orderCheckY(conn,oNum);
+		if(result>0) 
+		{
+			commit(conn);
+		}
+		else 
+		{
+			rollback(conn);
+		}
+		close(conn);
+		return result;
+	}
+
+	public int checkN(int oNum) {
+		Connection conn=getConnection();
+		int result=dao.orderCheckN(conn,oNum);
+		if(result>0) 
+		{
+			commit(conn);
+		}
+		else 
+		{
+			rollback(conn);
+		}
 		close(conn);
 		return result;
 	}

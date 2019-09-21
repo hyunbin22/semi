@@ -4,9 +4,11 @@
 <%@ page import="com.semi.lecture.model.vo.LectureReview"%>
 <%@ page import="java.util.List"%>
 <%
+
    Lecture lec = (Lecture) request.getAttribute("lecture");
    List<LectureReview> list = (List) request.getAttribute("list");
-   String days = (String)request.getAttribute("day");
+   String days = (String)request.getParameter("day");
+   String lecTot = (String)request.getAttribute("lecTot");
    
    String coverImage = "";
    for(int i=0;i<lec.getLectureUpList().size();i++){
@@ -28,7 +30,11 @@
 </div>
 <br><br>
 <section>
-<form action="<%=request.getContextPath()%>/lecture/OrderEnrollEnd.do?=lecnum=<%=lec.getLecNum()%>" method="post">
+<form action="<%=request.getContextPath()%>/lecture/OrderEnrollEnd.do" method="post">
+<input type="hidden" value="<%=lec.getLecNum()%>" name="lecNum">
+<input type="hidden" name="oTot" value="<%=lecTot %>">
+<input type="hidden" name="oPrice" value="<%=lec.getLecPrice() %>">
+
 	<table id="LecMemRegistTable">
 		<tr>
 			<td rowspan="6"><img class="lecMemRegImage" src="<%=request.getContextPath() %>/upload/lecture/<%=coverImage %>"></td>
@@ -45,13 +51,24 @@
 			<td colspan="4"><hr></td>
 		</tr>
 		<tr>
-			<td><%=lec.getLecWeek() %>요일</td>
-			<td>시간 : <%=lec.getLecTot() %></td>
+			<td><%=days %>요일</td>
+			<td >시간 : <%=lecTot %></td>
 			<td>정원 : <%=lec.getLecStudentCount() %>/<%=lec.getLecMaxCount() %></td>
 			
 		</tr>
 		<tr>
 			<td colspan="4"><%=lec.getLecPrice() %>원</td>
+		</tr>
+		<tr>
+			<td colspan="10"><hr></td>
+		</tr>
+		<tr>
+			<td colspan="10" id="orderTalk">멘토에게 남기고 싶은 말</td>
+		</tr>
+		<tr>
+			<td colspan="10">
+			<textarea id="oText" name="oText" cols="110" rows="5" ></textarea>
+			</td>
 		</tr>
 		<tr>
 			<td colspan="4"><input class="lecMemRegButton" type="submit" value="신청하기" ></td>
