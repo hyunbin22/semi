@@ -21,7 +21,7 @@
 
 <section class="center ">
 <aside>
-   <form>
+   <form action ="<%=request.getContextPath()%>/lecture/lectureListSubcategory.do">
       <div class="wrap">
          <div class="lectureFloatMenu">
             <div class="lectureFloatTitle">
@@ -31,7 +31,7 @@
             <br><br>
             <div class="lectureFloatsubtitle">메인 카테고리</div>
             <div id="select_box1">
-               <select id="category" class="color" title="select color" name="category">
+               <select id="category" class="color" title="select color">
 	               <%for (Category c : category){ %>
 	                        <option value="<%=c.getScNum()%>"><%=c.getScName() %></option>
 	               <%} %>
@@ -40,11 +40,14 @@
             </div>
             <div class="lectureFloatsubtitle">서브 카테고리</div>
             <div id="select_box1">
-               <select id="subCategory" class="color" title="select color" name="subCategory">
+               <select id="subCategory2" class="color" title="select color">
 	               <div id="subCategoryVal">
 	               		서브카테고리
 	               </div>
                </select>
+               <%for (SubCategory sc : subCategory){ %>
+               <input type="hidden" name="subNum" value="<%=sc.getSubNum()%>">
+               <%} %>
             </div>
 
 
@@ -83,7 +86,7 @@
                                 }else{
 	                             	console.log(datas[i]);
 	                             	 // 이전에 있던 option들 삭제
-	                                $('<option value="' + (i+1) +'">' + datas[i] + '</option>').appendTo('#subCategory');
+	                                $('<option value="' + (i+1) +'">' + datas[i] + '</option>').appendTo('#subCategory2');
 	                             	 
                           		}
                              }
