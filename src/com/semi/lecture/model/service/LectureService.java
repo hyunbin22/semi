@@ -125,6 +125,14 @@ public class LectureService {
 
 		return list;
 	}
+	
+	public List<Lecture> lectureListByMtNum(int mtnum) {
+		Connection conn=getConnection();
+		List<Lecture> list=dao.lectureListByMtNum(conn, mtnum);
+		close(conn);
+
+		return list;
+	}
 
 
 	public Lecture lectureListByLecNum(int lecNum) {
