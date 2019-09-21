@@ -372,42 +372,46 @@ public class LectureDao {
 	}
 
 	// 강의 리스트 
-	public List<Lecture> selectLectureList(Connection conn, int cPage, int numPerPage) {
-		PreparedStatement pstmt=null;
-		String sql=prop.getProperty("selectLectureList");
-		ResultSet rs = null;
-		List<Lecture> lecturelist = new ArrayList();
+		public List<Lecture> selectLectureList(Connection conn, int cPage, int numPerPage) {
+			PreparedStatement pstmt=null;
+			String sql=prop.getProperty("selectLectureList");
+			ResultSet rs = null;
+			List<Lecture> lecturelist = new ArrayList();
 
-		try {
-			pstmt = conn.prepareStatement(sql);
-			pstmt.setInt(1, (cPage-1)*numPerPage+1);
-			pstmt.setInt(2, cPage*numPerPage);
-			rs = pstmt.executeQuery();
+			try {
+				pstmt = conn.prepareStatement(sql);
+				pstmt.setInt(1, (cPage-1)*numPerPage+1);
+				pstmt.setInt(2, cPage*numPerPage);
+				rs = pstmt.executeQuery();
 
 
-			while(rs.next()) {
-				Lecture lec=new Lecture();
-				Mento mt = new Mento();
+				while(rs.next()) {
+					Lecture lec=new Lecture();
+					Mento mt = new Mento();
 
-				lec.setLecNum(rs.getInt("lecnum"));
-				lec.setLecName(rs.getString("lecname"));
-				lec.setLecType(rs.getString("lectype"));
-				lec.setLecPrice(rs.getInt("lecprice"));
-				lec.setMtNum(rs.getInt("mtnum"));
+					lec.setLecNum(rs.getInt("lecnum"));
+					lec.setLecName(rs.getString("lecname"));
+					lec.setLecType(rs.getString("lectype"));
+					lec.setLecPrice(rs.getInt("lecprice"));
+					lec.setMtNum(rs.getInt("mtnum"));
+					lec.setLecMeet(rs.getString("lecmeet"));
 
-				LectureUpload lecUp = new LectureUploadDao().lectureUpCover2(conn, rs.getInt("lecnum"));
-				lec.setLectureUpload(lecUp);
-				lecturelist.add(lec);
+					LectureUpload lecUp = new LectureUploadDao().lectureUpCover2(conn, rs.getInt("lecnum"));
+					Mento m = new MentoDao().mentoView(conn, rs.getInt("mtnum"));
+					lec.setLecMento(m);
+					lec.setLectureUpload(lecUp);
+					lecturelist.add(lec);
 
+				}
+				
+			}catch(Exception e) {
+				e.printStackTrace();
+			}finally {
+				close(rs);
+				close(pstmt);
 			}
-		}catch(Exception e) {
-			e.printStackTrace();
-		}finally {
-			close(rs);
-			close(pstmt);
+			return lecturelist;
 		}
-		return lecturelist;
-	}
 
 	//강의 이름
 	public Lecture selectLectureName(Connection conn, int int1) {
@@ -493,7 +497,6 @@ public class LectureDao {
 		return result;
 	}
 	
-	//강의번호로 
 	public Lecture lectureListByLecNum(Connection conn, int lecNum) {
 		PreparedStatement pstmt=null;
 		ResultSet rs=null;
@@ -521,12 +524,11 @@ public class LectureDao {
 				lt.setLecTot2(rs.getString("lecTot2"));
 				lt.setLecOpenDate(rs.getDate("lecOpenDate"));
 				lt.setLecOpenDate2(rs.getDate("lecOpenDate2"));
-				lt.setLecLocalContent(rs.getString("lecLocalContent"));
-				lt.setLecMentoContent(rs.getString("lecMentoContent"));
-				lt.setLecLectureContent(rs.getString("lecLectureContent"));
+				lt.setLecLocalContent(rs.getString("lecLocalContent").replaceAll(" ", "&nbsp;").replaceAll("<", "&lt;").replaceAll(">", "&gt;").replaceAll("\n", "<br>"));
+				lt.setLecMentoContent(rs.getString("lecMentoContent").replaceAll(" ", "&nbsp;").replaceAll("<", "&lt;").replaceAll(">", "&gt;").replaceAll("\n", "<br>"));
+				lt.setLecLectureContent(rs.getString("lecLectureContent").replaceAll(" ", "&nbsp;").replaceAll("<", "&lt;").replaceAll(">", "&gt;").replaceAll("\n", "<br>"));
 				lt.setLectureUpList(new LectureUploadDao().lectureUpList(conn, lecNum));
-				System.out.println(new LectureUploadDao().lectureUpList(conn, lecNum));
-				
+
 			}	
 
 		}catch(SQLException e) {

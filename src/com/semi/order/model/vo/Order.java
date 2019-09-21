@@ -1,3 +1,4 @@
+
 package com.semi.order.model.vo;
 
 import java.sql.Date;
@@ -24,6 +25,7 @@ public class Order {
 	public Order() {
 		// TODO Auto-generated constructor stub
 	}
+
 
 	public Order(int oNum, int mNum, int lecNum, String oTot, String oText, int oPrice, char oPayment, char oCheck,
 			Lecture lecture, Member member, Date orderDate, Date payDate) {
@@ -156,8 +158,5 @@ public class Order {
 				+ ", oPrice=" + oPrice + ", oPayment=" + oPayment + ", oCheck=" + oCheck + ", lecture=" + lecture
 				+ ", member=" + member + "]";
 	}
-	
-	
-	
 
 }
