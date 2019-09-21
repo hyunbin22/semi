@@ -27,6 +27,7 @@ public class OpenToMessageServlet extends HttpServlet {
 		request.setAttribute("toId", toId);
 		request.setAttribute("lecName", lecName);
 		request.setAttribute("moimTitle", moimTitle);
+		System.out.println(moimTitle);
 		request.getRequestDispatcher("/views/common/webMessageView.jsp?toId="+toId).forward(request, response);	
 	}
 

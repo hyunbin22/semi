@@ -1,22 +1,23 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ page import="com.semi.member.model.vo.Member" %>
+<%@ page import="com.semi.member.model.vo.Member, com.semi.moim.model.vo.Moim" %>
 <%@ include file="/views/common/header.jsp"%>
 <% 
-   Member m = (Member) session.getAttribute("loginMember");
+    Member m = (Member) session.getAttribute("loginMember");
+	Moim moim = (Moim)request.getAttribute("moim");	
 	
 %>
   <section class = "center1">
             <div class="wrap">
                 <div class="bar">
                     <br>
-                    <h1 class="center1">모임게시글 작성</h1>
+                    <h1 class="center1">모임게시글 수정</h1>
                     <br><br>
                     <hr>
     		</div>
     		<div class="center1">
-                <form action="<%=request.getContextPath()%>/moim/moimEnrollEnd.do?mNum=<%=m.getmNum() %>" method="POST" onsubmit="return checkValue();" enctype="multipart/form-data">
-                    <table class="tblreg">
+                <form action="<%=request.getContextPath()%>/moim/moimUpdateEnd.do?moimNum=<%=moim.getMoimNum()%>" method="POST" onsubmit="return checkValue();" enctype="multipart/form-data">
+                    <table class="tblreg tblMoim">
                         <tr>
                             <td>작성자 ID</td>
                             <td>
@@ -28,13 +29,13 @@
                         <tr>
                             <td style="width:503px;">제목</td>
                             <td>
-                                <input class="textfield" type="text" name="title" id = "title" maxlength="30" placeholder="제목을 입력해주세요.">
+                                <input class="textfield" type="text" name="title" id = "title" maxlength="30" value="<%=moim.getMoimTitle()%>">
                             </td>
                             <td></td>
                         </tr>
                         <tr>
                             <td>내용</td>
-                            <td><textarea id = "text" name = "text" rows="20" cols="60" style="resize: none;" placeholder="내용을 입력해주세요."></textarea></td>
+                            <td><textarea id = "text" name = "text" rows="20" cols="60" style="resize: none;" placeholder="내용을 입력해주세요."><%=moim.getMoimText() %></textarea></td>
                         	<td></td>
                         </tr>
                         <tr>
@@ -47,6 +48,23 @@
                             	<input type="button" name="addFile" class="next btnMoimFile" id="addFile" value="추가">
                             </td>
                         </tr>
+                        <tr style="float:left;">
+                        	<td style="float:left; text-align:left;">
+                        	<%if(moim.getMoimUpload().size()>0 || moim.getMoimUpload()!=null) {
+                         			for(int i = 0; i < moim.getMoimUpload().size(); i++) {
+                         				%>
+                         		<div>
+                         		<input type="hidden" name = "orgListName" value="<%=moim.getMoimUpload().get(i).getUpMoimOrgName() %>">
+                         		<input type="hidden" name = "reListName" value="<%=moim.getMoimUpload().get(i).getUpMoimReName() %>">
+                         		<%=i+1%>.&nbsp;&nbsp;<a href="javascript:fn_filedown('<%=moim.getMoimUpload().get(i).getUpMoimOrgName()%>','<%=moim.getMoimUpload().get(i).getUpMoimReName()%>')"><%=moim.getMoimUpload().get(i).getUpMoimOrgName() %></a>
+                         		<input type="button" name = "removeFile" class="next btnMoimFile" id="btnRemove" value="삭제">
+                         		<br>
+                         		</div>
+                         		<%} 
+                        		}%>
+                        	
+                        	</td>
+                        </tr>
                         <tr>
                         	<td></td>
                         	<td id="boxFile">
@@ -55,13 +73,13 @@
                         <tr>
                         	<td style="width:503px;">검색키워드<br>( , 로 구분)</td>
                             <td>
-                                <input class="textfield" type="text" name="keyword" id = "keyword">
+                                <input class="textfield" type="text" name="keyword" id = "keyword" value="<%=moim.getMoimKeyword()%>">
                             </td>
                             <td></td>
                         </tr>    
                     </table>
                    	<div class = "center1">
-                   <input type="submit" id = "submit" value="등록" class="next center1">   
+                   <input type="submit" id = "submit" value="수정" class="next center1">   
                 	</div>
                 </form>
                 </div>
@@ -124,6 +142,11 @@
     			}
     		});
     	});
+    	
+    	 function fn_filedown(ori, re) {
+ 	    	var file = encodeURIComponent(ori);
+ 	    	location.href="<%=request.getContextPath()%>/moim/filedown.do?oriFileName="+file+"&reFileName="+re;
+ 	    }
 
     </script>
 

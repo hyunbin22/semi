@@ -1513,8 +1513,12 @@ table.mtStudyList{
 	background-color: none;
 }
 
-.moimNav ul li {
-	
+.tblMoim tr{
+	height: auto;
+}
+
+.pagination {
+	padding-left:40px;
 }
 
 /* 검색 */
@@ -1539,7 +1543,6 @@ div#search-container {
 /* 글쓰기 버튼 */
 .moimWrite {
 	float: right;
-	margin-top: -50px;
 }
 
 .btnMoimFile {

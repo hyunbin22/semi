@@ -26,4 +26,15 @@ public class MoimUploadService {
 		
 	}
 
+	
+	//게시글 수정시 원래있던 파일 지웠을때
+	public int deleteUpload(int upMoimNum) {
+		Connection conn = getConnection();
+		int result = dao.deleteUpload(conn, upMoimNum);
+		if(result > 0) commit(conn);
+		else rollback(conn);
+		close(conn);
+		return result;
+	}
+
 }

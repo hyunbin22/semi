@@ -158,10 +158,6 @@
 			} else if(key==userKey) {
 				$('#sendSms').prop("disabled", false);
 				$('#checkKey').prop("disabled", false);
-				
-				/* $('#keyCheck2').text("인증번호가 일치합니다.");
-				$('#keyCheck2').css({"color":"green","font-size":"11px"});
-				$('#keyCheck2').prop("disabled", true); */
 				$('#tel1').prop("readonly", true);
 				$('#tel2').prop("readonly", true);
 				$('#tel3').prop("readonly", true);
@@ -173,7 +169,7 @@
 				
 				$('#checkNum').readOnly=true;
 				$('#keyCheck').prop("disabled",false);
-				
+	
 				$('#sendSms').text("인증완료");
 				$('#sendSms').disab
 				count=1;

@@ -81,17 +81,7 @@ public class MoimService {
 		return list;
 	}
 
-	
-	//모임게시물 수정
-	public int updateMoim(Moim moim) {
-		Connection conn = getConnection();
-		int result = dao.updateMoim(conn, moim);
-		if(result > 0) {
-			result = moim.getMoimNum();
-		} else rollback(conn);
-		close(conn);
-		return result;
-	}
+
 	//모임 게시물 삭제
 	public int deleteMoim(int moimNum) {
 		Connection conn = getConnection();
@@ -109,6 +99,17 @@ public class MoimService {
 		
 		close(conn);
 		return moim;
+	}
+
+	//모임게시물 수정
+	public int updateMoim(int moimNum, String title, String text, String keyword) {
+		Connection conn = getConnection();
+		int result = dao.updateMoim(conn, moimNum, title, text, keyword);
+		if(result > 0) {
+			result = moimNum;
+		} else rollback(conn);
+		close(conn);
+		return result;
 	}
 
 

@@ -283,16 +283,16 @@ public class MoimDao {
 	}
 
 	//모임 게시물 수정
-	public int updateMoim(Connection conn, Moim moim) {
+	public int updateMoim(Connection conn, int moimNum, String title, String text, String keyword) {
 		PreparedStatement pstmt = null;
 		String sql = "update tb_moim set moim_title=?, moim_keyword=?, moim_text=? where moim_num=?";
 		int result = 0;
 		try {
 			pstmt = conn.prepareStatement(sql);
-			pstmt.setString(1, moim.getMoimTitle());
-			pstmt.setString(2, moim.getMoimKeyword());
-			pstmt.setString(3, moim.getMoimText());
-			pstmt.setInt(4, moim.getMoimNum());
+			pstmt.setString(1, title);
+			pstmt.setString(2, keyword);
+			pstmt.setString(3, text);
+			pstmt.setInt(4, moimNum);
 			result = pstmt.executeUpdate();
 		} catch(Exception e) {
 			e.printStackTrace();
@@ -300,7 +300,6 @@ public class MoimDao {
 			close(pstmt);
 		}
 		return result;
-		
 	}
 
 }

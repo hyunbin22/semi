@@ -61,4 +61,23 @@ public class MoimUploadDao {
 		return list;
 	}
 
+	//게시글 수정시 원래있던 첨부파일 지웠을떄
+	public int deleteUpload(Connection conn, int upMoimNum) {
+		
+		PreparedStatement pstmt = null;
+		String sql = "delete from tb_upload_moim where up_moimnum=?";
+		int result = 0; 
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, upMoimNum);
+			result = pstmt.executeUpdate();
+			
+		} catch(Exception e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		return result;
+	}
+
 }

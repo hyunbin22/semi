@@ -87,6 +87,12 @@
              });
          }
      }); 
+	 
+	 $(function(){
+		 $('#login').click(function(){
+			 loginFrm.submit();
+		 });
+	 });
 </script>
 <header id="mainHeader">
         <div id="head" >
@@ -99,7 +105,7 @@
 		            <form id = "loginFrm" action = "<%=request.getContextPath() %>/member/memberLoginServlet.do" method="POST" onsubmit="return validate();">
 		                <input id = "id" type = "text" name = "mId" placeholder="아이디">
 		                <input id = "pwd" type = "password" name = "mPw" placeholder="비밀번호">
-		                <input type="submit" value="로그인" id="login">
+		                <input type="button" value="로그인" id="login">
 		            </form>
 		            </div>
 		                <div id = "loginmenu2">

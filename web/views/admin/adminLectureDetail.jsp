@@ -57,6 +57,15 @@
 							}%>
 						</p>
 					</p>
+					<p class="classinfo">
+						<h2>강의 기본정보</h2>
+						<p>
+							수업타입 : <%=lec.getLecLectureContent() %><br>
+							1회 시간당 가격 : <br>
+							1회 수업 시간 : <br>
+							
+						</p>
+					</p>
 					
 					<p class="classinfo">
 						<h2>커리큘럼</h2>
