@@ -13,7 +13,7 @@ import com.semi.lecture.model.vo.Lecture;
 /**
  * Servlet implementation class lectureMemberRegistServlet
  */
-@WebServlet("/lecture/OrderEnroll.do")
+@WebServlet("/order/OrderEnroll.do")
 public class OrderEnrollServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        

@@ -2,11 +2,12 @@
    pageEncoding="UTF-8"%>
 <%@ page import="com.semi.lecture.model.vo.Lecture"%>
 <%@ page import="com.semi.lecture.model.vo.LectureReview"%>
+<%@ page import="com.semi.order.model.vo.Order" %>
 <%@ page import="java.util.List"%>
 <%
    Lecture lec = (Lecture) request.getAttribute("lecture");
-	LectureReview rc =(LectureReview)request.getAttribute("Review");
-   List<LectureReview> list = (List) request.getAttribute("list");
+	List<LectureReview> list = (List) request.getAttribute("list");
+	List<Order> orderList = (List)request.getAttribute("orderList");
    String coverImage = "";
    String profileImage = "";
 	String lectureImage[] = null;
@@ -24,6 +25,7 @@
    
    String var = lec.getLecWeek();
    String [] vars = var.split(",");
+   
 %>
 
 
@@ -108,16 +110,18 @@
                <!-- 리뷰 댓글창 -->
                <p class="reviewinfo" id="rinfo">
                <h2 class="subtext">리뷰</h2><hr>
+               <%for(int i=0;i<orderList.size();i++){
+               if(memberLogin.getmNum()==orderList.get(i).getmNum()){ %>
                <form action="<%=request.getContextPath()%>/LectureReview/reviewWrite" method="post">
-                  <input type="hidden" name="rNum"> <input type="hidden" name="lecNum" value="<%=lec.getLecNum()%>">
+                  <input type="hidden" name="lecNum" value="<%=lec.getLecNum()%>">
                   <input type="hidden" name="mNum" value="<%=memberLogin != null ? memberLogin.getmNum() : ""%>">
-
-                  <textarea name="rTitle" rows="1" cols="30" placeholder="제목"></textarea>
-                  <textarea name="rText" rows="5" cols="60" placeholder="내용"></textarea>
-
+                  <input type="text" name="rTitle" rows="1" cols="30" placeholder="제목">
+                  <input type="text" name="rText" rows="5" cols="60" placeholder="내용">
                   <button type="submit">등록</button>
 
                </form>
+               <%}} %>
+               
 
 					<script>
  
@@ -142,29 +146,37 @@
 					</script>
 
 					<%
-						if (list != null && !list.isEmpty()) {
-							for (LectureReview lr : list) {
-								if (memberLogin != null
-										&& (lr.getmNum() == memberLogin.getmNum() || memberLogin.getmId().equals("admin"))) {
+							for (LectureReview rv : list) {
+								
 					%>
-
-					<div class="review">
+					 <div class="review">
 						<div class="memprofile">
 							<table class="reviewtable">
 								<tr>
-									<td class="reviewId">수강생<br> <b><%=lr.getmNum()%></b>님
-										<small>3.3/5.0</small>
+									<td class="reviewId">수강생<br>
+									<b>
+										<%-- <%
+										String orderName = "";
+										for(int i=0;i<orderList.size();i++){
+											if(orderList.get(i).getmNum()==rv.getmNum()){
+												orderName=orderList.get(i).getLecture().getlec
+											}%>
+										} --%>
+									</b>님<br>
+										<small><%=rv.getrDate() %></small>
 									</td>
 
-									<td class="reviewContent"><%=lr.getrTitle()%>
-										<hr> <%=lr.getrText()%></td>
+									<td class="reviewContent"><%=rv.getrTitle()%>
+										<hr> <%=rv.getrText()%></td>
 
 									<td>
 										<%
-											if (memberLogin != null && ("admin".equals(memberLogin.getmId())/*&& 리뷰작성자와 동일한 멤버로그인아이디일경우 */
-														)) {
+											if (memberLogin != null && ("thd9292".equals(memberLogin.getmId())||memberLogin.getmNum()==rv.getmNum()))/*&& 리뷰작성자와 동일한 멤버로그인아이디일경우 */
+														 {
 										%>
-										<button class="btn-delete" value="<%=lr.getLecnum()%>">삭제</button>
+										<br><br><br><br>
+										<br><br><br><br>
+										<button id="deleteReview" value="<%=rv.getrNum()%>">삭제</button>
 										<%
 											}
 										%>
@@ -184,9 +196,19 @@
 
 					<%
 						}
-							}
-						}
+							
+						
 					%>
+					
+					<script>
+						$(function(){
+							$('#deleteReview').click(function(){
+								if(confirm("정말로 리뷰를 삭제하시겠습니까?")){
+									location.href="<%=request.getContextPath()%>/lecture/lectureReviewDelete.do?lecnum=<%=lec.getLecNum()%>&rNum="+$(this).val();
+								}
+							})
+						});
+					</script>
 
 					</p>
                <p class="questioninfo" id="qinfo"></p>
@@ -292,8 +314,7 @@
 	});
 
    $(window).scroll(function() {
-	   console.log($(window).scrollTop());
-      if ($(window).scrollTop() > 323) {
+	  if ($(window).scrollTop() > 323) {
          $('.floatMenu').addClass("fix");
          $('.floatMenu').addClass("right");
          $('.floatMenu').removeClass("floatMenu");

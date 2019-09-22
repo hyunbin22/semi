@@ -179,6 +179,24 @@ public class LectureService {
 			return list;
 		}
 
+		public int deleteReview(int lecNum, int rNum) {
+			Connection conn=getConnection();
+			int result=dao.deleteComment(conn, lecNum, rNum);
+			if(result>0) {commit(conn);}
+			else {rollback(conn);}
+			close(conn);
+			return result;
+		}
+
+		public int insertReview(int lecNum, int mNum, String rTitle, String rText) {
+			Connection conn=getConnection();
+			int result=dao.insertComment(conn,lecNum,mNum,rTitle,rText);
+			if(result>0) {commit(conn);}
+			else {rollback(conn);}
+			close(conn);
+			return result;
+		}
+
 
 
 }

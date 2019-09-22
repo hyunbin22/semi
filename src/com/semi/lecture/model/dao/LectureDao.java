@@ -637,4 +637,44 @@ public class LectureDao {
 		System.out.println(lecturelist);
 		return lecturelist;
 	}
+
+	//delete from tb_review where lecNum=? and rNum=?
+	public int deleteComment(Connection conn, int lecNum, int rNum) {
+		PreparedStatement pstmt=null;
+		int result=0;
+		String sql=prop.getProperty("deleteReview");
+		try {
+			pstmt=conn.prepareStatement(sql);
+			pstmt.setInt(1, lecNum);;
+			pstmt.setInt(2, rNum);
+			result=pstmt.executeUpdate();
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}
+		finally {
+			close(pstmt);
+		}
+		return result;
+	}
+
+
+	public int insertComment(Connection conn, int lecNum, int mNum, String rTitle, String rText) {
+		PreparedStatement pstmt=null;
+		int result=0;
+		String sql=prop.getProperty("insertReview");
+		try {
+			pstmt=conn.prepareStatement(sql);
+			pstmt.setInt(1, lecNum);
+			pstmt.setInt(2, mNum);
+			pstmt.setString(3, rTitle);
+			pstmt.setString(4, rText);
+			result=pstmt.executeUpdate();
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}
+		finally {
+			close(pstmt);
+		}
+		return result;
+	}
 }

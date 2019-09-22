@@ -30,7 +30,7 @@
 </div>
 <br><br>
 <section>
-<form action="<%=request.getContextPath()%>/lecture/OrderEnrollEnd.do" method="post">
+<form action="<%=request.getContextPath()%>/order/OrderEnroll.do" method="post">
 <input type="hidden" value="<%=lec.getLecNum()%>" name="lecNum">
 <input type="hidden" name="oTot" value="<%=lecTot %>">
 <input type="hidden" name="oPrice" value="<%=lec.getLecPrice() %>">

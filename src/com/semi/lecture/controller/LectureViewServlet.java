@@ -1,6 +1,7 @@
 package com.semi.lecture.controller;
 
 import java.io.IOException;
+import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -13,6 +14,8 @@ import com.semi.lecture.model.service.LectureService;
 import com.semi.lecture.model.vo.Lecture;
 import com.semi.lecture.model.vo.LectureReview;
 //import com.semi.lecture.model.vo.LectureReview;
+import com.semi.order.model.service.OrderService;
+import com.semi.order.model.vo.Order;
 
 /**
  * Servlet implementation class LectureViewServlet
@@ -34,12 +37,14 @@ public class LectureViewServlet extends HttpServlet {
     */
    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
       String lectureNo = request.getParameter("lecnum");
-
       Lecture lec=new LectureService().selectLecture(lectureNo);
-      LectureReview rv=new LectureReviewService().selectReview(lectureNo);
       
+      List<LectureReview> list=new LectureReviewService().selectReview(lectureNo);
+      List<Order> orderList = new OrderService().selectLectureOrder(lectureNo);
+      System.out.println(list);
+      request.setAttribute("orderList", orderList);
       request.setAttribute("lecture", lec);
-      request.setAttribute("Review", rv);
+      request.setAttribute("list", list);
       request.getRequestDispatcher("/views/lecture/lectureView.jsp").forward(request, response);
    }
 

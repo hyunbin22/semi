@@ -287,7 +287,6 @@ public class OrderDao {
 			close(pstmt);
 		}
 
-		System.out.println("OrderDao의 selectOrder(강의넘버 일치하는 오더 가져오기) :"+list);
 		return list;
 	}
 
@@ -323,6 +322,49 @@ public class OrderDao {
 			close(pstmt);
 		}
 		return result;
+	}
+
+	//결제 완료된 오더 가져오기
+	public List<Order> selectLectureOrder(Connection conn, String lecNum) {
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		String sql=prop.getProperty("selectLectureOrder");
+		Order o = null;
+		List<Order> list=new ArrayList();
+		Lecture l = new Lecture();
+		LectureDao dao = new LectureDao();
+		int lecNum2 = Integer.parseInt(lecNum);
+		try {
+			pstmt=conn.prepareStatement(sql);
+			pstmt.setInt(1,lecNum2);
+			rs=pstmt.executeQuery();
+			while(rs.next()) {
+				o = new Order();
+				o.setoNum(rs.getInt("onum"));
+				o.setmNum(rs.getInt("mnum"));
+				o.setLecNum(lecNum2);
+				o.setoTot(rs.getString("otot").replaceAll(" ", "&nbsp;").replaceAll("<", "&lt;").replaceAll(">", "&gt;").replaceAll("\n", "<br>"));
+				o.setoText(rs.getString("otext").replaceAll(" ", "&nbsp;").replaceAll("<", "&lt;").replaceAll(">", "&gt;").replaceAll("\n", "<br>"));
+				o.setoPrice(rs.getInt("oprice"));
+				o.setoPayment(rs.getString("opayment").charAt(0));
+				o.setoCheck(rs.getString("ocheck").charAt(0));
+				o.setOrderDate(rs.getDate("orderdate"));
+
+				Member m = new MemberDao().selectMemberMnum(conn, rs.getInt("mnum"));
+				Lecture lec = new LectureDao().lectureView(conn, rs.getInt("lecNum"));
+				o.setMember(m);
+				o.setLecture(lec);
+				list.add(o);
+			}
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rs);
+			close(pstmt);
+		}
+
+		System.out.println("OrderDao의 selectOrder(강의넘버 일치하는 결제 오더 가져오기) :"+list);
+		return list;
 	}
 
 
