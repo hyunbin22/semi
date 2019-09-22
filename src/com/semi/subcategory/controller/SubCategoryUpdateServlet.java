@@ -1,4 +1,4 @@
-package com.semi.mento.controller;
+package com.semi.subcategory.controller;
 
 import java.io.IOException;
 
@@ -8,20 +8,19 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.semi.mento.model.service.MentoUploadService;
-import com.semi.mento.model.vo.MentoUpload;
+import com.semi.subcategory.model.service.SubCategoryService;
 
 /**
- * Servlet implementation class MentoMyPageModifyServlet
+ * Servlet implementation class SubCategoryUpdateServlet
  */
-@WebServlet("/mento/mypageModify.do")
-public class MentoMyPageModifyServlet extends HttpServlet {
+@WebServlet("/admin/subcategoryUpdate")
+public class SubCategoryUpdateServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public MentoMyPageModifyServlet() {
+    public SubCategoryUpdateServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -30,10 +29,16 @@ public class MentoMyPageModifyServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		int mtnum=Integer.parseInt(request.getParameter("mtnum"));
+		int subcategory = Integer.parseInt(request.getParameter("subcategory")); //select box에서 선택한 값
+		String inputsubcategory = request.getParameter("inputsubcategory2"); //새로 입력한 값
+		int result=new SubCategoryService().updateSubCategory(subcategory,inputsubcategory);
 
+		String msg=result>0?"카테고리 수정이 완료되었습니다.":"카테고리 수정이 실패하였습니다.";
+		String loc="/";
 		
-		request.getRequestDispatcher("/views/mento/mentoPageModifyView.jsp").forward(request,response);	
+		request.setAttribute("msg", msg);
+		request.setAttribute("loc", loc);
+		request.getRequestDispatcher("/views/common/msg.jsp").forward(request, response);
 	}
 
 	/**

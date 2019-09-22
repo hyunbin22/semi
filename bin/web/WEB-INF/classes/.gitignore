@@ -1,3 +1,7 @@
+<<<<<<< HEAD:bin/web/WEB-INF/classes/.gitignore
+=======
+/api/
+>>>>>>> e952cc51eafa76a30f0f07188c8cd9d94ea0dd70:web/WEB-INF/classes/.gitignore
 /com/
 /common/
 /sql/

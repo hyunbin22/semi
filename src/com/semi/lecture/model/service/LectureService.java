@@ -46,7 +46,7 @@ public class LectureService {
 		close(conn);
 		return result;
 	}
-	
+
 	public List<Lecture> lectureApproFindList(String type, String data, int cPage, int numPerPage) {
 		Connection conn = getConnection();
 		List<Lecture> list = dao.lectureApproList(conn, type, data, cPage, numPerPage);
@@ -92,7 +92,7 @@ public class LectureService {
 
 		if(result>0) {
 			commit(conn);
-			result = dao.selectSeqLecNum(conn, l.getMtNum());
+			result = dao.selectSeqLecNum(conn);
 		}else {
 			rollback(conn);
 		}
@@ -131,6 +131,13 @@ public class LectureService {
 		close(conn);
 		return list;
 	}
+	
+	public List<Lecture> lectureMentoList(int cPage, int numPerPage,int mtnum) {
+		Connection conn= getConnection();
+		List<Lecture> list=dao.lectureMentoList(conn, cPage, numPerPage,mtnum);
+		close(conn);
+		return list;
+	}
 
 
 	public Lecture lectureListByLecNum(int lecNum) {
@@ -164,9 +171,17 @@ public class LectureService {
 		return result;
 	}
 
-		public List<Lecture> lectureAllListByLecNum(int lecNum) {
+	public List<Lecture> lectureAllListByLecNum(int lecNum) {
 		Connection conn= getConnection();
 		List<Lecture> list=dao.lectureAllListByLecNum(conn, lecNum);
+		close(conn);
+		return list;
+	}
+
+	//강의수정하는거 할거임.!
+	public List<LectureUpload> selectLectureUpload(int lecNum) {
+		Connection conn= getConnection();
+		List<LectureUpload> list=dao.selectLectureUpload(conn, lecNum);
 		close(conn);
 		return list;
 	}

@@ -34,12 +34,19 @@
 			<hr>
 		</div>
 		<div class="regdata center1">
+			<div class="lecture">필수입력<b style='color:#ff005a;'> *</b>표시</div>
 			<form action="<%=request.getContextPath()%>/mento/updateLecture.do?lecNum=<%=lt.getLecNum()%>" method="POST" enctype="multipart/form-data">
-				<div>수업제목</div>
-				<input type="text" id="title" name="className" value="<%=lt.getLecName()%>">
+				<div class="box">
+				<div class="lecture" >수업제목</div>
+			
+				<input type="text" id="title" name="className" value="<%=lt.getLecName()%>" class="title2" >
+				
+				</div>
 				<br> <br> <br>
-				<div>수업카테고리</div>
-				<select name="maincategory" id="maincategory">
+				<hr>
+				<div class="box">
+				<div class="lecture" >수업카테고리<b style='color:#ff005a;'>*</b></div>
+				<select name="maincategory" id="maincategory" class="title2" >
 					<option value="0">카테고리선택</option>
 					<%
 						for (Category c : cList) {
@@ -49,28 +56,42 @@
 						}
 					%>
 				</select>
-			    <select id="good" name="subcategory">
+				
+			    <select id="good" name="subcategory" class="title2" >
 					<option>과목선택</option>
-				</select> <br> <br> <br>
-				<div>수업형태</div>
+				</select>
+				</div>
+				 <br> <br>
+				 <hr>
+				<div class="box">
+				<div class="lecture">수업형태</div>
 				<%if(lt.getLecType().equals("그룹")) { %>
-							<input type="radio" name="classType" id="r2" value="그룹" checked><label	for="r2">그룹수업</label>
-							<input type="text" name="studentCount"	value="<%=lt.getLecMaxCount()%>">
-							<input type="radio" name="classType" id="r1" value="1:1"><label for="r1">1:1수업</label>                             
+							<input type="text" name="studentCount"	value="<%=lt.getLecMaxCount()%>" class="title2" >
+							<input type="radio" name="classType" id="r2" value="그룹" style='margin-top:19px;' checked><label	for="r2" style='margin-top:17px; margin:10px;'>그룹수업</label>
+							<input type="radio" name="classType" id="r1" value="1대1" style='margin-top:19px;'><label for="r1" style='margin-top:17px; margin:10px;'>1대1수 업</label>                             
                             <%} else { %>
-	                        <input type="radio" name="classType" id="r2" value="그룹"><label	for="r2">그룹수업</label>
-							<input type="text" name="studentCount"	value="<%=lt.getLecMaxCount()%>">
-							<input type="radio" name="classType" id="r1" value="1:1" checked><label for="r1">1:1수업</label>            
+							<input type="text" name="studentCount"	value="<%=lt.getLecMaxCount()%>" class="title2" >
+	                        <input type="radio" name="classType" id="r2" value="그룹" style='margin-top:19px;' ><label	for="r2" style='margin-top:17px; margin:10px;'>그룹수업</label>
+							<input type="radio" name="classType" id="r1" value="1대1" style='margin-top:19px;' checked><label for="r1" style='margin-top:17px; margin:10px;'>1대1수업</label>            
                         <%} %>
 				<br> <br>
-				 커버사진등록 <input type='file' id="file1" name="file1" /> <br> <br>
+				</div>
+				<br><br>
+				<hr>
+				<div class="box">
+				<div class="lecture">커버사진등록<b style='color:#ff005a;'>*</b></div>
+				<br>
 				 <div id='View_area' style='position: relative; width: 100px; height: 100px; color: black; border: 0px solid black; dispaly: inline; margin:0;'>
+				 <input type='file' id="file1" name="file1" /> <br> <br>
 			
-			  	<img id="image_section1" alt="미리보기" src="<%=request.getContextPath() %>/upload/lecture/<%=coverName%>" style='position: relative; width: 250px; height: 200px; color: black; border: 0px solid black; dispaly: inline;'>
+			  	<img id="image_section1" alt="미리보기" src="<%=request.getContextPath() %>/upload/lecture/<%=lt.getLectureUpload().getUpLectureReName()%>" style='position: relative; width: 250px; height: 200px; color: black; border: 0px solid black; dispaly: inline;'>
 						        
-			         </div>
-			         <br><br><br><br><br><br>
-				수업사진등록
+		         </div>
+		         </div>
+		         <br><br><br><br><br><br><br>
+		         <hr>
+				<div class="box">
+				<div class="lecture">수업사진등록<b style='color:#ff005a;'>*</b></div>
 				<table width="400" border="0" cellspacing="0" cellpadding="0" style= 'margin:0;'>
 					<tr>
 						<td colspan="2" align="left" bgcolor="#FFFFFF">
@@ -98,27 +119,36 @@
 	       								<img src="<%=request.getContextPath() %>/upload/lecture/<%=classImgName%>" id="image_section2" alt="미리보기" style='position: relative; width: 250px; height: 200px; color: black; border: 0px solid black; dispaly: inline;'>				
 						        
 	       								  </div>
+	       								  </td>
 								</tr>
 							</table>
 						</td>
 					</tr>
 				</table>
+				</div>
 				<br><br><br>
 				
 				<input type="hidden" value=<%=mt.getMtNum() %> name="mtNum">
-
 				<br> <br>
-				<div>멘토소개</div>
-				<textarea id="" cols="30" rows="10" name="mentoIntroduce"><%=lt.getLecMentoContent()%></textarea>
-				<br> <br> <br>
-				<div>강좌소개</div>
-				<textarea id="" cols="30" rows="10" name="classIntroduce"><%=lt.getLecLectureContent()%></textarea>
-				<br> <br> <br>
-				<div>시간당가격</div>
-				<input type="text" name="price" id="hourPrice" value="<%=lt.getLecPrice()%>"> 원 <br>
+				<hr>
+				<div class="box">
+				<div class="lecture">멘토소개</div>
+				<textarea id="" cols="30" rows="10" name="mentoIntroduce" class="title2"><%=lt.getLecMentoContent()%></textarea></div>
 				<br> <br>
-				<div>기본수업시간</div>
-				<select name="time" id="time">
+				<hr>
+				<div class="box">
+				<div class="lecture">강의소개</div>
+				<textarea id="" cols="30" rows="10" name="classIntroduce" class="title2"><%=lt.getLecLectureContent()%></textarea></div>
+				<br> <br>
+				<hr>
+				<div class="box">
+				<div class="lecture">시간당가격</div>
+				<input type="text" name="price" id="hourPrice" value="<%=lt.getLecPrice()%>" class="title2"> 원 <br>
+				</div>
+				<br> <br>
+				<div class="box">
+				<div class="lecture">기본수업시간<b style='color:#ff005a;'>*</b></div>
+				<select name="time" id="time" class="title2">
 					<option value="0"><%=lt.getLecTime() %>시간</option>
 					<option value="1">1시간</option>
 					<option value="2">2시간</option>
@@ -126,20 +156,25 @@
 					<option value="4">4시간</option>
 					<option value="5">5시간</option>
 					<option value="6">6시간</option>
-				</select> /회 <br> <br> <br>
-				<div>총수업(한달기준)</div>
+				</select> /회
+				</div>
+				<br> <br>
+				<div class="box">
+				<div class="lecture">총수업(한달기준)</div>
 				<input type="text" name="totaltime" id="totalTime"
-					value="<%=lt.getLecCount()%>" onkeyup="total()">회 <br> <br>
-				<br>
-				<div>총가격</div>
-				<div class="calc-total">
+					value="<%=lt.getLecCount()%>" onkeyup="total()" class="title2">회 
+				</div>
+				<br><br><br>
+				<hr>
+				<div class="lecture">총가격</div>
+					<div class="calc-total" style=' border-radius: 4px;  padding: 12px 24px; width: 100%; text-align: right; float: right; color: #555; font-size: 15px; background: #edf0f4;'>
 					<dl>
-						<dt>
+						<dt style='text-align:left;'>
 							<font id="calc-price"><span id="price2"><%=lt.getLecPrice() %></span></font>원 X <font
 								id="calc-time"><span id="time2"><%=lt.getLecTime() %></span></font>시간 X <font
 								id="calc-totaltime"><span id="totalTime2"><%=lt.getLecCount() %></span></font>회
 						</dt>
-						<dd>
+						<dd style='color: #ff005a; font-size:20px'>
 							총 <font id="calc-result"><span id="totalPrice2"><%=lt.getLecPrice()*lt.getLecTime()*lt.getLecCount() %></span></font>원
 						</dd>
 						<dd>
@@ -148,9 +183,11 @@
 					</dl>
 				</div>
 				<br>				
-				
-				<div>장소</div>
-				<select name="local1" id="local1">
+				<br><br><br><br><br><br>
+				<hr>
+				<div class="box">
+				<div class="lecture">장소<b style='color:#ff005a;'>*</b></div>
+				<select name="local1" id="local1" class="title2">
 					<option value="0">지역선택</option>
 					<%
 						for (Local l : lList) {
@@ -160,14 +197,17 @@
 						}
 					%>
 				</select>
-				<select id="local" name="local">
+				<select id="local" name="local"  class="title2">
 					<option id="si">시/구/군 선택</option>
 				</select> <br> <br>
 				<input type="text" name="local2" id="local2"
-					value="<%=lt.getLecLocalContent()%>"> <br> <br> <br>
-				<div>가능 요일별 시간대(복수선택)</div>
-				<br>
-
+					value="<%=lt.getLecLocalContent()%>" class="title2"> <br> <br> <br>
+				</div>		
+				<br><br>
+				<hr>
+				<div class="box">
+				<div class="lecture">가능 요일별 시간대(복수선택)<b style='color:#ff005a;'>*</b></div>
+				</div>
 				<input type="checkbox" name="yo" value="월요일">월요일
 				
 				<input type="checkbox" name="yo" value="화요일">화요일
@@ -187,51 +227,60 @@
 				</div></small>
 				
 				<br> <br>
+				<hr>
+				<div class="box">
 				<%
 						if(lt.getLecTot()==null) {
 					%>
-				 <input type="text" name="day1"	placeholder="ex>오후7시~오후9시">
+				 <input type="text" name="day1"	placeholder="ex>오후7시~오후9시" class="title2">
 					<%}else{%>
-							 <input type="text" name="day1"	value="<%=lt.getLecTot()%>">
+							 <input type="text" name="day1"	value="<%=lt.getLecTot()%>" class="title2">
 							
 					<%} %>
 					
 					<%
 						if(lt.getLecMeet().equals("선택")) {
 					%>
-				 		 <input type="radio" name="week1" id="f1" value="선택" checked><label for="f1"></label>
-							 <input type="date" name="month1" min='2019-01-01' max='2019-12-31' value="<%=lt.getLecOpenDate()%>"/>
-							 <input type="radio" name="week1" id="f2" value="협의"><label for="f2">협의</label> <br> <br> <br>  
+				 		 <input type="radio" name="week1" id="f1" value="선택" style='margin-top:17px; ' checked><label for="f1" style='margin:10px;'></label>
+							 <input type="date" name="month1" min='2019-01-01' max='2019-12-31' value="<%=lt.getLecOpenDate()%>" class="title2"/>
+							 <input type="radio" name="week1" id="f2" value="협의" style='margin-top:17px; '><label for="f2" style='margin:10px;'>협의</label> <br> <br> <br>  
 					<%}else{%>
-							 		 <input type="radio" name="week1" id="f1" value="선택"><label for="f1"></label>
-							 <input type="date" name="month1" min='2019-01-01' max='2019-12-31' value="<%=lt.getLecOpenDate()%>"/>
-							 <input type="radio" name="week1" id="f2" value="협의" checked><label for="f2">협의</label> <br> <br> <br>  
+							 		 <input type="radio" name="week1" id="f1" value="선택" style='margin-top:17px; '><label for="f1" style='margin:10px;'></label>
+							 <input type="date" name="month1" min='2019-01-01' max='2019-12-31' value="<%=lt.getLecOpenDate()%>" class="title2"/>
+							 <input type="radio" name="week1" id="f2" value="협의"  style='margin-top:17px; ' checked><label for="f2" style='margin:10px;'>협의</label> <br> <br> <br>  
 							
-					<%} %>                         
+					<%} %> 
+					</div>
+				<br>
+				<div class="box">                        
    
 				 <%
 						if(lt.getLecTot2()==null) {
 					%>
-				 <input type="text" name="day2" placeholder="ex>오후7시~오후9시">
+				 <input type="text" name="day2" placeholder="ex>오후7시~오후9시" class="title2">
 					<%}else{%>
-							 <input type="text" name="day2"	value="<%=lt.getLecTot2()%>">
+							 <input type="text" name="day2"	value="<%=lt.getLecTot2()%>" class="title2">
 							
 					<%} %>
 					
 							<%
 						if(lt.getLecMeet().equals("선택")) {
 					%>
-				 			 <input type="radio" name="week2" id="f3" value="선택" checked><label for="f3"></label>
-							 <input type="date" name="month2" min='2019-01-01' max='2019-12-31' value="<%=lt.getLecOpenDate2()%>"/>
-							 <input type="radio" name="week2" id="f4" value="협의"><label for="f4">협의</label> <br> <br> <br>   
+				 			 <input type="radio" name="week2" id="f3" value="선택" style='margin-top:17px; ' checked><label for="f3" style='margin:10px;'></label>
+							 <input type="date" name="month2" min='2019-01-01' max='2019-12-31' class="title2" value="<%=lt.getLecOpenDate2()%>"/>
+							 <input type="radio" name="week2" id="f4" value="협의" style='margin-top:17px; '><label for="f4" style='margin:10px;'>협의</label> <br> <br> <br>   
 					<%}else{%>
-							 	 <input type="radio" name="week2" id="f3" value="선택" ><label for="f3"></label>
-							 <input type="date" name="month2" min='2019-01-01' max='2019-12-31' value="<%=lt.getLecOpenDate2()%>"/>
-							 <input type="radio" name="week2" id="f4" value="협의" checked><label for="f4">협의</label> <br> <br> <br>   
+							 <input type="radio" name="week2" id="f3" value="선택" style='margin-top:17px; '><label for="f3" style='margin:10px;'></label>
+							 <input type="date" name="month2" min='2019-01-01' max='2019-12-31' class="title2" value="<%=lt.getLecOpenDate2()%>"/>
+							 <input type="radio" name="week2" id="f4" value="협의" style='margin-top:17px; ' checked><label for="f4" style='margin:10px;'>협의</label> <br> <br> <br>   
 							
 					<%} %>                             
-
-				 <button type="submit" id="insert1" name="submit1">승인요청</button>
+				</div>
+				<br>
+				<div class="center1">
+								<button type="submit" id="insert1" name="submit1" style='color: #fff; border:none; padding: 6px 10px; width: 130px; margin: 20px auto; font-size: 16px; border-radius: 6px; text-align: center; background: #eb9f9f;'>승인요청</button>
+				</div>
+			
 			</form>
 		</div>
 	</div>
@@ -373,7 +422,7 @@ function readURL(input) {
                $("input:text[name=studentCount]").attr("disabled",false);
                // radio 버튼의 value 값이 1이라면 활성화
     
-           }else if($("input[name=classType]:checked").val() == "1:1"){
+           }else if($("input[name=classType]:checked").val() == "1대1"){
                  $("input:text[name=studentCount]").attr("disabled",true);
                // radio 버튼의 value 값이 0이라면 비활성화
            }

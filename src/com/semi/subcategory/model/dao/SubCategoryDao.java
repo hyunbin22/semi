@@ -69,14 +69,14 @@ public class SubCategoryDao {
 		return list;
 	}
 	
-	public int updateSubCategory(Connection conn, String subName, int subNum) {
+	public int updateSubCategory(Connection conn, int subcategory, String inputsubcategory) {
 		PreparedStatement pstmt=null;
 		int result=0;
 		String sql=prop.getProperty("updateSubCategory");
 		try {
 			pstmt=conn.prepareStatement(sql);
-			pstmt.setString(1, subName);
-			pstmt.setInt(2, subNum);
+			pstmt.setString(1, inputsubcategory);
+			pstmt.setInt(2, subcategory);
 			result=pstmt.executeUpdate();
 		}catch(Exception e) {
 			e.printStackTrace();
@@ -86,13 +86,13 @@ public class SubCategoryDao {
 		return result;
 	}
 	
-	public int deleteSubCategory(Connection conn, String subName) {
+	public int deleteSubCategory(Connection conn, int subcategory) {
 		PreparedStatement pstmt=null;
 		int result=0;
 		String sql=prop.getProperty("deleteSubCategory");
 		try {
 			pstmt=conn.prepareStatement(sql);
-			pstmt.setString(1, subName);
+			pstmt.setInt(1, subcategory);
 			result=pstmt.executeUpdate();
 		}catch(Exception e) {
 			e.printStackTrace();

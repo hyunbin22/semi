@@ -38,9 +38,9 @@ public class SubCategoryService {
 		return list;
 	}
 	
-	public int updateSubCategory(String subName, int subNum) {
+	public int updateSubCategory(int subcategory, String inputsubcategory) {
 		Connection conn=getConnection();
-		int result=dao.updateSubCategory(conn,subName,subNum);
+		int result=dao.updateSubCategory(conn,subcategory,inputsubcategory);
 		if(result>0) {
 			commit(conn);
 		}else {
@@ -50,9 +50,9 @@ public class SubCategoryService {
 		return result;
 	}
 
-	public int deleteSubCategory(String subName) {
+	public int deleteSubCategory(int subcategory) {
 		Connection conn=getConnection();
-		int result=dao.deleteSubCategory(conn,subName);
+		int result=dao.deleteSubCategory(conn,subcategory);
 		if(result>0) {
 			commit(conn);
 		}else {

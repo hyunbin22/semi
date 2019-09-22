@@ -6,7 +6,9 @@ import static common.template.JDBCTemplate.getConnection;
 import static common.template.JDBCTemplate.rollback;
 
 import java.sql.Connection;
+import java.util.List;
 
+import com.semi.lecture.model.vo.Lecture;
 import com.semi.mento.model.dao.MentoUploadDao;
 import com.semi.mento.model.vo.MentoUpload;
 
@@ -31,6 +33,23 @@ public class MentoUploadService {
 		close(conn);
 		return result1;
 		
+	}
+
+
+	public List<MentoUpload> mentoUpList(int getMtNum) {
+		Connection conn= getConnection();
+		List<MentoUpload> list=dao.mentoUpList(conn, getMtNum);
+		close(conn);
+		return list;
+	}
+
+
+	public int deleteMentoImg(int mtNum) {
+		Connection conn = getConnection();
+		int result=dao.deleteMentoImg(conn, mtNum);
+		
+		close(conn);
+		return result;
 	}
 
 

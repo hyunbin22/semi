@@ -54,13 +54,15 @@ public class LectureUploadService {
 		Connection conn = getConnection();
 		int result=dao.deleteLectureImg(conn, lecNum);
 		
-		if(result>0) {
-			commit(conn);
-		}else {
-			rollback(conn);
-		}
 		close(conn);
 		return result;
+	}
+
+	public LectureUpload searchLectureImg(int lecNum) {
+		Connection conn = getConnection();
+		LectureUpload lu = dao.searchLectureImg(conn,lecNum);
+		close(conn);
+		return lu;
 	}
 
 }
