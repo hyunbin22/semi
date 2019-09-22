@@ -124,4 +124,12 @@ public class OrderService {
 		return result;
 	}
 
+	//lecNum이 일치하는 오더 가져오기. (페이징 제외)
+	public List<Order> selectLectureOrder(int lecNum) {
+		Connection conn = getConnection();
+		List<Order> list = dao.selectLectureOrder(conn, lecNum);
+		close(conn);
+		return list;
+	}
+
 }

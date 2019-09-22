@@ -161,9 +161,11 @@
 				$('#keyCheck').prop("disabled", true);
 
 			} else if(key==userKey) {
+				var sendSms = $('#sendSms');
+				var checkKey = $('#checkKey');
 				alert("핸드폰 인증이 완료되었습니다.");
-				$('#sendSms').attr("disabled", false);
-				$('#checkKey').attr("disabled", false);
+				sendSms.disabled = 'disabled';
+				checkKey.disabled = 'disabled';
 				$('#tel1').prop("readonly", true);
 				$('#tel2').prop("readonly", true);
 				$('#tel3').prop("readonly", true);

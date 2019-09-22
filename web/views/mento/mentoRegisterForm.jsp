@@ -10,7 +10,7 @@
                     <br><br>
                     <hr>
                 </div>
-      <form action="<%=request.getContextPath()%>/mentoRegisterEnd" method="post" enctype="multipart/form-data" class = "center1" id = "mentoFrm">
+      <form action="<%=request.getContextPath()%>/mento/mentoRegisterEnd.do" method="post" enctype="multipart/form-data" class = "center1" id = "mentoFrm">
         <div class="box">
          <div class="lecture" style='margin-top:50px;'>프로필 사진</div>
          <div style='margin:0;'><input type=file name='mtprofileimg' style='display: none;' class="title2">
@@ -106,7 +106,7 @@
         var fileSize = (this).files[0].size;
         var maxSize = 1024*1024*1024;
         
-        if($.inArray(ext, ['gif','png','jpg','jpeg','doc','docx','xls','xlsx','hwp']) == -1) {
+        if($.inArray(ext, ['gif','png','jpg','jpeg']) == -1) {
            alert("등록할 수 없는 확장자입니다.");
            $(this).val("");
            return;
@@ -124,7 +124,7 @@
         var fileSize = (this).files[0].size;
         var maxSize = 1024*1024*1024;
         
-        if($.inArray(ext, ['gif','png','jpg','jpeg','doc','docx','xls','xlsx','hwp']) == -1) {
+        if($.inArray(ext, ['gif','png','jpg','jpeg']) == -1) {
            alert("등록할 수 없는 확장자입니다.");
            $(this).val("");
            return;
@@ -142,7 +142,7 @@
         var fileSize = (this).files[0].size;
         var maxSize = 1024*1024*1024;
         
-        if($.inArray(ext, ['gif','png','jpg','jpeg','doc','docx','xls','xlsx','hwp']) == -1) {
+        if($.inArray(ext, ['gif','png','jpg','jpeg']) == -1) {
            alert("등록할 수 없는 확장자입니다.");
            $(this).val("");
            return;
@@ -165,73 +165,74 @@
         
      // 빈칸 체크
      function checkNull(){
-        
-        var profile =$('#profileImg');
-        var nick=$('#nick');
-        
-        // 대학인증, 신분증인증
-        var school1=$('#school1');
-        var school2=$('#school2');
-        var school12=$('#school12');
-        
-        // 학교, 학과
-        var school3=$('#school3');
-        var school4=$('#school4');
-        
-        // 재학, 졸업
-        var school5=$('#school5');
-        var school6=$('#school6');
-        
-        // 신분인증사진
-        var photo=$('#photo');
-        
-        // 은행, 계좌번호
-        var bank=$('#bank');
-        var accountNumber=$('#accountNumber');
-        
-        if(profile.val()==""){
-           alert('프로필 사진을 등록하세요.');
-           profile.focus();
-           return false;
-        }
-        if(nick.val().length<2){
-           alert('닉네임은 2글자 이상 가능합니다.');
-           
-           nick.focus();
-           return false;
-        }
-        if(school1.is(':checked')==false&&school2.is(':checked')==false&&school12.is(':checked')==false){
-           alert('인증방법을 선택하세요.');
-           return false;
-        }
-        if(school3.val()==null){
-           alert('학교를 입력하세요.');
-           school3.focus();
-           return false;
-        }
-        if(school4.val()==null){
-           alert('학과를 입력하세요.');
-           scholl4.focus();
-           return false;
-        }
-        if(school5.val()==null&&school6.val()==null){
-           alert('재학 혹은 졸업을 선택하세요.');
-           return false;
-        }
-        if(photo.val()==""){
-           alert('신분인증사진을 등록하세요.')
-           return false;
-        }
-        if(bank.val()==null){
-           alert('은행을 선택하세요.');
-           return false;
-        }
-        if(accountNumber.val()==null){
-           alert('계좌번호를 입력하세요.');
-           return false;
-        }
-        
-        return true;
+    	var profile =$('#profileImg');
+  		var nick=$('#nick');
+  		
+  		// 대학인증, 신분증인증
+  		var school1=$('#school1');
+  		var school2=$('#school2');
+  		var school12=$('#school12');
+  		
+  		// 학교, 학과
+  		var school3=$('#school3');
+  		var school4=$('#school4');
+  		
+  		// 재학, 졸업
+  		var school5=$('#school5');
+  		var school6=$('#school6');
+  		
+  		// 신분인증사진
+  		var photo=$('#photo');
+  		
+  		// 은행, 계좌번호
+  		var bank=$('#bank');
+  		var accountNumber=$('#accountNumber');
+  		
+  		if(profile.val()==""){
+  			alert('프로필 사진을 등록하세요.');
+  			profile.focus();
+  			return false;
+  		}
+  		if(nick.val().length<2){
+  			alert('닉네임은 2글자 이상 가능합니다.');
+  			
+  			nick.focus();
+  			return false;
+  		}
+  		if(school1.is(':checked')==false&&school2.is(':checked')==false&&school12.is(':checked')==false){
+  			alert('인증방법을 선택하세요.');
+  			return false;
+  		}
+  		if(schoo1.is(':checked')==true || school2.is(':checked')==true) {
+	  		if(school3.val()==null){
+	  			alert('학교를 입력하세요.');
+	  			school3.focus();
+	  			return false;
+	  		}
+	  		if(school4.val()==null){
+	  			alert('학과를 입력하세요.');
+	  			scholl4.focus();
+	  			return false;
+	  		}
+	  		if(school5.val()==null&&school6.val()==null){
+	  			alert('재학 혹은 졸업을 선택하세요.');
+	  			return false;
+	  		}
+  		}
+  		if(photo.val()==""){
+  			alert('신분인증사진을 등록하세요.')
+  			return false;
+  		}
+  		if(bank.val()==null){
+  			alert('은행을 선택하세요.');
+  			return false;
+  		}
+  		if(accountNumber.val()==null){
+  			alert('계좌번호를 입력하세요.');
+  			return false;
+  		}
+  		
+  		return true;
      }
        </script>
 </section>
