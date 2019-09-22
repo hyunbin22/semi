@@ -29,31 +29,29 @@ public class MentoUploadDao {
 			e.printStackTrace();
 		}
 	}
-	//멘토 이미지 등록
-	//			public int registerMentoImage(Connection conn, MentoUpload mtu, int mtnum) {
-	//				PreparedStatement pstmt=null;
-	//				System.out.println("mtnum : "+mtnum);
-	//				int result=0;
-	//				String sql=prop.getProperty("registerMentoImage");
-	//				try {
-	//					pstmt=conn.prepareStatement(sql);
-	//					pstmt.setInt(1, mtnum);
-	//					pstmt.setString(2, mtu.getUpMentoOrgProfile());
-	//					pstmt.setString(3, mtu.getUpMentoReProfile());
-	//					pstmt.setString(4, mtu.getUpMentoOrgConfirm());
-	//					pstmt.setString(5, mtu.getUpMentoReConfirm());
-	//					pstmt.setString(6, mtu.getUpMentoNameLicense());
-	//					pstmt.setString(7, mtu.getUpMentoOrgLicense());
-	//					pstmt.setString(8, mtu.getUpMentoReLicense());
-	//					result=pstmt.executeUpdate();
-	//		
-	//				}catch(SQLException e) {
-	//					e.printStackTrace();
-	//				}finally {
-	//					close(pstmt);
-	//				}
-	//				return result;
-	//			}
+	 // 멘토이미지 등록
+    public int registerMentoImage(Connection conn, MentoUpload mtu, int mtnum, String category) {
+       PreparedStatement pstmt=null;
+       System.out.println("mtnum : "+mtnum);
+       int result=0;
+       String sql=prop.getProperty("registerMentoImage");
+       try {
+          pstmt=conn.prepareStatement(sql);
+          pstmt.setInt(1, mtnum);
+          pstmt.setString(2, category);
+          pstmt.setString(3, mtu.getUpMentoNameLicense());
+          pstmt.setString(4, mtu.getUpMentoOrgName());
+          pstmt.setString(5, mtu.getUpMentoReName());
+          result=pstmt.executeUpdate();
+
+       }catch(SQLException e) {
+          e.printStackTrace();
+       }finally {
+          close(pstmt);
+       }
+       return result;
+    }
+    
 
 	//첨부파일 전체불러오기
 	public List<MentoUpload> mentoUpList(Connection conn, int mtNum) {
