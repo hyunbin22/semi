@@ -5,88 +5,114 @@
     <%@ page import="com.semi.mento.model.vo.MentoUpload, java.util.*" %>
     <%@ include file = "/views/common/header.jsp" %>
     <% 
-    	MentoUpload mu = (MentoUpload)request.getAttribute("mentoUpload");
+    	List<MentoUpload> muList = (List)request.getAttribute("mentoUpload");
     %>
 	<%@ include file="/views/common/myPageAside.jsp" %>
+                    <section>
 	<div class="wrap">
 	<div id="myPageContentWrap">
-                        <br><br>
+                 <div class="bar">
+					<br>
+					<br>
                     <h1 class="center1">멘토페이지</h1>
                     <br><br>
                     <hr>
+                    <br>
                 </div>
                 <div class="regdata center1">
-                    <table class="tblreg">
+                    <table class="tblreg center1">
                         <tr>
-                            <td>닉네임</td>
-                            <td>
+                        <div class="box">
+                            <td class="lecture">닉네임</td>
+                            <td class="title2">
                      			 <%=mt.getMtNickName()%>
                             </td>
                             <td>
    
                             </td>
+                            </div>
                         </tr>
                         <tr>
                         </tr>
                         <tr>
-                            <td>인증방법</td>
-                            <td>
+                        <div class="box">
+                            <td class="lecture">인증방법</td>
+                            <td class="title2">
                                 <%=mt.getMtHowConfirm()%>
                             </td>
+                            </div>
                         </tr>
                         <tr>
                         </tr>
                          <tr>
-                            <td>자격증</td>
-                            <td>
-                   		<%-- 		<%=mu.getUpMentoNameLicense()%>	 --%>			
+                         <div class="box">
+                            <td class="lecture">자격증명</td>
+                           <td class="title2">
+                            <%for(int i=0; i<muList.size(); i++) {
+                            	if(muList.get(i).getUpMentoNameLicense()!=null){
+                            		%>
+                           <%=muList.get(i).getUpMentoNameLicense()+"." %>
+                            <%
+                            }
+                            }%>
                             </td>
+                            </div>
                         </tr>
                         <tr>
                         </tr>
                         <tr>
-                            <td>학력</td>
-                            <td> 
+                        <div class="box">
+                            <td class="lecture">학력</td>
+                            <td class="title2"> 
                             	<%=mt.getMtAcademic() %> 
                             </td>
+                            </div>
                         </tr>
                         <tr>
                         </tr>
                         <tr>
-                            <td>전공학과</td>
-                            <td> <%=mt.getMtAcademicDept() %></td>
+                        <div class="box">
+                            <td class="lecture">전공학과</td>
+                            <td class="title2"> <%=mt.getMtAcademicDept() %></td>
+                            </div>
                         </tr>
                         <tr>
                         </tr>
                         <tr>
-                            <td>재학/졸업</td>
-                            <td>
+                        <div class="box">
+                            <td class="lecture">재학/졸업</td>
+                            <td class="title2">
                                 <span><%=mt.getMtGraduation() %></span> 
                             </td>
+                        </div>
                         </tr>
                         <tr>
                         </tr>
                         <tr>
-                            <td>은행</td>
-                            <td>
+                        <div class="box">
+                            <td class="lecture">은행</td>
+                            <td class="title2">
                                <%=mt.getMtBank() %>
                             </td>
     
                             <td>
 
                             </td>
+                            </div>
                         </tr>
                         <tr>
                         </tr>
                             <tr>
-                            <td>계좌번호</td>
-                            <td>
+                            <div class="box">
+                            <td class="lecture">계좌번호</td>
+                            <td class="title2">
                                <%=mt.getMtAccountNumber() %>
                             </td>
     
                             <td>
 
                             </td>
+							</div>
                         </tr>
                     </table>
                 </div>

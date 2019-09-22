@@ -33,13 +33,10 @@ public class LectureViewServlet extends HttpServlet {
     * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
     */
    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-      String lectureNo = request.getParameter("lecnum");
+      int lectureNo = Integer.parseInt(request.getParameter("lecnum"));
 
-      Lecture lec=new LectureService().selectLecture(lectureNo);
-      
-      System.out.println("LectureViewServlet lec : "+lec);
-      
-      
+      Lecture lec=new LectureService().lectureView(lectureNo);
+      System.out.println(lec);
       request.setAttribute("lecture", lec);
       request.getRequestDispatcher("/views/lecture/lectureView.jsp").forward(request, response);
    }

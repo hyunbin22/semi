@@ -157,7 +157,7 @@
 			         </ul>
 			         <%if(memberLogin != null) {
 			         	if (memberLogin.getmId().equals("kiho") || memberLogin.getmId().equals("admin") || memberLogin.getmId().equals("gusqls897") || memberLogin.getmId().equals("rldh8") || memberLogin.getmId().equals("thd9292")) {%>
-				        <li><a href="<%=request.getContextPath()%>/admin/AdminMentoApproval.do">관리자</a></li>
+				         <li><a href="<%=request.getContextPath()%>/views/admin/adminMain.jsp">관리자</a></li>
 				      <%} 
 			         }%>
 			      </li>

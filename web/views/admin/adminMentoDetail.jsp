@@ -66,19 +66,19 @@
 					 }%>
 					<h2><strong>입금받을 은행 / 계좌번호</strong></h2>
 					<p><%=mt.getMtBank() %> / <%=mt.getMtAccountNumber() %></p>
-					<%
-						if (mt.getMtReason() != null) {
-					%>
+ 					<%
+						if (temp!=0) {
+					%> 
 					<h2><strong>거절사유</strong></h2>
-					<textarea id="refusalContent" cols="107" rows="5" style="resize: none;" maxlength="100" placeholder="거절사유를 입력하세요."><%=reason %></textarea>
+					<textarea id="refusalContent" cols="107" rows="5" style="resize: none;" maxlength="100" placeholder="거절사유를 입력하세요." style="width:100%;"><%=reason %></textarea>
 	
-					<%
+ 					<%
 						}
-					%>
+					%> 
 					<br><br>
 					<hr>
 					<br>
-					<%if(temp==1) {%>
+					<%if(temp!=0) {%>
 					<div class="appro-btn-wrap">
 						<input type="button" value="승인" class="next" id="btnclassAppro" onclick="checkAppro();">
 						<button class="next" id="btnclassRefusal" onclick="btnRefusal();">거절</button>
@@ -100,13 +100,14 @@
 	<%@ include file="/views/common/adminAside.jsp" %>
 	<%} %>
 </section>
+<%@ include file="/views/common/adminFooter.jsp"%>
 <script>
 	$(function(){
 		<%if(temp==0) {%>
 			$('#admin-mento-wrap').css('float','none');
 			$('#admin-mento-wrap').addClass('center1');
 			
-		<%} else if(temp==1) {%>
+		<%} else if(temp!=0) {%>
 			$('#btnclassAppro').addClass('mentosubmit');
 			$('#btnclassAppro').addClass('mentosubmit');
 			
@@ -135,4 +136,3 @@
 
 	
 </script>
-<%@ include file="/views/common/adminFooter.jsp"%>

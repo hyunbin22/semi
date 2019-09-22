@@ -99,7 +99,7 @@
 	<%@ include file="/views/common/adminAside.jsp"%>
 
 </section>
-
+<%@ include file="/views/common/adminFooter.jsp"%>
 <script>
 $(function(){
 	var sid = $("#search-mId");
@@ -121,4 +121,3 @@ $(function(){
 	}
 });
 </script>
-<%@ include file="/views/common/adminFooter.jsp"%>

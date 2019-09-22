@@ -5,6 +5,7 @@
 <% 
     Member m = (Member) session.getAttribute("loginMember");
 	Moim moim = (Moim)request.getAttribute("moim");	
+	String moimKeyword = moim.getMoimKeyword()==null?"":moim.getMoimKeyword();
 	
 %>
   <section class = "center1">
@@ -29,13 +30,13 @@
                         <tr>
                             <td style="width:503px;">제목</td>
                             <td>
-                                <input class="textfield" type="text" name="title" id = "title" maxlength="30" value="<%=moim.getMoimTitle()%>">
+                                <input class="textfield" type="text" name="title" id = "title" maxlength="200" value="<%=moim.getMoimTitle()%>" placeholder="제목을 입력해주세요.">
                             </td>
                             <td></td>
                         </tr>
                         <tr>
                             <td>내용</td>
-                            <td><textarea id = "text" name = "text" rows="20" cols="60" style="resize: none;" placeholder="내용을 입력해주세요."><%=moim.getMoimText() %></textarea></td>
+                            <td><textarea id = "text" name = "text" rows="20" cols="60" style="resize: none;" placeholder="내용을 입력해주세요."><%=moim.getMoimText().replaceAll("<br>", "").replaceAll("&nbsp;","") %></textarea></td>
                         	<td></td>
                         </tr>
                         <tr>
@@ -73,7 +74,7 @@
                         <tr>
                         	<td style="width:503px;">검색키워드<br>( , 로 구분)</td>
                             <td>
-                                <input class="textfield" type="text" name="keyword" id = "keyword" value="<%=moim.getMoimKeyword()%>">
+                                <input class="textfield" type="text" name="keyword" id = "keyword" value="<%=moimKeyword%>">
                             </td>
                             <td></td>
                         </tr>    

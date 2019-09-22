@@ -13,7 +13,8 @@ import com.semi.member.model.vo.Member;
 /**
  * Servlet implementation class MemberMyPageModifyServlet
  */
-@WebServlet("/mento/myPageModify.do")
+@WebServlet("/member/myPageModify.do")
+
 public class MemberMyPageModifyServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
