@@ -4,7 +4,6 @@
 <%@ page import="com.semi.lecture.model.vo.LectureReview"%>
 <%@ page import="java.util.List"%>
 <%
-
    Lecture lec = (Lecture) request.getAttribute("lecture");
    List<LectureReview> list = (List) request.getAttribute("list");
    String days = (String)request.getParameter("day");
@@ -30,7 +29,7 @@
 </div>
 <br><br>
 <section>
-<form action="<%=request.getContextPath()%>/lecture/OrderEnrollEnd.do" method="post">
+<form action="<%=request.getContextPath()%>/order/OrderEnrollEnd.do" method="post">
 <input type="hidden" value="<%=lec.getLecNum()%>" name="lecNum">
 <input type="hidden" name="oTot" value="<%=lecTot %>">
 <input type="hidden" name="oPrice" value="<%=lec.getLecPrice() %>">

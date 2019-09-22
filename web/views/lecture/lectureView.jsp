@@ -209,7 +209,7 @@
 
       <div class="wrap">
          <div class="floatMenu">
-            <form action="<%=request.getContextPath()%>/order/OrderEnroll.do?lecnum=<%=lec.getLecNum() %>"
+            <form action="<%=request.getContextPath()%>/order/OrderEnroll.do?lecNum=<%=lec.getLecNum() %>"
       method="post" enctype="multipart/form-data">
             <div class="floatTitle">
                결제

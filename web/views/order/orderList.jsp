@@ -30,7 +30,7 @@
                         <tr class = "list">
                             <td class = "listNumber"><%=(i+1) %></td>
                             <td class = "listContent"><span><%=list.get(i).getLecture().getLecName() %></span></td>
-                            <td class = "listContent"><span><button class = "next" onclick = "location.href='<%=request.getContextPath()%>/member/seeMoreStudy.do?lecNum=<%=list.get(i).getLecNum()%>'">상세보기</button></span></td>
+                            <td class = "listContent"><span><button class = "next" onclick = "location.href='<%=request.getContextPath()%>/order/orderView.do?oNum=<%=list.get(i).getoNum()%>'">상세보기</button></span></td>
                             <td class = "listCheck"><%=list.get(i).getoCheck() %></td>
                             <td class = "listCheck"><%if(list.get(i).getoCheck() == 'Y' && list.get(i).getoPayment() == 'N'){ %>
                             							<span><button class = "next" onclick = "location.href='<%=request.getContextPath()%>/order/orderPaymentView.do?oNum=<%=list.get(i).getoNum()%>'">결제하기</button></span>
