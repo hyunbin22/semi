@@ -6,6 +6,7 @@
     <%@ include file = "/views/common/header.jsp" %>
     <% 
     	List<Lecture> list = (List)request.getAttribute("list");
+   		int cPage = (int)request.getAttribute("cPage");
     %>
       <%@ include file="/views/common/myPageAside.jsp" %>
       	  	<div class="wrap">
@@ -49,5 +50,8 @@
             </div>
             </div>
             </div>
+            <div id="admin-appro-pageBar" class = "center1">
+			<%=request.getAttribute("pageBar")%>
+		</div>
       </section>
     <%@ include file = "/views/common/footer.jsp" %>

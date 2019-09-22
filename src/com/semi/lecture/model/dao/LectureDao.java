@@ -30,8 +30,8 @@ public class LectureDao {
 			e.printStackTrace();
 		}
 	}
-	
-	
+
+
 	//승인신청한 강의목록
 	public int countLectureApproval(Connection conn) {
 		PreparedStatement pstmt = null;
@@ -131,7 +131,7 @@ public class LectureDao {
 		}
 		return result;
 	}
-	
+
 	public List<Lecture> lectureApproList(Connection conn, String type, String data, int cPage, int numPerPage) {
 
 		List<LectureUpload> setUpList = new ArrayList();
@@ -327,12 +327,12 @@ public class LectureDao {
 	}
 
 	//멘토번호로 강의번호 조회
-	public int selectSeqLecNum(Connection conn, int mtNum) {
+	public int selectSeqLecNum(Connection conn) {
 
 		Statement stmt = null;
 		ResultSet rs = null;
 		int result = 0;
-		String sql = "select lecnum from tb_lecture where mtnum = " + mtNum;
+		String sql = "select SEQ_LECTURE.currval from dual";
 		try {
 			stmt = conn.createStatement();
 			rs = stmt.executeQuery(sql);
@@ -372,46 +372,46 @@ public class LectureDao {
 	}
 
 	// 강의 리스트 
-		public List<Lecture> selectLectureList(Connection conn, int cPage, int numPerPage) {
-			PreparedStatement pstmt=null;
-			String sql=prop.getProperty("selectLectureList");
-			ResultSet rs = null;
-			List<Lecture> lecturelist = new ArrayList();
+	public List<Lecture> selectLectureList(Connection conn, int cPage, int numPerPage) {
+		PreparedStatement pstmt=null;
+		String sql=prop.getProperty("selectLectureList");
+		ResultSet rs = null;
+		List<Lecture> lecturelist = new ArrayList();
 
-			try {
-				pstmt = conn.prepareStatement(sql);
-				pstmt.setInt(1, (cPage-1)*numPerPage+1);
-				pstmt.setInt(2, cPage*numPerPage);
-				rs = pstmt.executeQuery();
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, (cPage-1)*numPerPage+1);
+			pstmt.setInt(2, cPage*numPerPage);
+			rs = pstmt.executeQuery();
 
 
-				while(rs.next()) {
-					Lecture lec=new Lecture();
-					Mento mt = new Mento();
+			while(rs.next()) {
+				Lecture lec=new Lecture();
+				Mento mt = new Mento();
 
-					lec.setLecNum(rs.getInt("lecnum"));
-					lec.setLecName(rs.getString("lecname"));
-					lec.setLecType(rs.getString("lectype"));
-					lec.setLecPrice(rs.getInt("lecprice"));
-					lec.setMtNum(rs.getInt("mtnum"));
-					lec.setLecMeet(rs.getString("lecmeet"));
+				lec.setLecNum(rs.getInt("lecnum"));
+				lec.setLecName(rs.getString("lecname"));
+				lec.setLecType(rs.getString("lectype"));
+				lec.setLecPrice(rs.getInt("lecprice"));
+				lec.setMtNum(rs.getInt("mtnum"));
+				lec.setLecMeet(rs.getString("lecmeet"));
 
-					LectureUpload lecUp = new LectureUploadDao().lectureUpCover2(conn, rs.getInt("lecnum"));
-					Mento m = new MentoDao().mentoView(conn, rs.getInt("mtnum"));
-					lec.setLecMento(m);
-					lec.setLectureUpload(lecUp);
-					lecturelist.add(lec);
+				LectureUpload lecUp = new LectureUploadDao().lectureUpCover2(conn, rs.getInt("lecnum"));
+				Mento m = new MentoDao().mentoView(conn, rs.getInt("mtnum"));
+				lec.setLecMento(m);
+				lec.setLectureUpload(lecUp);
+				lecturelist.add(lec);
 
-				}
-				
-			}catch(Exception e) {
-				e.printStackTrace();
-			}finally {
-				close(rs);
-				close(pstmt);
 			}
-			return lecturelist;
+
+		}catch(Exception e) {
+			e.printStackTrace();
+		}finally {
+			close(rs);
+			close(pstmt);
 		}
+		return lecturelist;
+	}
 
 	//강의 이름
 	public Lecture selectLectureName(Connection conn, int int1) {
@@ -442,7 +442,7 @@ public class LectureDao {
 		Statement stmt=null;
 		ResultSet rs=null;
 		List<Lecture> list=new ArrayList();
-		String sql="select * from tb_lecture";
+		String sql="select * from tb_lecture where mtnum="+mtnum;
 		try {
 			stmt=conn.createStatement();
 			rs=stmt.executeQuery(sql);
@@ -460,7 +460,7 @@ public class LectureDao {
 		}
 		return list;
 	}
-	
+
 	//강의수정
 	public int updateLecture(Connection conn, Lecture l, int lecNum) {
 		PreparedStatement pstmt = null;
@@ -496,7 +496,7 @@ public class LectureDao {
 
 		return result;
 	}
-	
+
 	public Lecture lectureListByLecNum(Connection conn, int lecNum) {
 		PreparedStatement pstmt=null;
 		ResultSet rs=null;
@@ -528,6 +528,7 @@ public class LectureDao {
 				lt.setLecMentoContent(rs.getString("lecMentoContent").replaceAll(" ", "&nbsp;").replaceAll("<", "&lt;").replaceAll(">", "&gt;").replaceAll("\n", "<br>"));
 				lt.setLecLectureContent(rs.getString("lecLectureContent").replaceAll(" ", "&nbsp;").replaceAll("<", "&lt;").replaceAll(">", "&gt;").replaceAll("\n", "<br>"));
 				lt.setLectureUpList(new LectureUploadDao().lectureUpList(conn, lecNum));
+				lt.setLectureUpload(new LectureUploadDao().lectureUpCover2(conn, lecNum));
 
 			}	
 
@@ -583,5 +584,58 @@ public class LectureDao {
 			close(stmt);
 		}
 		return list;
+	}
+
+	public List<LectureUpload> selectLectureUpload(Connection conn, int lecNum) {
+		Statement stmt=null;
+		ResultSet rs=null;
+		List<LectureUpload> list=new ArrayList();
+		String sql="select * from tb_upload_lecture where lecNum="+lecNum;
+		try {
+			stmt=conn.createStatement();
+			rs=stmt.executeQuery(sql);
+			while(rs.next()) {
+				LectureUpload lu=new LectureUpload();
+				lu.setUpLectureCategory(rs.getString("up_lecture_category"));
+				lu.setUpLectureOrgName(rs.getString("up_lecture_org_name"));
+				lu.setUpLectureReName(rs.getString("up_lecture_re_name"));
+				list.add(lu);
+			}
+		}catch(Exception e) {
+			e.printStackTrace();
+		}finally {
+			close(rs);
+			close(stmt);
+		}
+		return list;
+	}
+
+	public List<Lecture> lectureMentoList(Connection conn, int cPage, int numPerPage, int mtnum) {
+		PreparedStatement pstmt=null;
+		String sql=prop.getProperty("lectureMentoList");
+		ResultSet rs = null;
+		List<Lecture> lecturelist = new ArrayList();
+
+		try {
+
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1,mtnum);
+			pstmt.setInt(2, (cPage-1)*numPerPage+1);
+			pstmt.setInt(3, cPage*numPerPage);
+			rs = pstmt.executeQuery();
+
+			while(rs.next()) {
+				Lecture l=new Lecture();
+				l.setLecName(rs.getString("lecName"));
+				l.setLecNum(rs.getInt("lecNum"));
+				lecturelist.add(l);
+			}
+		}catch(Exception e) {
+			e.printStackTrace();
+		}finally {
+			close(rs);
+			close(pstmt);
+		}
+		return lecturelist;
 	}
 }

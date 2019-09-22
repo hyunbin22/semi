@@ -28,7 +28,7 @@
                         <tr>
                             <td style="width:503px;">제목</td>
                             <td>
-                                <input class="textfield" type="text" name="title" id = "title" maxlength="30" placeholder="제목을 입력해주세요.">
+                                <input class="textfield" type="text" name="title" id = "title" maxlength="200" placeholder="제목을 입력해주세요.">
                             </td>
                             <td></td>
                         </tr>

@@ -36,5 +36,16 @@ public class MoimUploadService {
 		close(conn);
 		return result;
 	}
+	
+	//원래있던파일 다지웠을때
+	public int allDeleteUpload(int moimNum) {
+		Connection conn = getConnection();
+		int result = dao.allDeleteUpload(conn, moimNum);
+		if(result > 0) {
+			commit(conn);
+		} else rollback(conn);
+		close(conn);
+		return result;
+	}
 
 }

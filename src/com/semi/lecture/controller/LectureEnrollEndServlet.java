@@ -82,7 +82,12 @@ public class LectureEnrollEndServlet extends HttpServlet {
 			
 			String lecType = mr.getParameter("classType"); //수업형태 (1:1수업, 그룹수업)
 			System.out.println(lecType);
-			int lecmaxcount = Integer.parseInt(mr.getParameter("studentCount")); //수업정원
+			int lecmaxcount = 0;
+			if(lecType.equals("그룹")) {
+				lecmaxcount = Integer.parseInt(mr.getParameter("studentCount"));
+				
+			}
+	
 			System.out.println(lecmaxcount);
 //			String address= mr.getParameter("subcategory");
 //			address+=mr.getParameter("local2");
@@ -164,7 +169,7 @@ public class LectureEnrollEndServlet extends HttpServlet {
 	      if(result>0 && result2>0) {
 	         msg="강의등록 완료";
 	         request.setAttribute("msg", msg);
-	         request.getRequestDispatcher("views/mento/mentoPageView.jsp").forward(request, response);
+	         request.getRequestDispatcher("views/member/myPageView.jsp").forward(request, response);
 	      }
 	      else{
 	         msg="강의동록 실패!!";

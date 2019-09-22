@@ -63,22 +63,29 @@ public class MoimUpdateEndServlet extends HttpServlet {
 		int result2=0;
 
 		//원래있던 파일
-		String[] orgListName = mr.getParameterValues("orgListName");
-		String[] reListName = mr.getParameterValues("reListName");
+		String[] orgListName = mr.getParameterValues("orgListName")!=null ? mr.getParameterValues("orgListName"):null;
+		System.out.println(orgListName);
+		String[] reListName =mr.getParameterValues("reListName")!=null ? mr.getParameterValues("reListName"):null;
 		int count = 0;
 		int deleteResult = 0;
 		
 		//원래있던 파일을 삭제했을떄
-		for(int i = 0; i < orgMoim.getMoimUpload().size(); i++) {	//db에 저장되어있는 업로드 리스트
-			count = 0;
-			for(int j = 0; j < orgListName.length; j++) {	//폼에서 넘어온 첨부파일 리스트(기존)
-				if(orgMoim.getMoimUpload().get(i).getUpMoimOrgName().equals(orgListName[j]) && 
-						orgMoim.getMoimUpload().get(i).getUpMoimReName().equals(reListName[j])) {	//같은 이름이 있다면
-					count++;	//count 증가
-				}
+		if(orgListName==null) {	//원래있던파일 전부다 삭제했을때
+			for(int i = 0; i < orgMoim.getMoimUpload().size(); i++) {
+				deleteResult = new MoimUploadService().allDeleteUpload(orgMoim.getMoimUpload().get(i).getMoimNum());
 			}
-			if(count==0) {	//같은 이름이 없을때 삭제로직
-				deleteResult = new MoimUploadService().deleteUpload(orgMoim.getMoimUpload().get(i).getUpMoimNum());
+		} else {
+			for(int i = 0; i < orgMoim.getMoimUpload().size(); i++) {	//db에 저장되어있는 업로드 리스트
+				count = 0;
+				for(int j = 0; j < orgListName.length; j++) {	//폼에서 넘어온 첨부파일 리스트(기존)
+					if(orgMoim.getMoimUpload().get(i).getUpMoimOrgName().equals(orgListName[j]) && 
+							orgMoim.getMoimUpload().get(i).getUpMoimReName().equals(reListName[j])) {	//같은 이름이 있다면
+						count++;	//count 증가
+					}
+				}
+				if(count==0) {	//같은 이름이 없을때 삭제로직
+					deleteResult = new MoimUploadService().deleteUpload(orgMoim.getMoimUpload().get(i).getUpMoimNum());
+				}
 			}
 		}
 		
