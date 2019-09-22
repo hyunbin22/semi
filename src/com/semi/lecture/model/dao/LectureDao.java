@@ -17,6 +17,7 @@ import com.semi.lecture.model.vo.Lecture;
 import com.semi.lecture.model.vo.LectureUpload;
 import com.semi.mento.model.dao.MentoDao;
 import com.semi.mento.model.vo.Mento;
+import com.semi.subcategory.model.vo.SubCategory;
 
 public class LectureDao {
 
@@ -388,13 +389,15 @@ public class LectureDao {
 				while(rs.next()) {
 					Lecture lec=new Lecture();
 					Mento mt = new Mento();
-
+					SubCategory sc = new SubCategory();
+					
 					lec.setLecNum(rs.getInt("lecnum"));
 					lec.setLecName(rs.getString("lecname"));
 					lec.setLecType(rs.getString("lectype"));
 					lec.setLecPrice(rs.getInt("lecprice"));
 					lec.setMtNum(rs.getInt("mtnum"));
 					lec.setLecMeet(rs.getString("lecmeet"));
+					lec.setSubNum(rs.getInt("subNum"));
 
 					LectureUpload lecUp = new LectureUploadDao().lectureUpCover2(conn, rs.getInt("lecnum"));
 					Mento m = new MentoDao().mentoView(conn, rs.getInt("mtnum"));
@@ -410,6 +413,8 @@ public class LectureDao {
 				close(rs);
 				close(pstmt);
 			}
+			
+			System.out.println(lecturelist);
 			return lecturelist;
 		}
 
@@ -583,5 +588,53 @@ public class LectureDao {
 			close(stmt);
 		}
 		return list;
+	}
+
+
+	public List<Lecture> selectLectureListSubNum(Connection conn,int cPage, int numPerPage, int subNum) {
+		PreparedStatement pstmt=null;
+		String sql=prop.getProperty("selectLectureListSubNum");
+		ResultSet rs = null;
+		List<Lecture> lecturelist = new ArrayList();
+
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, subNum);
+			pstmt.setInt(2, (cPage-1)*numPerPage+1);
+			pstmt.setInt(3, cPage*numPerPage);
+			
+			rs = pstmt.executeQuery();
+
+
+			while(rs.next()) {
+				Lecture lec=new Lecture();
+				Mento mt = new Mento();
+				SubCategory sc = new SubCategory();
+				
+				lec.setLecNum(rs.getInt("lecnum"));
+				lec.setLecName(rs.getString("lecname"));
+				lec.setLecType(rs.getString("lectype"));
+				lec.setLecPrice(rs.getInt("lecprice"));
+				lec.setMtNum(rs.getInt("mtnum"));
+				lec.setLecMeet(rs.getString("lecmeet"));
+				lec.setSubNum(rs.getInt("subNum"));
+
+				LectureUpload lecUp = new LectureUploadDao().lectureUpCover2(conn, rs.getInt("lecnum"));
+				Mento m = new MentoDao().mentoView(conn, rs.getInt("mtnum"));
+				lec.setLecMento(m);
+				lec.setLectureUpload(lecUp);
+				lecturelist.add(lec);
+
+			}
+			
+		}catch(Exception e) {
+			e.printStackTrace();
+		}finally {
+			close(rs);
+			close(pstmt);
+		}
+		
+		System.out.println(lecturelist);
+		return lecturelist;
 	}
 }

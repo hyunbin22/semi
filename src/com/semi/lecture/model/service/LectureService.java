@@ -171,6 +171,14 @@ public class LectureService {
 		return list;
 	}
 
+		//서브 카테고리 검색
+		public List<Lecture> selectLectureListSubNum(int cPage, int numPerPage, int subNum) {
+			Connection conn = getConnection();
+			List<Lecture> list= dao.selectLectureListSubNum(conn, cPage, numPerPage, subNum);
+			close(conn);
+			return list;
+		}
+
 
 
 }

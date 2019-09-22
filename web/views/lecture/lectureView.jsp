@@ -5,12 +5,11 @@
 <%@ page import="java.util.List"%>
 <%
    Lecture lec = (Lecture) request.getAttribute("lecture");
-
    List<LectureReview> list = (List) request.getAttribute("list");
-	
    String coverImage = "";
    String profileImage = "";
 	String lectureImage[] = null;
+	String toId=lec.getLecMento().getMember().getmId();
    for(int i=0;i<lec.getLectureUpList().size();i++){
 		if(lec.getLectureUpList().get(i).getUpLectureCategory().equals("cover")){
 			coverImage = lec.getLectureUpList().get(i).getUpLectureReName();
@@ -22,11 +21,6 @@
 		}
 	}
    
-	
-	   
-   
-   
-   
    String var = lec.getLecWeek();
    String [] vars = var.split(",");
 %>
@@ -34,6 +28,7 @@
 
 
 <%@ include file="/views/common/header.jsp"%>
+
 <%-- <link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/css/classdetail.css">
    <link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/css/layout.css"> --%>
 
@@ -44,7 +39,8 @@
          <!--card-img-top -->
          <div class="detailbody">
             <div class="class_info">
-               <h5 class="" name="lectype">
+            <br><br>
+               <h5 class="lecType" name="lectype">
                   [
                   <%=lec.getLecType()%>
                   ]
@@ -203,19 +199,18 @@
 
       <div class="wrap">
          <div class="floatMenu">
-            <form action="<%=request.getContextPath()%>/lecture/OrderEnroll.do?lecnum=<%=lec.getLecNum() %>"
-      method="post" enctype="multipart/form-data">
+            <form action="<%=request.getContextPath()%>/lecture/OrderEnroll.do"
+      method="post" >
+      <input type="hidden" value="<%=lec.getLecNum()%>" name="lecnum">
             <div class="floatTitle">
                결제
                <hr>
             </div>
             <div class="floatsubtitle">수업시간</div>
-            <div id="select_box">
-               <li>
-               		<ol value="<%=lec.getLecTot()%>"><%=lec.getLecTot() %></ol>
-               		<ol value="<%=lec.getLecTot2()%>"><%=lec.getLecTot2() %></ol>
-               	
-               </li>
+            <div class="lecFViewTot-group">
+	               <input class="lecFViewTot"name="lectot" type="radio" value="<%=lec.getLecTot()%>"><%=lec.getLecTot() %>
+	               <input class="lecFViewTot" name="lectot" type="radio" value="<%=lec.getLecTot2()%>"><%=lec.getLecTot2()%>
+
                <!-- <select id="color" title="select color">
                         <option selected="selected">asdf</option>
                     </select> -->
@@ -233,10 +228,10 @@
             <div class="floatsubtitle">요일</div>
             <div id="select_box">
             	<select id="week" name="day">
-            		<option value="<%=lec.getLecWeek() %>"><%=lec.getLecWeek() %></option>
-            		<%-- <%for (int i=0; i<vars.length;i++){ %>
+            		<%-- <option value="<%=lec.getLecWeek() %>"><%=lec.getLecWeek() %></option> --%>
+            		<%for (int i=0; i<vars.length;i++){ %>
             		<option value="<%=vars[i]%>"><%=vars[i]%></option>
-            		<%} %> --%>
+            		<%} %>
             	</select>
             </div>
             
@@ -267,11 +262,9 @@
 	        </div>
 	           </form>
             <br>
-            <form action="<%=request.getContextPath()%>/lectureMewmberRegist">
 	            <div>
-               <input type="submit" value="문의하기" class="classSubmit">
+               <button class="classSubmit" id="questionMento">문의하기</button>
             </div>
-            </form>
 
          </div>
       </div>
@@ -280,8 +273,24 @@
 </aside>
 
 <script>
+	$(function(){
+		
+		$('#questionMento').click(function(){
+			var url = "<%=request.getContextPath()%>/message/messageList.do?toId=<%=toId%>";
+			var status = "width=400, height=600, resizable=no, status=no, toolbars=no, menubar=no";
+			var title="메세지"
+			var popUp = open("", title, status);
+			window.name="parentWin"; 
+			openMessageFrm.target = title;
+			openMessageFrm.action=url;
+			openMessageFrm.submit();
+			
+		});
+	});
+
    $(window).scroll(function() {
-      if ($(window).scrollTop() > 371) {
+	   console.log($(window).scrollTop());
+      if ($(window).scrollTop() > 323) {
          $('.floatMenu').addClass("fix");
          $('.floatMenu').addClass("right");
          $('.floatMenu').removeClass("floatMenu");
@@ -295,5 +304,6 @@
 </script>
 
 <script src="js/bootstrap.js"></script>
+
 
 <%@ include file="/views/common/footer.jsp"%>

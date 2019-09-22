@@ -81,7 +81,7 @@ public class MentoUpdateModifyServlet extends HttpServlet {
          String upMentoOrgProfile=mr.getOriginalFileName("mtprofileimg");
          String upMentoReProfile = mr.getFilesystemName("mtprofileimg");
          MentoUpload mtu1 = new MentoUpload(result, category, upMentoNameLicense, upMentoOrgProfile, upMentoReProfile);
-         result2=new MentoUploadService().updateMentoImage(mtu1, result, category);
+         result2=new MentoUploadService().registerMentoImage(mtu1, result, category);
          System.out.println("카테고리 : "+category+", 파일이름 :"+upMentoOrgProfile);
       }
       if(mr.getOriginalFileName("mtconfirming")!=null) {
@@ -89,7 +89,7 @@ public class MentoUpdateModifyServlet extends HttpServlet {
          String upMentoOrgConfirm =mr.getOriginalFileName("mtconfirming");
          String upMentoReConfirm= mr.getFilesystemName("mtconfirming");
          MentoUpload mtu2 = new MentoUpload(result, category, upMentoNameLicense, upMentoOrgConfirm, upMentoReConfirm);
-         result2=new MentoUploadService().updateMentoImage(mtu2, result, category);
+         result2=new MentoUploadService().registerMentoImage(mtu2, result, category);
          System.out.println("카테고리 : "+category+", 파일이름 :"+upMentoOrgConfirm);
       }
 
@@ -99,7 +99,7 @@ public class MentoUpdateModifyServlet extends HttpServlet {
          String upMentoOrgLicense =mr.getOriginalFileName("mtlicenseimg");
          String upMentoReLicense= mr.getFilesystemName("mtlicenseimg");   
          MentoUpload mtu3 = new MentoUpload(result, category, upMentoNameLicense, upMentoOrgLicense, upMentoReLicense);
-         result2=new MentoUploadService().updateMentoImage(mtu3, result, category);
+         result2=new MentoUploadService().registerMentoImage(mtu3, result, category);
          System.out.println("카테고리 : "+category+", 파일이름 :"+upMentoOrgLicense);
       }
       

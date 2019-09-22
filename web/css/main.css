@@ -828,7 +828,7 @@ input#apply {
 	position: relative;
 	width: 160px;
 	height: 32px;
-	margin: 10px 20px 30px 20px;
+	margin: 10px 20px 10px 20px;
 	background-color: white;
 	color: black;
 	font-weight: 600;
@@ -881,6 +881,7 @@ input#apply {
 	font-weight: 900;
 	border: 0px;
 	border-radius: 20px;
+	display:inline;
 }
 
 .floatTitle hr {
@@ -889,6 +890,7 @@ input#apply {
 	border-top: 5px solid white;
 	height: 10px;
 	border-radius: 5 px;
+	margin-bottom: 0px;
 }
 
 .floatsubtitle {
@@ -902,7 +904,7 @@ div#select_box {
 	position: relative;
 	width: 160px;
 	height: 32px;
-	margin: 10px 20px 30px 20px;
+	margin: 10px 20px 10px 20px;
 	background-color: black;
 	color: white;
 	font-weight: 600;
