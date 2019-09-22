@@ -5,6 +5,7 @@
 <%@ page import="java.util.List"%>
 <%
    Lecture lec = (Lecture) request.getAttribute("lecture");
+	LectureReview rc =(LectureReview)request.getAttribute("Review");
    List<LectureReview> list = (List) request.getAttribute("list");
    String coverImage = "";
    String profileImage = "";
@@ -33,7 +34,7 @@
    <link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/css/layout.css"> --%>
 
 <section class="center">
-   <div class="wrap">
+   <div class="wrap"> 
       <article class="detailwrap">
          <img src="<%=request.getContextPath()%>/upload/lecture/<%=coverImage%>" class="detailimg" alt="...">
          <!--card-img-top -->
@@ -85,6 +86,7 @@
                   </tr>
                </table>
                <hr>
+               <h2 class="subtext">강의 소개</h2><hr>
                <p class="content" name="leclecturecontent"><%=lec.getLecLectureContent()%></p>
 
                <!-- <h2 class="subtext">커리큘럼</h2>
@@ -104,94 +106,95 @@
 
 
                <!-- 리뷰 댓글창 -->
-               <%-- <p class="reviewinfo" id="rinfo">
-               <form
-                  action="<%=request.getContextPath()%>/LectureReview/reviewWrite"
-                  method="post">
-                  <input type="hidden" name="rNum"> <input type="hidden"
-                     name="lecNum" value="<%=lec.getLecNum()%>"> <input
-                     type="hidden" name="mNum"
-                     value="<%=memberLogin != null ? memberLogin.getmNum() : ""%>">
-                  <textarea name="rTitle" rows="1" cols="60"></textarea>
-                  <textarea name="rText" rows="5" cols="60"></textarea>
+               <p class="reviewinfo" id="rinfo">
+               <h2 class="subtext">리뷰</h2><hr>
+               <form action="<%=request.getContextPath()%>/LectureReview/reviewWrite" method="post">
+                  <input type="hidden" name="rNum"> <input type="hidden" name="lecNum" value="<%=lec.getLecNum()%>">
+                  <input type="hidden" name="mNum" value="<%=memberLogin != null ? memberLogin.getmNum() : ""%>">
+
+                  <textarea name="rTitle" rows="1" cols="30" placeholder="제목"></textarea>
+                  <textarea name="rText" rows="5" cols="60" placeholder="내용"></textarea>
 
                   <button type="submit">등록</button>
 
                </form>
 
-               <script>
-                  $(function() {
-                     $("textarea[name=rTitle]").focuse(function() {
-                        if (
-               <%=memberLogin == null%>
-                  ) {
-                           alert("로그인해주시기 바랍니다.");
-                        }
-                     });
-                  });
-                  $(function() {
-                     $("textarea[name=rText]").focuse(function() {
-                        if (
-               <%=memberLogin == null%>
-                  ) {
-                           alert("로그인해주시기 바랍니다.");
-                        }
-                     });
-                  });
-               </script>
+					<script>
+ 
+						$(function() {
+							$("textarea[name=rTitle]").focuse(function() {
+								if (
+					<%=memberLogin == null%>
+						) {
+									alert("로그인해주시기 바랍니다.");
+								}
+							});
+						});
+						$(function() {
+							$("textarea[name=rText]").focuse(function() {
+								if (
+					<%=memberLogin == null%>
+						) {
+									alert("로그인해주시기 바랍니다.");
+								}
+							});
+						});
+					</script>
 
-               <%
-                  if (list != null && !list.isEmpty()) {
-                     for (LectureReview lr : list) {
-                        if (memberLogin != null
-                              && (lr.getmNum() == memberLogin.getmNum() || memberLogin.getmId().equals("admin"))) {
-               %>
+					<%
+						if (list != null && !list.isEmpty()) {
+							for (LectureReview lr : list) {
+								if (memberLogin != null
+										&& (lr.getmNum() == memberLogin.getmNum() || memberLogin.getmId().equals("admin"))) {
+					%>
 
-               <div class="review">
-                  <div class="memprofile">
-                     <table class="reviewtable">
-                        <tr>
-                           <td class="reviewId">수강생<br> <b><%=lr.getmNum() %></b>님
-                              <small>3.3/5.0</small>
-                           </td>
+					<div class="review">
+						<div class="memprofile">
+							<table class="reviewtable">
+								<tr>
+									<td class="reviewId">수강생<br> <b><%=lr.getmNum()%></b>님
+										<small>3.3/5.0</small>
+									</td>
 
-                           <td class="reviewContent"><%=lr.getrTitle() %>
-                              <hr> <%=lr.getrText() %></td>
-                              
-                           <td>
-                              <%if(memberLogin!=null
-                              &&("admin".equals(memberLogin.getmId())/*&& 리뷰작성자와 동일한 멤버로그인아이디일경우 */
-                              )) {%>
-                              <button class="btn-delete"
-                                 value="<%=lr.getLecnum() %>">삭제</button> <%} %>
-                           </td>
-                        </tr>
+									<td class="reviewContent"><%=lr.getrTitle()%>
+										<hr> <%=lr.getrText()%></td>
 
-                     </table>
+									<td>
+										<%
+											if (memberLogin != null && ("admin".equals(memberLogin.getmId())/*&& 리뷰작성자와 동일한 멤버로그인아이디일경우 */
+														)) {
+										%>
+										<button class="btn-delete" value="<%=lr.getLecnum()%>">삭제</button>
+										<%
+											}
+										%>
+									</td>
+								</tr>
+
+							</table>
 
 
-                  </div>
-                  <!-- <div class="review_content">
+						</div>
+						<!-- <div class="review_content">
                                     <input type="text">
                                     <input type="submit">
                                 </div> -->
 
-               </div>
+					</div>
 
-               <%
-                        }
-                     }
-                  }
-               %>
+					<%
+						}
+							}
+						}
+					%>
 
-               </p>
-               <p class="questioninfo" id="qinfo"></p> --%>
+					</p>
+               <p class="questioninfo" id="qinfo"></p>
             </div>
          </div>
       </article>
 
    </div>
-   <!-- <div id="floatMenu" onload="floatMenu"> 내용 입력 </div> -->
 
 </section>
 

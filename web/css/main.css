@@ -1615,3 +1615,36 @@ div#search-container {
 	border-radius: 5px;
 	cursor: pointer;
 }
+
+.reviewtable{
+    width: 460px;
+    height:150px;
+    margin-left:20px;
+    margin-right: 20px;
+    border-top: solid 1px lightgray;
+    border-bottom: solid 1px lightgray;
+}
+
+
+/*lectureView review css*/
+.reviewId{
+    width:100px;
+    text-align: center;
+}
+
+.reviewId b{
+    font-size: 20px;
+}
+
+.reviewContent{
+    position: absolute;
+    width:360px;
+    height: 150px;
+    overflow: scroll;
+    text-align: left;
+    margin-right: 30px;
+    
+}
+
+.reviewContent::-webkit-scrollbar{
+    wid
