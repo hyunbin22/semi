@@ -33,7 +33,6 @@ public class AdminLectureOnServlet extends HttpServlet {
 		LectureService service = new LectureService();
 		int result = service.lectureOn(lecNum);
 		
-		System.out.println(result);
 		
 		String msg = "";
 		String loc = "/admin/adminLectureList.do";

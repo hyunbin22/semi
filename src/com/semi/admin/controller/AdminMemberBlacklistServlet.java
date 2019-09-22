@@ -36,8 +36,7 @@ public class AdminMemberBlacklistServlet extends HttpServlet {
 		String mId = request.getParameter("reportId");
 		String check = request.getParameter("check");
 		String rReply = request.getParameter("rReply");
-		
-		System.out.println(rReply);
+	
 		
 		ReportService service = new ReportService();
 		int result3 = service.regsterReport2(mAttackerNum, rReply);

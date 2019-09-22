@@ -11,20 +11,18 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.semi.lecture.model.service.LectureService;
 import com.semi.lecture.model.vo.Lecture;
-import com.semi.member.model.service.MemberService;
-import com.semi.member.model.vo.Member;
 
 /**
- * Servlet implementation class AdminLectureIdFinderServlet
+ * Servlet implementation class AdminLectureNolistIdFinderServlet
  */
-@WebServlet("/admin/lectureIdFinder.do")
-public class AdminLectureIdFinderServlet extends HttpServlet {
+@WebServlet("/admin/lectureNolistIdFinder.do")
+public class AdminLectureNolistIdFinderServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public AdminLectureIdFinderServlet() {
+    public AdminLectureNolistIdFinderServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -38,7 +36,7 @@ public class AdminLectureIdFinderServlet extends HttpServlet {
 		int temp = Integer.parseInt(request.getParameter("temp"));
 		String path = "";
 		if(temp==0) {
-			path="/admin/lectureIdFinder.do";	//승인완료 리스트로 변경해야함
+			path="/admin/lectureNolistIdFinder.do";	//승인완료 리스트로 변경해야함
 		} else if(temp==1 ) {
 			path="/admin/AdminLectureApproval.do";
 		} else if(temp==2) {
@@ -55,8 +53,8 @@ public class AdminLectureIdFinderServlet extends HttpServlet {
 		int numPerPage=10;
 		int countLectureApproval = new LectureService().countLectureApproval(type, data);
 		
-		List<Lecture> lectureList = new LectureService().lectureApproFindList2(type, data, cPage, numPerPage);
-
+		List<Lecture> lectureList = new LectureService().lectureApproFindList3(type, data, cPage, numPerPage);
+		System.out.println(lectureList);
 		int mentoTotalPage=(int)Math.ceil((double)countLectureApproval/numPerPage);
 		String pageBar="";
 		int pageSizeBar=5;
@@ -89,7 +87,7 @@ public class AdminLectureIdFinderServlet extends HttpServlet {
 		request.setAttribute("cPage", cPage);
 		request.setAttribute("list",lectureList);
 		if(temp==0) {	//승인완료된 리스트
-			request.getRequestDispatcher("/views/admin/adminLectureIdFindList.jsp").forward(request, response);
+			request.getRequestDispatcher("/views/admin/adminLectureIdFindNoLIst.jsp").forward(request, response);
 		} else if(temp==1){	//승인전 거절안된 리스트
 			request.getRequestDispatcher("/views/admin/adminLectureApproval.jsp").forward(request, response);
 		} else if(temp==2) {	//승인전 거절된 리스트

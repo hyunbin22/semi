@@ -34,7 +34,6 @@ public class AdminLectureOffServlet extends HttpServlet {
 		LectureService service = new LectureService();
 		int result = service.lectureOff(lecNum);
 		
-		System.out.println(result);
 		
 		String msg = "";
 		String loc = "/admin/adminLectrueNoList.do";

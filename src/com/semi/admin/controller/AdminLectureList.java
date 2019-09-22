@@ -41,9 +41,7 @@ public class AdminLectureList extends HttpServlet {
 		
 		int countLectureAll = new LectureService().countLectureList();
 		List<Lecture> lectureAllList = new LectureService().lectureAllList(cPage, numPerPage);
-		
-		System.out.println(countLectureAll);
-		System.out.println(lectureAllList);
+	
 		
 		int lectureTotalPage=(int)Math.ceil((double)countLectureAll/numPerPage);
 		String pageBar="";

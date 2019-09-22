@@ -41,9 +41,7 @@ public class AdminLectureNoList extends HttpServlet {
 		
 		int countLectureNo = new LectureService().countLectureNoList();
 		List<Lecture> lectureNoList = new LectureService().lectureNoList(cPage, numPerPage);
-		
-		System.out.println(countLectureNo);
-		System.out.println(lectureNoList);
+
 		
 		int lectureTotalPage=(int)Math.ceil((double)countLectureNo/numPerPage);
 		String pageBar="";

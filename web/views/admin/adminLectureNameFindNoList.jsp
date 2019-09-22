@@ -30,8 +30,8 @@
 				</form>
 			</div>
 	 		<div id="search-mName">
-				<form action="<%=request.getContextPath()%>/admin/lectureApproFinder.do">
-					<input type="hidden" name="searchType" value="mName">
+				<form action="<%=request.getContextPath()%>/admin/lectureNolistNameFinder.do">
+					<input type="hidden" name="searchType" value="lecName">
 					<input type="hidden" name="cPage" value="<%=cPage%>"> 
 					<input type="hidden" name="temp" value=0> 
 					<input type="text" name="searchKeyword" placeholder="강의 제목 입력"
@@ -96,7 +96,7 @@
 	<br><br>
 	</article>
 
-<%@ include file="/views/common/adminLectureAside.jsp"%>
+	<%@ include file="/views/common/adminLectureAside.jsp"%>
 
 </section>
 <%@ include file="/views/common/adminFooter.jsp"%>

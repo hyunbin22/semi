@@ -213,6 +213,34 @@ public class LectureService {
 			return result;
 		}
 
+		public List<Lecture> lectureApproFindList2(String type, String data, int cPage, int numPerPage) {
+			Connection conn = getConnection();
+			List<Lecture> list = dao.lectureApproList2(conn, type, data, cPage, numPerPage);
+			close(conn);
+			return list;
+		}
+
+		public List<Lecture> lectureApproFindList3(String type, String data, int cPage, int numPerPage) {
+			Connection conn = getConnection();
+			List<Lecture> list = dao.lectureApproList3(conn, type, data, cPage, numPerPage);
+			close(conn);
+			return list;
+		}
+
+		public List<Lecture> lectureApproFindList4(String data, int cPage, int numPerPage) {
+			Connection conn = getConnection();
+			List<Lecture> list = dao.lectureApproList4(conn, data, cPage, numPerPage);
+			close(conn);
+			return list;
+		}
+
+		public List<Lecture> lectureApproFindList5(String data, int cPage, int numPerPage) {
+			Connection conn = getConnection();
+			List<Lecture> list = dao.lectureApproList5(conn, data, cPage, numPerPage);
+			close(conn);
+			return list;
+		}
+
 
 
 
