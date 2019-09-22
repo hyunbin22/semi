@@ -55,7 +55,6 @@ public class MessageListServletEnd extends HttpServlet {
 		int toMNum = new MemberService().selectMember(toId).getmNum();
 		
 		List<Message> chatList = new MessageService().messageListByRecent(fromMNum, toMNum, 100);
-		System.out.println("MessageListServlet " + chatList);
 		if(chatList.size()==0) return "";
 		for(int i = 0; i < chatList.size(); i++) {
 			result.append("[{\"value\": \"" + chatList.get(i).getFromMember().getmId() + "\"},");
@@ -78,7 +77,6 @@ public class MessageListServletEnd extends HttpServlet {
 		int toMNum = new MemberService().selectMember(toId).getmNum();
 		
 		List<Message> chatList = service.messageListById(fromMNum, toMNum, chatId);
-		System.out.println("getId chatList " + chatList);
 		if(chatList.size()==0) return "";
 		for(int i = 0; i < chatList.size(); i++) {
 			result.append("[{\"value\": \"" + chatList.get(i).getFromMember().getmId() + "\"},");

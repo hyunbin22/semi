@@ -287,7 +287,6 @@ public class OrderDao {
 			close(pstmt);
 		}
 
-		System.out.println("OrderDao의 selectOrder(강의넘버 일치하는 오더 가져오기) :"+list);
 		return list;
 	}
 

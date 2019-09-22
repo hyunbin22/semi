@@ -64,7 +64,6 @@ public class MoimUpdateEndServlet extends HttpServlet {
 
 		//원래있던 파일
 		String[] orgListName = mr.getParameterValues("orgListName")!=null ? mr.getParameterValues("orgListName"):null;
-		System.out.println(orgListName);
 		String[] reListName =mr.getParameterValues("reListName")!=null ? mr.getParameterValues("reListName"):null;
 		int count = 0;
 		int deleteResult = 0;
@@ -115,13 +114,13 @@ public class MoimUpdateEndServlet extends HttpServlet {
 		String msg="";
 		String loc="";
 		
-		if(result2>0) {
-			msg="수정완료";
-			loc="/moim/moimList.do";
+		if(result>0) {
+			msg="게시물 수정이 완료되었습니다.";
+			loc="/moim/moimView.do?moimNum="+moimNum;
 		}
 		else{
-			msg="수정실패";
-			loc="/";
+			msg="게시물 수정이 실패하였습니다. 관리자에게 문의해주세요.";
+			loc="/moim/moimView.do?moimNum="+moimNum;
 		}
 		
 		request.setAttribute("msg", msg);

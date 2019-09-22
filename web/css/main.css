@@ -1551,24 +1551,7 @@ td.contentTable2 {
 	padding-left: 40px;
 }
 
-/* 검색 */
-div#search-moim_keyword {
-	display: none;
-}
 
-div#search-mName {
-	display: none;
-}
-
-div#search-mId {
-	display: inline-block;
-}
-
-div#search-container {
-	margin: 0 0 10px 0;
-	padding: 3px;
-	float: left;
-}
 
 /* 글쓰기 버튼 */
 .moimWrite {

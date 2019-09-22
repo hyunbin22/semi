@@ -32,7 +32,6 @@ public class MentoUploadDao {
 	 // 멘토이미지 등록
     public int registerMentoImage(Connection conn, MentoUpload mtu, int mtnum, String category) {
        PreparedStatement pstmt=null;
-       System.out.println("mtnum : "+mtnum);
        int result=0;
        String sql=prop.getProperty("registerMentoImage");
        try {
@@ -55,7 +54,6 @@ public class MentoUploadDao {
 
 	//첨부파일 전체불러오기
 	public List<MentoUpload> mentoUpList(Connection conn, int mtNum) {
-		System.out.println("MentoUploadDao" + mtNum);
 		PreparedStatement pstmt = null;
 		String sql = prop.getProperty("mentoUpList");
 		List<MentoUpload> list = new ArrayList();
