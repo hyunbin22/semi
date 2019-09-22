@@ -4,6 +4,7 @@
 <%@ page import="com.semi.lecture.model.vo.LectureReview"%>
 <%@ page import="java.util.List"%>
 <%
+
    Lecture lec = (Lecture) request.getAttribute("lecture");
    List<LectureReview> list = (List) request.getAttribute("list");
    String days = (String)request.getParameter("day");
@@ -21,8 +22,6 @@
 
 
 <%@ include file="/views/common/header.jsp"%>
-<%-- <link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/css/classdetail.css">
-   <link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/css/layout.css"> --%>
 <br><br><br><br>
 <div class="center1">
 <h5 class="subtext">강의 신청</h5>
@@ -51,7 +50,7 @@
 		</tr>
 		<tr>
 			<td><%=days %>요일</td>
-			<td >시간 : <%=lecTot %></td>
+			<td>시간 : <%=lecTot %></td>
 			<td>정원 : <%=lec.getLecStudentCount() %>/<%=lec.getLecMaxCount() %></td>
 			
 		</tr>

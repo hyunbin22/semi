@@ -29,7 +29,7 @@ public class OrderEnrollServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		  int lectureNo = Integer.parseInt(request.getParameter("lecNum")); // 강의번호
+		int lectureNo = Integer.parseInt(request.getParameter("lecNum")); // 강의번호
 	      String days = request.getParameter("day"); // 요일
 	      String lecTot = request.getParameter("lectot"); // 시간
 	      Lecture lec=new LectureService().lectureView(lectureNo);

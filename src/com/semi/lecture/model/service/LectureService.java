@@ -53,7 +53,7 @@ public class LectureService {
 		close(conn);
 		return list;
 	}
-	
+
 	public List<Lecture> lectureMentoList(int cPage, int numPerPage,int mtnum) {
 		Connection conn= getConnection();
 		List<Lecture> list=dao.lectureMentoList(conn, cPage, numPerPage,mtnum);
@@ -246,6 +246,31 @@ public class LectureService {
 	}
 
 
+	//서브 카테고리 검색
+	public List<Lecture> selectLectureListSubNum(int cPage, int numPerPage, int subNum) {
+		Connection conn = getConnection();
+		List<Lecture> list= dao.selectLectureListSubNum(conn, cPage, numPerPage, subNum);
+		close(conn);
+		return list;
+	}
+
+	public int deleteReview(int lecNum, int rNum) {
+		Connection conn=getConnection();
+		int result=dao.deleteComment(conn, lecNum, rNum);
+		if(result>0) {commit(conn);}
+		else {rollback(conn);}
+		close(conn);
+		return result;
+	}
+
+	public int insertReview(int lecNum, int mNum, String rTitle, String rText) {
+		Connection conn=getConnection();
+		int result=dao.insertComment(conn,lecNum,mNum,rTitle,rText);
+		if(result>0) {commit(conn);}
+		else {rollback(conn);}
+		close(conn);
+		return result;
+	}
 
 
 

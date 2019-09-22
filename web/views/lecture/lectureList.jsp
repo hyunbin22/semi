@@ -16,9 +16,9 @@
 
 <%@ include file="/views/common/header.jsp"%>
 
-<section class="center ">
+<section>
 <aside>
-   <form>
+   <form action="<%=request.getContextPath()%>/lecture/lectureListSearch.do">
       <div class="wrap">
          <div class="lectureFloatMenu">
             <div class="lectureFloatTitle">
@@ -27,7 +27,7 @@
             </div>
             <div class="lectureFloatsubtitle">메인 카테고리</div>
             <div id="select_box1">
-               <select id="category" class="color" title="select color" name="category">
+               <select id="category" class="color" title="select color">
 	               <%for (Category c : category){ %>
 	                        <option value="<%=c.getScNum()%>"><%=c.getScName() %></option>
 	               <%} %>
@@ -36,22 +36,17 @@
             </div>
             <div class="lectureFloatsubtitle">서브 카테고리</div>
             <div id="select_box1">
-               <select id="subCategory" class="color" title="select color" name="subCategory">
+               <select id="subCategory" class="color" title="select color" name="subName">
 	               <div id="subCategoryVal">
 	               		서브카테고리
 	               </div>
                </select>
-            </div>
-            <div class="lectureFloatsubtitle">1회 시간</div>
-            <div id="select_box">
-
             </div>
 
             <script>
             
             $(window).scroll(function() {
                if ($(window).scrollTop() > 420) {
-            	   console.log($(window).scrollTop());
                   $('.lectureFloatMenu').addClass("lectureFix");
                   $('.lectureFloatMenu').addClass("right");
                   $('.lectureFloatMenu').removeClass("lectureFloatMenu");
@@ -80,9 +75,8 @@
                                 if(data==0){
                                    $("#local").append("<option value='1'></option>");
                                 }else{
-	                             	console.log(datas[i]);
 	                             	 // 이전에 있던 option들 삭제
-	                                $('<option value="' + (i+1) +'">' + datas[i] + '</option>').appendTo('#subCategory');
+	                                $('<option value="' + datas[i] +'">' + datas[i] + '</option>').appendTo('#subCategory');
                           		}
                              }
 
@@ -107,7 +101,6 @@
                });
             </script>
             <div>
-               <!-- <input type=""> -->
                <input type="submit" value="확인" class="classSubmit">
             </div>
             <section class= "page1">
@@ -149,7 +142,7 @@
             <tr>
                 <td colspan="4" class="classinfo">
 
-                    멘토사진 
+                    <%=lec.getLecMento().getMtNickName() %>
 
                     <hr>
                     
