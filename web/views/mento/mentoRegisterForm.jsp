@@ -3,7 +3,7 @@
 <%@ include file="/views/common/header.jsp"%>
 <%@ include file="/views/common/myPageAside.jsp" %>
 <div class="wrap">
-	<div id="myPageContentWrap">
+   <div id="myPageContentWrap">
                 <div class="bar">
                         <br>
                     <h1 class="center1">멘토신청하기</h1>
@@ -32,12 +32,14 @@
          </div>
          <br> <br>
          <br> <br>
-        <div class = "box"><div class = "lecture">별명</div>
-         <input id="nick" type="text" name="mtnickname" class = "title2">
+        <div class = "box">
+           <div class = "lecture">별명</div>
+            <input id="nick" type="text" name="mtnickname" class = "title2">
          </div>
          <br> <br> <br> <br>
          <span class = "lecture">신분/학력 인증</span>
-         <input id="school1" type="radio" name="mthowconfirm" value="대학교인증" /> 대학인증
+         <input id="school1" type="radio" name="mthowconfirm" value="대학교인증" /> 대학교인증
+         <input id="school12" type="radio" name="mthowconfirm" value="대학원인증"/> 대학원인증
          <input id="school2" type="radio" name="mthowconfirm" value="신분증인증" /> 신분증인증 
          <br> <br>
          <input id="school3" type="text"
@@ -48,8 +50,8 @@
          <input id="school5" type="radio" name="mtgraduation" value="재학" /> 재학
          <input id="school6" type="radio" name="mtgraduation" value="졸업" /> 졸업
          <br> <br>
-         	<span class = "lecture">신분인증사진</span>
-         	<input class = "title2" id="photo" type="file"
+            <span class = "lecture">신분인증사진</span>
+            <input class = "title2" id="photo" type="file"
             name="mtconfirming" id="profile_pt"
             onchange="previewImage(this,'View_area')">
          <div id='View_area'
@@ -59,8 +61,8 @@
          
          <span class = "lecture">자격증 1 (선택)</span>
          <input id="school7" type="text"
-            name="mtlicense" class = "title2"/> <br> <br> <span class = "lecture">자격증 1 사진</span> <input id="photo"
-            type="file" name="mtlicenseimg" id="profile_pt"
+            name="mtlicense" class = "title2"/> <br> <br> <span class = "lecture">자격증 1 사진</span> <input id="photo" class="title2"
+            type="file" name="mtlicenseimg" id="profile_pt"   
             onchange="previewImage(this,'View_area')">
          
          <div id='View_area'
@@ -71,11 +73,25 @@
          <input id="school7" type="text" name="mtlicense2" class = "title2"/>
          <br><br>
          
-         <span class = "lecture">자격증 2 사진</span> <input id="photo" type="file" name="mtlicenseimg2"
+         <span class = "lecture">자격증 2 사진</span> <input class="title2" id="photo" type="file" name="mtlicenseimg2"
             id="profile_pt" onchange="previewImage(this,'View_area')">
          <div id='View_area'
             style='position: relative; width: 100px; height: 100px; color: black; border: 0px solid black; dispaly: inline;'>
          </div>
+            <span class = "lecture">은행</span> <select name="mtbank" id="bank" style='position: relative; width: 100px; height: 100px; color: black; border: 0px solid black; dispaly: inline;'>
+               <option value="농협은행">농협은행</option>
+               <option value="카카오뱅크">카카오뱅크</option>
+               <option value="국민은행">국민은행</option>
+               <option value="신한은행">신한은행</option>
+               <option value="기업은행">기업은행</option>
+               <option value="우리은행">우리은행</option>
+            </select>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <span class = "lecture">계좌번호</span>
+            <input id="accountNumber" type="text" name="mtAccountNumber" style='display:inline;'>
+            <br>
+            <br>
+         
          <div class = "center1">
                     <input type="button" id = "btnDelete" value="신청하기" class="next center1" onclick="enrollMento();">
             </div>
@@ -84,12 +100,60 @@
    </div>
    </div>
     <script>
-     function enrollMento(){
-         var frm=$('#mentoFrm');
-         var url="<%=request.getContextPath()%>/mento/mentoRegisterEnd.do?mNum=<%=m.getmNum()%>";
-         frm.attr("action",url);
-         frm.submit();
-         }
+    
+    $(document).on("change","input[name='mtprofileimg']",function(event) {
+        var ext = $(this).val().split('.').pop().toLowerCase();
+        var fileSize = (this).files[0].size;
+        var maxSize = 1024*1024*1024;
+        
+        if($.inArray(ext, ['gif','png','jpg','jpeg','doc','docx','xls','xlsx','hwp']) == -1) {
+           alert("등록할 수 없는 확장자입니다.");
+           $(this).val("");
+           return;
+        } 
+        
+        if(fileSize > maxSize) {
+           alert("첨부파일 크기는 1GB 이내로 등록 가능합니다.");
+           $(this).val("");
+           return;
+        }
+     });
+    
+    $(document).on("change","input[name='mtconfirming']",function(event) {
+        var ext = $(this).val().split('.').pop().toLowerCase();
+        var fileSize = (this).files[0].size;
+        var maxSize = 1024*1024*1024;
+        
+        if($.inArray(ext, ['gif','png','jpg','jpeg','doc','docx','xls','xlsx','hwp']) == -1) {
+           alert("등록할 수 없는 확장자입니다.");
+           $(this).val("");
+           return;
+        } 
+        
+        if(fileSize > maxSize) {
+           alert("첨부파일 크기는 1GB 이내로 등록 가능합니다.");
+           $(this).val("");
+           return;
+        }
+     });
+    
+    $(document).on("change","input[name='mtconfirming']",function(event) {
+        var ext = $(this).val().split('.').pop().toLowerCase();
+        var fileSize = (this).files[0].size;
+        var maxSize = 1024*1024*1024;
+        
+        if($.inArray(ext, ['gif','png','jpg','jpeg','doc','docx','xls','xlsx','hwp']) == -1) {
+           alert("등록할 수 없는 확장자입니다.");
+           $(this).val("");
+           return;
+        } 
+        
+        if(fileSize > maxSize) {
+           alert("첨부파일 크기는 1GB 이내로 등록 가능합니다.");
+           $(this).val("");
+           return;
+        }
+     });
      
 
      function enrollMento(){
@@ -102,12 +166,13 @@
      // 빈칸 체크
      function checkNull(){
         
-        var profile =$('#profile');
+        var profile =$('#profileImg');
         var nick=$('#nick');
         
         // 대학인증, 신분증인증
         var school1=$('#school1');
         var school2=$('#school2');
+        var school12=$('#school12');
         
         // 학교, 학과
         var school3=$('#school3');
@@ -124,17 +189,18 @@
         var bank=$('#bank');
         var accountNumber=$('#accountNumber');
         
-        if(profile.val()==null){
+        if(profile.val()==""){
            alert('프로필 사진을 등록하세요.');
            profile.focus();
            return false;
         }
-        if(nick.val().length()<2){
+        if(nick.val().length<2){
            alert('닉네임은 2글자 이상 가능합니다.');
+           
            nick.focus();
            return false;
         }
-        if(school1.val()==null&&school2.val()==null){
+        if(school1.is(':checked')==false&&school2.is(':checked')==false&&school12.is(':checked')==false){
            alert('인증방법을 선택하세요.');
            return false;
         }
@@ -152,16 +218,16 @@
            alert('재학 혹은 졸업을 선택하세요.');
            return false;
         }
-        if(photo.val()=null){
+        if(photo.val()==""){
            alert('신분인증사진을 등록하세요.')
            return false;
         }
-        if(bank.val()=null){
+        if(bank.val()==null){
            alert('은행을 선택하세요.');
            return false;
         }
-        if(accountNumber()==null){
-           alert('계좌번호를 선택하세요.');
+        if(accountNumber.val()==null){
+           alert('계좌번호를 입력하세요.');
            return false;
         }
         

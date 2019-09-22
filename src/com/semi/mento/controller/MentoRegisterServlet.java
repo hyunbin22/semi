@@ -15,7 +15,7 @@ import com.semi.member.model.service.MemberService;
  */
 @WebServlet("/mento/mentoRegister.do")
 public class MentoRegisterServlet extends HttpServlet {
-	private static final long serialVersionUID = 1L;
+   private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
@@ -25,22 +25,25 @@ public class MentoRegisterServlet extends HttpServlet {
         // TODO Auto-generated constructor stub
     }
 
-	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
-	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
-		response.sendRedirect("/views/mento/mentoRegisterForm.jsp");
-		
-//		request.getRequestDispatcher("/views/mento/mentoRegisterForm.jsp").forward(request, response);
-	}
+   /**
+    * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+    */
+   protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+      
+      String mId=request.getParameter("mId");
+      Member m= new MemberService().selectMember(mId);
+      request.setAttribute("member", m);
+      //response.sendRedirect("/views/mento/mentoRegisterForm.jsp");
+      
+      request.getRequestDispatcher("/views/mento/mentoRegisterForm.jsp").forward(request, response);
+   }
 
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		doGet(request, response);
-	}
+   /**
+    * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+    */
+   protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+      // TODO Auto-generated method stub
+      doGet(request, response);
+   }
 
 }

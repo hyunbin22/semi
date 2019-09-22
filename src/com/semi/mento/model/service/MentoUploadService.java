@@ -15,15 +15,29 @@ import com.semi.mento.model.vo.MentoUpload;
 import common.template.JDBCTemplate;
 
 public class MentoUploadService {
-	
+
 	private MentoUploadDao dao = new MentoUploadDao();
+
+	// 멘토신청이미지
+	public int registerMentoImage(MentoUpload mtu, int mtnum, String category) {
+		Connection conn=getConnection();
+		int result=dao.registerMentoImage(conn, mtu, mtnum, category);
+		if(result>0) {
+			commit(conn);
+		}else {
+			rollback(conn);
+		}
+		close(conn);
+		return result;
+	}
+
 
 
 	public int updateMentoImage(MentoUpload mtu1, int result, String category) {
 
 		Connection conn = getConnection();
 		int result1=dao.updateMentoImage(conn, mtu1, result, category);
-		
+
 		if(result>0) {
 			commit(conn);
 
@@ -32,7 +46,7 @@ public class MentoUploadService {
 		}
 		close(conn);
 		return result1;
-		
+
 	}
 
 
@@ -47,7 +61,7 @@ public class MentoUploadService {
 	public int deleteMentoImg(int mtNum) {
 		Connection conn = getConnection();
 		int result=dao.deleteMentoImg(conn, mtNum);
-		
+
 		close(conn);
 		return result;
 	}
