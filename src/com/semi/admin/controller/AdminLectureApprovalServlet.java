@@ -43,7 +43,6 @@ public class AdminLectureApprovalServlet extends HttpServlet {
 		
 		int countLectureApproval = new LectureService().countLectureApproval();
 		List<Lecture> lectureApproList = new LectureService().lectureApproList(cPage, numPerPage);
-		
 		int lectureTotalPage=(int)Math.ceil((double)countLectureApproval/numPerPage);
 		String pageBar="";
 		int pageSizeBar=5;

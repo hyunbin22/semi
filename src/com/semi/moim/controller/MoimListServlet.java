@@ -63,35 +63,7 @@ public class MoimListServlet extends HttpServlet {
 		else {
 			pageBar+="<a href="+request.getContextPath()+ "/moim/moimList.do?cPage="+(pageNo)+">[다음]</a>";
 		}
-		
-//		pageBar += "<nav aria-label=\"...\" class=\"moimNav\">" + 
-//				"  <ul class=\"pagination\">" + 
-//				"  <li class=\"page-item disabled\">";
-//		if(pageNo==1) {
-//			pageBar+="<a class=\"page-link\" href=\"#\" tabindex=\"-1\" aria-disabled=\"true\">Previous</a></li>";
-//		}
-//		else {
-//			pageBar+="<a class=\"page-link\" href="+request.getContextPath()+"/moim/moimList.do?cPage="+(pageNo-1)+" tabindex=\"-1\" aria-disabled=\"true\">Previous</a></li>";
-//		}
-//		pageBar += "<li class=\"page-item active\" aria-current=\"page\">";
-//		while(!(pageNo>pageEnd||pageNo>totalPage)) {
-//			if(pageNo==cPage) {
-//				pageBar+="<a class=\"page-link\" href=\"#\">"+pageNo+" <span class=\"sr-only\">(current)</span></a></li>";
-//			}
-//			else {
-//				pageBar+="<a href="+request.getContextPath()+"/moim/moimList.do?cPage="+pageNo+" class=\"page-link\">"+pageNo+"</a></li>";
-//			}
-//			pageNo++;
-//		}
-//		pageBar += "<li class=\"page-item\">";
-//		if(pageNo>totalPage) {
-//			pageBar+="<a class=\"page-link\" href=\"#\">Next</a></li>";
-//		}
-//		else {
-//			pageBar+="<a href="+request.getContextPath()+
-//			"/moim/moimList.do?cPage="+(pageNo)+">Next</a></li>";
-//		}
-//		pageBar += "</ul></nav>";
+
 		//view페이지에 데이터 전송
 		request.setAttribute("pageBar", pageBar);
 		request.setAttribute("cPage", cPage);

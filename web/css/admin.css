@@ -13,11 +13,13 @@ h3 {
 	font-family: 'Noto Sans KR', sans-serif;
 }
 h1, h2 {
-	font-family: 'Hanna';
+	font-family: 'Noto Sans KR', sans-serif;
 }
 /* admin */
 body{
-    width: 1024px
+    width: 1024px;
+    margin: auto;
+  
 }
 
 /* list가 0일때 */
@@ -596,3 +598,4 @@ table{
 .tab-content{
 	    font-family: 'Noto Sans KR', sans-serif;
 }
+

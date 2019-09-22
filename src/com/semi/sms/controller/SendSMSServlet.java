@@ -30,7 +30,6 @@ public class SendSMSServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String phone = request.getParameter("phone");
 		
-		System.out.println("servlet" + phone);
 		
 		String api_key = "NCSOJCPKELHANSUP";
 		String api_secret = "JTSLLFOAKZ3DIJBB1V8KPZSYT1S7GVBS";
@@ -51,22 +50,21 @@ public class SendSMSServlet extends HttpServlet {
 		String resultStr = "";
 		if ((boolean) result.get("status") == true) {
 			// 메시지 보내기 성공 및 전송결과 출력
-			System.out.println("성공");
-			System.out.println(result.get("group_id")); // 그룹아이디
-			System.out.println(result.get("result_code")); // 결과코드
-			System.out.println(result.get("result_message")); // 결과 메시지
-			System.out.println(result.get("success_count")); // 메시지아이디
-			System.out.println(result.get("error_count")); // 여러개 보낼시 오류난 메시지 수
+//			System.out.println("성공");
+//			System.out.println(result.get("group_id")); // 그룹아이디
+//			System.out.println(result.get("result_code")); // 결과코드
+//			System.out.println(result.get("result_message")); // 결과 메시지
+//			System.out.println(result.get("success_count")); // 메시지아이디
+//			System.out.println(result.get("error_count")); // 여러개 보낼시 오류난 메시지 수
 			resultStr = "success";
 		} else {
 			// 메시지 보내기 실패
-			System.out.println("실패");
-			System.out.println(result.get("code")); // REST API 에러코드
-			System.out.println(result.get("message")); // 에러메시지
+//			System.out.println("실패");
+//			System.out.println(result.get("code")); // REST API 에러코드
+//			System.out.println(result.get("message")); // 에러메시지
 			resultStr =  "fail";
 		}
 		
-		System.out.println(resultStr);
 		
 		response.setContentType("charset=UTF-8");
 		response.getWriter().write(key); 

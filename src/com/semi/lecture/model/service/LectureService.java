@@ -53,6 +53,13 @@ public class LectureService {
 		close(conn);
 		return list;
 	}
+	
+	public List<Lecture> lectureMentoList(int cPage, int numPerPage,int mtnum) {
+		Connection conn= getConnection();
+		List<Lecture> list=dao.lectureMentoList(conn, cPage, numPerPage,mtnum);
+		close(conn);
+		return list;
+	}
 
 	//강의 한개 보기
 	public Lecture lectureView(int lecNum) {
@@ -92,7 +99,7 @@ public class LectureService {
 
 		if(result>0) {
 			commit(conn);
-			result = dao.selectSeqLecNum(conn);
+			result = dao.selectSeqLecNum(conn, l.getMtNum());
 		}else {
 			rollback(conn);
 		}
@@ -116,25 +123,9 @@ public class LectureService {
 		return list;
 	}
 
-	//강의 선택
-	public Lecture selectLecture(String lectureNo) {
-		Connection conn = getConnection();
-		Lecture lec = dao.lectureView(conn, Integer.parseInt(lectureNo));
-
-		close(conn);
-		return lec;
-	}
-
 	public List<Lecture> lectureListByMtNum(int mtnum) {
 		Connection conn= getConnection();
 		List<Lecture> list=dao.lectureListByMtNum(conn, mtnum);
-		close(conn);
-		return list;
-	}
-	
-	public List<Lecture> lectureMentoList(int cPage, int numPerPage,int mtnum) {
-		Connection conn= getConnection();
-		List<Lecture> list=dao.lectureMentoList(conn, cPage, numPerPage,mtnum);
 		close(conn);
 		return list;
 	}
@@ -178,13 +169,83 @@ public class LectureService {
 		return list;
 	}
 
-	//강의수정하는거 할거임.!
-	public List<LectureUpload> selectLectureUpload(int lecNum) {
+	//강의갯수
+	public int countLectureList() {
+		Connection conn = getConnection();
+		int result = dao.countLectureList(conn);
+		close(conn);
+		return result;
+	}
+
+	//강의모든리스트(status Y)
+	public List<Lecture> lectureAllList(int cPage, int numPerPage) {
 		Connection conn= getConnection();
-		List<LectureUpload> list=dao.selectLectureUpload(conn, lecNum);
+		List<Lecture> list=dao.lectureAllList(conn, cPage, numPerPage);
 		close(conn);
 		return list;
 	}
+
+	//status(N)
+	public int countLectureNoList() {
+		Connection conn = getConnection();
+		int result = dao.countLectureNoList(conn);
+		close(conn);
+		return result;
+	}
+
+	//status(N)
+	public List<Lecture> lectureNoList(int cPage, int numPerPage) {
+		Connection conn= getConnection();
+		List<Lecture> list=dao.lectureNoList(conn, cPage, numPerPage);
+		close(conn);
+		return list;
+	}
+
+	//status(N)로 바꾸기
+	public int lectureOff(int lecNum) {
+		Connection conn = getConnection();
+		int result = dao.lectureOff(conn, lecNum);
+		close(conn);
+		return result;
+	}
+
+	//status(Y)로 바꾸기
+	public int lectureOn(int lecNum) {
+		Connection conn = getConnection();
+		int result = dao.lectureOn(conn, lecNum);
+		close(conn);
+		return result;
+	}
+
+	public List<Lecture> lectureApproFindList2(String type, String data, int cPage, int numPerPage) {
+		Connection conn = getConnection();
+		List<Lecture> list = dao.lectureApproList2(conn, type, data, cPage, numPerPage);
+		close(conn);
+		return list;
+	}
+
+	public List<Lecture> lectureApproFindList3(String type, String data, int cPage, int numPerPage) {
+		Connection conn = getConnection();
+		List<Lecture> list = dao.lectureApproList3(conn, type, data, cPage, numPerPage);
+		close(conn);
+		return list;
+	}
+
+	public List<Lecture> lectureApproFindList4(String data, int cPage, int numPerPage) {
+		Connection conn = getConnection();
+		List<Lecture> list = dao.lectureApproList4(conn, data, cPage, numPerPage);
+		close(conn);
+		return list;
+	}
+
+	public List<Lecture> lectureApproFindList5(String data, int cPage, int numPerPage) {
+		Connection conn = getConnection();
+		List<Lecture> list = dao.lectureApproList5(conn, data, cPage, numPerPage);
+		close(conn);
+		return list;
+	}
+
+
 
 
 

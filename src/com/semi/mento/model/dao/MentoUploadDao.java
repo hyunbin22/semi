@@ -32,7 +32,6 @@ public class MentoUploadDao {
 	 // 멘토이미지 등록
     public int registerMentoImage(Connection conn, MentoUpload mtu, int mtnum, String category) {
        PreparedStatement pstmt=null;
-       System.out.println("mtnum : "+mtnum);
        int result=0;
        String sql=prop.getProperty("registerMentoImage");
        try {

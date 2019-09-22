@@ -52,5 +52,4 @@
             </div>
         </section>
         
->>>>>>> cd775fe7606f768061ec6a245c816946f0c292f7
 <%@ include file="/views/common/footer.jsp"%>

@@ -17,7 +17,7 @@
                 <table style="width:100%;">
                 	<tr style="background-color: lightgray;">
 	                	<th>No</th>
-	                    <th style="width:300px;">제목</th>
+	                    <th style="width:400px;">제목</th>
 	                    <th style="width:80px;">작성자</th>
 	                    <th style="width:200px;">작성 날짜</th>
 	                    <th style="width:60px;">조회수</th>
@@ -44,21 +44,19 @@
                                 </div>
                             </td>
                         </tr>
-                        <tr style="float:left;"><td>첨부파일</td><td colspan="4"></td></tr>
-                        <tr style="float:left;">
-                        	<td style="float:left; text-align:left;">
-                        	<%if(moim.getMoimUpload().size()>0 || moim.getMoimUpload()!=null) {
+                        
+                </table>
+                <div style="width:760px; text-align:left;">
+                <h5>첨부파일</h5>
+                <div style="width:100%;">
+                <%if(moim.getMoimUpload().size()>0 || moim.getMoimUpload()!=null) {
                          			for(int i = 0; i < moim.getMoimUpload().size(); i++) {%>
                          		<%=i+1%>.&nbsp;&nbsp;<a href="javascript:fn_filedown('<%=moim.getMoimUpload().get(i).getUpMoimOrgName()%>','<%=moim.getMoimUpload().get(i).getUpMoimReName()%>')"><%=moim.getMoimUpload().get(i).getUpMoimOrgName() %></a>
                          		<br>
                          		<%} 
                         		}%>
-                        	
-                        	</td>
-                        	<td colspan="4"></td>
-                        </tr>
-                        
-                </table>
+                 		</div>
+                </div>
                 <table class = "center1">
                     <tr class="null">
                     <td>
@@ -75,10 +73,6 @@
                 </table>
                 </div>
     </section>
-<%--     <form id="moimFrm" method="post" name="moimFrm">			<!-- 수정/삭제시 보낼 데이터 -->
-    	<input type="hidden" name="moimNum" value=<%=moim.getMoimNum() %>>
-    </form>
-     --%>
     <%if(m!=null) { %>
     <form name="moimMessage" method="post" id="openMessageFrm">	<!-- 메세지보내기 -->
 		<input type="hidden" name="toId" value="<%=moim.getMember().getmId()%>">
@@ -105,8 +99,6 @@
 			if(confirm("삭제하시겠습니까?")) {
 				var url = "<%=request.getContextPath()%>/moim/moimDelete.do?moimNum=<%=moim.getMoimNum() %>";
 				location.href=url;
-				/* moimFrm.action=url;
-				moimFrm.submit(); */
 			}
 		}
 		
@@ -125,7 +117,7 @@
 					var toId = "<%=toId%>";
 					var url = "<%=request.getContextPath()%>/message/openToMessage.do";
 					var status = "width=400, height=600, resizable=no, status=no, toolbars=no, menubar=no";
-					var title="ABLINGTALK"
+					var title="ABLINGTALK";
 					var popUp = open("", title, status);
 					window.name="parentWin"; 
 					moimMessage.target = title;

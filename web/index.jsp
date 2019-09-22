@@ -26,9 +26,7 @@
 	</div>
 	<br>
 	<div class = "center">
-	<div id=most1_1 style="float: left;">인기강좌 1</div>
-	<div id=most1_1 style="float: left;">인기강좌 2</div>
-	<div id=most1_1 style="float: left;">인기강좌 3</div>
+		<img src="<%=request.getContextPath() %>/image/인기강좌.png">
 	</div>
 <!-- 	<article>
 		<div style="float: left">
