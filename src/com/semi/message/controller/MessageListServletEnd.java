@@ -51,11 +51,11 @@ public class MessageListServletEnd extends HttpServlet {
 	public String getTen(String fromId, String toId) {
 		StringBuffer result = new StringBuffer("");
 		result.append("{\"result\":[");
-		MessageService service = new MessageService();
 		int fromMNum = new MemberService().selectMember(fromId).getmNum();
 		int toMNum = new MemberService().selectMember(toId).getmNum();
 		
-		List<Message> chatList = service.messageListByRecent(fromMNum, toMNum, 100);
+		List<Message> chatList = new MessageService().messageListByRecent(fromMNum, toMNum, 100);
+		System.out.println("MessageListServlet " + chatList);
 		if(chatList.size()==0) return "";
 		for(int i = 0; i < chatList.size(); i++) {
 			result.append("[{\"value\": \"" + chatList.get(i).getFromMember().getmId() + "\"},");
@@ -66,7 +66,7 @@ public class MessageListServletEnd extends HttpServlet {
 			
 		}
 		result.append("], \"last\":\"" + chatList.get(chatList.size()-1).getMessageNum() + "\"}");
-		service.readChat(fromMNum, toMNum);
+		new MessageService().readChat(fromMNum, toMNum);
 		return result.toString();
 	}
 	
@@ -78,7 +78,7 @@ public class MessageListServletEnd extends HttpServlet {
 		int toMNum = new MemberService().selectMember(toId).getmNum();
 		
 		List<Message> chatList = service.messageListById(fromMNum, toMNum, chatId);
-
+		System.out.println("getId chatList " + chatList);
 		if(chatList.size()==0) return "";
 		for(int i = 0; i < chatList.size(); i++) {
 			result.append("[{\"value\": \"" + chatList.get(i).getFromMember().getmId() + "\"},");

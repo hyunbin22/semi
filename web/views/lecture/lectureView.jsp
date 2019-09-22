@@ -21,12 +21,10 @@
 			profileImage = lec.getLecMento().getList().get(i).getUpMentoReName();
 		}
 	}
+   String toId = lec.getLecMento().getMember().getmId();
    
-	
-	   
-   
-   
-   
+   Member m = (Member) session.getAttribute("loginMember");
+
    String var = lec.getLecWeek();
    String [] vars = var.split(",");
 %>
@@ -196,6 +194,14 @@
 
    </div>
    <!-- <div id="floatMenu" onload="floatMenu"> 내용 입력 </div> -->
+   
+   <%if(m!=null) { %>
+    <form name="lecMessage" method="post" id="openMessageFrm">	<!-- 메세지보내기 -->
+		<input type="hidden" name="toId" value="<%=toId%>">
+		<input type="hidden" name="fromId" value="<%=m.getmId()%>">
+		<input type="hidden" name="lectureName" value="<%=lec.getLecName() %>">
+	</form>
+	<%} %>
 
 </section>
 
@@ -203,19 +209,17 @@
 
       <div class="wrap">
          <div class="floatMenu">
-            <form action="<%=request.getContextPath()%>/lecture/OrderEnroll.do?lecnum=<%=lec.getLecNum() %>"
+            <form action="<%=request.getContextPath()%>/order/OrderEnroll.do?lecnum=<%=lec.getLecNum() %>"
       method="post" enctype="multipart/form-data">
             <div class="floatTitle">
                결제
                <hr>
             </div>
             <div class="floatsubtitle">수업시간</div>
-            <div id="select_box">
-               <li>
-               		<ol value="<%=lec.getLecTot()%>"><%=lec.getLecTot() %></ol>
-               		<ol value="<%=lec.getLecTot2()%>"><%=lec.getLecTot2() %></ol>
-               	
-               </li>
+             <div class="lecFViewTot-group">
+                  <input class="lecFViewTot"name="lectot" type="radio" value="<%=lec.getLecTot()%>"><%=lec.getLecTot() %>
+                  <input class="lecFViewTot" name="lectot" type="radio" value="<%=lec.getLecTot2()%>"><%=lec.getLecTot2()%>
+
                <!-- <select id="color" title="select color">
                         <option selected="selected">asdf</option>
                     </select> -->
@@ -232,12 +236,12 @@
             </div>
             <div class="floatsubtitle">요일</div>
             <div id="select_box">
-            	<select id="week" name="day">
-            		<option value="<%=lec.getLecWeek() %>"><%=lec.getLecWeek() %></option>
-            		<%-- <%for (int i=0; i<vars.length;i++){ %>
-            		<option value="<%=vars[i]%>"><%=vars[i]%></option>
-            		<%} %> --%>
-            	</select>
+               <select id="week" name="day">
+                  <%-- <option value="<%=lec.getLecWeek() %>"><%=lec.getLecWeek() %></option> --%>
+                  <%for (int i=0; i<vars.length;i++){ %>
+                  <option value="<%=vars[i]%>"><%=vars[i]%></option>
+                  <%} %>
+               </select>
             </div>
             
             <div class="floatsubtitle">장소</div>
@@ -260,6 +264,19 @@
                      $(this).siblings("label").text(select_name);
                   });
                });
+             </script>
+
+            </div>
+            <script>
+               $(function() {
+                  var select = $("select#color");
+
+                  select.change(function() {
+                     var select_name = $(this).children(
+                           "option:selected").text();
+                     $(this).siblings("label").text(select_name);
+                  });
+               });
             </script>
             
             <div>
@@ -269,9 +286,9 @@
             <br>
             <form action="<%=request.getContextPath()%>/lectureMewmberRegist">
 	            <div>
-               <input type="submit" value="문의하기" class="classSubmit">
             </div>
             </form>
+            <input type="button" value="문의하기" class="classSubmit btnMessage">
 
          </div>
       </div>
@@ -292,6 +309,26 @@
 
       }
    });
+   
+   $(function(){
+		$('.btnMessage').click(function(){
+			<%-- if('<%=m.getmId()%>'==null || '<%=m.getmId()%>'=="") { --%>
+			if('<%=m%>'==null) {
+				alert("로그인 후 이용 가능합니다.");
+				$('#id').focus();
+			} else {
+				var toId = "<%=toId%>";
+				var url = "<%=request.getContextPath()%>/message/openToMessage.do";
+				var status = "width=400, height=600, resizable=no, status=no, toolbars=no, menubar=no";
+				var title="ABLINGTALK"
+				var popUp = open("", title, status);
+				window.name="parentWin"; 
+				lecMessage.target = title;
+				lecMessage.action=url;
+				lecMessage.submit();
+			}
+		})
+	});
 </script>
 
 <script src="js/bootstrap.js"></script>

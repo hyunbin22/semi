@@ -116,15 +116,6 @@ public class LectureService {
 		return list;
 	}
 
-	//강의 선택
-	public Lecture selectLecture(String lectureNo) {
-		Connection conn = getConnection();
-		Lecture lec = dao.lectureView(conn, Integer.parseInt(lectureNo));
-
-		close(conn);
-		return lec;
-	}
-
 	public List<Lecture> lectureListByMtNum(int mtnum) {
 		Connection conn= getConnection();
 		List<Lecture> list=dao.lectureListByMtNum(conn, mtnum);

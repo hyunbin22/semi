@@ -55,6 +55,7 @@ public class MentoUploadDao {
 
 	//첨부파일 전체불러오기
 	public List<MentoUpload> mentoUpList(Connection conn, int mtNum) {
+		System.out.println("MentoUploadDao" + mtNum);
 		PreparedStatement pstmt = null;
 		String sql = prop.getProperty("mentoUpList");
 		List<MentoUpload> list = new ArrayList();

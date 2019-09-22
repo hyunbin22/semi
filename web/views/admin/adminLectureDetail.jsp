@@ -7,8 +7,6 @@
 	String cate = (String)request.getAttribute("cate");
 	String local = (String)request.getAttribute("local");
 	int temp = (int)request.getAttribute("temp");
-	Member m = (Member)session.getAttribute("loginMember");
-	String toId = lec.getLecMento().getMember().getmId();
 	String reason = "";
 	if(lec.getLecReason()!=null) {
 		reason = lec.getLecReason();
@@ -94,7 +92,7 @@
 						<p class="refusalinfo">
 							<h2>거절사유</h2>
 							<div class="center1">
-								<textarea id="refusalContent" cols="107" rows="5" style="resize: none;" maxlength="200" placeholder="거절사유를 입력하세요."><%=reason %></textarea>
+								<textarea id="refusalContent" cols="107" rows="5" style="resize: none;" maxlength="200" placeholder="거절사유를 입력하세요." style="width:100%;"><%=reason %></textarea>
 							</div>
 						</p>
 					<%} %>
@@ -113,15 +111,7 @@
 				<input type="hidden" name="lecNum" id="inputlecNum" value=<%=lec.getLecNum() %>>
 				<input type="hidden" name="mtLec" value="lec">
 			</form>
-			
-			<button class="mentosubmit" id="sendMessage">문의하기</button>
-			
-			<form name="openMessageFrm" method="post">
-				<input type="hidden" name="toId" value="<%=lec.getLecMento().getMember().getmId()%>">
-				<input type="hidden" name="fromId" value="<%=m.getmId()%>">
-				<input type="hidden" name="lectureName" value="<%=lec.getLecName() %>">
-			</form>
-			
+
 			</div>
 		</div>
 		</article>
@@ -152,20 +142,6 @@
 			}
 		}
 
-		
-		//문의하기
-		$(function(){
-			$('#sendMessage').click(function(){
-				var toId = "<%=toId%>";
-				var url = "<%=request.getContextPath()%>/message/openToMessage.do?toId="+toId;
-				var status = "width=400, height=600, resizable=no, status=no, toolbars=no, menubar=no";
-				var title="ABLINGTALK"
-				var popUp = open("", title, status);
-				window.name="parentWin"; 
-				openMessageFrm.target = title;
-				openMessageFrm.action=url;
-				openMessageFrm.submit();
-			});
-		});
+	
 	</script>
 <%@ include file="/views/common/adminFooter.jsp"%>

@@ -170,7 +170,7 @@
 	function getInfiniteChat() {
 		setInterval(function() {
 			chatListFunction(lastId);
-		}, 1000);
+		}, 2000);
 	}
 	
 	//안읽은메세지수 출력
