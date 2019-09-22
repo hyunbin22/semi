@@ -30,9 +30,10 @@ public class MentoRegisterServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		response.sendRedirect("/views/mento/mentoRegisterForm.jsp");
-		
-//		request.getRequestDispatcher("/views/mento/mentoRegisterForm.jsp").forward(request, response);
+//		response.sendRedirect("/views/mento/mentoRegisterForm.jsp");
+		String mId = request.getParameter("mId");
+		request.setAttribute("mId", mId);
+		request.getRequestDispatcher("/views/mento/mentoRegisterForm.jsp").forward(request, response);
 	}
 
 	/**

@@ -10,7 +10,7 @@
 %>
 <%@ include file="/views/common/adminMemberAside.jsp"%>
 <section>
-<div style = "height: 700px;">
+<div style = "height: 1000px;">
 <article id="search1">
 		<div id="adminSearchContainer">
 
@@ -75,6 +75,7 @@
 
 </div>
 </section>
+<%@ include file="/views/common/adminFooter.jsp"%>
  <script>
  $(function(){
 		if(<%=count%>==0) {
@@ -83,5 +84,3 @@
 		}
 	});
  </script>
-</body>
-</html>

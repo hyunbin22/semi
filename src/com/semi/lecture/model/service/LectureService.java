@@ -171,6 +171,50 @@ public class LectureService {
 		return list;
 	}
 
+		public int countLectureList() {
+			Connection conn = getConnection();
+			int result = dao.countLectureList(conn);
+			close(conn);
+			return result;
+		}
+
+		public List<Lecture> lectureAllList(int cPage, int numPerPage) {
+			Connection conn= getConnection();
+			List<Lecture> list=dao.lectureAllList(conn, cPage, numPerPage);
+			close(conn);
+			return list;
+		}
+
+		public int countLectureNoList() {
+			Connection conn = getConnection();
+			int result = dao.countLectureNoList(conn);
+			close(conn);
+			return result;
+		}
+
+		public List<Lecture> lectureNoList(int cPage, int numPerPage) {
+			Connection conn= getConnection();
+			List<Lecture> list=dao.lectureNoList(conn, cPage, numPerPage);
+			close(conn);
+			return list;
+		}
+
+		public int lectureOff(int lecNum) {
+			Connection conn = getConnection();
+			int result = dao.lectureOff(conn, lecNum);
+			close(conn);
+			return result;
+		}
+		
+		public int lectureOn(int lecNum) {
+			Connection conn = getConnection();
+			int result = dao.lectureOn(conn, lecNum);
+			close(conn);
+			return result;
+		}
+
+
+
 
 
 }

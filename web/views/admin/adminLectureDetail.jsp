@@ -129,6 +129,7 @@
 	<%@ include file="/views/common/adminAside.jsp" %>
 	<%} %>
 </section>
+<%@ include file="/views/common/adminFooter.jsp"%>
 	<script>
 		
 		function btnRefusal() {
@@ -168,4 +169,3 @@
 			});
 		});
 	</script>
-<%@ include file="/views/common/adminFooter.jsp"%>

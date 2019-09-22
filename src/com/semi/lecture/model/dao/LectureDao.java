@@ -15,6 +15,7 @@ import java.util.Properties;
 
 import com.semi.lecture.model.vo.Lecture;
 import com.semi.lecture.model.vo.LectureUpload;
+import com.semi.member.model.vo.Member;
 import com.semi.mento.model.dao.MentoDao;
 import com.semi.mento.model.vo.Mento;
 
@@ -584,4 +585,198 @@ public class LectureDao {
 		}
 		return list;
 	}
+
+
+	public int countLectureList(Connection conn) {
+		Statement stmt = null;
+		ResultSet rs = null;
+		int result = 0;
+		String sql = "select count(*) from tb_lecture";
+		try {
+			stmt = conn.createStatement();
+			rs = stmt.executeQuery(sql);
+			if(rs.next()){
+				result = rs.getInt(1);
+			}
+		}catch(Exception e) {
+			e.printStackTrace();
+		}finally {
+			close(rs);
+			close(stmt);
+		}
+		return result;
+		
+	}
+
+
+	public List<Lecture> lectureAllList(Connection conn , int cPage , int numPerPage) {
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		String sql=prop.getProperty("selectListPage");
+		List<Lecture> list=new ArrayList();
+		Lecture lec = null;
+		try {
+			pstmt=conn.prepareStatement(sql);
+			pstmt.setInt(1,(cPage-1)*numPerPage+1);
+			pstmt.setInt(2,cPage*numPerPage);
+			rs=pstmt.executeQuery();
+			while(rs.next()) {
+				lec = new Lecture();
+				lec.setLecNum(rs.getInt("lecnum"));
+				lec.setMtNum(rs.getInt("mtnum"));
+				lec.setSubNum(rs.getInt("subnum"));
+				lec.setLocalSubNum(rs.getInt("sublocalnum"));
+				lec.setLecName(rs.getString("lecname"));
+				lec.setLecType(rs.getString("lectype"));
+				lec.setLecMaxCount(rs.getInt("lecmaxcount"));
+				lec.setLecPrice(rs.getInt("lecprice"));
+				lec.setLecTime(rs.getInt("lectime"));
+				lec.setLecCount(rs.getInt("leccount"));
+				lec.setLecWeek(rs.getString("lecweek"));
+				lec.setLecMeet(rs.getString("lecmeet"));
+				lec.setLecTot(rs.getString("lecTot"));
+				lec.setLecTot2(rs.getString("lecTot2"));
+				lec.setLecOpenDate(rs.getDate("lecOpenDate"));
+				lec.setLecOpenDate2(rs.getDate("lecOpenDate2"));
+				lec.setLecLocalContent(rs.getString("lecLocalContent").replaceAll(" ", "&nbsp;").replaceAll("<", "&lt;").replaceAll(">", "&gt;").replaceAll("\n", "<br>"));
+				lec.setLecMentoContent(rs.getString("lecMentoContent").replaceAll(" ", "&nbsp;").replaceAll("<", "&lt;").replaceAll(">", "&gt;").replaceAll("\n", "<br>"));
+				lec.setLecLectureContent(rs.getString("lecLectureContent").replaceAll(" ", "&nbsp;").replaceAll("<", "&lt;").replaceAll(">", "&gt;").replaceAll("\n", "<br>"));
+				lec.setLecStudentCount(rs.getInt("lecStudentCount"));
+				lec.setLecADate(rs.getDate("lecaDate"));
+				lec.setLecCheck(rs.getString("lecCheck").charAt(0));
+				if(rs.getString("lecReason")==null) {
+					lec.setLecReason(rs.getString("lecReason"));
+				} else {
+					lec.setLecReason(rs.getString("lecReason").replaceAll(" ", "&nbsp;").replaceAll("<", "&lt;").replaceAll(">", "&gt;").replaceAll("\n", "<br>"));
+				}
+				lec.setLecStatus(rs.getString("lecstatus").charAt(0));
+				List<LectureUpload> lecUp = new LectureUploadDao().lectureUpCover(conn,rs.getInt("lecnum"));
+				Mento m = new MentoDao().mentoView(conn, rs.getInt("mtnum"));
+				lec.setLectureUpList(lecUp);
+				lec.setLecMento(m);
+				list.add(lec);
+			}
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rs);
+			close(pstmt);
+		}return list;
+	}
+
+
+	public int countLectureNoList(Connection conn) {
+		Statement stmt = null;
+		ResultSet rs = null;
+		int result = 0;
+		String sql = "select count(*) from tb_lecture where lecstatus = 'N' ";
+		try {
+			stmt = conn.createStatement();
+			rs = stmt.executeQuery(sql);
+			if(rs.next()){
+				result = rs.getInt(1);
+			}
+		}catch(Exception e) {
+			e.printStackTrace();
+		}finally {
+			close(rs);
+			close(stmt);
+		}
+		return result;
+	}
+
+
+	public List<Lecture> lectureNoList(Connection conn, int cPage, int numPerPage) {
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		String sql=prop.getProperty("selectListPage2");
+		List<Lecture> list=new ArrayList();
+		Lecture lec = null;
+		try {
+			pstmt=conn.prepareStatement(sql);
+			pstmt.setInt(1,(cPage-1)*numPerPage+1);
+			pstmt.setInt(2,cPage*numPerPage);
+			rs=pstmt.executeQuery();
+			while(rs.next()) {
+				lec = new Lecture();
+				lec.setLecNum(rs.getInt("lecnum"));
+				lec.setMtNum(rs.getInt("mtnum"));
+				lec.setSubNum(rs.getInt("subnum"));
+				lec.setLocalSubNum(rs.getInt("sublocalnum"));
+				lec.setLecName(rs.getString("lecname"));
+				lec.setLecType(rs.getString("lectype"));
+				lec.setLecMaxCount(rs.getInt("lecmaxcount"));
+				lec.setLecPrice(rs.getInt("lecprice"));
+				lec.setLecTime(rs.getInt("lectime"));
+				lec.setLecCount(rs.getInt("leccount"));
+				lec.setLecWeek(rs.getString("lecweek"));
+				lec.setLecMeet(rs.getString("lecmeet"));
+				lec.setLecTot(rs.getString("lecTot"));
+				lec.setLecTot2(rs.getString("lecTot2"));
+				lec.setLecOpenDate(rs.getDate("lecOpenDate"));
+				lec.setLecOpenDate2(rs.getDate("lecOpenDate2"));
+				lec.setLecLocalContent(rs.getString("lecLocalContent").replaceAll(" ", "&nbsp;").replaceAll("<", "&lt;").replaceAll(">", "&gt;").replaceAll("\n", "<br>"));
+				lec.setLecMentoContent(rs.getString("lecMentoContent").replaceAll(" ", "&nbsp;").replaceAll("<", "&lt;").replaceAll(">", "&gt;").replaceAll("\n", "<br>"));
+				lec.setLecLectureContent(rs.getString("lecLectureContent").replaceAll(" ", "&nbsp;").replaceAll("<", "&lt;").replaceAll(">", "&gt;").replaceAll("\n", "<br>"));
+				lec.setLecStudentCount(rs.getInt("lecStudentCount"));
+				lec.setLecADate(rs.getDate("lecaDate"));
+				lec.setLecCheck(rs.getString("lecCheck").charAt(0));
+				if(rs.getString("lecReason")==null) {
+					lec.setLecReason(rs.getString("lecReason"));
+				} else {
+					lec.setLecReason(rs.getString("lecReason").replaceAll(" ", "&nbsp;").replaceAll("<", "&lt;").replaceAll(">", "&gt;").replaceAll("\n", "<br>"));
+				}
+				lec.setLecStatus(rs.getString("lecstatus").charAt(0));
+				List<LectureUpload> lecUp = new LectureUploadDao().lectureUpCover(conn,rs.getInt("lecnum"));
+				Mento m = new MentoDao().mentoView(conn, rs.getInt("mtnum"));
+				lec.setLectureUpList(lecUp);
+				lec.setLecMento(m);
+				list.add(lec);
+			}
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rs);
+			close(pstmt);
+		}return list;
+	}
+
+
+	public int lectureOff(Connection conn, int lecNum) {
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		int result = 0;
+		String sql=prop.getProperty("lectOff");
+		try {
+			pstmt=conn.prepareStatement(sql);
+			pstmt.setInt(1, lecNum);
+			result=pstmt.executeUpdate();
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}
+		finally {
+			close(pstmt);
+		}
+		return result;
+	}
+	
+	public int lectureOn(Connection conn, int lecNum) {
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		int result = 0;
+		String sql=prop.getProperty("lectOn");
+		try {
+			pstmt=conn.prepareStatement(sql);
+			pstmt.setInt(1, lecNum);
+			result=pstmt.executeUpdate();
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}
+		finally {
+			close(pstmt);
+		}
+		return result;
+	}
+
+
 }

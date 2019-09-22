@@ -92,6 +92,7 @@
 		</div>
 
 	</article>
+	<br><br>
 
 	<%@ include file="/views/common/adminAside.jsp"%>
 

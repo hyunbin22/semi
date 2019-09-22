@@ -9,12 +9,12 @@
  	ReportUpload rpu = (ReportUpload)request.getAttribute("reportUp");
 %>
 
- <section class="center1">
+ <section>
 
         <article class="admin-list-container wrap">
           <div class="row">
          <div class="col">
-            <div class="notice-table">
+            <div class="notice-table2">
             <form id = "replyFrm" action = "" method = "post">
             <input type="hidden" name="reportId" value=<%=rp.getMember().getmId() %>>
                 <table class="notice-top">
@@ -125,6 +125,7 @@
                 </div>
             </div>
         </article>
+        <%@ include file="/views/common/adminAside.jsp"%>
     </section>
     
 	<script>

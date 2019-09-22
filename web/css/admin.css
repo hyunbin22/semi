@@ -18,7 +18,9 @@ h1, h2 {
 }
 /* admin */
 body{
-    width: 1024px
+    width: 1024px;
+    margin: auto;
+  
 }
 
 /* list가 0일때 */
@@ -596,4 +598,10 @@ table{
 
 .tab-content{
 	    font-family: 'Noto Sans KR', sans-serif;
+}
+
+.notice-table2{ /* 공지사항내용목록 */
+	margin-left : -20px;
+    float: left;
+    text-align: center;
 }
