@@ -10,7 +10,7 @@
 	String searchKey = (String)request.getAttribute("searchKeyword");
 %>
 <section>
-
+<div style = "height: 1000px;">
 	<article id="search1">
 		<div id="adminSearchContainer">
 			<select id="searchType">
@@ -79,9 +79,8 @@
 			</div>
 	<br><br>
 	</article>
-
+<div style = "height: 1000px;">
 </section>
-
 <script>
 $(function(){
 	var sid = $("#search-mId");
@@ -103,5 +102,4 @@ $(function(){
 });
 
 </script>
-
 <%@ include file="/views/common/adminFooter.jsp"%>

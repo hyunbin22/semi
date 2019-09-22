@@ -28,13 +28,15 @@ p {
 </head>
 <body class="center1">
 	<header class="admin-header">
-			<br><br><br><br><br><br>
+
+			<a href="<%=request.getContextPath()%>/views/admin/adminMain.jsp"><img src = "<%=request.getContextPath()%>/image/adminHeaderLogo.png"></a>
+
 		<ul id="header-line">
 			<li><a href="<%=request.getContextPath() %>/admin/memberList.do">회원관리</a></li>
 			<li><a href="<%=request.getContextPath() %>/admin/AdminMentoList.do">멘토관리</a></li>
-			<li><a href="#">강의관리</a></li>
+			<li><a href="<%=request.getContextPath() %>/admin/adminLectureList.do">강의관리</a></li>
 			<li><a href="<%=request.getContextPath()%>/admin/categoryEnroll">카테고리관리</a></li>
 			<li><a href="<%=request.getContextPath() %>/admin/AdminMentoApproval.do">승인관리</a></li>
-			<button id="exit" onclick="location.href='<%=request.getContextPath()%>'">메인</a></button>
+			<button id="exit" onclick="location.href='<%=request.getContextPath()%>'">메인</button>
 		</ul>
 	</header>

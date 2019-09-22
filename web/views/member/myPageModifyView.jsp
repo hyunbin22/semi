@@ -190,7 +190,4 @@
     
     
         </script>
-    
-
-
     <%@ include file = "/views/common/footer.jsp" %>

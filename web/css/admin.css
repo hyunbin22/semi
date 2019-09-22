@@ -17,7 +17,9 @@ h1, h2 {
 }
 /* admin */
 body{
-    width: 1024px
+    width: 1024px;
+    margin: auto;
+  
 }
 
 /* list가 0일때 */
@@ -596,3 +598,4 @@ table{
 .tab-content{
 	    font-family: 'Noto Sans KR', sans-serif;
 }
+

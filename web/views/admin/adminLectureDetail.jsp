@@ -115,7 +115,7 @@
 			</div>
 		</div>
 		</article>
-		<%if(temp!=0) {%>
+	<%if(temp!=0) {%>
 	<%@ include file="/views/common/adminAside.jsp" %>
 	<%} %>
 </section>
@@ -144,4 +144,6 @@
 
 	
 	</script>
+
+
 <%@ include file="/views/common/adminFooter.jsp"%>

@@ -75,6 +75,7 @@
 
 </div>
 </section>
+<%@ include file="/views/common/adminFooter.jsp"%>
 <script>
 $(function(){
 	if(<%=count%>==0) {
@@ -83,6 +84,3 @@ $(function(){
 	}
 });
 </script>
-   
-</body>
-</html>

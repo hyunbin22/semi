@@ -100,6 +100,7 @@
 	<%@ include file="/views/common/adminAside.jsp" %>
 	<%} %>
 </section>
+<%@ include file="/views/common/adminFooter.jsp"%>
 <script>
 	$(function(){
 		<%if(temp==0) {%>
@@ -135,4 +136,3 @@
 
 	
 </script>
-<%@ include file="/views/common/adminFooter.jsp"%>
