@@ -86,8 +86,8 @@
         return true;
         }
     
+   		var count = 1;
     	$(function(){
-    		var count = 1;
     		$('#addFile').click(function(){
     			var addWrap = '<div class="fileWrap">';
         		addWrap += '<input id="inputMoimFile" type="file" name="moimFile' + count + '">';
@@ -106,7 +106,7 @@
     		});
     		
     		//확장자, 정규식 검사
-    		$(document).on("change","input[name='moimFile']",function(event) {
+    		$(document).on("change","input[name='moimFile"+count+"']",function(event) {
     			var ext = $(this).val().split('.').pop().toLowerCase();
     			var fileSize = (this).files[0].size;
     			var maxSize = 1024*1024*1024;
