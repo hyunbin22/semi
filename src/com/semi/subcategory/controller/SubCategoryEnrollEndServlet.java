@@ -15,7 +15,7 @@ import com.semi.subcategory.model.service.SubCategoryService;
  */
 @WebServlet("/admin/subcategoryEnrollEnd")
 public class SubCategoryEnrollEndServlet extends HttpServlet {
-	private static final long serialVersionUID = 1L;
+   private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
@@ -25,31 +25,31 @@ public class SubCategoryEnrollEndServlet extends HttpServlet {
         // TODO Auto-generated constructor stub
     }
 
-	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
-	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
-		int maincategory = Integer.parseInt(request.getParameter("maincategory"));
-		String inputsubcategory = request.getParameter("inputsubcategory");
-		
-		
-		int result=new SubCategoryService().enrollSubCategory(inputsubcategory,maincategory);
+   /**
+    * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+    */
+   protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+      
+      int maincategory = Integer.parseInt(request.getParameter("maincategory"));
+      String inputsubcategory = request.getParameter("inputsubcategory");
+      
+      
+      int result=new SubCategoryService().enrollSubCategory(inputsubcategory,maincategory);
 
-		String msg="";
-		String loc="/";
-		msg=result>0?"서브카테고리 등록 성공":"서브카테고리 등록 실패";
-		request.setAttribute("msg", msg);
-		request.setAttribute("loc", loc);
-		request.getRequestDispatcher("/views/common/msg.jsp").forward(request, response);
-	}
+      String msg="";
+      String loc="/admin/subcategoryEnroll";
+      msg=result>0?"서브카테고리 등록 성공":"서브카테고리 등록 실패";
+      request.setAttribute("msg", msg);
+      request.setAttribute("loc", loc);
+      request.getRequestDispatcher("/views/common/msg.jsp").forward(request, response);
+   }
 
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		doGet(request, response);
-	}
+   /**
+    * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+    */
+   protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+      // TODO Auto-generated method stub
+      doGet(request, response);
+   }
 
 }
