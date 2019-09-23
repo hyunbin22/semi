@@ -65,7 +65,12 @@
                         <div class="box">
                             <td class="lecture">학력</td>
                             <td class="title2"> 
-                            	<%=mt2.getMtAcademic() %> 
+                <%       	if(mt2.getMtAcademic()!=null){
+                            		%>
+                           <%=mt2.getMtAcademic() %> 
+                            <%
+                                  }%>
+     
                             </td>
                             </div>
                         </tr>
@@ -74,7 +79,16 @@
                         <tr>
                         <div class="box">
                             <td class="lecture">전공학과</td>
-                            <td class="title2"> <%=mt2.getMtAcademicDept() %></td>
+                          <td class="title2"> 
+                             <%
+                            	if(mt2.getMtAcademicDept() !=null){
+                            		%>
+                            		 <%=mt2.getMtAcademicDept() %>
+                            <%
+                            }
+                            %>
+   							  </td>
+                            
                             </div>
                         </tr>
                         <tr>

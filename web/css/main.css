@@ -359,7 +359,7 @@ textarea:focus::-webkit-input-placeholder {
 }
 
 .mainMenu nav ul {
-	z-index: 1;
+	z-index: 6;
 	padding: 0 0px;
 	list-style: none;
 	position: absolute;
