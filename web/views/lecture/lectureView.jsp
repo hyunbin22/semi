@@ -222,12 +222,11 @@
                   <input class="lecFViewTot"name="lectot" type="radio" value="<%=lec.getLecTot()%>"><%=lec.getLecTot() %>
                <%} %>
                <%if(lec.getLecTot2()!=null){ %>   
-                  <input class="lecFViewTot" name="lectot2" type="radio" value="<%=lec.getLecTot2()%>"><%=lec.getLecTot2()%>
+                  <input class="lecFViewTot" name="lectot"  type="radio" value="<%=lec.getLecTot2()%>"><%=lec.getLecTot2()%>
             <%} %>
             <%if(lec.getLecTot()==null&&lec.getLecTot2()==null){ %>
                &nbsp;&nbsp;&nbsp;협의
                <input type="hidden" name="lectot" value="협의">
-               <input type="hidden" name="lectot2" value="협의">
             <%} %>
             </div>
             <div class="floatsubtitle">총 수업 횟수</div>
