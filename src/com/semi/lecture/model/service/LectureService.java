@@ -101,7 +101,7 @@ public class LectureService {
 
 		if(result>0) {
 			commit(conn);
-			result = dao.selectSeqLecNum(conn, l.getMtNum());
+			result = dao.selectSeqLecNum(conn);
 		}else {
 			rollback(conn);
 		}

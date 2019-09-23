@@ -815,7 +815,6 @@ input#apply {
 	margin-bottom: 2em;
 	position: relative;
 	width: 160px;
-	height: 32px;
 	margin: 10px 20px 10px 20px;
 	background-color: white;
 	color: black;
@@ -843,7 +842,6 @@ input#apply {
 .floatMenu {
 	position: absolute;
 	width: 200px;
-	height: 740px;
 	/* top:52%; */
 	margin-top: -250px;
 	margin-left: 100px;

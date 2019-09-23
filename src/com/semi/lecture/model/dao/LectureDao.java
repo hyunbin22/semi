@@ -329,12 +329,12 @@ public class LectureDao {
 	}
 
 	//멘토번호로 강의번호 조회
-	public int selectSeqLecNum(Connection conn, int mtNum) {
+	public int selectSeqLecNum(Connection conn) {
 
 		Statement stmt = null;
 		ResultSet rs = null;
 		int result = 0;
-		String sql = "select lecnum from tb_lecture where mtnum = " + mtNum;
+		String sql = "select SEQ_LECTURE.currval from dual";
 		try {
 			stmt = conn.createStatement();
 			rs = stmt.executeQuery(sql);
