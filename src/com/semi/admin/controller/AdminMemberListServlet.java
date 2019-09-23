@@ -33,13 +33,7 @@ public class AdminMemberListServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		Member loginMember=(Member)request.getSession().getAttribute("loginMember");
-		if(loginMember==null || !loginMember.getmId().equals("admin")) {
-			request.setAttribute("msg","잘못된 경로로 접근하셨습니다.");
-			request.setAttribute("loc", "/");
-			request.getRequestDispatcher("/views/common/msg.jsp")
-			.forward(request, response);
-			return;
-		}
+
 		//페이징처리 추가하기
 		int cPage;
 		try {
@@ -56,9 +50,7 @@ public class AdminMemberListServlet extends HttpServlet {
 		int totalPage=(int)Math.ceil((double)totalMember/numPerPage);
 		String pageBar="";
 		int pageSizeBar=5;
-		System.out.println("cpage : "+cPage);
 		int pageNo=((cPage-1)/pageSizeBar)*pageSizeBar+1;
-		System.out.println("pageNo : "+(cPage-1)/pageSizeBar*pageSizeBar);
 		int pageEnd=pageNo+pageSizeBar-1;
 		if(pageNo==1) {
 			pageBar+="<span>[이전]</span>";

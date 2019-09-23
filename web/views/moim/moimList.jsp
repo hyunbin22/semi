@@ -125,7 +125,6 @@ div#search-container {
 		var skeyword = $('#search-moim_keyword');
 		var searchType=$("#searchType");
 		searchType.change(function() {
-			console.log(this.value);
 			sid.hide();
 			sname.hide();
 			skeyword.hide();
