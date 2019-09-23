@@ -42,7 +42,7 @@ public class OrderService {
 		order = dao.selectOrder(conn, oNum);
 		close(conn);
 		return order;
-
+		
 	}
 
 	//결제 Y로 바꾸기
@@ -130,6 +130,14 @@ public class OrderService {
 		List<Order> list = dao.selectLectureOrder(conn, lecNum);
 		close(conn);
 		return list;
+	}
+	
+	//lecNum이랑 mNum이 일치
+	public Order selectLoginMemOrder(int mNum, int lectureNo) {
+		Connection conn = getConnection();
+		Order o = dao.selectLoginMemOrder(conn, mNum, lectureNo);
+		close(conn);
+		return o;
 	}
 
 }

@@ -13,6 +13,8 @@ import java.util.List;
 import java.util.Properties;
 
 import com.semi.lecture.model.vo.LectureReview;
+import com.semi.member.model.dao.MemberDao;
+import com.semi.member.model.vo.Member;
 
 public class LectureReviewDao {
 
@@ -46,6 +48,8 @@ public class LectureReviewDao {
 				rv.setrTitle(rs.getString("rTitle").replaceAll(" ", "&nbsp;").replaceAll("<", "&lt;").replaceAll(">", "&gt;").replaceAll("\n", "<br>"));
 				rv.setrText(rs.getString("rText").replaceAll(" ", "&nbsp;").replaceAll("<", "&lt;").replaceAll(">", "&gt;").replaceAll("\n", "<br>"));
 				rv.setrDate(rs.getDate("rDate"));
+				Member m = new MemberDao().selectMemberMnum(conn, rs.getInt("mNum"));
+				rv.setMember(m);
 				list.add(rv);
 			}
 		} catch(SQLException e) {

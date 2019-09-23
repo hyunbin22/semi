@@ -38,9 +38,8 @@ public class MentoUploadDao {
 			pstmt=conn.prepareStatement(sql);
 			pstmt.setInt(1, mtnum);
 			pstmt.setString(2, category);
-			pstmt.setString(3, mtu.getUpMentoNameLicense());
-			pstmt.setString(4, mtu.getUpMentoOrgName());
-			pstmt.setString(5, mtu.getUpMentoReName());
+			pstmt.setString(3, mtu.getUpMentoOrgName());
+			pstmt.setString(4, mtu.getUpMentoReName());
 			result=pstmt.executeUpdate();
 
 		}catch(SQLException e) {
@@ -204,8 +203,5 @@ public class MentoUploadDao {
 
 		return result1;
 	}
-	
-
-
 
 }

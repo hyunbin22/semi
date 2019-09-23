@@ -88,8 +88,8 @@ public class OrderDao {
 				order.setOrderDate(rs.getDate("orderDate"));
 				order.setPayDate(rs.getDate("paydate"));
 
-				order.setLecture(new LectureService().lectureView(rs.getInt("lecNum")));
-				order.setMember(new MemberService().selectMember(rs.getInt("mnum")));
+				order.setLecture(new LectureDao().lectureView(conn, rs.getInt("lecNum")));
+				order.setMember(new MemberDao().selectMemberMnum(conn, rs.getInt("mnum")));
 			}
 
 		} catch(SQLException e) {
@@ -340,7 +340,7 @@ public class OrderDao {
 			while(rs.next()) {
 				o = new Order();
 				o.setoNum(rs.getInt("onum"));
-				o.setmNum(rs.getInt("mnum"));
+				o.setmNum(rs.getInt("mNum"));
 				o.setLecNum(lecNum);
 				o.setoTot(rs.getString("otot").replaceAll(" ", "&nbsp;").replaceAll("<", "&lt;").replaceAll(">", "&gt;").replaceAll("\n", "<br>"));
 				o.setoText(rs.getString("otext").replaceAll(" ", "&nbsp;").replaceAll("<", "&lt;").replaceAll(">", "&gt;").replaceAll("\n", "<br>"));
@@ -349,7 +349,7 @@ public class OrderDao {
 				o.setoCheck(rs.getString("ocheck").charAt(0));
 				o.setOrderDate(rs.getDate("orderdate"));
 
-				Member m = new MemberDao().selectMemberMnum(conn, rs.getInt("mnum"));
+				Member m = new MemberDao().selectMemberMnum(conn, rs.getInt("mNum"));
 				Lecture lec = new LectureDao().lectureView(conn, rs.getInt("lecNum"));
 				o.setMember(m);
 				o.setLecture(lec);
@@ -361,8 +361,40 @@ public class OrderDao {
 			close(rs);
 			close(pstmt);
 		}
-
 		return list;
+	}
+
+	public Order selectLoginMemOrder(Connection conn, int mNum, int lectureNo) {
+		PreparedStatement pstmt=null;
+		ResultSet rs = null;
+		int result = 0;
+		String sql=prop.getProperty("selectLoginMemOrder");
+		Order o = new Order();
+		try {
+			pstmt=conn.prepareStatement(sql);
+			pstmt.setInt(1, mNum);
+			pstmt.setInt(2,lectureNo);
+			result=pstmt.executeUpdate();
+			if(rs.next()) {
+				o = new Order();
+				o.setoNum(rs.getInt("onum"));
+				o.setmNum(rs.getInt("mnum"));
+				o.setLecNum(rs.getInt("lecnum"));
+				o.setoText(rs.getString("otext").replaceAll(" ", "&nbsp;").replaceAll("<", "&lt;").replaceAll(">", "&gt;").replaceAll("\n", "<br>"));
+				o.setoTot(rs.getString("otot"));
+				o.setoPrice(rs.getInt("oprice"));
+				o.setoPayment(rs.getString("opayment").charAt(0));
+				o.setoCheck(rs.getString("ocheck").charAt(0));  
+				o.setOrderDate(rs.getDate("orderDate"));
+				o.setPayDate(rs.getDate("payDate"));
+			}
+			
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}
+		return o;
 	}
 
 

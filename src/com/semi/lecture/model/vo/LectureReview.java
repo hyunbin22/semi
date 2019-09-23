@@ -2,6 +2,8 @@ package com.semi.lecture.model.vo;
 
 import java.sql.Date;
 
+import com.semi.member.model.vo.Member;
+
 public class LectureReview {
 
    
@@ -12,17 +14,35 @@ public class LectureReview {
    private String rTitle; // 리뷰제목
    private String rText; // 리뷰내용
    private Date rDate; // 리뷰작성날자
+   private Member member;
    
    
    public LectureReview() {
       // TODO Auto-generated constructor stub
    }
    
-   
+    
+    
    
 
 
-   public LectureReview(int lecnum, int mNum, String rTitle, String rText) {
+   public LectureReview(int rNum, int lecnum, int mNum, String rTitle, String rText, Date rDate, Member member) {
+	super();
+	this.rNum = rNum;
+	this.lecnum = lecnum;
+	this.mNum = mNum;
+	this.rTitle = rTitle;
+	this.rText = rText;
+	this.rDate = rDate;
+	this.member = member;
+}
+
+
+
+
+
+
+public LectureReview(int lecnum, int mNum, String rTitle, String rText) {
 	super();
 	this.lecnum = lecnum;
 	this.mNum = mNum;
@@ -59,9 +79,28 @@ public LectureReview(int rNum, int lecnum, int mNum, String rTitle, String rText
    
    
    
+   
 
 
-   public int getrNum() {
+   public Member getMember() {
+	return member;
+}
+
+
+
+
+
+
+public void setMember(Member member) {
+	this.member = member;
+}
+
+
+
+
+
+
+public int getrNum() {
       return rNum;
    }
 
