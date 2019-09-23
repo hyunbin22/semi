@@ -42,9 +42,9 @@
 
                 </div>
                  <div class="qna-box-content">
-                    <p>
+                    <pre>
 <%=n.getnText() %>
-                    </p>
+                    </pre>
                 </div> 
                 <br><br><br>
             <div class="NoticeFileDownload">첨부파일

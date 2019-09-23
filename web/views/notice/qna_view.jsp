@@ -60,9 +60,9 @@
 
                 </div>
                  <div class="qna-box-content">
-                    <p>
+                    <pre>
 <%=q.getqContent() %>
-                    </p>
+                    </pre>
                 </div> 
                 <br><br><br>
   					<%if(qu.getUpQnaReName()!=null) {%>
