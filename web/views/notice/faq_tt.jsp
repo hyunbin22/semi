@@ -8,7 +8,7 @@
                 <h3>　　　FAQ - 자주 묻는 질문</h3>
             </div>
             <div class="qna-content center1"><br>
-            	<a class="qna-tab" onclick = "location.href='<%=request.getContextPath()%>/views/notice/faq_ts.jsp'">수강생</a>
+            	<a class="qna-tab" onclick = "location.href='<%=request.getContextPath()%>/faq/faq.do'">수강생</a>
                 <a class="qna-tab on">강사</a>
             </div>
             <div class="qna-section center1">

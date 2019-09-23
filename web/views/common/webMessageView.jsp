@@ -64,7 +64,7 @@
 								<div class="form-group col-xs-10">
 								<%if(!toId.equals("msgAdmin")) {%>
 									<%if(str!=null && !str.equals("")) {%> 
-										<textarea style="height: 70px;resize: none;" id="chatContent" class="form-control" maxlength="100">[<%=str %>] 문의합니다!</textarea>
+										<textarea style="height: 70px;resize: none;" id="chatContent" class="form-control" maxlength="100"><%=str %> 문의합니다!</textarea>
 									<%} else { %>
 										<textarea style="height: 70px;resize: none;" id="chatContent" class="form-control" maxlength="100" placeholder="메세지를 입력하세요."></textarea>
 									<%} %>

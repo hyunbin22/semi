@@ -55,11 +55,15 @@
 									<br><br>
 									<div class="center1">
 								   		<button onclick="back();" class="next center1" >목록으로</button>
-								   		<%if(str.equals("N")) { %>
-								   			<button class = "next" onclick = "location.href='<%=request.getContextPath()%>/order/orderPaymentView.do?oNum=<%=o.getoNum()%>'">결제하기</button>
-								   		<%} else {%>
-								   			<button class = "next" id="btnPayReset">결제취소</button>
-								   		<%} %>
+								   		<%if(o.getoCheck()!='N') {%>
+									   		<%if(str.equals("N")) { %>
+									   			<button class = "next" onclick = "location.href='<%=request.getContextPath()%>/order/orderPaymentView.do?oNum=<%=o.getoNum()%>'">결제하기</button>
+									   		<%} else {%>
+									   			<button class = "next" id="btnPayReset">결제취소</button>
+									   		<%} 
+								   		}
+								   		%>
+								   		<button class = "next" onclick="location.href='<%=request.getContextPath()%>/lecture/lectureView?lecnum=<%=o.getLecNum()%>'">상세보기</button>
 									</div>
                  					<br>
   					</div>
@@ -69,7 +73,7 @@
 	<script>	
 		function back()
 		{
-			var url="<%=request.getContextPath()%>/member/studyList.do?mNum=<%=m.getmNum() %>";
+			var url="<%=request.getContextPath()%>/order/orderList.do?mNum=<%=m.getmNum() %>";
 			location.href=url;
 		}
 		

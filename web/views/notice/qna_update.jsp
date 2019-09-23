@@ -10,8 +10,9 @@
 %>
 	<section class="qna-view center1">
 	    <br>
-	    <p class="qna-title">문의 수정</p>
+	    <p class="qna-redit-title">문의 수정</p>
 	    <form action = "<%=request.getContextPath()%>/qna/updateDB.do" method="POST"  enctype="multipart/form-data">
+	    <input type="hidden" name="qNum" value="<%=q.getqNum()%>">
 	    <div class="qna-view-box center1" >
 	        <table>
 	            <tr>

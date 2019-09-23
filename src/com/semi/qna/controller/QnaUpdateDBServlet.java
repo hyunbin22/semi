@@ -34,8 +34,7 @@ public class QnaUpdateDBServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String root=getServletContext().getRealPath("/");
-	    System.out.println(root);
-		
+
 	    String saveDir=root+"/upload/qnaupload";//저장위치
 	    
 	    int maxSize=1024*1024*1024; //사이즈제한
@@ -43,11 +42,12 @@ public class QnaUpdateDBServlet extends HttpServlet {
 	    Member memberLogin = (Member) session.getAttribute("loginMember"); //로그인세션맴버
 	    MultipartRequest mr = new MultipartRequest(request, saveDir, maxSize, "UTF-8", new AblingFileRenamePolicy(memberLogin.getmId())); //멀티객체 저장
 	    
+	    int qNum=Integer.parseInt(mr.getParameter("qNum"));
 	    String title = mr.getParameter("qna-title");
 		String content = mr.getParameter("qna-content");
 		
 		QnaService service=new QnaService();
-		int result=service.updateQna(title, content);
+		int result=service.updateQna(title, content, qNum);
 		
 		String qnaOriName=mr.getOriginalFileName("qnafile");
 		String qnaReName=mr.getFilesystemName("qnafile");

@@ -23,9 +23,9 @@ import com.semi.qna.model.vo.QnaComment;
 import com.semi.qna.model.vo.QnaUpload;
 
 public class QnaDao {
-	
+
 	private Properties prop=new Properties();
-	
+
 	public QnaDao() {
 		String path=NoticeDao.class.getResource("/sql/semi/qna-query.properties").getPath();
 		try {
@@ -34,7 +34,7 @@ public class QnaDao {
 			e.printStackTrace();
 		}
 	}
-	
+
 	public int selectCountQna(Connection conn) {
 		Statement stmt=null;
 		ResultSet rs=null;
@@ -53,7 +53,7 @@ public class QnaDao {
 			close(stmt);
 		}return result;
 	}
-	
+
 	public List<Qna> selectListPage(Connection conn, int cPage, int numPerPage){
 		PreparedStatement pstmt=null;
 		ResultSet rs=null;
@@ -73,7 +73,7 @@ public class QnaDao {
 				q.setqContent(rs.getString("qcontent"));
 				q.setqDate(rs.getDate("qdate"));
 				q.setMember(dao.selectMemberMnum(conn, rs.getInt("mnum")));
-				
+
 				list.add(q);
 			}
 		}catch(SQLException e) {
@@ -82,9 +82,9 @@ public class QnaDao {
 			close(rs);
 			close(pstmt);
 		}return list;
-		
+
 	}
-	
+
 
 	public int enrollQna(Connection conn, String mId, String title , String content) {
 		PreparedStatement pstmt=null;
@@ -102,7 +102,7 @@ public class QnaDao {
 			close(pstmt);
 		}return result;
 	}
-	
+
 	public int selectSeqQna(Connection conn) {
 		Statement stmt=null;
 		ResultSet rs=null;
@@ -122,7 +122,7 @@ public class QnaDao {
 		}
 		return result;
 	}
-	
+
 	public int enrollQnaImg(Connection conn, String qnaOriName, String qnaReName, int result) {
 		PreparedStatement pstmt=null;
 		int result2=0;
@@ -195,7 +195,7 @@ public class QnaDao {
 		}
 		return qc;
 	}
-	
+
 	/* 댓글------------------------------------------------------------*/
 	public int insertComment(Connection conn, QnaComment qc) {
 		PreparedStatement pstmt=null;
@@ -213,7 +213,7 @@ public class QnaDao {
 			close(pstmt);
 		}return result;
 	}
-	
+
 	public QnaComment selectQnaComment(Connection conn, int qRef) {
 		PreparedStatement pstmt=null;
 		ResultSet rs=null;
@@ -234,13 +234,13 @@ public class QnaDao {
 		}catch (NullPointerException e){
 			e.printStackTrace(	);
 		}catch (Exception e) {
-			
+
 		}finally {
 			close(rs);
 			close(pstmt);
 		}return qc;
 	}
-	
+
 	// 댓글 시퀀스 번호
 	public int selectSeqQnaComment(Connection conn) {
 		Statement stmt=null;
@@ -261,7 +261,7 @@ public class QnaDao {
 		}
 		return result;
 	}
-	
+
 	//댓글삭제하기
 	public int deleteComment(Connection conn, int qcNo) {
 		PreparedStatement pstmt=null;
@@ -269,7 +269,7 @@ public class QnaDao {
 		String sql=prop.getProperty("deleteComment");
 		try {
 			pstmt=conn.prepareStatement(sql);
-//			pstmt.setInt(1,qnaNo);
+			//			pstmt.setInt(1,qnaNo);
 			pstmt.setInt(1, qcNo);
 			result=pstmt.executeUpdate();
 		}catch(SQLException e) {
@@ -303,7 +303,7 @@ public class QnaDao {
 		}
 		return qu;
 	}
-	
+
 	/* Qna글 수정 */
 	public Qna QnaUpdate(Connection conn, int qNum) {
 		PreparedStatement pstmt = null;
@@ -332,8 +332,9 @@ public class QnaDao {
 			close(pstmt);
 		}return q;
 	}
-	
-	public int updateQna(Connection conn, String title, String content) {
+
+	//DAO
+	public int updateQna(Connection conn, String title, String content, int qNum) {
 		PreparedStatement pstmt=null;
 		int result=0;
 		String sql=prop.getProperty("updateQna");
@@ -341,6 +342,7 @@ public class QnaDao {
 			pstmt=conn.prepareStatement(sql);
 			pstmt.setString(1, title);
 			pstmt.setString(2, content);
+			pstmt.setInt(3, qNum);
 			result = pstmt.executeUpdate();
 		}catch (Exception e) {
 			e.printStackTrace();

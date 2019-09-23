@@ -37,7 +37,7 @@ public class OrderUpdatePaymentServlet extends HttpServlet {
 				
 				//멘토한테 결제되었다는 메세지 보내기
 				String userId = new OrderService().selectOrder(oNum).getLecture().getLecMento().getMember().getmId();
-				new MessageService().insertMessage("msgAdmin", userId, "[ 신청번호 '"+oNum+"' ] 결제 완료 되었습니다.");
+				new MessageService().insertMessage("msgAdmin", userId, " 신청번호 '"+oNum+"'  결제 완료 되었습니다.");
 			}
 		}
 		

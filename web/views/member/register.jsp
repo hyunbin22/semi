@@ -172,6 +172,7 @@
 				$('#tel3').prop("readonly", true);
 
 				$('#checkNum').prop("readonly",true);
+				$('#keyCheck').text("");
 				$('#keyCheck').prop("disabled",false);
 	
 				count=1;

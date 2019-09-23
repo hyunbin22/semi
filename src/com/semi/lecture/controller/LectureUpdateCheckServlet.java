@@ -35,7 +35,7 @@ public class LectureUpdateCheckServlet extends HttpServlet {
 		//강의승인 되었다는 메세지 관리자로 보내기
 		Lecture lec = new LectureService().lectureView(lecNum);
 		if(result>0) {
-			new MessageService().insertMessage("msgAdmin", lec.getLecMento().getMember().getmId(), "< "+lec.getLecName()+" > 강의가 승인되었습니다.");
+			new MessageService().insertMessage("msgAdmin", lec.getLecMento().getMember().getmId(), lec.getLecName()+" 강의가 승인되었습니다.");
 		}
 		
 		

@@ -53,26 +53,26 @@ public class AdminMemberListServlet extends HttpServlet {
 		int pageNo=((cPage-1)/pageSizeBar)*pageSizeBar+1;
 		int pageEnd=pageNo+pageSizeBar-1;
 		if(pageNo==1) {
-			pageBar+="<span>[이전]</span>";
+			pageBar+="<span>[이전]&nbsp;</span>";
 		}
 		else {
-			pageBar+="<a href="+request.getContextPath()+"/admin/memberList.do?cPage="+(pageNo-1)+">[이전]</a>";
+			pageBar+="<a href="+request.getContextPath()+"/admin/memberList.do?cPage="+(pageNo-1)+">[이전]&nbsp;</a>";
 		}
 		while(!(pageNo>pageEnd||pageNo>totalPage)) {
 			if(pageNo==cPage) {
-				pageBar+="<span class='cPage'>"+pageNo+"</span>";
+				pageBar+="<span class='cPage'>"+pageNo+"&nbsp;</span>";
 			}
 			else {
-				pageBar+="<a href="+request.getContextPath()+"/admin/memberList.do?cPage="+pageNo+">"+pageNo+"</a>";
+				pageBar+="<a href="+request.getContextPath()+"/admin/memberList.do?cPage="+pageNo+">"+pageNo+"&nbsp;</a>";
 			}
 			pageNo++;
 		}
 		if(pageNo>totalPage) {
-			pageBar+="<span>[다음]</span>";
+			pageBar+="<span>[다음]&nbsp;</span>";
 		}
 		else {
 			pageBar+="<a href="+request.getContextPath()+
-			"/admin/memberList.do?cPage="+(pageNo)+">[다음]</a>";
+			"/admin/memberList.do?cPage="+(pageNo)+">[다음]&nbsp;</a>";
 		}
 		
 				

@@ -16,7 +16,7 @@
     <section class="qna center1">
     
         <br>
-        <p class="qna-title">Q&A</p>
+        <p class="qna-title">1:1문의</p>
         <div class="">
         <%if(memberLogin != null){ %>
             <a onclick = "location.href='<%=request.getContextPath()%>/views/notice/qna_form.jsp'"><input class="notice-write next" type="button" value="문의하기"></a>
