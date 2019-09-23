@@ -146,7 +146,7 @@
 			            <li><a href="<%=request.getContextPath()%>/notice/noticeList.do">공지사항</a></li>
 				          <li><a onclick = "location.href='<%=request.getContextPath()%>/views/notice/faq_ts.jsp'">F & A</a></li>
 			            <%if(memberLogin != null) { %>
-						      <li><a href="location.href='<%=request.getContextPath()%>/qna/qnaList.do'">1대1문의</a>
+						      <li><a href="<%=request.getContextPath()%>/qna/qnaList.do">1대1문의</a>
 						      </li>
 						      
 						      <li><a href="<%=request.getContextPath()%>/member/report.do">신고</a>
