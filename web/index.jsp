@@ -28,6 +28,7 @@
 	<div class = "center">
 		<img src="<%=request.getContextPath() %>/image/인기강좌.png">
 	</div>
+
 	<br><br><br><br><br><br>
 	<div>
 	<img src = "<%=request.getContextPath()%>/image/MainContent1.jpg">
