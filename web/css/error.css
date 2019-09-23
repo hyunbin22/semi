@@ -32,3 +32,7 @@
     background-color: rgb(255, 171, 161);
     border-bottom: 2px solid rgb(255, 118, 103);
 }
+
+.errorPIMGsize{
+   width : 600px;
+}

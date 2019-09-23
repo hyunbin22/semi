@@ -4,15 +4,15 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>Error Page</title>
 <script src="<%=request.getContextPath()%>/js/jquery-3.4.1.min.js"></script>
 <link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/css/error.css">
 </head>
 <body class="center1 errorPborder">
    <div class="">
       <div class="errorlinetop"></div>
-      <div class="center1">
-         <img src="<%=request.getContextPath()%>/image/logo.png" alt="">
+      <div class="center1 ">
+         <img class="errorPIMGsize"    src="<%=request.getContextPath()%>/image/logo.png" alt="">
       </div>
       <div>
          <table class="center1">
@@ -24,7 +24,7 @@
             </tr>
             <tr><td class="null35px"></td></tr>
             <tr>
-               <td colspan="2" class="buttoncenter"><a href="#"> Home </a></td>
+               <td colspan="2" class="buttoncenter"><a href="<%=request.getContextPath()%>"> Home </a></td>
             </tr>
          </table>
          <br><br><br>
