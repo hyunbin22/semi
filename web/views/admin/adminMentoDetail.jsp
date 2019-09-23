@@ -13,12 +13,12 @@
 <section>
 	<article id="admin-mento-wrap">
 		<div class="admin-mento-detailwrap">
-			<br><br><h1><strong>멘토 상세보기</strong></h1>
+			<br><br><h3><strong>멘토 상세보기</strong></h3>
 			<div class="admin-detail-frm-wrap">
 				<input type="hidden" name="mtNum" value="<%=mt.getMtNum()%>" id="mtNum">
 				<div class="mento_info_child">
 					<h1 class="mento-info-title"><%=mt.getMember().getmName()%> (<%=mt.getMember().getmId() %>)</h1>
-					<h2><strong>프로필사진</strong></h2>
+					<h3><strong>프로필사진</strong></h3>
 					<div id="picture-cover" class="picture center1">
 					<%for(int j = 0; j < mt.getList().size(); j++) {
 						if(mt.getList().get(j).getUpMentoCategory().equals("profile")) {%>
@@ -26,11 +26,11 @@
 					<%} 
 					}%>
 					</div>
-					<h2><strong>별명</strong></h2>
+					<h3><strong>별명</strong></h3>
 					<p><%=mt.getMtNickName()%></p>
-					<h2><strong>휴대폰 번호</strong></h2>
+					<h3><strong>휴대폰 번호</strong></h3>
 					<p><%=mt.getMember().getmPhone()%></p>
-					<h2><strong>신분/학력</strong></h2>
+					<h3><strong>신분/학력</strong></h3>
 					<p>
 						<strong>인증방법</strong> :
 						<%=mt.getMtHowConfirm()%></p>
@@ -57,20 +57,20 @@
 					<br /> <br />
 					<%for(int j = 0; j < mt.getList().size(); j++) {
 					 	if(mt.getList().get(j).getUpMentoCategory().equals("license")) {%>
-					<h2><strong>자격증</strong></h2>
-					<p><%=mt.getList().get(j).getUpMentoNameLicense() %></p>
+					<h3><strong>자격증</strong></h3>
+					<p>[ <%=mt.getList().get(j).getUpMentoNameLicense() %> ]</p>
 					<img src="<%=request.getContextPath() %>/upload/mento/<%=mt.getList().get(j).getUpMentoReName()%>">
 					<br> <br>
 	
 					<%}
 					 }%>
-					<h2><strong>입금받을 은행 / 계좌번호</strong></h2>
+					<h3><strong>입금받을 은행 / 계좌번호</strong></h3>
 					<p><%=mt.getMtBank() %> / <%=mt.getMtAccountNumber() %></p>
  					<%
 						if (temp!=0) {
 					%> 
-					<h2><strong>거절사유</strong></h2>
-					<textarea id="refusalContent" cols="107" rows="5" style="resize: none;" maxlength="100" placeholder="거절사유를 입력하세요." style="width:100%;"><%=reason %></textarea>
+					<h3><strong>거절사유</strong></h3>
+					<textarea id="refusalContent" cols="107" rows="5" style="resize: none; width:100%;" maxlength="100" placeholder="거절사유를 입력하세요." ><%=reason %></textarea>
 	
  					<%
 						}

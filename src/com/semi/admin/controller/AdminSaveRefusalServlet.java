@@ -35,7 +35,7 @@ public class AdminSaveRefusalServlet extends HttpServlet {
 			int mtNum = Integer.parseInt(request.getParameter("mtNum"));
 			String reason = request.getParameter("reason");
 			int result = new MentoService().updateRefusalMento(mtNum, reason);
-			msg = result>0?"거절완료":"거절실패";
+			msg = result>0?"거절 완료 되었습니다.":"거절 실패 하였습니다.";
 			loc = "/admin/AdminMentoApproval.do";
 			//거절되었다는 메세지 보내기
 			Mento mt = new MentoService().mentoView(mtNum);
@@ -47,7 +47,7 @@ public class AdminSaveRefusalServlet extends HttpServlet {
 			int lecNum = Integer.parseInt(request.getParameter("lecNum"));
 			String reason = request.getParameter("reason");
 			int result = new LectureService().updateRefusalLecture(lecNum, reason);
-			msg = result>0?"거절완료":"거절실패";
+			msg = result>0?"거절 완료 되었습니다.":"거절 실패 하였습니다.";
 			loc = "/admin/AdminLectureApproval.do";
 			//거절되었다는 메세지 보내기
 			Lecture lec = new LectureService().lectureView(lecNum);

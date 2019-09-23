@@ -1,18 +1,16 @@
 package com.semi.mento.model.service;
 
 import static common.template.JDBCTemplate.close;
-import static common.template.JDBCTemplate.commit;
 import static common.template.JDBCTemplate.getConnection;
+import static common.template.JDBCTemplate.close;
+import static common.template.JDBCTemplate.commit;
 import static common.template.JDBCTemplate.rollback;
 
 import java.sql.Connection;
 import java.util.List;
 
-import com.semi.lecture.model.vo.Lecture;
 import com.semi.mento.model.dao.MentoUploadDao;
 import com.semi.mento.model.vo.MentoUpload;
-
-import common.template.JDBCTemplate;
 
 public class MentoUploadService {
 
@@ -31,7 +29,18 @@ public class MentoUploadService {
 		return result;
 	}
 
-
+	//멘토신청 자격증 이미지
+	public int registerMentoImage2(MentoUpload mtu3, int mtnum, String category, String upMentoNameLicense) {
+		Connection conn=getConnection();
+		int result=dao.registerMentoImage2(conn, mtu3, mtnum, category, upMentoNameLicense);
+		if(result>0) {
+			commit(conn);
+		}else {
+			rollback(conn);
+		}
+		close(conn);
+		return result;
+	}
 
 	public int updateMentoImage(MentoUpload mtu1, int result, String category) {
 
@@ -65,6 +74,5 @@ public class MentoUploadService {
 		close(conn);
 		return result;
 	}
-
 
 }

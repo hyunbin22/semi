@@ -1,4 +1,3 @@
-
 package com.semi.lecture.model.dao;
 
 import static common.template.JDBCTemplate.close;
@@ -19,6 +18,7 @@ import com.semi.lecture.model.vo.LectureUpload;
 import com.semi.member.model.vo.Member;
 import com.semi.mento.model.dao.MentoDao;
 import com.semi.mento.model.vo.Mento;
+import com.semi.subcategory.model.vo.SubCategory;
 
 public class LectureDao {
 
@@ -498,7 +498,7 @@ public class LectureDao {
 
 		return result;
 	}
-	
+
 	public List<Lecture> lectureMentoList(Connection conn, int cPage, int numPerPage, int mtnum) {
 		PreparedStatement pstmt=null;
 		String sql=prop.getProperty("lectureMentoList");
@@ -1059,6 +1059,92 @@ public class LectureDao {
 			close(stmt);
 		}
 		return list;
+	}
+
+	public List<Lecture> selectLectureListSubNum(Connection conn,int cPage, int numPerPage, int subNum) {
+		PreparedStatement pstmt=null;
+		String sql=prop.getProperty("selectLectureListSubNum");
+		ResultSet rs = null;
+		List<Lecture> lecturelist = new ArrayList();
+
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, subNum);
+			pstmt.setInt(2, (cPage-1)*numPerPage+1);
+			pstmt.setInt(3, cPage*numPerPage);
+
+			rs = pstmt.executeQuery();
+
+
+			while(rs.next()) {
+				Lecture lec=new Lecture();
+				Mento mt = new Mento();
+				SubCategory sc = new SubCategory();
+
+				lec.setLecNum(rs.getInt("lecnum"));
+				lec.setLecName(rs.getString("lecname"));
+				lec.setLecType(rs.getString("lectype"));
+				lec.setLecPrice(rs.getInt("lecprice"));
+				lec.setMtNum(rs.getInt("mtnum"));
+				lec.setLecMeet(rs.getString("lecmeet"));
+				lec.setSubNum(rs.getInt("subNum"));
+
+				LectureUpload lecUp = new LectureUploadDao().lectureUpCover2(conn, rs.getInt("lecnum"));
+				Mento m = new MentoDao().mentoView(conn, rs.getInt("mtnum"));
+				lec.setLecMento(m);
+				lec.setLectureUpload(lecUp);
+				lecturelist.add(lec);
+
+			}
+
+		}catch(Exception e) {
+			e.printStackTrace();
+		}finally {
+			close(rs);
+			close(pstmt);
+		}
+
+		return lecturelist;
+	}
+
+	//delete from tb_review where lecNum=? and rNum=?
+	public int deleteComment(Connection conn, int lecNum, int rNum) {
+		PreparedStatement pstmt=null;
+		int result=0;
+		String sql=prop.getProperty("deleteReview");
+		try {
+			pstmt=conn.prepareStatement(sql);
+			pstmt.setInt(1, lecNum);;
+			pstmt.setInt(2, rNum);
+			result=pstmt.executeUpdate();
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}
+		finally {
+			close(pstmt);
+		}
+		return result;
+	}
+
+
+	public int insertComment(Connection conn, int lecNum, int mNum, String rTitle, String rText) {
+		PreparedStatement pstmt=null;
+		int result=0;
+		String sql=prop.getProperty("insertReview");
+		try {
+			pstmt=conn.prepareStatement(sql);
+			pstmt.setInt(1, lecNum);
+			pstmt.setInt(2, mNum);
+			pstmt.setString(3, rTitle);
+			pstmt.setString(4, rText);
+			result=pstmt.executeUpdate();
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}
+		finally {
+			close(pstmt);
+		}
+		return result;
 	}
 
 

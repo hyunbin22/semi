@@ -17,8 +17,6 @@
 
          String key=c.getName();
          String value=c.getValue();
-         System.out.println("key : "+key);
-         System.out.println("value : "+value);
          if(key.equals("saveId")){
             saveId=value;
    			}
@@ -110,8 +108,8 @@
 		            </div>
 		                <div id = "loginmenu2">
 		                <span onclick = "location.href='<%=request.getContextPath()%>/member/memberRegAgree.do'" id = "join">회원가입</span>
-		                <span onclick = "location.href='<%=request.getContextPath()%>/views/member/findId.jsp'" id = findId>아이디 찾기</span>
-		                <span onclick = "location.href='<%=request.getContextPath()%>/views/member/findPwd.jsp'" id = findPw>비밀번호 찾기</span>
+		                <span onclick = "location.href='<%=request.getContextPath()%>/member/memberFindId.do'" id = findId>아이디 찾기</span>
+		                <span onclick = "location.href='<%=request.getContextPath()%>/member/memberFindPWd.do'" id = findPw>비밀번호 찾기</span>
 		                 	</div>
 		            </div> 
 		             <%} else { %>       
@@ -139,19 +137,19 @@
 				<nav>
 			        <ul class="center1">
 			        
-				        <li><a href="<%=request.getContextPath()%>/views/common/abling.jsp">ABLING</a></li>
+				        <li><a href="<%=request.getContextPath()%>/admin/abling.do">ABLING</a></li>
 				        <li><a href="<%=request.getContextPath()%>/lecture/lectureList.do">강의찾기</a></li>
 				        <li><a href="<%=request.getContextPath()%>/moim/moimList.do">수업모임</a></li>
 				        <!-- <li><a href="#">이벤트</a></li> -->
 				        <li><a href="#">고객지원</a>
 			         <ul>
-			            <li><a onclick = "location.href='<%=request.getContextPath()%>/notice/noticeList.do'">공지사항</a></li>
-				        <li><a href="#">F & A</a></li>
+			            <li><a href="<%=request.getContextPath()%>/notice/noticeList.do">공지사항</a></li>
+				          <li><a onclick = "location.href='<%=request.getContextPath()%>/views/notice/faq_ts.jsp'">F & A</a></li>
 			            <%if(memberLogin != null) { %>
-						      <li><a onclick = "location.href='<%=request.getContextPath()%>/qna/qnaList.do'">1대1 문의</a>
+						      <li><a href="location.href='<%=request.getContextPath()%>/qna/qnaList.do'">1대1문의</a>
 						      </li>
 						      
-						      <li><a href="<%=request.getContextPath()%>/views/report/reportForm.jsp">신고</a>
+						      <li><a href="<%=request.getContextPath()%>/member/report.do">신고</a>
 						      </li>
 			      		<% } %>
 			         </ul>
@@ -223,7 +221,4 @@
 
 
 </script>
-
-
-
     <br>

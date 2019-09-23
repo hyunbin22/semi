@@ -46,7 +46,7 @@ public class OrderDao {
 			pstmt.setString(1, mId);
 			pstmt.setInt(2, order.getLecNum());
 			pstmt.setString(3, order.getoTot());
-			pstmt.setString(4, order.getoText().replaceAll(" ", "&nbsp;").replaceAll("<", "&lt;").replaceAll(">", "&gt;").replaceAll("\n", "<br>"));
+			pstmt.setString(4, order.getoText());
 			pstmt.setInt(5, order.getoPrice());
 
 			result=pstmt.executeUpdate();
@@ -322,6 +322,47 @@ public class OrderDao {
 			close(pstmt);
 		}
 		return result;
+	}
+
+	//결제 완료된 오더 가져오기
+	public List<Order> selectLectureOrder(Connection conn, int lecNum) {
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		String sql=prop.getProperty("selectLectureOrder");
+		Order o = null;
+		List<Order> list=new ArrayList();
+		Lecture l = new Lecture();
+		LectureDao dao = new LectureDao();
+		try {
+			pstmt=conn.prepareStatement(sql);
+			pstmt.setInt(1,lecNum);
+			rs=pstmt.executeQuery();
+			while(rs.next()) {
+				o = new Order();
+				o.setoNum(rs.getInt("onum"));
+				o.setmNum(rs.getInt("mnum"));
+				o.setLecNum(lecNum);
+				o.setoTot(rs.getString("otot").replaceAll(" ", "&nbsp;").replaceAll("<", "&lt;").replaceAll(">", "&gt;").replaceAll("\n", "<br>"));
+				o.setoText(rs.getString("otext").replaceAll(" ", "&nbsp;").replaceAll("<", "&lt;").replaceAll(">", "&gt;").replaceAll("\n", "<br>"));
+				o.setoPrice(rs.getInt("oprice"));
+				o.setoPayment(rs.getString("opayment").charAt(0));
+				o.setoCheck(rs.getString("ocheck").charAt(0));
+				o.setOrderDate(rs.getDate("orderdate"));
+
+				Member m = new MemberDao().selectMemberMnum(conn, rs.getInt("mnum"));
+				Lecture lec = new LectureDao().lectureView(conn, rs.getInt("lecNum"));
+				o.setMember(m);
+				o.setLecture(lec);
+				list.add(o);
+			}
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rs);
+			close(pstmt);
+		}
+
+		return list;
 	}
 
 

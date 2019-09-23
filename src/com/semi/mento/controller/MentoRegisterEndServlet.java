@@ -68,6 +68,7 @@ public class MentoRegisterEndServlet extends HttpServlet {
       String mtAccountNumber = mr.getParameter("mtAccountNumber");
       
       String upMentoNameLicense = mr.getParameter("mtlicense");
+      String upMentoNameLicense2 = mr.getParameter("mtlicense2");
       String category="";
       
       
@@ -86,14 +87,14 @@ public class MentoRegisterEndServlet extends HttpServlet {
          category="profile";
          String upMentoOrgProfile=mr.getOriginalFileName("mtprofileimg");
          String upMentoReProfile = mr.getFilesystemName("mtprofileimg");
-         MentoUpload mtu1 = new MentoUpload(result, category, upMentoNameLicense, upMentoOrgProfile, upMentoReProfile);
+         MentoUpload mtu1 = new MentoUpload(result, category, upMentoOrgProfile, upMentoReProfile);
          result2=new MentoUploadService().registerMentoImage(mtu1, result, category);
       }
       if(mr.getOriginalFileName("mtconfirming")!=null) {
          category="confirm";
          String upMentoOrgConfirm =mr.getOriginalFileName("mtconfirming");
          String upMentoReConfirm= mr.getFilesystemName("mtconfirming");
-         MentoUpload mtu2 = new MentoUpload(result, category, upMentoNameLicense, upMentoOrgConfirm, upMentoReConfirm);
+         MentoUpload mtu2 = new MentoUpload(result, category, upMentoOrgConfirm, upMentoReConfirm);
          result2=new MentoUploadService().registerMentoImage(mtu2, result, category);
       }
       
@@ -105,7 +106,14 @@ public class MentoRegisterEndServlet extends HttpServlet {
          String upMentoOrgLicense =mr.getOriginalFileName("mtlicenseimg");
          String upMentoReLicense= mr.getFilesystemName("mtlicenseimg");   
          MentoUpload mtu3 = new MentoUpload(result, category, upMentoNameLicense, upMentoOrgLicense, upMentoReLicense);
-         result2=new MentoUploadService().registerMentoImage(mtu3, result, category);
+         result2=new MentoUploadService().registerMentoImage2(mtu3, result, category, upMentoNameLicense);
+      }
+      if(mr.getOriginalFileName("mtImgLicense")!=null) {
+         category="license";
+         String upMentoOrgLicense =mr.getOriginalFileName("mtImgLicense");
+         String upMentoReLicense= mr.getFilesystemName("mtImgLicense");   
+         MentoUpload mtu4 = new MentoUpload(result, category, upMentoNameLicense2, upMentoOrgLicense, upMentoReLicense);
+         result2=new MentoUploadService().registerMentoImage2(mtu4, result, category, upMentoNameLicense2);
       }
       
       

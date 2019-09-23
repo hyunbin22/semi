@@ -39,7 +39,7 @@ public class LectureListServlet extends HttpServlet {
 	   // 카테고리 & 서브카테고리
 	   List<Category> c= (List)new CategoryService().selectCategory();
        List<SubCategory> sc= (List)new SubCategoryService().selectSubCategory();
-	   
+       
       // 강의 리스트 페이징 처리
       int cPage;
       try {
@@ -47,7 +47,7 @@ public class LectureListServlet extends HttpServlet {
       }catch(NumberFormatException e) {
          cPage=1;
       }
-      int numPerPage=5;
+      int numPerPage=10;
       LectureService service=new LectureService();
       int totalLecture=service.selectLectureCount();
       List<Lecture> lecturelist=service.selectLectureList(cPage, numPerPage);
@@ -81,7 +81,6 @@ public class LectureListServlet extends HttpServlet {
          pageBar+="<a href='"+request.getContextPath()
          +"/lecture/lectureList.do?cPage="+(pageNo)+"'>></a>";
       }
-      
       
       request.setAttribute("category", c);
       request.setAttribute("subcategory", sc);

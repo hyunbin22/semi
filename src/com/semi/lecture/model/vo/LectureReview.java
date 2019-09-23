@@ -22,7 +22,19 @@ public class LectureReview {
    
 
 
-   public LectureReview(int rNum, int lecnum, int mNum, String rTitle, String rText) {
+   public LectureReview(int lecnum, int mNum, String rTitle, String rText) {
+	super();
+	this.lecnum = lecnum;
+	this.mNum = mNum;
+	this.rTitle = rTitle;
+	this.rText = rText;
+}
+
+
+
+
+
+public LectureReview(int rNum, int lecnum, int mNum, String rTitle, String rText) {
       super();
       this.rNum = rNum;
       this.lecnum = lecnum;
