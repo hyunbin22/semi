@@ -37,6 +37,6 @@ p {
 			<li><a href="<%=request.getContextPath() %>/admin/adminLectureList.do">강의관리</a></li>
 			<li><a href="<%=request.getContextPath()%>/admin/categoryEnroll">카테고리관리</a></li>
 			<li><a href="<%=request.getContextPath() %>/admin/AdminMentoApproval.do">승인관리</a></li>
-			<button id="exit" onclick="location.href='<%=request.getContextPath()%>'">메인</button>
+			<button id="exit" onclick="location.href='<%=request.getContextPath()%>/'">메인</button>
 		</ul>
 	</header>
