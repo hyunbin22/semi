@@ -36,11 +36,6 @@ public class SelectSubCategoryServlet extends HttpServlet {
 
 		SubCategoryService service = new SubCategoryService();
 		List<SubCategory> list = service.selectSub(scNum);
-
-		
-//		request.setAttribute("scList", list);
-//		request.getRequestDispatcher("/views/lecture/lectureEnrollEnd.jsp").forward(request, response);
-		
 		String csv = "";
 		if(!list.isEmpty() ) {
 			for(int i = 0; i < list.size(); i++)

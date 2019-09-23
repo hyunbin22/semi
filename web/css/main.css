@@ -9,7 +9,7 @@
 @import url(http://fonts.googleapis.com/earlyaccess/hanna.css);
 
 * {
-	font-family: 'Nanum Gothic';
+	font-family: 'Noto Sans KR', sans-serif;
 	/*  margin: 0 auto; */
 	padding: 0 auto;
 }
@@ -1144,6 +1144,7 @@ input.inputbtn, input.btnregister {
 	margin: 20px 0 0 40px;
 	float: left;
 	text-align: center;
+	font-family: 'Noto Sans KR', sans-serif;
 }
 
 .notice-top {

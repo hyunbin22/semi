@@ -40,8 +40,6 @@ public class SubCategoryEnrollServlet extends HttpServlet {
         
         request.setAttribute("subcategory", sc);
         request.setAttribute("category", c);
-
-        
 		request.getRequestDispatcher("/views/admin/subcategoryEnroll.jsp").forward(request, response);
 		
 	}
