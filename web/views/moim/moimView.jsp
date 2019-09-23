@@ -34,10 +34,10 @@
                         <tr>
                         <td colspan = "5">내용</td>
                         </tr>
-                        <tr class="notice-content">
+                        <tr class="moim-content">
                             <td colspan="5">
-                                <div class="notice-content2">
-	                                <div class = "report-content">
+                                <div class="moim-content">
+	                                <div class = "report-content" style="margin-left:20px;">
 	                                   		<%=moim.getMoimText() %>
 
 									</div>

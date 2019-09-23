@@ -1983,3 +1983,9 @@ td.contentTable2 {
 .reviewContent::-webkit-scrollbar {
 	width: 0px;
 }
+
+.moim-content {
+	border-radius: 20px;
+	background-color: #e7e7e7;
+	text-align: left;
+}
