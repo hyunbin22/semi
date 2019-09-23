@@ -40,7 +40,7 @@ div#EmptyListWrap{
 }
 .admin-header ul li{
    line-height: 70px;
-   font-size: 1.6em;
+   font-size: 20px;
    font-weight: 900;
     display: inline;
     margin-right: 50px;
@@ -260,14 +260,14 @@ div.admin-detail-frm-wrap{
    border: 1px solid lavender;
    
 }
-div.admin-mento-detailwrap>h1{
+div.admin-mento-detailwrap>h1, div.admin-mento-detailwrap>h3{
    text-align:center;
    background-color: lavender;
    margin-bottom: 0;
    height: 60px;
 }
 
-div.admin-mento-detailwrap h2{
+div.admin-mento-detailwrap h3{
    text-align:center;
    background-color: lavender;
    margin-bottom: 0;
@@ -289,9 +289,6 @@ form.admin-mento-detail-frm{
     width:auto; height: auto;
     max-width: 500px; max-height: 500px;
     min-width: 400px; min-height: 400px;
-    margin-left: 40px;
-    margin-top : 30px;
-    margin-bottom: 30px;
 }
 
 .admin-mento-detailwrap hr{
@@ -299,8 +296,7 @@ form.admin-mento-detail-frm{
    margin-left: 0;
 }
 .admin-mento-detailwrap p{
-   margin-left: 20px;
-   font-size: 25px;
+   font-size: 20px;
 
 }
 
@@ -609,3 +605,17 @@ table{
     text-align: center;
 }
 
+/* 강의상세보기 기본정보 테이블 */
+.tblLectureInfo tr td{
+	text-align:right;
+}
+
+.tblLectureInfo tr td:first-child{
+	text-align:right;
+}
+
+
+.tblLectureInfo tr td:last-child {
+	width:150px;
+	text-align:left;	
+}
