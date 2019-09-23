@@ -9,7 +9,7 @@
 				<li><img
 					src="<%=request.getContextPath() %>/image/mainBanner01.jpg"
 					width="1024" height="500px"></li>
-				<li><img
+				<li><img 	
 					src="<%=request.getContextPath() %>/image/mainBanner02.jpg"
 					width="1024" height="500px"></li>
 				<li><img
