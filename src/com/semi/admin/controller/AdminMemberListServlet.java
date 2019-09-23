@@ -80,7 +80,7 @@ public class AdminMemberListServlet extends HttpServlet {
 		request.setAttribute("pageBar", pageBar);
 		request.setAttribute("cPage", cPage);
 		request.setAttribute("members",list);
-		request.getRequestDispatcher("/views/admin/memberList.jsp").forward(request, response);
+		request.getRequestDispatcher("/views/admin/adminMemberList.jsp").forward(request, response);
 	}
 
 	/**
