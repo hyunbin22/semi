@@ -15,16 +15,7 @@ public class MentoUpload {
 	}
 
 
-	public MentoUpload(int upMentoNum, int mtNum, String upMentoCategory, String upMentoNameLicense,
-			String upMentoOrgName, String upMentoReName) {
-		super();
-		this.upMentoNum = upMentoNum;
-		this.mtNum = mtNum;
-		this.upMentoCategory = upMentoCategory;
-		this.upMentoNameLicense = upMentoNameLicense;
-		this.upMentoOrgName = upMentoOrgName;
-		this.upMentoReName = upMentoReName;
-	}
+
 
 	public MentoUpload(int mtNum, String upMentoCategory, String upMentoOrgName, String upMentoReName) {
 		super();
@@ -35,6 +26,18 @@ public class MentoUpload {
 	}
 
 
+
+
+	public MentoUpload(int upMentoNum, int mtNum, String upMentoCategory, String upMentoNameLicense,
+			String upMentoOrgName, String upMentoReName) {
+		super();
+		this.upMentoNum = upMentoNum;
+		this.mtNum = mtNum;
+		this.upMentoCategory = upMentoCategory;
+		this.upMentoNameLicense = upMentoNameLicense;
+		this.upMentoOrgName = upMentoOrgName;
+		this.upMentoReName = upMentoReName;
+	}
 
 	public MentoUpload(String upMentoCategory, String upMentoNameLicense, String upMentoOrgName, String upMentoReName) {
 

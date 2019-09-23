@@ -42,12 +42,12 @@ public class MentoUploadService {
 		return result;
 	}
 
-	public int updateMentoImage(MentoUpload mtu1, int result, String category) {
+	public int updateMentoImage(MentoUpload mtu1, int mtNum, String category) {
 
 		Connection conn = getConnection();
-		int result1=dao.updateMentoImage(conn, mtu1, result, category);
+		int result1=dao.updateMentoImage(conn, mtu1, mtNum, category);
 
-		if(result>0) {
+		if(result1>0) {
 			commit(conn);
 
 		}else {
@@ -67,12 +67,13 @@ public class MentoUploadService {
 	}
 
 
-	public int deleteMentoImg(int mtNum) {
+	public int deleteMentoImg(int mentoUploadNum) {
 		Connection conn = getConnection();
-		int result=dao.deleteMentoImg(conn, mtNum);
+		int result=dao.deleteMentoImg(conn, mentoUploadNum);
 
 		close(conn);
 		return result;
 	}
+
 
 }

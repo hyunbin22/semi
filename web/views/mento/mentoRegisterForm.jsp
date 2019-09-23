@@ -103,7 +103,7 @@
         var fileSize = (this).files[0].size;
         var maxSize = 1024*1024*1024;
         
-        if($.inArray(ext, ['gif','png','jpg','jpeg','doc','docx','xls','xlsx','hwp']) == -1) {
+        if($.inArray(ext, ['gif','png','jpg','jpeg']) == -1) {
            alert("등록할 수 없는 확장자입니다.");
            $(this).val("");
            return;
@@ -121,7 +121,7 @@
         var fileSize = (this).files[0].size;
         var maxSize = 1024*1024*1024;
         
-        if($.inArray(ext, ['gif','png','jpg','jpeg','doc','docx','xls','xlsx','hwp']) == -1) {
+        if($.inArray(ext, ['gif','png','jpg','jpeg']) == -1) {
            alert("등록할 수 없는 확장자입니다.");
            $(this).val("");
            return;
@@ -139,7 +139,7 @@
         var fileSize = (this).files[0].size;
         var maxSize = 1024*1024*1024;
         
-        if($.inArray(ext, ['gif','png','jpg','jpeg','doc','docx','xls','xlsx','hwp']) == -1) {
+        if($.inArray(ext, ['gif','png','jpg','jpeg']) == -1) {
            alert("등록할 수 없는 확장자입니다.");
            $(this).val("");
            return;

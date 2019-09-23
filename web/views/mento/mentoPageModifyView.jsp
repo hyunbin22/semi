@@ -5,19 +5,29 @@
     <%@ page import="com.semi.mento.model.vo.Mento, java.util.*, com.semi.lecture.model.vo.Lecture, com.semi.mento.model.vo.MentoUpload" %>
     <% 
     	List<MentoUpload> mu = (List)request.getAttribute("mu");
+    	Mento mento = (Mento)request.getAttribute("mento");
     
-		String profileName=null;
-		String licenseName=null;
-		String confirmName=null;
+		String profileOrgName=null;
+		String confirmOrgName=null;
+		String profileReName=null;
+		String confirmReName=null;
+		String mentoLicenseName=null;
+		List<MentoUpload> mup = new ArrayList();
+	
 		for(MentoUpload mn : mu){
 			if(mn.getUpMentoCategory().equals("profile")){
-				profileName=mn.getUpMentoReName();
-			}if(mn.getUpMentoCategory().equals("license")){
-				licenseName=mn.getUpMentoReName();
-			}if(mn.getUpMentoCategory().equals("confirm")){
-				confirmName=mn.getUpMentoReName();
-		} 
+				profileReName=mn.getUpMentoReName();
+				profileOrgName=mn.getUpMentoOrgName();
+			}
+			if(mn.getUpMentoCategory().equals("license")){
+					mup.add(mn);										
+			}
+			if(mn.getUpMentoCategory().equals("confirm")){
+				confirmReName=mn.getUpMentoReName();
+				confirmOrgName=mn.getUpMentoOrgName();
 		}
+		
+			}
     %>
     <%@ include file="/views/common/myPageAside.jsp" %>
     <div class="wrap">
@@ -26,10 +36,11 @@
                     <h1 class="center1">멘토정보수정</h1>
                     
                     <br><br>
+
                     <hr>
                 </div>
                 <div class="regdata center1">
-                <form action="<%=request.getContextPath()%>/mento/mentoUpdateEnd.do?mtNum=<%=mt.getMtNum()%>" method="POST" id = "mentoFrm" enctype="multipart/form-data">
+                <form action="<%=request.getContextPath()%>/mento/mentoUpdateEnd.do?mtNum=<%=mento.getMtNum()%>" method="POST" id = "mentoFrm" enctype="multipart/form-data">
                    <table class="tblreg center1">
 					<tr>
 					<td>
@@ -44,11 +55,13 @@
 		         </p>
 	         	 <div id='View_area' style='position: relative; width: 100px; height: 100px; color: black; border: 0px solid black; dispaly: inline; margin:0;'>
          <input type=file name='mtprofileimg' id='mtprofileimg' style='display: none;' class="title2">
+         <input type="hidden" name="profileReName" value="<%=profileReName %>" id="profileReName">
+         <input type="hidden" name="profileOrgName" value="<%=profileOrgName %>" id="profileOrgName">
          <img id="camera"
             src='https://dumielauxepices.net/sites/default/files/digital-camera-clipart-basic-camera-502592-7419029.jpg'
             onclick='document.all.mtprofileimg.click(); document.all.file2.value=document.all.file1.value'
             width=150px; height=150px; style='margin-left:130px;'>
-			  	<img id="image_section1" alt="미리보기" src="<%=request.getContextPath() %>/upload/mento/<%=profileName%>" style='width:250px; height: 200px;'>
+			  	<img id="image_section1" alt="미리보기" src="<%=request.getContextPath() %>/upload/mento/<%=profileReName%>" style='width:250px; height: 200px;'>
 
 		         </div>
 						        <br><br><br><br><br><br><br><br><br>
@@ -65,10 +78,10 @@
 			         <div class="box">
 						<td colspan="3" class="lecture">닉네임</td>
 						<td>
+						<span id="nicknameCheck" class="rg-checkMsg"></span>
 						<br><input class="textfield title2" type="text" name="mtnickname"
-							id="nickName" value="<%=mt.getMtNickName() %>" required><br><br></td>
+							id="nickName" value="<%=mento.getMtNickName() %>" required><br><br></td>
 							
-						<td id="nicknameCheck" class="rg-checkMsg"></td>
 				</div>
 				</tr>
 					
@@ -76,12 +89,24 @@
 					<div class="box">
 				
 						<td colspan="3" class="lecture">신분/학력 인증</td>
-						<%if(mt.getMtHowConfirm().equals("대학교인증")) { %>
-							<td><input type="radio" name="mthowconfirm" value="대학교인증" checked/>대학인증
-					        <input type="radio" name="mthowconfirm" value="신분증인증" />신분증인증</td>                               
-                            <%} else { %>
-	                        <td><input type="radio" name="mthowconfirm" value="대학교인증" /> 대학인증
-					        <input type="radio" name="mthowconfirm" value="신분증인증" checked/>신분증인증</td>             
+						<%if(mento.getMtHowConfirm().equals("대학교인증")) { %>
+							<td>
+							<input type="radio" name="mthowconfirm" value="대학교인증" checked/>대학교인증
+					        <input type="radio" name="mthowconfirm" value="신분증인증" />신분증인증
+					        <input type="radio" name="mthowconfirm" value="대학원인증" />대학원인증
+					        </td>                               
+                            <%} else if(mento.getMtHowConfirm().equals("신분증인증")){ %>
+	                        <td>
+	                        <input type="radio" name="mthowconfirm" value="대학교인증" />대학교인증
+					        <input type="radio" name="mthowconfirm" value="신분증인증" checked/>신분증인증
+					        <input type="radio" name="mthowconfirm" value="대학원인증" />대학원인증
+					        </td>    
+					        <%} else{ %>
+	                        <td>
+	                        <input type="radio" name="mthowconfirm" value="대학교인증" />대학교인증
+					        <input type="radio" name="mthowconfirm" value="신분증인증"/>신분증인증
+					        <input type="radio" name="mthowconfirm" value="대학원인증" checked/>대학원증인증
+					        </td>           
                         <%} %>
                         
 				    </tr>
@@ -89,10 +114,10 @@
 				    	<td colspan="3"></td>
 					         <td>
 					         <br>
-					         <input class="textfield title2" type="text" name="mtacademic" value="<%=mt.getMtAcademic() %>" />
-					         <input class="textfield title2" type="text" name="mtacademicdept" value="<%=mt.getMtAcademicDept() %>" />
+					         <input class="textfield title2" type="text" name="mtacademic" value="<%=mento.getMtAcademic() %>" />
+					         <input class="textfield title2" type="text" name="mtacademicdept" value="<%=mento.getMtAcademicDept() %>" />
 					         <br>
-					         <%if(mt.getMtGraduation().equals("재학")) { %>
+					         <%if(mento.getMtGraduation().equals("재학")) { %>
 								<input type="radio" name="mtgraduation" value="재학" checked/> 재학
 						        <input type="radio" name="mtgraduation" value="졸업" /> 졸업                           
 						         	 
@@ -112,23 +137,29 @@
 						<div style='margin:0;'>
 			      <td > <br><br><br> <div id='View_area' style='position: relative; width: 100px; height: 100px; color: black; border: 0px solid black; dispaly: inline; margin:0;' >
 						<input type="file" name="mtconfirming" id="mtconfirmimg" onchange="previewImage(this,'View_area')">
-	       				<img  src="<%=request.getContextPath() %>/upload/mento/<%=confirmName%>" id="image_section2" alt="미리보기" style='width:250px; height: 200px;'>				
+						  <input type="hidden" name="confirmReName" value="<%=confirmReName %>">
+         				  <input type="hidden" name="confirmOrgName" value="<%=confirmOrgName %>">
+	       				<img  src="<%=request.getContextPath() %>/upload/mento/<%=confirmReName%>" id="image_section2" alt="미리보기" style='width:250px; height: 200px;'>				
 					   <br><br>
 	       			 </div>
 		       					
 						</td>    
 			      
 			         </div>
+			      <%for(int i=0; i<mup.size(); i++){ %>
 			         <tr>
-			      
 			         <div class="box">		
 			         
 					<br><br>
-			       	<td colspan="3" class="lecture"><br><br>자격증  1 (선택)</td>
+			       	<td colspan="3" class="lecture"><br><br>자격증 <%=i+1 %> (선택)</td>
 					<td>
 					<br><br><br><br><br><br><br>
-					 <input class="textfield title2" type="text" name="mtlicense" value=""/>
-					
+			
+						<%if(mup.get(i).getUpMentoReName()!=null){ %>
+						 <input class="textfield title2" type="text" name="mtlicense" value="<%=mup.get(i).getUpMentoNameLicense() %>"/>
+                <%}else{%>
+				<input class="textfield title2" type="text" name="mtlicense" placeholder="자격증명을 입력하세요."/>
+                <%}%>
 					 <br><br><br><br><br><br>
 					 </td>
 					</tr>
@@ -136,30 +167,38 @@
 					</div>
 					<tr>
 				   <div class="box">
-				    <td colspan="3" class="lecture"> 자격증 1 사진</td>
+				    <td colspan="3" class="lecture"> 자격증 <%=i+1 %>사진</td>
 				 
 				   <td>
 				   <div style='margin:0;'>
 				   <br><br> <div id='View_area' style='position: relative; width: 100px; height: 100px; color: black; border: 0px solid black; dispaly: inline; margin:0;' >
-				    <input type="file" name="mtlicenseimg" id="mtlicenseimg" onchange="previewImage(this,'View_area')">
-							<img  id="image_section3" style='width:250px; height: 200px;' alt="미리보기" src="<%=request.getContextPath() %>/upload/mento/<%=licenseName%>">
-	   				  </div>
-	   				  
-	   				 <td>  </td>
+				    <input type="file" name="mtlicenseimg" id="mtlicenseimg<%=i+1 %>" onchange="previewImage(this,'View_area')">
+				    <input type="hidden" name="licenseReName" value="<%=mup.get(i).getUpMentoReName() %>">
+         		    <input type="hidden" name="licenseOrgName" value="<%=mup.get(i).getUpMentoOrgName()%>">
+					<img  id="img_section<%=i+1 %>" style='width:250px; height: 200px;' alt="미리보기" src="<%=request.getContextPath() %>/upload/mento/<%=mup.get(i).getUpMentoReName()%>">
+	   				 </div>
+	   				 </div>
+	   				 </td>
+	   				 <td> 
+	   				  </td>
 
 					  </td>
 
 					 </div>
-					 </div>
-				    </tr>
+					 </tr>
+						<%} %>
 
 					<tr>    
 					<div class="box">
 				    	<td colspan="3" class="lecture"><br><br><br><br><br><br>은행</td>
 				        <td><br><br><br><br><br><br><select id="bank" name="mtbank" class="title2">
-							<option><%=mt.getMtBank() %></option>
-							<option value = "농협">농협</option>
-							<option value = "국민은행">국민은행</option>
+							<option><%=mento.getMtBank() %>(현재)</option>
+							<option value="농협은행">농협은행</option>
+			                <option value="카카오뱅크">카카오뱅크</option>
+			                <option value="국민은행">국민은행</option>
+			                <option value="신한은행">신한은행</option>
+			                <option value="기업은행">기업은행</option>
+			                <option value="우리은행">우리은행</option>
 							</select>
 						</td>
 						</div>
@@ -167,7 +206,7 @@
 					<tr>
 					<div class="box">
 							<td colspan="3" class="lecture">계좌번호 </td>
-							<td><input class="textfield title2" type = "text" name = "mtAccountNumber" id = "accountNumber" value="<%=mt.getMtAccountNumber()%>">
+							<td><input class="textfield title2" type = "text" name = "mtAccountNumber" id = "accountNumber" value="<%=mento.getMtAccountNumber()%>">
 			         	</td>
 					
 							</div>
@@ -186,6 +225,15 @@
                 	</div>
   
         <script>
+        
+/*         $(function(){
+        	$('#mtprofileimg').change(function(){
+        		$('#profileOrgName').value($('#mtprofileimg').val());
+        		$('#profileReName').value("");
+        		
+        		console.log($('#profileOrgName').val());
+        	});
+        }); */
         
         function readURL(input) {
       	  if (input.files && input.files[0]) {
@@ -226,16 +274,33 @@
        	   var reader = new FileReader();
        	   
        	   reader.onload = function (eee) {
-       	    $('#image_section3').attr('src', eee.target.result);  
+       	    $('#img_section1').attr('src', eee.target.result);  
        	   }
        	   
        	   reader.readAsDataURL(input.files[0]);
        	   }
        	 }   
        	 
-       	 $("#mtlicenseimg").change(function(){
+       	 $("#mtlicenseimg1").change(function(){
        	    readURL3(this);
        	 });
+       	 
+         function readURL4(input) {
+          	  if (input.files && input.files[0]) {
+          	   var reader = new FileReader();
+          	   
+          	   reader.onload = function (eee) {
+          	    $('#img_section2').attr('src', eee.target.result);  
+          	   }
+          	   
+          	   reader.readAsDataURL(input.files[0]);
+          	   }
+          	 }   
+          	 
+          	 $("#mtlicenseimg2").change(function(){
+          	    readURL4(this);
+          	 });
+
 
         
         function updateMento(){
