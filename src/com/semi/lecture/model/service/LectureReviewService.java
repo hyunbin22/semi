@@ -13,9 +13,9 @@ public class LectureReviewService {
 	
 	LectureReviewDao dao = new LectureReviewDao();
 
-	public List<LectureReview> selectReview(String lectureNo) {
+	public List<LectureReview> selectReview(int lectureNo) {
 		Connection conn = getConnection();
-		List<LectureReview> list= dao.lectureReview(conn, Integer.parseInt(lectureNo));
+		List<LectureReview> list= dao.lectureReview(conn, lectureNo);
 
 		close(conn);
 		return list;

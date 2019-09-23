@@ -414,7 +414,6 @@ public class LectureDao {
 				close(pstmt);
 			}
 			
-			System.out.println(lecturelist);
 			return lecturelist;
 		}
 
@@ -634,7 +633,6 @@ public class LectureDao {
 			close(pstmt);
 		}
 		
-		System.out.println(lecturelist);
 		return lecturelist;
 	}
 

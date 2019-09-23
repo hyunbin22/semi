@@ -325,7 +325,7 @@ public class OrderDao {
 	}
 
 	//결제 완료된 오더 가져오기
-	public List<Order> selectLectureOrder(Connection conn, String lecNum) {
+	public List<Order> selectLectureOrder(Connection conn, int lecNum) {
 		PreparedStatement pstmt=null;
 		ResultSet rs=null;
 		String sql=prop.getProperty("selectLectureOrder");
@@ -333,16 +333,15 @@ public class OrderDao {
 		List<Order> list=new ArrayList();
 		Lecture l = new Lecture();
 		LectureDao dao = new LectureDao();
-		int lecNum2 = Integer.parseInt(lecNum);
 		try {
 			pstmt=conn.prepareStatement(sql);
-			pstmt.setInt(1,lecNum2);
+			pstmt.setInt(1,lecNum);
 			rs=pstmt.executeQuery();
 			while(rs.next()) {
 				o = new Order();
 				o.setoNum(rs.getInt("onum"));
-				o.setmNum(rs.getInt("mnum"));
-				o.setLecNum(lecNum2);
+				o.setmNum(rs.getInt("mNum"));
+				o.setLecNum(lecNum);
 				o.setoTot(rs.getString("otot").replaceAll(" ", "&nbsp;").replaceAll("<", "&lt;").replaceAll(">", "&gt;").replaceAll("\n", "<br>"));
 				o.setoText(rs.getString("otext").replaceAll(" ", "&nbsp;").replaceAll("<", "&lt;").replaceAll(">", "&gt;").replaceAll("\n", "<br>"));
 				o.setoPrice(rs.getInt("oprice"));
@@ -350,7 +349,7 @@ public class OrderDao {
 				o.setoCheck(rs.getString("ocheck").charAt(0));
 				o.setOrderDate(rs.getDate("orderdate"));
 
-				Member m = new MemberDao().selectMemberMnum(conn, rs.getInt("mnum"));
+				Member m = new MemberDao().selectMemberMnum(conn, rs.getInt("mNum"));
 				Lecture lec = new LectureDao().lectureView(conn, rs.getInt("lecNum"));
 				o.setMember(m);
 				o.setLecture(lec);
@@ -362,9 +361,40 @@ public class OrderDao {
 			close(rs);
 			close(pstmt);
 		}
-
-		System.out.println("OrderDao의 selectOrder(강의넘버 일치하는 결제 오더 가져오기) :"+list);
 		return list;
+	}
+
+	public Order selectLoginMemOrder(Connection conn, int mNum, int lectureNo) {
+		PreparedStatement pstmt=null;
+		ResultSet rs = null;
+		int result = 0;
+		String sql=prop.getProperty("selectLoginMemOrder");
+		Order o = new Order();
+		try {
+			pstmt=conn.prepareStatement(sql);
+			pstmt.setInt(1, mNum);
+			pstmt.setInt(2,lectureNo);
+			result=pstmt.executeUpdate();
+			if(rs.next()) {
+				o = new Order();
+				o.setoNum(rs.getInt("onum"));
+				o.setmNum(rs.getInt("mnum"));
+				o.setLecNum(rs.getInt("lecnum"));
+				o.setoText(rs.getString("otext").replaceAll(" ", "&nbsp;").replaceAll("<", "&lt;").replaceAll(">", "&gt;").replaceAll("\n", "<br>"));
+				o.setoTot(rs.getString("otot"));
+				o.setoPrice(rs.getInt("oprice"));
+				o.setoPayment(rs.getString("opayment").charAt(0));
+				o.setoCheck(rs.getString("ocheck").charAt(0));  
+				o.setOrderDate(rs.getDate("orderDate"));
+				o.setPayDate(rs.getDate("payDate"));
+			}
+			
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}
+		return o;
 	}
 
 

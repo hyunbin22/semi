@@ -13,9 +13,22 @@ public class MentoUpload {
    public MentoUpload() {
       // TODO Auto-generated constructor stub
    }
+   
+   
 
 
-   public MentoUpload(int upMentoNum, int mtNum, String upMentoCategory, String upMentoNameLicense,
+   public MentoUpload(int mtNum, String upMentoCategory, String upMentoOrgName, String upMentoReName) {
+	super();
+	this.mtNum = mtNum;
+	this.upMentoCategory = upMentoCategory;
+	this.upMentoOrgName = upMentoOrgName;
+	this.upMentoReName = upMentoReName;
+}
+
+
+
+
+public MentoUpload(int upMentoNum, int mtNum, String upMentoCategory, String upMentoNameLicense,
          String upMentoOrgName, String upMentoReName) {
       super();
       this.upMentoNum = upMentoNum;

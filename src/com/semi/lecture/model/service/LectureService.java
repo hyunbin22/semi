@@ -117,9 +117,9 @@ public class LectureService {
 	}
 
 	//강의 선택
-	public Lecture selectLecture(String lectureNo) {
+	public Lecture selectLecture(int lectureNo) {
 		Connection conn = getConnection();
-		Lecture lec = dao.lectureView(conn, Integer.parseInt(lectureNo));
+		Lecture lec = dao.lectureView(conn, lectureNo);
 
 		close(conn);
 		return lec;
@@ -196,6 +196,7 @@ public class LectureService {
 			close(conn);
 			return result;
 		}
+
 
 
 

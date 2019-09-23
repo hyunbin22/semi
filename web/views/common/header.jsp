@@ -17,8 +17,6 @@
 
          String key=c.getName();
          String value=c.getValue();
-         System.out.println("key : "+key);
-         System.out.println("value : "+value);
          if(key.equals("saveId")){
             saveId=value;
    			}

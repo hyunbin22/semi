@@ -25,11 +25,9 @@ public class OrderService {
 		int result = dao.insertOrder(conn, mId, order);
 		int result2=0;
 
-		System.out.println("서비스 result : "+result);
 		if(result>0) {
 			commit(conn);
 			result2 = dao.getOnum(conn);
-			System.out.println("OrderService의 result2 :"+result2);
 		} else {
 			rollback(conn);
 		}
@@ -127,11 +125,19 @@ public class OrderService {
 	}
 
 	//lecNum이 일치하는 오더 가져오기. (페이징 제외)
-	public List<Order> selectLectureOrder(String lecNum) {
+	public List<Order> selectLectureOrder(int lecNum) {
 		Connection conn = getConnection();
 		List<Order> list = dao.selectLectureOrder(conn, lecNum);
 		close(conn);
 		return list;
+	}
+	
+	//lecNum이랑 mNum이 일치
+	public Order selectLoginMemOrder(int mNum, int lectureNo) {
+		Connection conn = getConnection();
+		Order o = dao.selectLoginMemOrder(conn, mNum, lectureNo);
+		close(conn);
+		return o;
 	}
 
 }

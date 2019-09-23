@@ -47,7 +47,6 @@ public class LectureListSearchServlet extends HttpServlet {
 	    	   }
 	       }
 	       
-	       System.out.println("서치서블릿 subNum : "+subNum);
 	       
 	      // 강의 리스트 페이징 처리
 	      int cPage;
@@ -57,7 +56,6 @@ public class LectureListSearchServlet extends HttpServlet {
 	         cPage=1;
 	      }
 	      
-	      System.out.println(cPage);
 	      
 	      int numPerPage=10;
 	      LectureService service=new LectureService();
@@ -81,7 +79,7 @@ public class LectureListSearchServlet extends HttpServlet {
 	         if(pageNo==cPage) {
 	            pageBar+="<span>"+pageNo+"</span>";
 	         } else {
-	            pageBar+="<a href='"+request.getContextPath()+"/lecture/lectureListSearch.do?subName="+subName+"cPage="+pageNo+"'>"+pageNo+"</a>";
+	            pageBar+="<a href='"+request.getContextPath()+"/lecture/lectureListSearch.do?subName="+subName+"&cPage="+pageNo+"'>"+pageNo+"</a>";
 	         }
 	         pageNo++;
 	      }

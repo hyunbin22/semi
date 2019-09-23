@@ -32,16 +32,14 @@ public class MentoUploadDao {
 	// 멘토이미지 등록
 		public int registerMentoImage(Connection conn, MentoUpload mtu, int mtnum, String category) {
 			PreparedStatement pstmt=null;
-			System.out.println("mtnum : "+mtnum);
 			int result=0;
 			String sql=prop.getProperty("registerMentoImage");
 			try {
 				pstmt=conn.prepareStatement(sql);
 				pstmt.setInt(1, mtnum);
 				pstmt.setString(2, category);
-				pstmt.setString(3, mtu.getUpMentoNameLicense());
-				pstmt.setString(4, mtu.getUpMentoOrgName());
-				pstmt.setString(5, mtu.getUpMentoReName());
+				pstmt.setString(3, mtu.getUpMentoOrgName());
+				pstmt.setString(4, mtu.getUpMentoReName());
 				result=pstmt.executeUpdate();
 
 			}catch(SQLException e) {
@@ -142,6 +140,30 @@ public class MentoUploadDao {
 			close(pstmt);
 		} return list;
 	}
+
+
+	//멘토자격증
+	public int registerMentoImage2(Connection conn, MentoUpload mtu, int mtnum, String category, String upMentoNameLicense) {
+		PreparedStatement pstmt=null;
+		int result=0;
+		String sql=prop.getProperty("registerMentoImage2");
+		try {
+			pstmt=conn.prepareStatement(sql);
+			pstmt.setInt(1, mtnum);
+			pstmt.setString(2, category);
+			pstmt.setString(3, mtu.getUpMentoNameLicense());
+			pstmt.setString(4, mtu.getUpMentoOrgName());
+			pstmt.setString(5, mtu.getUpMentoReName());
+			result=pstmt.executeUpdate();
+
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}
+		return result;
+	}
+	
 	
 	
 

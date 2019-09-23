@@ -3,6 +3,7 @@ package com.semi.lecture.controller;
 import java.io.IOException;
 import java.util.List;
 
+import javax.mail.Session;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -35,18 +36,17 @@ public class LectureViewServlet extends HttpServlet {
    /**
     * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
     */
-   protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-      String lectureNo = request.getParameter("lecnum");
-      Lecture lec=new LectureService().selectLecture(lectureNo);
-      
-      List<LectureReview> list=new LectureReviewService().selectReview(lectureNo);
-      List<Order> orderList = new OrderService().selectLectureOrder(lectureNo);
-      System.out.println(list);
-      request.setAttribute("orderList", orderList);
-      request.setAttribute("lecture", lec);
-      request.setAttribute("list", list);
-      request.getRequestDispatcher("/views/lecture/lectureView.jsp").forward(request, response);
-   }
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        int lectureNo = Integer.parseInt(request.getParameter("lecnum"));
+        Lecture lec=new LectureService().selectLecture(lectureNo);
+        
+        List<LectureReview> list=new LectureReviewService().selectReview(lectureNo);
+        List<Order> orderList = new OrderService().selectLectureOrder(lectureNo);
+        request.setAttribute("orderList", orderList);
+        request.setAttribute("lecture", lec);
+        request.setAttribute("list", list);
+        request.getRequestDispatcher("/views/lecture/lectureView.jsp").forward(request, response);
+     }
 
    /**
     * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)

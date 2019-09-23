@@ -5,23 +5,36 @@
 <%@ page import="com.semi.order.model.vo.Order" %>
 <%@ page import="java.util.List"%>
 <%
+	Member m = (Member) session.getAttribute("loginMember");
    Lecture lec = (Lecture) request.getAttribute("lecture");
 	List<LectureReview> list = (List) request.getAttribute("list");
 	List<Order> orderList = (List)request.getAttribute("orderList");
+	
    String coverImage = "";
    String profileImage = "";
-	String lectureImage[] = null;
+	String lectureImage = "";
 	String toId=lec.getLecMento().getMember().getmId();
+	
+	int loginOrderMNum = 0;
+	for(int i=0; i<orderList.size();i++){
+		if(m==null){
+			
+		}else if(m.getmNum()==orderList.get(i).getmNum()){
+			loginOrderMNum=orderList.get(i).getmNum();
+		}
+	}
+	
    for(int i=0;i<lec.getLectureUpList().size();i++){
 		if(lec.getLectureUpList().get(i).getUpLectureCategory().equals("cover")){
 			coverImage = lec.getLectureUpList().get(i).getUpLectureReName();
-		}/* else if (lec.getLectureUpList().get(i).getUpLectureCategory().equals("lecimage")){
-			lectureImage[i] = lec.getLectureUpList().get(i).getUpLectureReName();
-		} */
+		}else if (lec.getLectureUpList().get(i).getUpLectureCategory().equals("lecimage")){
+			lectureImage = lec.getLectureUpList().get(i).getUpLectureReName();
+		}
 		else if(lec.getLecMento().getList().get(i).getUpMentoCategory().equals("profile")){
 			profileImage = lec.getLecMento().getList().get(i).getUpMentoReName();
 		}
 	}
+   
    
    String var = lec.getLecWeek();
    String [] vars = var.split(",");
@@ -79,7 +92,7 @@
 
                   </tr>
                   <tr>
-                     <td><img src="<%=request.getContextPath()%>/upload/lecture/<%=profileImage%>"></td>
+                     <td><img src="<%=request.getContextPath()%>/upload/mento/<%=profileImage%>"></td>
                      <td>
                         <ul class="tutorpro" name="lecmentocontent">
                            <%=lec.getLecMentoContent()%>
@@ -89,6 +102,7 @@
                </table>
                <hr>
                <h2 class="subtext">강의 소개</h2><hr>
+               <img src="<%=request.getContextPath()%>/upload/lecture/<%=lectureImage%>" class="detailimg" alt="...">
                <p class="content" name="leclecturecontent"><%=lec.getLecLectureContent()%></p>
 
                <!-- <h2 class="subtext">커리큘럼</h2>
@@ -110,40 +124,17 @@
                <!-- 리뷰 댓글창 -->
                <p class="reviewinfo" id="rinfo">
                <h2 class="subtext">리뷰</h2><hr>
-               <%for(int i=0;i<orderList.size();i++){
-               if(memberLogin.getmNum()==orderList.get(i).getmNum()){ %>
                <form action="<%=request.getContextPath()%>/LectureReview/reviewWrite" method="post">
                   <input type="hidden" name="lecNum" value="<%=lec.getLecNum()%>">
                   <input type="hidden" name="mNum" value="<%=memberLogin != null ? memberLogin.getmNum() : ""%>">
-                  <input type="text" name="rTitle" rows="1" cols="30" placeholder="제목">
-                  <input type="text" name="rText" rows="5" cols="60" placeholder="내용">
+                  <input type="text" id="rTitle" name="rTitle" rows="1" cols="30" placeholder="제목">
+                  <input type="text" id="rText" name="rText" rows="5" cols="60" placeholder="내용">
                   <button type="submit">등록</button>
 
                </form>
-               <%}} %>
                
 
-					<script>
- 
-						$(function() {
-							$("textarea[name=rTitle]").focuse(function() {
-								if (
-					<%=memberLogin == null%>
-						) {
-									alert("로그인해주시기 바랍니다.");
-								}
-							});
-						});
-						$(function() {
-							$("textarea[name=rText]").focuse(function() {
-								if (
-					<%=memberLogin == null%>
-						) {
-									alert("로그인해주시기 바랍니다.");
-								}
-							});
-						});
-					</script>
+
 
 					<%
 							for (LectureReview rv : list) {
@@ -162,6 +153,7 @@
 												orderName=orderList.get(i).getLecture().getlec
 											}%>
 										} --%>
+					            		<%=rv.getMember().getmName() %>
 									</b>님<br>
 										<small><%=rv.getrDate() %></small>
 									</td>
@@ -171,7 +163,7 @@
 
 									<td>
 										<%
-											if (memberLogin != null && ("thd9292".equals(memberLogin.getmId())||memberLogin.getmNum()==rv.getmNum()))/*&& 리뷰작성자와 동일한 멤버로그인아이디일경우 */
+											if (memberLogin != null && memberLogin.getmNum()==rv.getmNum())
 														 {
 										%>
 										<br><br><br><br>
@@ -197,7 +189,7 @@
 					<%
 						}
 							
-						
+							
 					%>
 					
 					<script>
@@ -224,7 +216,7 @@
 
       <div class="wrap">
          <div class="floatMenu">
-            <form action="<%=request.getContextPath()%>/lecture/OrderEnroll.do"
+            <form action="<%=request.getContextPath()%>/order/OrderEnroll.do"
       method="post" >
       <input type="hidden" value="<%=lec.getLecNum()%>" name="lecnum">
             <div class="floatTitle">
@@ -233,12 +225,17 @@
             </div>
             <div class="floatsubtitle">수업시간</div>
             <div class="lecFViewTot-group">
+            	<%if(lec.getLecTot()!=null){ %>
 	               <input class="lecFViewTot"name="lectot" type="radio" value="<%=lec.getLecTot()%>"><%=lec.getLecTot() %>
-	               <input class="lecFViewTot" name="lectot" type="radio" value="<%=lec.getLecTot2()%>"><%=lec.getLecTot2()%>
-
-               <!-- <select id="color" title="select color">
-                        <option selected="selected">asdf</option>
-                    </select> -->
+	            <%} %>
+	            <%if(lec.getLecTot2()!=null){ %>   
+	               <input class="lecFViewTot" name="lectot2" type="radio" value="<%=lec.getLecTot2()%>"><%=lec.getLecTot2()%>
+				<%} %>
+				<%if(lec.getLecTot()==null&&lec.getLecTot2()==null){ %>
+					&nbsp;&nbsp;&nbsp;협의
+					<input  name="lectot" type="hidden" value="협의">
+					<input name="lectot2" type="hidden" value="협의">
+				<%} %>
             </div>
             <div class="floatsubtitle">총 수업 횟수</div>
             <div id="select_box">
@@ -288,30 +285,62 @@
 	           </form>
             <br>
 	            <div>
-               <button class="classSubmit" id="questionMento">문의하기</button>
+               <input type="button" value="문의하기" class="classSubmit btnMessage">
             </div>
 
          </div>
       </div>
-
+<%if(memberLogin!=null) { %>
+       <form name="lecMessage" method="post" id="openMessageFrm">   <!-- 메세지보내기 -->
+         <input type="hidden" name="toId" value="<%=toId%>">
+         <input type="hidden" name="fromId" value="<%=memberLogin.getmId()%>">
+         <input type="hidden" name="lectureName" value="<%=lec.getLecName() %>">
+      </form>
+      <%} %>
 
 </aside>
 
 <script>
+$(function(){
+	   $('.btnMessage').click(function(){
+		   if('<%=m%>'==null) {
+	         alert("로그인 후 이용 가능합니다.");
+	         $('#id').focus();
+	      } else {
+	         var toId = "<%=toId%>";
+	         var url = "<%=request.getContextPath()%>/message/openToMessage.do";
+	         var status = "width=400, height=600, resizable=no, status=no, toolbars=no, menubar=no";
+	         var title="ABLINGTALK"
+	         var popUp = open("", title, status);
+	         window.name="parentWin"; 
+	         lecMessage.target = title;
+	         lecMessage.action=url;
+	         lecMessage.submit();
+	      }
+	   })
+	});
+
+$(function(){
+	$("#rTitle").click(function(){
+		if('<%=m%>' == null){
+			alert("로그인해주시기 바랍니다.");
+			$('#id').focus();
+		}else if('<%=loginOrderMNum%>'==0){
+				alert("해당 강의를 수강한 회원만 작성이 가능합니다.");
+			}
+	});
+});
 	$(function(){
-		
-		$('#questionMento').click(function(){
-			var url = "<%=request.getContextPath()%>/message/messageList.do?toId=<%=toId%>";
-			var status = "width=400, height=600, resizable=no, status=no, toolbars=no, menubar=no";
-			var title="메세지"
-			var popUp = open("", title, status);
-			window.name="parentWin"; 
-			openMessageFrm.target = title;
-			openMessageFrm.action=url;
-			openMessageFrm.submit();
-			
+		$("#rText").click(function(){
+			if('<%=m%>' == null){
+				alert("로그인해주시기 바랍니다.");
+				$('#id').focus();
+			}else if('<%=loginOrderMNum%>'==0){
+				alert("해당 강의를 수강한 회원만 작성이 가능합니다.");
+			}
 		});
 	});
+	
 
    $(window).scroll(function() {
 	  if ($(window).scrollTop() > 323) {
@@ -326,8 +355,6 @@
       }
    });
 </script>
-
-<script src="js/bootstrap.js"></script>
 
 
 <%@ include file="/views/common/footer.jsp"%>
