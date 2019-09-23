@@ -11,7 +11,7 @@
                 <div class="bar">
                     <br><table class = "MYLIST">
                                 <tr>
-                                    <td><button onclick="location.href='<%=request.getContextPath()%>/views/report/reportForm.jsp'" id = "listBtn">신고하기</button></td>
+                                    <td><button onclick="location.href='<%=request.getContextPath()%>/member/report.do" id = "listBtn">신고하기</button></td>
                                     <td><button onclick="location.href='<%=request.getContextPath()%>/member/reportHistroy?mNum=<%=m.getmNum() %>'" id = "listBtn">신고내역</button></td>
                                 </tr>
                         </table><br><br>
@@ -129,4 +129,5 @@
 
     	
     </script>
+
     <%@ include file = "/views/common/footer.jsp" %>
