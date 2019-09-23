@@ -114,8 +114,17 @@
                    <td colspan="3"></td>
                         <td>
                         <br>
+                        <%if(mento.getMtAcademic() !=null){ %>
                         <input class="textfield title2" type="text" name="mtacademic" value="<%=mento.getMtAcademic() %>" />
+                        <%}else{ %>
+                        <input class="textfield title2" type="text" name="mtacademic" value="" />
+                        <%} %>
+                         <%if(mento.getMtAcademicDept() !=null){ %>
                         <input class="textfield title2" type="text" name="mtacademicdept" value="<%=mento.getMtAcademicDept() %>" />
+                        <%}else{ %>
+                        <input class="textfield title2" type="text" name="mtacademicdept" value="" />
+                        <%} %>
+    
                         <br>
                         <%if(mento.getMtGraduation().equals("재학")) { %>
                         <input type="radio" name="mtgraduation" value="재학" checked/> 재학

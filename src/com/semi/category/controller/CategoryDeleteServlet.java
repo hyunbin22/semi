@@ -39,7 +39,7 @@ public class CategoryDeleteServlet extends HttpServlet {
 		int result= new CategoryService().deleteCategory(selectbank);
 		
 		String msg=result>0?"카테고리삭제완료":"카테고리삭제실패!! 등록된강의가있습니다.";
-		String loc="/";
+		String loc="/admin/categoryEnroll";
 		
 		request.setAttribute("msg", msg);
 		request.setAttribute("loc", loc);

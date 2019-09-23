@@ -34,7 +34,7 @@ public class SubCategoryUpdateServlet extends HttpServlet {
 		int result=new SubCategoryService().updateSubCategory(subcategory,inputsubcategory);
 
 		String msg=result>0?"카테고리 수정이 완료되었습니다.":"카테고리 수정이 실패하였습니다.";
-		String loc="/";
+		String loc="/admin/subcategoryEnroll";
 		
 		request.setAttribute("msg", msg);
 		request.setAttribute("loc", loc);
