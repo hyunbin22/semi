@@ -25,12 +25,12 @@ public class MemberRegisterServlet extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		String id = request.getParameter("id");
-		String pw = request.getParameter("pw");
-		String name = request.getParameter("name");
+		String id = request.getParameter("id").trim();
+		String pw = request.getParameter("pw").trim();
+		String name = request.getParameter("name").trim();
 		char gender = request.getParameter("gender").charAt(0);
 		Date birth = Date.valueOf(request.getParameter("birth"));
-		String email = request.getParameter("email");
+		String email = request.getParameter("email").trim();
 		String phone = request.getParameter("tel1");
 		phone+=request.getParameter("tel2");
 		phone+=request.getParameter("tel3");

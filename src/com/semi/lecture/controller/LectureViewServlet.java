@@ -5,14 +5,17 @@ import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.semi.lecture.model.service.LectureReviewService;
 import com.semi.lecture.model.service.LectureService;
 import com.semi.lecture.model.vo.Lecture;
+import com.semi.lecture.model.vo.LectureReview;
 //import com.semi.lecture.model.vo.LectureReview;
+import com.semi.order.model.service.OrderService;
+import com.semi.order.model.vo.Order;
 
 /**
  * Servlet implementation class LectureViewServlet
@@ -33,14 +36,16 @@ public class LectureViewServlet extends HttpServlet {
     * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
     */
    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-      String lectureNo = request.getParameter("lecnum");
 
-      Lecture lec=new LectureService().selectLecture(lectureNo);
-      
-      System.out.println("LectureViewServlet lec : "+lec);
-      
-      
+      int lectureNo = Integer.parseInt(request.getParameter("lecnum"));
+
+      Lecture lec=new LectureService().lectureView(lectureNo);
+      List<LectureReview> list=new LectureReviewService().selectReview(lectureNo);
+      List<Order> orderList = new OrderService().selectLectureOrder(lectureNo);
+      request.setAttribute("orderList", orderList);
+
       request.setAttribute("lecture", lec);
+      request.setAttribute("list", list);
       request.getRequestDispatcher("/views/lecture/lectureView.jsp").forward(request, response);
    }
 

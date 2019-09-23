@@ -2,6 +2,7 @@ package com.semi.mento.controller;
 
 import java.io.IOException;
 import java.sql.Date;
+import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -18,7 +19,6 @@ import com.semi.lecture.model.service.LectureUploadService;
 import com.semi.lecture.model.vo.Lecture;
 import com.semi.lecture.model.vo.LectureUpload;
 import com.semi.member.model.vo.Member;
-import com.semi.mento.model.vo.Mento;
 
 import common.oreilly.servlet.multipart.AblingFileRenamePolicy;
 
@@ -43,7 +43,7 @@ public class MentoUpdateLectureEndServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		 
 		if(!ServletFileUpload.isMultipartContent(request)) {
-	         request.setAttribute("msg", "등록 실패 ![form:ectype] 관리자에게 문의하세요!");
+	         request.setAttribute("msg", "강의수정 실패 ![form:ectype] 관리자에게 문의하세요!");
 	         request.setAttribute("loc", "/");
 	         request.getRequestDispatcher("/views/common/msg.jsp").forward(request, response);
 	         
@@ -70,7 +70,11 @@ public class MentoUpdateLectureEndServlet extends HttpServlet {
 			String lecName = mr.getParameter("className"); //수업제목
 			int subCategory = Integer.parseInt(mr.getParameter("subcategory")); //부카테고리
 			String lecType = mr.getParameter("classType"); //수업형태 (1:1수업, 그룹수업)
-			int lecmaxcount = Integer.parseInt(mr.getParameter("studentCount")); //수업정원
+			int lecmaxcount = 0;
+			if(lecType.equals("그룹")) {
+			lecmaxcount = Integer.parseInt(mr.getParameter("studentCount"));
+				
+			} //수업정원
 			String address= mr.getParameter("subcategory");
 			address+=mr.getParameter("local2");
 			String lecMentoContent =mr.getParameter("mentoIntroduce"); //멘토소개
@@ -88,7 +92,7 @@ public class MentoUpdateLectureEndServlet extends HttpServlet {
 			String lecTot2 = mr.getParameter("day2"); // 수업시간
 			String week2 = mr.getParameter("week2"); //날짜선택 버튼,날짜협S의 버튼
 			Date lecOpenDate2 = Date.valueOf(mr.getParameter("month2")); //개설날짜
-			
+		
   
 	      Lecture l = new Lecture(lecNum, mtNum, subCategory, subLocal, lecName, lecType,
 	            lecmaxcount, lecPrice, lecTime, lecCount, lecWeek, lecMeet, lecTot,
@@ -105,40 +109,97 @@ public class MentoUpdateLectureEndServlet extends HttpServlet {
 	      
 	      if(result3>0) {
 	    	  result = new LectureService().updateLecture(l, lecNum); // mtnum
-	    	  
-	    	  if(mr.getOriginalFileName("file1")!=null) { // lecture테이블 cover
-	    		  category="cover";
-	    		  String upLectureOriCover = mr.getOriginalFileName("file1");
-	    		  String upLectureReCover = mr.getFilesystemName("file1");
-	    		  LectureUpload lecup1 = new LectureUpload(lecNum, category, upLectureOriCover, upLectureReCover);
-	    		  result2=new LectureUploadService().insertLectureImage(lecup1, lecNum, category);
-	    		  System.out.println("카테고리 : "+category+", 변경전 : "+upLectureOriCover+", 파일이름 : "+upLectureReCover);
-	    	  }
-	    	  if(mr.getOriginalFileName("addImg")!=null) {
-	    		  category="lecimage";
-	    		  String upLectureOrilecimage = mr.getOriginalFileName("addImg");
-	    		  String upLectureRelecimage = mr.getFilesystemName("addImg");	    
-	    		  LectureUpload lecup2 = new LectureUpload(lecNum, category, upLectureOrilecimage, upLectureRelecimage);
-	    		  result2=new LectureUploadService().insertLectureImage(lecup2, lecNum, category);
-	    		  System.out.println("카테고리 : "+category+", 변경전 : "+upLectureOrilecimage+", 파일이름 : "+upLectureRelecimage);
-	    	  }
-
+	      
+	      if(mr.getOriginalFileName("file1")!=null){
+    		  category="cover";
+    		  String upLectureOriCover = mr.getOriginalFileName("file1");
+    		  String upLectureReCover = mr.getFilesystemName("file1");
+    		  LectureUpload lecup1 = new LectureUpload(lecNum, category, upLectureOriCover, upLectureReCover);
+    		  result2=new LectureUploadService().insertLectureImage(lecup1, lecNum, category);
+    		  
+    	  }
+    	  if(mr.getOriginalFileName("addImg")!=null) {	    	  
+    		  category="lecimage";
+    		  String upLectureOrilecimage = mr.getOriginalFileName("addImg");
+    		  String upLectureRelecimage = mr.getFilesystemName("addImg");	    
+    		  LectureUpload lecup2 = new LectureUpload(lecNum, category, upLectureOrilecimage, upLectureRelecimage);
+    		  result2=new LectureUploadService().insertLectureImage(lecup2, lecNum, category);
+    	  }
 	      }else {
 	    	  	 msg="강의수정 실패!!";
 		         loc="/";
 		         request.setAttribute("msg", msg);
 			     request.setAttribute("loc", loc);
 			     request.getRequestDispatcher("/views/common/msg.jsp").forward(request, response);
-	      }	            
-	     
+	      }
+	      
+//	      int result2=0;
+	      
+//	      int result3 = 0;
+//	      LectureUpload result4=new LectureUploadService().searchLectureImg(lecNum);
+//	      
+//	 
+//	    	  int result = new LectureService().updateLecture(l, lecNum); // mtnum
+//	    	  
+//	    	  if(mr.getOriginalFileName("file1")!=null){
+//	    		  result3 = new LectureUploadService().deleteLectureImg(lecNum);
+//	    		  category="cover";
+//	    		  String upLectureOriCover = mr.getOriginalFileName("file1");
+//	    		  String upLectureReCover = mr.getFilesystemName("file1");
+//	    		  LectureUpload lecup1 = new LectureUpload(lecNum, category, upLectureOriCover, upLectureReCover);
+//	    		  result2=new LectureUploadService().insertLectureImage(lecup1, lecNum, category);
+//	    		  System.out.println("카테고리 : "+category+", 변경전 : "+upLectureOriCover+", 파일이름 : "+upLectureReCover);
+//	    		  
+//	    	  }
+//	    	  if(mr.getOriginalFileName("addImg")!=null) {	    	  
+//	    		  result3 = new LectureUploadService().deleteLectureImg(lecNum);
+//	    		  category="lecimage";
+//	    		  String upLectureOrilecimage = mr.getOriginalFileName("addImg");
+//	    		  String upLectureRelecimage = mr.getFilesystemName("addImg");	    
+//	    		  LectureUpload lecup2 = new LectureUpload(lecNum, category, upLectureOrilecimage, upLectureRelecimage);
+//	    		  result2=new LectureUploadService().insertLectureImage(lecup2, lecNum, category);
+//	    		  System.out.println("카테고리 : "+category+", 변경전 : "+upLectureOrilecimage+", 파일이름 : "+upLectureRelecimage);
+//	    	  }
+//	    	  if(mr.getOriginalFileName("file1")==null) { // lecture테이블 cover
+//	    		  category="cover";
+//	    		  coverReImage=result4.getUpLectureReName();
+//	    		  coverOriImage=result4.getUpLectureOrgName();
+//		    	  LectureUpload lecup1 = new LectureUpload(lecNum, category, coverOriImage, coverReImage);
+//	    		  result2=new LectureUploadService().insertLectureImage(lecup1, lecNum, category);
+//	    		  System.out.println("카테고리 : "+category+", 변경전 : "+coverOriImage+", 파일이름 : "+coverReImage);
+//	    	  }
+//	    	  if(mr.getOriginalFileName("addImg")==null) {
+//	    		  category="lecimage";
+//	    		  lecReImage=result4.getUpLectureReName();
+//		    	  lecOriImage=result4.getUpLectureOrgName();
+//		    	  LectureUpload lecup2 = new LectureUpload(lecNum, category, lecOriImage, lecReImage);
+//	    		  result2=new LectureUploadService().insertLectureImage(lecup2, lecNum, category);
+//	    		  System.out.println("카테고리 : "+category+", 변경전 : "+lecOriImage+", 파일이름 : "+lecReImage);
+//	    		  result3 = new LectureUploadService().deleteLectureImg(lecNum);
+//	    	  }
 
+	
+
+	      System.out.println(coverReImage);
+	      System.out.println(lecReImage);
+	      System.out.println("데이터수정 : "+result);
+	      System.out.println("이미지등록 : "+result2);
+	      System.out.println("이미지삭제 : "+result3);
+
+	      
 	      
 	      if(result>0 && result2>0 && result3>0) {
 	         msg="강의수정 완료";
 	         loc="/";
 	         request.setAttribute("msg", msg);
 		     request.setAttribute("loc", loc);
-	         request.getRequestDispatcher("/views/mento/mentoPageView.jsp").forward(request, response);
+	         request.getRequestDispatcher("/views/member/myPageView.jsp").forward(request, response);
+	      }else {
+	    	  	 msg="강의수정 실패!!";
+		         loc="/";
+		         request.setAttribute("msg", msg);
+			     request.setAttribute("loc", loc);
+			     request.getRequestDispatcher("/views/common/msg.jsp").forward(request, response);
 	      }
 
 	}

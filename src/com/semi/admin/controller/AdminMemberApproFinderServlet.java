@@ -43,7 +43,6 @@ public class AdminMemberApproFinderServlet extends HttpServlet {
 		int numPerPage=10;
 		int countMemberApproval = new MemberService().countMemberApproval(type, data);
 		List<Member> memberList = new MemberService().memberFindList(data, cPage, numPerPage);
-		System.out.println("리스트 : " + memberList);
 		
 		int reportTotalPage=(int)Math.ceil((double)countMemberApproval/numPerPage);
 		String pageBar="";

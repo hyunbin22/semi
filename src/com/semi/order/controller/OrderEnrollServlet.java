@@ -13,7 +13,7 @@ import com.semi.lecture.model.vo.Lecture;
 /**
  * Servlet implementation class lectureMemberRegistServlet
  */
-@WebServlet("/lecture/OrderEnroll.do")
+@WebServlet("/order/OrderEnroll.do")
 public class OrderEnrollServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -29,13 +29,14 @@ public class OrderEnrollServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-	      String lectureNo = request.getParameter("lecnum");
-	      String days = request.getParameter("day");
-	      Lecture lec=new LectureService().selectLecture(lectureNo);
-	     
+		int lectureNo = Integer.parseInt(request.getParameter("lecNum")); // 강의번호
+	      String days = request.getParameter("day"); // 요일
+	      String lecTot = request.getParameter("lectot"); // 시간
+	      Lecture lec=new LectureService().lectureView(lectureNo);
 	      
 	      request.setAttribute("day", days);
 	      request.setAttribute("lecture", lec);
+	      request.setAttribute("lecTot", lecTot);
 	      request.getRequestDispatcher("/views/order/orderEnroll.jsp").forward(request, response);
 	}
 

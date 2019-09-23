@@ -161,9 +161,11 @@
 				$('#keyCheck').prop("disabled", true);
 
 			} else if(key==userKey) {
+				var sendSms = $('#sendSms');
+				var checkKey = $('#checkKey');
 				alert("핸드폰 인증이 완료되었습니다.");
-				$('#sendSms').attr("disabled", false);
-				$('#checkKey').attr("disabled", false);
+				sendSms.disabled = 'disabled';
+				checkKey.disabled = 'disabled';
 				$('#tel1').prop("readonly", true);
 				$('#tel2').prop("readonly", true);
 				$('#tel3').prop("readonly", true);
@@ -380,7 +382,7 @@
 		
 		//이메일 체크 글자가 보일때
 		if ($('#emailCheck').prop('disabled')) {
-			alert("인증번호를 확인하세요.");
+			alert("이메일을 확인하세요.");
 			return false;
 		}
 		

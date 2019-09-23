@@ -96,11 +96,11 @@ public class MoimEnrollEndServlet extends HttpServlet {
 		
 		if(result2>0) {
 			msg="작성 완료";
-			loc="/moim/moimList.do";
+			loc="/moim/moimView.do?moimNum="+result;
 		}
 		else{
 			msg="작성 실패";
-			loc="/moim/moimList.do";
+			loc="/moim/moimView.do?moimNum="+result;
 		}
 		
 		request.setAttribute("msg", msg);

@@ -43,7 +43,6 @@ public class AdminMemberBlackApproFinderServlet extends HttpServlet {
 		int numPerPage=10;
 		int countMemberBlackApproval = new MemberService().countMemberBalckApproval(type, data);
 		List<Member> memberBlackList = new MemberService().memberFindBlackList(data, cPage, numPerPage);
-		System.out.println("리스트 : " + memberBlackList);
 		
 		int reportTotalPage=(int)Math.ceil((double)countMemberBlackApproval/numPerPage);
 		String pageBar="";

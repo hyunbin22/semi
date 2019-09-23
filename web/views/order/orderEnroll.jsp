@@ -22,15 +22,13 @@
 
 
 <%@ include file="/views/common/header.jsp"%>
-<%-- <link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/css/classdetail.css">
-   <link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/css/layout.css"> --%>
 <br><br><br><br>
 <div class="center1">
 <h5 class="subtext">강의 신청</h5>
 </div>
 <br><br>
 <section>
-<form action="<%=request.getContextPath()%>/lecture/OrderEnrollEnd.do" method="post">
+<form action="<%=request.getContextPath()%>/order/OrderEnrollEnd.do" method="post">
 <input type="hidden" value="<%=lec.getLecNum()%>" name="lecNum">
 <input type="hidden" name="oTot" value="<%=lecTot %>">
 <input type="hidden" name="oPrice" value="<%=lec.getLecPrice() %>">
@@ -52,7 +50,7 @@
 		</tr>
 		<tr>
 			<td><%=days %>요일</td>
-			<td >시간 : <%=lecTot %></td>
+			<td>시간 : <%=lecTot %></td>
 			<td>정원 : <%=lec.getLecStudentCount() %>/<%=lec.getLecMaxCount() %></td>
 			
 		</tr>

@@ -14,7 +14,6 @@ import java.util.Properties;
 
 import com.semi.category.model.dao.CategoryDao;
 import com.semi.member.model.dao.MemberDao;
-import com.semi.member.model.service.MemberService;
 import com.semi.message.model.vo.Message;
 
 public class MessageDao {
@@ -32,7 +31,7 @@ public class MessageDao {
 	
 	//헤더에서 안읽은 메세지수 보여주기
 	public int noReadCount(Connection conn, String id) {
-		int mNum = new MemberService().selectMember(id).getmNum();
+		int mNum = new MemberDao().selectMember(conn, id).getmNum();
 		
 		Statement stmt = null;
 		ResultSet rs = null;
@@ -56,8 +55,8 @@ public class MessageDao {
 	
 	//대화상대별 안읽은 메세지 갯수
 	public int noReadCountById(Connection conn, String fromId, String toId) {
-		int fromMNum = new MemberService().selectMember(fromId).getmNum();
-		int toMNum = new MemberService().selectMember(toId).getmNum();
+		int fromMNum = new MemberDao().selectMember(conn, fromId).getmNum();
+		int toMNum =  new MemberDao().selectMember(conn, toId).getmNum();
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		int result = 0;
@@ -193,7 +192,7 @@ public class MessageDao {
 	
 	//메세지 리스트(각 대화상대 별 맨 마지막꺼 리스트로 보여주기)
 	public List<Message> getMessageBox(Connection conn, String userId) {
-		int mNum = new MemberService().selectMember(userId).getmNum();
+		int mNum = new MemberDao().selectMember(conn, userId).getmNum();
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		List<Message> list = new ArrayList();

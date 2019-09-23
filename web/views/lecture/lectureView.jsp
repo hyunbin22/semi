@@ -1,16 +1,18 @@
+
 <%@ page language="java" contentType="text/html; charset=UTF-8"
    pageEncoding="UTF-8"%>
 <%@ page import="com.semi.lecture.model.vo.Lecture"%>
 <%@ page import="com.semi.lecture.model.vo.LectureReview"%>
+<%@ page import="com.semi.order.model.vo.Order" %>
 <%@ page import="java.util.List"%>
 <%
-   Lecture lec = (Lecture) request.getAttribute("lecture");
-
-   List<LectureReview> list = (List) request.getAttribute("list");
-	
-   String coverImage = "";
-   String profileImage = "";
+    Lecture lec = (Lecture) request.getAttribute("lecture");
+	List<LectureReview> list = (List) request.getAttribute("list");
+	List<Order> orderList = (List)request.getAttribute("orderList");
+    String coverImage = "";
+    String profileImage = "";
 	String lectureImage[] = null;
+	String toId=lec.getLecMento().getMember().getmId();
    for(int i=0;i<lec.getLectureUpList().size();i++){
 		if(lec.getLectureUpList().get(i).getUpLectureCategory().equals("cover")){
 			coverImage = lec.getLectureUpList().get(i).getUpLectureReName();
@@ -22,29 +24,24 @@
 		}
 	}
    
-	
-	   
-   
-   
-   
    String var = lec.getLecWeek();
    String [] vars = var.split(",");
+   
 %>
 
 
 
 <%@ include file="/views/common/header.jsp"%>
-<%-- <link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/css/classdetail.css">
-   <link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/css/layout.css"> --%>
 
 <section class="center">
-   <div class="wrap">
+   <div class="wrap"> 
       <article class="detailwrap">
          <img src="<%=request.getContextPath()%>/upload/lecture/<%=coverImage%>" class="detailimg" alt="...">
          <!--card-img-top -->
          <div class="detailbody">
             <div class="class_info">
-               <h5 class="" name="lectype">
+            <br><br>
+               <h5 class="lecType" name="lectype">
                   [
                   <%=lec.getLecType()%>
                   ]
@@ -89,18 +86,10 @@
                   </tr>
                </table>
                <hr>
+               <h2 class="subtext">강의 소개</h2><hr>
                <p class="content" name="leclecturecontent"><%=lec.getLecLectureContent()%></p>
 
-               <!-- <h2 class="subtext">커리큘럼</h2>
-                            <ul>
-                                <li>1회차 : 아이라이너 테크닉</li>
-                                <li>2회차 : 립스틱 테크닉</li>
-                                <li>2회차 : 립스틱 테크닉</li>
-                                <li>2회차 : 립스틱 테크닉</li>
-                                <li>2회차 : 립스틱 테크닉</li>
-                                <li>2회차 : 립스틱 테크닉</li>
-                                <li>2회차 : 립스틱 테크닉</li>
-                            </ul> -->
+            
                <hr>
 
 
@@ -108,94 +97,115 @@
 
 
                <!-- 리뷰 댓글창 -->
-               <%-- <p class="reviewinfo" id="rinfo">
-               <form
-                  action="<%=request.getContextPath()%>/LectureReview/reviewWrite"
-                  method="post">
-                  <input type="hidden" name="rNum"> <input type="hidden"
-                     name="lecNum" value="<%=lec.getLecNum()%>"> <input
-                     type="hidden" name="mNum"
-                     value="<%=memberLogin != null ? memberLogin.getmNum() : ""%>">
-                  <textarea name="rTitle" rows="1" cols="60"></textarea>
-                  <textarea name="rText" rows="5" cols="60"></textarea>
-
+               <p class="reviewinfo" id="rinfo">
+               <h2 class="subtext">리뷰</h2><hr>
+               <%for(int i=0;i<orderList.size();i++){
+               if(memberLogin.getmNum()==orderList.get(i).getmNum()){ %>
+               <form action="<%=request.getContextPath()%>/LectureReview/reviewWrite" method="post">
+                  <input type="hidden" name="lecNum" value="<%=lec.getLecNum()%>">
+                  <input type="hidden" name="mNum" value="<%=memberLogin != null ? memberLogin.getmNum() : ""%>">
+                  <input type="text" name="rTitle" rows="1" cols="30" placeholder="제목">
+                  <input type="text" name="rText" rows="5" cols="60" placeholder="내용">
                   <button type="submit">등록</button>
 
                </form>
+               <%}} %>
+               
 
-               <script>
-                  $(function() {
-                     $("textarea[name=rTitle]").focuse(function() {
-                        if (
-               <%=memberLogin == null%>
-                  ) {
-                           alert("로그인해주시기 바랍니다.");
-                        }
-                     });
-                  });
-                  $(function() {
-                     $("textarea[name=rText]").focuse(function() {
-                        if (
-               <%=memberLogin == null%>
-                  ) {
-                           alert("로그인해주시기 바랍니다.");
-                        }
-                     });
-                  });
-               </script>
+					<script>
+ 
+						$(function() {
+							$("textarea[name=rTitle]").focuse(function() {
+								if (
+					<%=memberLogin == null%>
+						) {
+									alert("로그인해주시기 바랍니다.");
+								}
+							});
+						});
+						$(function() {
+							$("textarea[name=rText]").focuse(function() {
+								if (
+					<%=memberLogin == null%>
+						) {
+									alert("로그인해주시기 바랍니다.");
+								}
+							});
+						});
+					</script>
 
-               <%
-                  if (list != null && !list.isEmpty()) {
-                     for (LectureReview lr : list) {
-                        if (memberLogin != null
-                              && (lr.getmNum() == memberLogin.getmNum() || memberLogin.getmId().equals("admin"))) {
-               %>
+					<%
+							for (LectureReview rv : list) {
+								
+					%>
+					 <div class="review">
+						<div class="memprofile">
+							<table class="reviewtable">
+								<tr>
+									<td class="reviewId">수강생<br>
+									<b>
+										<%-- <%
+										String orderName = "";
+										for(int i=0;i<orderList.size();i++){
+											if(orderList.get(i).getmNum()==rv.getmNum()){
+												orderName=orderList.get(i).getLecture().getlec
+											}%>
+										} --%>
+									</b>님<br>
+										<small><%=rv.getrDate() %></small>
+									</td>
 
-               <div class="review">
-                  <div class="memprofile">
-                     <table class="reviewtable">
-                        <tr>
-                           <td class="reviewId">수강생<br> <b><%=lr.getmNum() %></b>님
-                              <small>3.3/5.0</small>
-                           </td>
+									<td class="reviewContent"><%=rv.getrTitle()%>
+										<hr> <%=rv.getrText()%></td>
 
-                           <td class="reviewContent"><%=lr.getrTitle() %>
-                              <hr> <%=lr.getrText() %></td>
-                              
-                           <td>
-                              <%if(memberLogin!=null
-                              &&("admin".equals(memberLogin.getmId())/*&& 리뷰작성자와 동일한 멤버로그인아이디일경우 */
-                              )) {%>
-                              <button class="btn-delete"
-                                 value="<%=lr.getLecnum() %>">삭제</button> <%} %>
-                           </td>
-                        </tr>
+									<td>
+										<%
+											if (memberLogin != null && ("thd9292".equals(memberLogin.getmId())||memberLogin.getmNum()==rv.getmNum()))/*&& 리뷰작성자와 동일한 멤버로그인아이디일경우 */
+														 {
+										%>
+										<br><br><br><br>
+										<br><br><br><br>
+										<button id="deleteReview" value="<%=rv.getrNum()%>">삭제</button>
+										<%
+											}
+										%>
+									</td>
+								</tr>
 
-                     </table>
+							</table>
 
 
-                  </div>
-                  <!-- <div class="review_content">
+						</div>
+						<!-- <div class="review_content">
                                     <input type="text">
                                     <input type="submit">
                                 </div> -->
 
-               </div>
+					</div>
 
-               <%
-                        }
-                     }
-                  }
-               %>
+					<%
+						}
+							
+						
+					%>
+					
+					<script>
+						$(function(){
+							$('#deleteReview').click(function(){
+								if(confirm("정말로 리뷰를 삭제하시겠습니까?")){
+									location.href="<%=request.getContextPath()%>/lecture/lectureReviewDelete.do?lecnum=<%=lec.getLecNum()%>&rNum="+$(this).val();
+								}
+							})
+						});
+					</script>
 
-               </p>
-               <p class="questioninfo" id="qinfo"></p> --%>
+					</p>
+               <p class="questioninfo" id="qinfo"></p>
             </div>
          </div>
       </article>
 
    </div>
-   <!-- <div id="floatMenu" onload="floatMenu"> 내용 입력 </div> -->
 
 </section>
 
@@ -203,19 +213,17 @@
 
       <div class="wrap">
          <div class="floatMenu">
-            <form action="<%=request.getContextPath()%>/lecture/OrderEnroll.do?lecnum=<%=lec.getLecNum() %>"
-      method="post" enctype="multipart/form-data">
+            <form action="<%=request.getContextPath()%>/order/OrderEnroll.do %>" method="post" >
+      <input type="hidden" value="<%=lec.getLecNum()%>" name="lecNum">
             <div class="floatTitle">
                결제
                <hr>
             </div>
             <div class="floatsubtitle">수업시간</div>
-            <div id="select_box">
-               <li>
-               		<ol value="<%=lec.getLecTot()%>"><%=lec.getLecTot() %></ol>
-               		<ol value="<%=lec.getLecTot2()%>"><%=lec.getLecTot2() %></ol>
-               	
-               </li>
+            <div class="lecFViewTot-group">
+	               <input class="lecFViewTot"name="lectot" type="radio" value="<%=lec.getLecTot()%>"><%=lec.getLecTot() %>
+	               <input class="lecFViewTot" name="lectot" type="radio" value="<%=lec.getLecTot2()%>"><%=lec.getLecTot2()%>
+
                <!-- <select id="color" title="select color">
                         <option selected="selected">asdf</option>
                     </select> -->
@@ -233,10 +241,10 @@
             <div class="floatsubtitle">요일</div>
             <div id="select_box">
             	<select id="week" name="day">
-            		<option value="<%=lec.getLecWeek() %>"><%=lec.getLecWeek() %></option>
-            		<%-- <%for (int i=0; i<vars.length;i++){ %>
+            		<%-- <option value="<%=lec.getLecWeek() %>"><%=lec.getLecWeek() %></option> --%>
+            		<%for (int i=0; i<vars.length;i++){ %>
             		<option value="<%=vars[i]%>"><%=vars[i]%></option>
-            		<%} %> --%>
+            		<%} %>
             	</select>
             </div>
             
@@ -267,21 +275,46 @@
 	        </div>
 	           </form>
             <br>
-            <form action="<%=request.getContextPath()%>/lectureMewmberRegist">
 	            <div>
-               <input type="submit" value="문의하기" class="classSubmit">
+               <input type="button" value="문의하기" class="classSubmit btnMessage">
             </div>
-            </form>
 
          </div>
       </div>
+      
+      <%if(memberLogin!=null) { %>
+	    <form name="lecMessage" method="post" id="openMessageFrm">	<!-- 메세지보내기 -->
+			<input type="hidden" name="toId" value="<%=toId%>">
+			<input type="hidden" name="fromId" value="<%=memberLogin.getmId()%>">
+			<input type="hidden" name="lectureName" value="<%=lec.getLecName() %>">
+		</form>
+		<%} %>
 
 
 </aside>
 
 <script>
+$(function(){
+	$('.btnMessage').click(function(){
+		if(<%=memberLogin%>==null) {
+			alert("로그인 후 이용 가능합니다.");
+			$('#id').focus();
+		} else {
+			var toId = "<%=toId%>";
+			var url = "<%=request.getContextPath()%>/message/openToMessage.do";
+			var status = "width=400, height=600, resizable=no, status=no, toolbars=no, menubar=no";
+			var title="ABLINGTALK"
+			var popUp = open("", title, status);
+			window.name="parentWin"; 
+			lecMessage.target = title;
+			lecMessage.action=url;
+			lecMessage.submit();
+		}
+	})
+});
+
    $(window).scroll(function() {
-      if ($(window).scrollTop() > 371) {
+	  if ($(window).scrollTop() > 323) {
          $('.floatMenu').addClass("fix");
          $('.floatMenu').addClass("right");
          $('.floatMenu').removeClass("floatMenu");
@@ -295,5 +328,6 @@
 </script>
 
 <script src="js/bootstrap.js"></script>
+
 
 <%@ include file="/views/common/footer.jsp"%>
