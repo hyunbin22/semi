@@ -10,13 +10,13 @@
                     <br><br>
                     <hr>
                 </div>
-      <form action="<%=request.getContextPath()%>/mentoRegisterEnd" method="post" enctype="multipart/form-data" class = "center1" id = "mentoFrm">
+      <form action="<%=request.getContextPath()%>/mento/mentoRegisterEnd.do" method="post" enctype="multipart/form-data" class="center1" id="mentoFrm" onsubmit="return checkNull();">
         <div class="box">
          <div class="lecture" style='margin-top:50px;'>프로필 사진</div>
-         <div style='margin:0;'><input type=file name='mtprofileimg' style='display: none;' class="title2">
+         <div style='margin:0;'><input type=file name='mtprofileimg' class="title2" id="profileImg"><br><br>
          <img id="camera"
             src='https://dumielauxepices.net/sites/default/files/digital-camera-clipart-basic-camera-502592-7419029.jpg'
-            onclick='document.all.mtprofileimg.click(); document.all.file2.value=document.all.file1.value'
+            
             width=150px; height=150px;>
          <p id="profile">
             <br> <br> <br> <br>
@@ -28,7 +28,7 @@
          </div>
          <br> <br>
          <div class = "box"><div class = "lecture">아이디</div>
-         <div class = "lecture"><input id="nick" type="text" name="mtnickname" value = "<%=m.getmId()%>" readonly="readonly" style = "border : none;"></div>
+         <div class = "lecture"><input type="text" name="mtnickname" value = "<%=m.getmId()%>" readonly="readonly" style = "border : none;"></div>
          </div>
          <br> <br>
          <br> <br>
@@ -51,33 +51,30 @@
          <input id="school6" type="radio" name="mtgraduation" value="졸업" /> 졸업
          <br> <br>
             <span class = "lecture">신분인증사진</span>
-            <input class = "title2" id="photo" type="file"
-            name="mtconfirming" id="profile_pt"
-            onchange="previewImage(this,'View_area')">
-         <div id='View_area'
-            style='position: relative; width: 100px; height: 100px; color: black; border: 0px solid black; dispaly: inline;'>
-         </div>
+            <input class = "title2" id="confirmPhoto" type="file" name="mtconfirming"><br><br>
+            <img id="confirming" src='https://dumielauxepices.net/sites/default/files/digital-camera-clipart-basic-camera-502592-7419029.jpg'
+ width=150px; height=150px;/>
+         
          <br> <br>
          
          <span class = "lecture">자격증 1 (선택)</span>
          <input id="school7" type="text"
-            name="mtlicense" class = "title2"/> <br> <br> <span class = "lecture">자격증 1 사진</span> <input id="photo" class="title2"
-            type="file" name="mtlicenseimg" id="profile_pt"   
-            onchange="previewImage(this,'View_area')">
+            name="mtlicense" class = "title2"/> <br> <br> <span class = "lecture">자격증 1 사진</span> <input id="licensePhoto" class="title2"
+            type="file" name="mtlicenseimg" id="profile_pt" ><br><br>
+            <img id="licenseImg"
+   src='https://dumielauxepices.net/sites/default/files/digital-camera-clipart-basic-camera-502592-7419029.jpg'
+    width=150px; height=150px;/><br><br>
          
-         <div id='View_area'
-            style='position: relative; width: 100px; height: 100px; color: black; border: 0px solid black; dispaly: inline;'>
-         </div>
          
          <span class = "lecture">자격증 2 (선택)</span>
-         <input id="school7" type="text" name="mtlicense2" class = "title2"/>
+         <input id="school8" type="text" name="mtlicense2" class = "title2"/>
          <br><br>
          
-         <span class = "lecture">자격증 2 사진</span> <input class="title2" id="photo" type="file" name="mtlicenseimg2"
-            id="profile_pt" onchange="previewImage(this,'View_area')">
-         <div id='View_area'
-            style='position: relative; width: 100px; height: 100px; color: black; border: 0px solid black; dispaly: inline;'>
-         </div>
+         <span class = "lecture">자격증 2 사진</span> <input class="title2" id="licensePhoto2" type="file" name="mtImgLicense"
+            id="profile_pt2"><br><br>
+         <img id="licenseImg2"
+   src='https://dumielauxepices.net/sites/default/files/digital-camera-clipart-basic-camera-502592-7419029.jpg'
+    width=150px; height=150px;/><br><br>
             <span class = "lecture">은행</span> <select name="mtbank" id="bank" style='position: relative; width: 100px; height: 100px; color: black; border: 0px solid black; dispaly: inline;'>
                <option value="농협은행">농협은행</option>
                <option value="카카오뱅크">카카오뱅크</option>
@@ -93,7 +90,7 @@
             <br>
          
          <div class = "center1">
-                    <input type="button" id = "btnDelete" value="신청하기" class="next center1" onclick="enrollMento();">
+                    <input type="submit" id = "btnDelete" value="신청하기" class="next center1" onclick="enrollMento();">
             </div>
          
       </form>
@@ -200,24 +197,22 @@
            nick.focus();
            return false;
         }
-        if(school1.is(':checked')==false&&school2.is(':checked')==false&&school12.is(':checked')==false){
-           alert('인증방법을 선택하세요.');
-           return false;
-        }
-        if(school3.val()==null){
-           alert('학교를 입력하세요.');
-           school3.focus();
-           return false;
-        }
-        if(school4.val()==null){
-           alert('학과를 입력하세요.');
-           scholl4.focus();
-           return false;
-        }
-        if(school5.val()==null&&school6.val()==null){
-           alert('재학 혹은 졸업을 선택하세요.');
-           return false;
-        }
+        if(schoo1.is(':checked')==true || school12.is(':checked')==true) {
+            if(school3.val()==null){
+               alert('학교를 입력하세요.');
+               school3.focus();
+               return false;
+            }
+            if(school4.val()==null){
+               alert('학과를 입력하세요.');
+               scholl4.focus();
+               return false;
+            }
+            if(school5.val()==null&&school6.val()==null){
+               alert('재학 혹은 졸업을 선택하세요.');
+               return false;
+            }
+         }
         if(photo.val()==""){
            alert('신분인증사진을 등록하세요.')
            return false;
@@ -230,9 +225,77 @@
            alert('계좌번호를 입력하세요.');
            return false;
         }
-        
         return true;
      }
+     
+      //프로필사진 미리보기
+     function readURL(input) {
+          if (input.files && input.files[0]) {
+           var reader = new FileReader();
+           
+           reader.onload = function (e) {
+            $('#camera').attr('src', e.target.result);  
+           }
+           
+           reader.readAsDataURL(input.files[0]);
+           }
+         }   
+         
+         $("#profileImg").change(function(){
+            readURL(this);
+         });
+         
+         
+         
+       //신분증사진 미리보기
+       function confirmReadURL(input) {
+          if (input.files && input.files[0]) {
+           var reader = new FileReader();
+           
+           reader.onload = function (ee) {
+            $('#confirming').attr('src', ee.target.result);  
+           }
+           
+           reader.readAsDataURL(input.files[0]);
+           }
+         }   
+         
+         $("#confirmPhoto").change(function(){
+            confirmReadURL(this);
+         });
+         
+         //자격증사진 미리보기
+         function licenseImageURL(input) {
+          if (input.files && input.files[0]) {
+           var reader = new FileReader();
+           
+           reader.onload = function (ee) {
+            $('#licenseImg').attr('src', ee.target.result);  
+           }
+           
+           reader.readAsDataURL(input.files[0]);
+           }
+         }   
+         
+         $("#licensePhoto").change(function(){
+            licenseImageURL(this);
+         });
+         
+         function licenseImageURL2(input) {
+             if (input.files && input.files[0]) {
+              var reader = new FileReader();
+              
+              reader.onload = function (ee) {
+               $('#licenseImg2').attr('src', ee.target.result);  
+              }
+              
+              reader.readAsDataURL(input.files[0]);
+              }
+            }   
+            
+            $("#licensePhoto2").change(function(){
+               licenseImageURL2(this);
+            });
        </script>
 </section>
 <%@ include file="/views/common/footer.jsp"%>

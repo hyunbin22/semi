@@ -2,7 +2,6 @@ package com.semi.mento.controller;
 
 import java.io.IOException;
 import java.sql.Date;
-import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -59,12 +58,12 @@ public class MentoUpdateLectureEndServlet extends HttpServlet {
 	      HttpSession session = request.getSession();
 	      Member memberLogin = (Member) session.getAttribute("loginMember");
 	      MultipartRequest mr = new MultipartRequest(request, saveDir, maxSize, "UTF-8", new AblingFileRenamePolicy(memberLogin.getmId()));
-	      
+	                              
 	      String coverOriImage = mr.getOriginalFileName("file1");
 	      String coverReImage = mr.getFilesystemName("file1");
 	      String lecOriImage = mr.getOriginalFileName("addImg");
 	      String lecReImage = mr.getFilesystemName("addImg");
-	      
+	                            
 	      	int lecNum = Integer.parseInt(mr.getParameter("lecNum"));
 	      	int mtNum = Integer.parseInt(mr.getParameter("mtNum")); //멘토 참조번호
 			String lecName = mr.getParameter("className"); //수업제목
@@ -103,104 +102,54 @@ public class MentoUpdateLectureEndServlet extends HttpServlet {
 	      String loc="";
 	      String category="";
 
-	      int result=0;
+	      Lecture orgLecture = new LectureService().lectureListByLecNum(lecNum);
+	      int result= new LectureService().updateLecture(l, lecNum); 
 	      int result2=0;
-	      int result3 = new LectureUploadService().deleteLectureImg(lecNum);
+	      if(result>0) {
+		      for(int i=0; i<orgLecture.getLectureUpList().size(); i++) {
+			    	  switch(orgLecture.getLectureUpList().get(i).getUpLectureCategory()) {
+			    	  case "cover" :
+			    		  if(coverOriImage!=null){
+			    			  
+			    			  result2=new LectureUploadService().deleteLectureImg(lecNum);
+			    			  if(result2>0) {
+			    			  category="cover";
+			    			  LectureUpload lecup1 = new LectureUpload(lecNum, category, coverOriImage, coverReImage);
+			    			  result2=new LectureUploadService().insertLectureImage(lecup1, lecNum, category);			    			  
+			    		  }
+			    		  } break;
+			    	  case "lecimage" :
+			    		  if(lecOriImage!=null) {	
+			    			 
+			    			  result2=new LectureUploadService().deleteLectureImg(lecNum);
+			    			  if(result2>0) {
+			    			  category="lecimage";
+			    			
+			    			  LectureUpload lecup2 = new LectureUpload(lecNum, category, lecOriImage, lecReImage);
+			    			  result2=new LectureUploadService().insertLectureImage(lecup2, lecNum, category);
+			    		  }
+			    	  }break;
+			    	  default: result2 = 1; break;
+			      }
+		      }
 	      
-	      if(result3>0) {
-	    	  result = new LectureService().updateLecture(l, lecNum); // mtnum
-	      
-	      if(mr.getOriginalFileName("file1")!=null){
-    		  category="cover";
-    		  String upLectureOriCover = mr.getOriginalFileName("file1");
-    		  String upLectureReCover = mr.getFilesystemName("file1");
-    		  LectureUpload lecup1 = new LectureUpload(lecNum, category, upLectureOriCover, upLectureReCover);
-    		  result2=new LectureUploadService().insertLectureImage(lecup1, lecNum, category);
-    		  
-    	  }
-    	  if(mr.getOriginalFileName("addImg")!=null) {	    	  
-    		  category="lecimage";
-    		  String upLectureOrilecimage = mr.getOriginalFileName("addImg");
-    		  String upLectureRelecimage = mr.getFilesystemName("addImg");	    
-    		  LectureUpload lecup2 = new LectureUpload(lecNum, category, upLectureOrilecimage, upLectureRelecimage);
-    		  result2=new LectureUploadService().insertLectureImage(lecup2, lecNum, category);
-    	  }
-	      }else {
-	    	  	 msg="강의수정 실패!!";
-		         loc="/";
-		         request.setAttribute("msg", msg);
-			     request.setAttribute("loc", loc);
-			     request.getRequestDispatcher("/views/common/msg.jsp").forward(request, response);
-	      }
-	      
-//	      int result2=0;
-	      
-//	      int result3 = 0;
-//	      LectureUpload result4=new LectureUploadService().searchLectureImg(lecNum);
-//	      
-//	 
-//	    	  int result = new LectureService().updateLecture(l, lecNum); // mtnum
-//	    	  
-//	    	  if(mr.getOriginalFileName("file1")!=null){
-//	    		  result3 = new LectureUploadService().deleteLectureImg(lecNum);
-//	    		  category="cover";
-//	    		  String upLectureOriCover = mr.getOriginalFileName("file1");
-//	    		  String upLectureReCover = mr.getFilesystemName("file1");
-//	    		  LectureUpload lecup1 = new LectureUpload(lecNum, category, upLectureOriCover, upLectureReCover);
-//	    		  result2=new LectureUploadService().insertLectureImage(lecup1, lecNum, category);
-//	    		  System.out.println("카테고리 : "+category+", 변경전 : "+upLectureOriCover+", 파일이름 : "+upLectureReCover);
-//	    		  
-//	    	  }
-//	    	  if(mr.getOriginalFileName("addImg")!=null) {	    	  
-//	    		  result3 = new LectureUploadService().deleteLectureImg(lecNum);
-//	    		  category="lecimage";
-//	    		  String upLectureOrilecimage = mr.getOriginalFileName("addImg");
-//	    		  String upLectureRelecimage = mr.getFilesystemName("addImg");	    
-//	    		  LectureUpload lecup2 = new LectureUpload(lecNum, category, upLectureOrilecimage, upLectureRelecimage);
-//	    		  result2=new LectureUploadService().insertLectureImage(lecup2, lecNum, category);
-//	    		  System.out.println("카테고리 : "+category+", 변경전 : "+upLectureOrilecimage+", 파일이름 : "+upLectureRelecimage);
-//	    	  }
-//	    	  if(mr.getOriginalFileName("file1")==null) { // lecture테이블 cover
-//	    		  category="cover";
-//	    		  coverReImage=result4.getUpLectureReName();
-//	    		  coverOriImage=result4.getUpLectureOrgName();
-//		    	  LectureUpload lecup1 = new LectureUpload(lecNum, category, coverOriImage, coverReImage);
-//	    		  result2=new LectureUploadService().insertLectureImage(lecup1, lecNum, category);
-//	    		  System.out.println("카테고리 : "+category+", 변경전 : "+coverOriImage+", 파일이름 : "+coverReImage);
-//	    	  }
-//	    	  if(mr.getOriginalFileName("addImg")==null) {
-//	    		  category="lecimage";
-//	    		  lecReImage=result4.getUpLectureReName();
-//		    	  lecOriImage=result4.getUpLectureOrgName();
-//		    	  LectureUpload lecup2 = new LectureUpload(lecNum, category, lecOriImage, lecReImage);
-//	    		  result2=new LectureUploadService().insertLectureImage(lecup2, lecNum, category);
-//	    		  System.out.println("카테고리 : "+category+", 변경전 : "+lecOriImage+", 파일이름 : "+lecReImage);
-//	    		  result3 = new LectureUploadService().deleteLectureImg(lecNum);
-//	    	  }
-
-	
-
-	      System.out.println(coverReImage);
-	      System.out.println(lecReImage);
-	      System.out.println("데이터수정 : "+result);
-	      System.out.println("이미지등록 : "+result2);
-	      System.out.println("이미지삭제 : "+result3);
+	}
 
 	      
-	      
-	      if(result>0 && result2>0 && result3>0) {
-	         msg="강의수정 완료";
-	         loc="/";
-	         request.setAttribute("msg", msg);
-		     request.setAttribute("loc", loc);
-	         request.getRequestDispatcher("/views/member/myPageView.jsp").forward(request, response);
-	      }else {
-	    	  	 msg="강의수정 실패!!";
-		         loc="/";
-		         request.setAttribute("msg", msg);
-			     request.setAttribute("loc", loc);
-			     request.getRequestDispatcher("/views/common/msg.jsp").forward(request, response);
-	      }
+	  	if(result>0) {	
+			msg="수업수정 완료";
+			loc="/mento/studyList.do?mtnum="+orgLecture.getMtNum();
+			request.setAttribute("msg", msg);
+			request.setAttribute("loc", loc);
+			request.getRequestDispatcher("/views/common/msg.jsp").forward(request, response);
+
+		} else {
+			msg="수업수정 실패!!";
+			loc="/mento/studyList.do?mtnum="+orgLecture.getMtNum();
+			request.setAttribute("msg", msg);
+			request.setAttribute("loc", loc);
+			request.getRequestDispatcher("/views/common/msg.jsp").forward(request, response);
+		}
 
 	}
 

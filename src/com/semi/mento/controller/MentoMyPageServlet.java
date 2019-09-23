@@ -36,13 +36,12 @@ public class MentoMyPageServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		int getmNum=Integer.parseInt(request.getParameter("getmNum"));
-		
 		int getMtNum=Integer.parseInt(request.getParameter("getMtNum"));
-		
+
 		
 		List<MentoUpload> muList = new MentoUploadService().mentoUpList(getMtNum);
-		Mento mt= new MentoService().mentoView(getmNum);
-		
+		Mento mt= new MentoService().mentoView(getMtNum);
+
 		request.setAttribute("mento", mt);
 		request.setAttribute("mentoUpload", muList);
 		

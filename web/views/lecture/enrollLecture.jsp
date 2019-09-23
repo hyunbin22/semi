@@ -23,11 +23,13 @@
 		</div>
 		
 		<div class=" center1 myPage-content-wrap">
-			<form action="<%=request.getContextPath()%>/lectureEnrollEnd?mtNum=<%=mt.getMtNum()%>" method="POST" enctype="multipart/form-data">
+			<form action="<%=request.getContextPath()%>/lectureEnrollEnd?mtNum=<%=mt.getMtNum()%>" method="POST" enctype="multipart/form-data" onsubmit="return checkValue();">
 			<div class="box">
 				<div class="lecture" >수업제목</div>
 				<div>
-				<input type="text" id="title" class="title2" name="className" >
+				<input type="text" id="title" class="title2" name="className" style="width: 630px;" >
+				<br>
+				<span id="titleCheck" class="rg-checkMsg"></span>
 				<br> <br>
 				<div style='background: #edf0f4; border-radius: 4px; padding: 12px 24px; width: 630px;'>
 				<b style='color:#ff005a;'>TIP</b>
@@ -57,6 +59,9 @@
 			    <select id="good" name="subcategory" class="title2">
 					<option>과목선택</option>
 				</select> 
+				<span id="mCategory" class="rg-checkMsg"></span>
+				<br>
+				<span id="sCategory" class="rg-checkMsg"></span>
 				</div>
 				<br><br>
 				<hr>
@@ -78,6 +83,7 @@
 			     </div>
 				</div>
 				<br><br><br><br><br><br><br>
+				<span id="coverImg" class="rg-checkMsg"></span>
 				<hr>
 				<div class="box">
 				<div class="lecture">수업사진등록</div>
@@ -92,6 +98,7 @@
 										클릭해 보세요.
 									</td>
 								</tr>
+								
 								<br>
 								<tr>
 									<td height="25">
@@ -117,28 +124,32 @@
 				</table>
 				</div>
 				  <br><br><br>		
+				  <span id="lectureImg" class="rg-checkMsg"></span>
 				<input type="hidden" value=<%=mt.getMtNum() %> name="mtNum">
 
 				<br> <br>
 				<hr>
 				<div class="box">
 				<div class="lecture">멘토소개</div>
-				<textarea id="" cols="30" rows="10" name="mentoIntroduce"
+				<textarea id="mento" cols="30" rows="10" name="mentoIntroduce"
 					placeholder="내용을 입력해주세요." class="title2"></textarea>
+					<span id="mentoIntroduce" class="rg-checkMsg"></span>
 					</div>
 				
 				<br> 
 				<hr>
 				<div class="box">
 				<div class="lecture">강의소개</div>
-				<textarea id="" cols="30" rows="10" name="classIntroduce"
+				<textarea id="lecture" cols="30" rows="10" name="classIntroduce"
 					placeholder="내용을 입력해주세요." class="title2"></textarea>
+					<span id="lectureIntroduce" class="rg-checkMsg"></span>
 				</div>
 				<br> 
 				<hr>
 				<div class="box">
 				<div class="lecture">시간당가격</div>
 				<input type="text" name="price" id="hourPrice" class="title2"> 원 <br>
+				<span id="lecPrice" class="rg-checkMsg"></span>
 				</div>
 				<br> <br>
 				<div class="box">
@@ -152,12 +163,14 @@
 					<option value="5">5시간</option>
 					<option value="6">6시간</option>
 				</select> /회 
+				<span id="lecTime" class="rg-checkMsg"></span>
 				</div>
 				<br> <br> 
 				<div class="box">
 				<div class="lecture">총수업(한달기준)</div>
 				<input type="text" name="totaltime" id="totalTime"
 					placeholder="예) 20회" onkeyup="total()" class="title2">회 
+					<span id="lecTotalTime" class="rg-checkMsg"></span>
 				</div>
 				<br> <br> 
 				<hr>
@@ -202,6 +215,8 @@
 				</select>
 				<input type="text" name="local2" id="local2"
 					placeholder="세부장소를 입력하세요.">
+				<span id="localCt" class="rg-checkMsg"></span>
+					<span id="localDetail" class="rg-checkMsg"></span>
 				</div>
 				<br><br>
 				<hr>
@@ -222,20 +237,23 @@
 				</option>
 				<input type="checkbox" name="yo" value="일요일">일요일
 				</option>
+				<span id="day1" class="rg-checkMsg"></span>
 				<br><br>
 				<hr>
 				<div class="box">
 				<br> <br> <input type="text" name="day1" placeholder="ex>오후7시~오후9시" class="title2"> 
 				<input type="radio"	name="week1" id="f1" value="선택" style='margin-top:17px; ' checked><label for="f1" style='margin:10px;'></label>
-				<input type="date" name="month1" min='2019-09-23' max='2019-12-31' class="title2"/>
+				<input type="date" name="month1" id="month1" min='2019-09-23' max='2019-12-31' class="title2"/>
 				<input type="radio" name="week1" id="f2" value="협의" style='margin-top:17px; '><label for="f2" style='margin:10px;'>협의</label>
+				<span id="day2" class="rg-checkMsg"></span>
 				</div>
 				<br>
 				<div class="box">
 				<input type="text" name="day2" placeholder="ex>오후7시~오후9시" class="title2">
 				<input type="radio" name="week2" id="f3" value="선택" style='margin-top:17px; ' checked ><label for="f3" style='margin:10px; '></label>
-				<input type="date" name="month2" min='2019-09-23' max='2019-12-31' class="title2"/>
+				<input type="date" name="month2" id="month2" min='2019-09-23' max='2019-12-31' class="title2"/>
 				<input type="radio" name="week2" id="f4" value="협의" style='margin-top:17px; '><label for="f4" style='margin:10px;'>협의</label>
+				<span id="day3" class="rg-checkMsg"></span>
 				</div>
 				<br>
 				<div class="center1">
@@ -249,6 +267,299 @@
 	</div>
 </section>
 <script>
+
+$(function(){
+ 	var titleCheck = $('#titleCheck');
+	$('#title').blur(function(){
+		var rgTitle = $('#title').val();
+					if (rgTitle == "") {
+						$(titleCheck).text('제목을 입력해주세요.');
+						$(titleCheck).css({"color" : "red","font-size" : "11px"});
+						$(titleCheck).prop("disabled",true);
+					} else {
+						$(titleCheck).text("");
+						$(titleCheck).prop("disabled",false);
+						} 		
+		});
+	});
+	
+$(function(){
+ 	var lectureIntroduce = $('#lectureIntroduce');
+	$('#lecture').blur(function(){
+		var rgLectureIntroduce = $('#lecture').val();
+					if (rgLectureIntroduce == "") {
+						$(lectureIntroduce).text('강의소개를 입력해주세요.');
+						$(lectureIntroduce).css({"color" : "red","font-size" : "11px"});
+						$(lectureIntroduce).prop("disabled",true);
+					}  else {
+						$(lectureIntroduce).text("");
+						$(lectureIntroduce).prop("disabled",false);
+						} 	
+		});
+	});
+	
+$(function(){
+ 	var mentoIntroduce = $('#mentoIntroduce');
+	$('#mento').blur(function(){
+		var rgMentoIntroduce = $('#mento').val();
+					if (rgMentoIntroduce == "") {
+						$(mentoIntroduce).text('멘토소개를 입력해주세요.');
+						$(mentoIntroduce).css({"color" : "red","font-size" : "11px"});
+						$(mentoIntroduce).prop("disabled",true);
+					}  else {
+						$(mentoIntroduce).text("");
+						$(mentoIntroduce).prop("disabled",false);
+						} 	
+		});
+	});
+	
+$(function(){
+ 	var mCategory = $('#mCategory');
+	$('#maincategory').blur(function(){
+		var rgMainCategory = $('#maincategory').val();
+					if (rgMainCategory==0) {
+						$(mCategory).text('카테고리를 선택해주세요.');
+						$(mCategory).css({"color" : "red","font-size" : "11px"});
+						$(mCategory).prop("disabled",true);
+					}  else {
+						$(mCategory).text("");
+						$(mCategory).prop("disabled",false);
+						} 	
+		});
+	});
+	
+$(function(){
+ 	var sCategory = $('#sCategory');
+	$('#good').blur(function(){
+		var rgSubCategory = $('#good').val();
+					if (rgSubCategory==0) {
+						$(sCategory).text('하위카테고리를 선택해주세요.');
+						$(sCategory).css({"color" : "red","font-size" : "11px"});
+						$(sCategory).prop("disabled",true);
+					}  else {
+						$(sCategory).text("");
+						$(sCategory).prop("disabled",false);
+						} 	
+		});
+	});
+	
+$(function(){
+ 	var lecPrice = $('#lecPrice');
+	$('#hourPrice').blur(function(){
+		var rgHourPrice = $('#hourPrice').val();
+					if (rgHourPrice==0) {
+						$(lecPrice).text('가격을 입력해주세요.');
+						$(lecPrice).css({"color" : "red","font-size" : "11px"});
+						$(lecPrice).prop("disabled",true);
+					}  else {
+						$(lecPrice).text("");
+						$(lecPrice).prop("disabled",false);
+						} 	
+		});
+	});
+	
+$(function(){
+ 	var lecTime = $('#lecTime');
+	$('#time').blur(function(){
+		var rgTime = $('#time').val();
+					if (rgTime==0) {
+						$(lecTime).text('시간을 선택해주세요.');
+						$(lecTime).css({"color" : "red","font-size" : "11px"});
+						$(lecTime).prop("disabled",true);
+					}  else {
+						$(lecTime).text("");
+						$(lecTime).prop("disabled",false);
+						} 	
+		});
+	});
+	
+$(function(){
+ 	var lecTotalTime = $('#lecTotalTime');
+	$('#totalTime').blur(function(){
+		var rgTotalTime = $('#totalTime').val();
+					if (rgTotalTime==0) {
+						$(lecTotalTime).text('총수업 횟수를 선택해주세요.');
+						$(lecTotalTime).css({"color" : "red","font-size" : "11px"});
+						$(lecTotalTime).prop("disabled",true);
+					}  else {
+						$(lecTotalTime).text("");
+						$(lecTotalTime).prop("disabled",false);
+						} 	
+		});
+	});
+	
+$(function(){
+ 	var localCt = $('#localCt');
+	$('#local1').blur(function(){
+		var rgLocal1 = $('#local1').val();
+					if (rgLocal1==0) {
+						$(localCt).text('지역을 선택해주세요.');
+						$(localCt).css({"color" : "red","font-size" : "11px"});
+						$(localCt).prop("disabled",true);
+					}  else {
+						$(localCt).text("");
+						$(localCt).prop("disabled",false);
+						} 	
+		});
+	});
+	
+$(function(){
+ 	var localDetail = $('#localDetail');
+	$('#local2').blur(function(){
+		var rgLocal2 = $('#local2').val();
+					if (rgLocal2==0) {
+						$(localDetail).text('세부장소를 입력해주세요.');
+						$(localDetail).css({"color" : "red","font-size" : "11px"});
+						$(localDetail).prop("disabled",true);
+					}  else {
+						$(localDetail).text("");
+						$(localDetail).prop("disabled",false);
+						} 	
+		});
+	});
+
+		$(function(){
+		 	var day2 = $('#day2');
+			$('#month1').blur(function(){
+				var rgMonth1 = $('#month1').val();
+							if (rgMonth1==0) {
+								$(day2).text('날짜를 입력해주세요.');
+								$(day2).css({"color" : "red","font-size" : "11px"});
+								$(day2).prop("disabled",true);
+							}  else {
+								$(day2).text("");
+								$(day2).prop("disabled",false);
+								} 	
+				});
+			});
+	
+		$(function(){
+		 	var day3 = $('#day3');
+			$('#month2').blur(function(){
+				var rgMonth2 = $('#month2').val();
+							if (rgMonth2==0) {
+								$(day3).text('날짜를 입력해주세요.');
+								$(day3).css({"color" : "red","font-size" : "11px"});
+								$(day3).prop("disabled",true);
+							}  else {
+								$(day3).text("");
+								$(day3).prop("disabled",false);
+								} 	
+				});
+			});
+		
+		$(function(){
+		 	var coverImg = $('#coverImg');
+			$('#file1').blur(function(){
+				var rgFile1 = $('#file1').val();
+							if (rgFile1==0) {
+								$(coverImg).text('커버사진을 등록해주세요.');
+								$(coverImg).css({"color" : "red","font-size" : "11px"});
+								$(coverImg).prop("disabled",true);
+							}  else {
+								$(coverImg).text("");
+								$(coverImg).prop("disabled",false);
+								} 	
+				});
+			});
+		
+		$(function(){
+		 	var lectureImg = $('#lectureImg');
+			$('#addImg').blur(function(){
+				var rgAddImg = $('#addImg').val();
+							if (rgAddImg==0) {
+								$(lectureImg).text('수업사진을 등록해주세요.');
+								$(lectureImg).css({"color" : "red","font-size" : "11px"});
+								$(lectureImg).prop("disabled",true);
+							}  else {
+								$(lectureImg).text("");
+								$(lectureImg).prop("disabled",false);
+								} 	
+				});
+			});
+	
+function checkValue() {
+	//요일을 선택안했을때
+	var fields = $("input[name='yo']").serializeArray(); 
+    if (fields.length === 0) 
+    { 
+        alert('요일을 체크하세요.'); 
+        // cancel submit
+        return false;
+    }
+
+	//제목 체크글자가 보일때
+	if ($('#title').val().length==0) {
+		alert("제목을 확인하세요.");
+		return false;
+	}
+	//멘토소개 체크글자가 보일때
+	if ($('#mento').val().length==0) {
+		alert("멘토소개를 확인하세요.");
+		return false;
+	}
+	//강의소개 체크글자가 보일때
+	if ($('#lecture').val().length==0) {
+		alert("강의소개를 확인하세요.");
+		return false;
+	}	
+	//카테고리 체크글자가 보일때
+	if ($('#maincategory').val()=="0") {
+		alert("카테고리를 확인하세요.");
+		return false;
+	}
+	//하위카테고리 체크글자가 보일때
+	if ($('#good').val()=="0") {
+		alert("하위카테고리를 확인하세요.");
+		return false;
+	}
+	//가격 체크글자가 보일때
+	if ($('#hourPrice').val().length==0) {
+		alert("가격을 확인하세요.");
+		return false;
+	}
+	//수업시간 체크글자가 보일때
+	if ($('#time').val()=="0") {
+		alert("수업시간을 선택하세요.");
+		return false;
+	}
+	//총수업횟수 체크글자가 보일때
+	if ($('#totalTime').val().length==0) {
+		alert("총수업 횟수를 확인하세요.");
+		return false;
+	}
+	//지역 체크글자가 보일때
+	if ($('#local1').val()=="0") {
+		alert("지역을 선택하세요.");
+		return false;
+	}
+	//세부장소 체크글자가 보일때
+	if ($('#local2').val().length==0) {
+		alert("세부장소을 입력하세요.");
+		return false;
+	}
+	//날짜1 체크글자가 보일때
+	if ($('#month1').val().length==0) {
+		alert("날짜를 선택하세요.");
+		return false;
+	}
+	//날짜2 체크글자가 보일때
+	if ($('#month2').val().length==0) {
+		alert("날짜를 선택하세요.");
+		return false;
+	}
+	//커버사진 체크글자가 보일때
+	if ($('#file1').val().length==0) {
+		alert("커버사진을 등록하세요.");
+		return false;
+	}
+	//수업사진 체크글자가 보일때
+	if ($('#addImg').val().length==0) {
+		console.log($('#lectureImg').val());
+		alert("수업사진을 등록하세요.");
+		return false;
+	}
+};
 
 			//확장자, 정규식 검사
 			$(document).on("change","input[name='file1']",function(event) {

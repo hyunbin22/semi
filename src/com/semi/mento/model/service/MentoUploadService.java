@@ -33,12 +33,12 @@ public class MentoUploadService {
 
 
 
-	public int updateMentoImage(MentoUpload mtu1, int result, String category) {
+	public int updateMentoImage(MentoUpload mtu1, int mtNum, String category) {
 
 		Connection conn = getConnection();
-		int result1=dao.updateMentoImage(conn, mtu1, result, category);
+		int result1=dao.updateMentoImage(conn, mtu1, mtNum, category);
 
-		if(result>0) {
+		if(result1>0) {
 			commit(conn);
 
 		}else {
@@ -58,13 +58,26 @@ public class MentoUploadService {
 	}
 
 
-	public int deleteMentoImg(int mtNum) {
+	public int deleteMentoImg(int mentoUploadNum) {
 		Connection conn = getConnection();
-		int result=dao.deleteMentoImg(conn, mtNum);
+		int result=dao.deleteMentoImg(conn, mentoUploadNum);
 
 		close(conn);
 		return result;
 	}
+	
+	 //멘토신청 자격증 이미지
+	   public int registerMentoImage2(MentoUpload mtu3, int mtnum, String category, String upMentoNameLicense) {
+	      Connection conn=getConnection();
+	      int result=dao.registerMentoImage2(conn, mtu3, mtnum, category, upMentoNameLicense);
+	      if(result>0) {
+	         commit(conn);
+	      }else {
+	         rollback(conn);
+	      }
+	      close(conn);
+	      return result;
+	   }
 
 
 }

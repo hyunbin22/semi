@@ -147,17 +147,18 @@ public class MentoUploadDao {
 	}
 	
 	//멘토 사진 수정
-	public int updateMentoImage(Connection conn, MentoUpload mtu1, int result, String category) {
+	public int updateMentoImage(Connection conn, MentoUpload mtu1, int mtNum, String category) {
 		PreparedStatement pstmt = null;
 		int result1=0;
-		String sql=prop.getProperty("updateMentoImage");
+		String sql="insert into tb_upload_mento values(seq_upload_mento.nextval,?,?,?,?,?)";
 		try {
 			pstmt=conn.prepareStatement(sql);
-			pstmt.setString(1, category);
-			pstmt.setString(2, mtu1.getUpMentoNameLicense());
-			pstmt.setString(3, mtu1.getUpMentoOrgName());
-			pstmt.setString(4, mtu1.getUpMentoReName());
-			pstmt.setInt(5, result);
+			pstmt.setInt(1, mtNum);
+			pstmt.setString(2, category);
+			pstmt.setString(3, mtu1.getUpMentoNameLicense());
+			pstmt.setString(4, mtu1.getUpMentoOrgName());
+			pstmt.setString(5, mtu1.getUpMentoReName());
+			result1 = pstmt.executeUpdate();
 
 		}catch(SQLException e) {
 			e.printStackTrace();
@@ -169,13 +170,13 @@ public class MentoUploadDao {
 	}
 	
 	//멘토 이미지 삭제
-	public int deleteMentoImg(Connection conn, int mtNum) {
+	public int deleteMentoImg(Connection conn, int mentoUploadNum) {
 		PreparedStatement pstmt = null;
 		int result1=0;
 		String sql=prop.getProperty("deleteMentoImg");
 		try {
 			pstmt=conn.prepareStatement(sql);
-			pstmt.setInt(1, mtNum);
+			pstmt.setInt(1, mentoUploadNum);
 			result1=pstmt.executeUpdate();
 		}catch(SQLException e) {
 			e.printStackTrace();
@@ -185,6 +186,28 @@ public class MentoUploadDao {
 
 		return result1;
 	}
+	
+	   //멘토자격증
+	   public int registerMentoImage2(Connection conn, MentoUpload mtu, int mtnum, String category, String upMentoNameLicense) {
+	      PreparedStatement pstmt=null;
+	      int result=0;
+	      String sql=prop.getProperty("registerMentoImage2");
+	      try {
+	         pstmt=conn.prepareStatement(sql);
+	         pstmt.setInt(1, mtnum);
+	         pstmt.setString(2, category);
+	         pstmt.setString(3, mtu.getUpMentoNameLicense());
+	         pstmt.setString(4, mtu.getUpMentoOrgName());
+	         pstmt.setString(5, mtu.getUpMentoReName());
+	         result=pstmt.executeUpdate();
+
+	      }catch(SQLException e) {
+	         e.printStackTrace();
+	      }finally {
+	         close(pstmt);
+	      }
+	      return result;
+	   }
 
 
 }

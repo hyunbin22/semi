@@ -28,125 +28,167 @@ import com.semi.mento.model.vo.MentoUpload;
  */
 @WebServlet("/mento/mentoUpdateEnd.do")
 public class MentoUpdateModifyEndServlet extends HttpServlet {
-   private static final long serialVersionUID = 1L;
-       
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
-    public MentoUpdateModifyEndServlet() {
-        super();
-        // TODO Auto-generated constructor stub
-    }
+	private static final long serialVersionUID = 1L;
 
-   /**
-    * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
-    */
-   protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-      if(!ServletFileUpload.isMultipartContent(request)) {
-         request.setAttribute("msg", "멘토수정 실패 [form:ectype] 관리자에게 문의하세요!");
-         request.setAttribute("loc", "/");
-         request.getRequestDispatcher("/views/common/msg.jsp").forward(request, response);
-         
-         return;
-      }
-      
-      String root=getServletContext().getRealPath("/");
-      System.out.println(root);
-      
-      String saveDir=root+"/upload/mento";
-      
-      
-      int maxSize=1024*1024*1024;
-      
-      HttpSession session = request.getSession();
-      Member memberLogin = (Member) session.getAttribute("loginMember");
-      MultipartRequest mr = new MultipartRequest(request, saveDir, maxSize, "UTF-8", new AblingFileRenamePolicy(memberLogin.getmId()));
-      
-      String profileOriImage = mr.getParameter("mtprofileimg");
-      String profileReImage = mr.getParameter("mtprofileimg");
-      String confirmOriImage = mr.getParameter("mtconfirming");
-      String confirmReImage = mr.getParameter("mtconfirming");
-      String licenseOriImage = mr.getParameter("mtlicenseimg");
-      String licenseReImage = mr.getParameter("mtlicenseimg");
-      
-      int mtNum = Integer.parseInt(request.getParameter("mtNum"));
-      String mtnickname = mr.getParameter("mtnickname");
-      String mthowconfirm = mr.getParameter("mthowconfirm");
-      String mtacademic = mr.getParameter("mtacademic");
-      String mtacademicdept = mr.getParameter("mtacademicdept");
-      String mtgraduation = mr.getParameter("mtgraduation");
-      String mtBank = mr.getParameter("mtbank");
-      String mtAccountNumber = mr.getParameter("mtAccountNumber");      
-      String upMentoNameLicense = mr.getParameter("mtlicense");
-      
-      Mento mt = new Mento(mtnickname, mthowconfirm, mtacademic, mtacademicdept, mtgraduation, mtBank, mtAccountNumber);
-      
-      
-      String category="";
-      String msg="";
-      String loc="";
-        
-      int result=0;
-      int result2=0;
-      int result3= new MentoUploadService().deleteMentoImg(mtNum);
+	/**
+	 * @see HttpServlet#HttpServlet()
+	 */
+	public MentoUpdateModifyEndServlet() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
 
-      if(result3>0) {
-    	  result = new MentoService().updateMento(mtnickname, mthowconfirm, mtacademic, mtacademicdept, mtgraduation, mtBank, mtAccountNumber, mtNum);
- 
-      if(mr.getOriginalFileName("mtprofileimg")!=null) {
-         category="profile";
-         String upMentoOrgProfile=mr.getOriginalFileName("mtprofileimg");
-         String upMentoReProfile = mr.getFilesystemName("mtprofileimg");
-         MentoUpload mtu1 = new MentoUpload(mtNum, category, upMentoNameLicense, upMentoOrgProfile, upMentoReProfile);
-         result2=new MentoUploadService().updateMentoImage(mtu1, mtNum, category);
-         System.out.println("카테고리 : "+category+", 파일이름 :"+upMentoOrgProfile);
-      }
-      if(mr.getOriginalFileName("mtconfirming")!=null) {
-         category="confirm";
-         String upMentoOrgConfirm =mr.getOriginalFileName("mtconfirming");
-         String upMentoReConfirm= mr.getFilesystemName("mtconfirming");
-         MentoUpload mtu2 = new MentoUpload(mtNum, category, upMentoNameLicense, upMentoOrgConfirm, upMentoReConfirm);
-         result2=new MentoUploadService().updateMentoImage(mtu2, mtNum, category);
-         System.out.println("카테고리 : "+category+", 파일이름 :"+upMentoOrgConfirm);
-      }
-      if(mr.getOriginalFileName("mtlicenseimg")!=null) {
-         category="license";
-         String upMentoOrgLicense =mr.getOriginalFileName("mtlicenseimg");
-         String upMentoReLicense= mr.getFilesystemName("mtlicenseimg");   
-         MentoUpload mtu3 = new MentoUpload(mtNum, category, upMentoNameLicense, upMentoOrgLicense, upMentoReLicense);
-         result2=new MentoUploadService().updateMentoImage(mtu3, mtNum, category);
-         System.out.println("카테고리 : "+category+", 파일이름 :"+upMentoOrgLicense);
-      }
-      }else {
-    	 msg="멘토수정 실패!!";
-         loc="/";
-         request.setAttribute("msg", msg);
-	     request.setAttribute("loc", loc);
-	     request.getRequestDispatcher("/views/common/msg.jsp").forward(request, response);
-      }
-      
-      System.out.println("등록"+result);
-      System.out.println("수정"+result2);
-      System.out.println("삭제"+result3);
-      
-      
-      if(result>0 && result2>0 && result3>0) {
-        msg="멘토수정 완료";
-        loc="/";
-        request.setAttribute("msg", msg);
-        request.setAttribute("loc", loc);
-        request.getRequestDispatcher("/views/mento/mentoPageView.jsp").forward(request, response);
-      
-      }
-      
-   }
+	/**
+	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+	 */
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		if(!ServletFileUpload.isMultipartContent(request)) {
+			request.setAttribute("msg", "멘토수정 실패 [form:ectype] 관리자에게 문의하세요!");
+			request.setAttribute("loc", "/");
+			request.getRequestDispatcher("/views/common/msg.jsp").forward(request, response);
 
-   /**
-    * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-    */
-   protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-      // TODO Auto-generated method stub
-      doGet(request, response);
-   }
+			return;
+		}
+
+		String root=getServletContext().getRealPath("/");
+
+		String saveDir=root+"/upload/mento";
+
+		int maxSize=1024*1024*1024;
+
+		HttpSession session = request.getSession();
+		Member memberLogin = (Member) session.getAttribute("loginMember");
+
+		MultipartRequest mr = new MultipartRequest(request, saveDir, maxSize, "UTF-8", new AblingFileRenamePolicy(memberLogin.getmId()));
+
+		String mtnickname = mr.getParameter("mtnickname");
+		String mthowconfirm = mr.getParameter("mthowconfirm");
+		String mtacademic = mr.getParameter("mtacademic");
+		String mtacademicdept = mr.getParameter("mtacademicdept");
+		String mtgraduation = mr.getParameter("mtgraduation");
+		String mtBank = mr.getParameter("mtbank");
+		String mtAccountNumber = mr.getParameter("mtAccountNumber");      
+
+		//기존 파일이름
+		String proOre = mr.getParameter("profileOrgName");
+		String proRe = mr.getParameter("profileReName");
+		String conOre = mr.getParameter("profileOrgName");
+		String conRe = mr.getParameter("profileReName");
+		String[] liOre = mr.getParameterValues("licenseOrgName");
+		String[] liRe = mr.getParameterValues("licenseReName");
+
+
+		//수정했을때 새로 받아오는 파일이름
+		String profileOriImage = mr.getOriginalFileName("mtprofileimg");
+		String profileReImage = mr.getFilesystemName("mtprofileimg");
+		String confirmOriImage = mr.getOriginalFileName("mtconfirming");
+		String confirmReImage = mr.getFilesystemName("mtconfirming");
+		String licenseOriImage = mr.getOriginalFileName("mtlicenseimg");
+		String licenseReImage = mr.getFilesystemName("mtlicenseimg");
+		String licenseOriImage1 = mr.getOriginalFileName("mtlicenseimg1");
+		String licenseReImage1 = mr.getFilesystemName("mtlicenseimg1");
+
+		System.out.println(licenseOriImage1);
+		System.out.println(licenseReImage1);
+		int mtNum = Integer.parseInt(request.getParameter("mtNum"));
+
+		Mento mt = new Mento(mtnickname, mthowconfirm, mtacademic, mtacademicdept, mtgraduation, mtBank, mtAccountNumber);
+		Mento mt1 = new MentoService().mentoView(mtNum);
+		String upMentoNameLicense = mr.getParameter("mtlicense");
+		String upMentoNameLicense1 = mr.getParameter("mtlicense1");
+		
+
+		Mento orgMento = new MentoService().mentoView(mtNum);
+		int result = new MentoService().updateMento(mtnickname, mthowconfirm, mtacademic, mtacademicdept, mtgraduation, mtBank, mtAccountNumber, mtNum);
+		int result2=0;
+		if(result>0) {
+			for(int i = 0; i < orgMento.getList().size(); i++) {
+//				result2 = 0;
+				switch(orgMento.getList().get(i).getUpMentoCategory()) {
+				case "profile" : 
+					if(profileOriImage!=null) {
+
+						result2 = new MentoUploadService().deleteMentoImg(orgMento.getList().get(i).getUpMentoNum());
+						if(result2>0) {
+							String category="profile";
+	
+							MentoUpload mtu1 = new MentoUpload(mtNum, category, null, profileOriImage, profileReImage);
+							result2=new MentoUploadService().updateMentoImage(mtu1, mtNum, category);
+						}
+					} break;
+				case "confirm" :
+					if(confirmOriImage!=null) {
+						result2 = new MentoUploadService().deleteMentoImg(orgMento.getList().get(i).getUpMentoNum());
+						if(result2>0) {
+							String category="confirm";
+							MentoUpload mtu1 = new MentoUpload(mtNum, category, null, confirmOriImage, confirmReImage);
+							result2=new MentoUploadService().updateMentoImage(mtu1, mtNum, category);
+						}
+					} break;
+				case "license" :
+					if(licenseOriImage!=null) {
+								result2 = new MentoUploadService().deleteMentoImg(orgMento.getList().get(i).getUpMentoNum());
+
+								if(result2>0) {
+									String category="license";
+									MentoUpload mtu1 = new MentoUpload(mtNum, category, upMentoNameLicense, licenseOriImage, licenseReImage);
+									result2=new MentoUploadService().updateMentoImage(mtu1, mtNum, category);
+								}
+							}
+					if(licenseOriImage1!=null) {
+						result2 = new MentoUploadService().deleteMentoImg(orgMento.getList().get(i).getUpMentoNum());
+						System.out.println("result2 : "+result2);
+						if(result2>0) {
+
+							String category="license";
+							MentoUpload mtu1 = new MentoUpload(mtNum, category, upMentoNameLicense1, licenseOriImage1, licenseReImage1);
+							System.out.println("mtu1 : "+mtu1);
+							result2=new MentoUploadService().updateMentoImage(mtu1, mtNum, category);
+						}
+					}
+						
+					
+					break;
+					
+				default: result2 = 1; break;
+
+				}
+
+			}
+			
+		}
+	
+
+		String msg="";
+		String loc="";
+
+
+		if(result>0) {
+
+			session.setAttribute("loginMento", mt1);
+			System.out.println(session.getAttribute("loginMento").toString());
+			msg="멘토수정 완료";
+			loc="/mento/mentoMyPage.do?getmNum="+orgMento.getmNum()+"&getMtNum="+orgMento.getMtNum();
+			request.setAttribute("msg", msg);
+			request.setAttribute("loc", loc);
+			request.getRequestDispatcher("/views/common/msg.jsp").forward(request, response);
+
+		} else {
+			msg="멘토수정 실패!!";
+			loc="/mento/mentoMyPage.do?getmNum="+orgMento.getmNum()+"&getMtNum="+orgMento.getMtNum();
+			request.setAttribute("msg", msg);
+			request.setAttribute("loc", loc);
+			request.getRequestDispatcher("/views/common/msg.jsp").forward(request, response);
+		}
+
+	}
+
+	/**
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 */
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// TODO Auto-generated method stub
+		doGet(request, response);
+	}
 
 }

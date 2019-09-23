@@ -72,63 +72,42 @@ public class LectureEnrollEndServlet extends HttpServlet {
 	      String lecReImage = mr.getFilesystemName("addImg");
 	      
 	      int mtNum = Integer.parseInt(mr.getParameter("mtNum")); //멘토 참조번호
-			System.out.println(mtNum);
+
 			String lecName = mr.getParameter("className"); //수업제목
-			System.out.println(lecName);
-			
+	
 			String subCategory = mr.getParameter("subcategory"); //부카테고리
-			System.out.println(subCategory);
+	
 			int subCategoryNum = new SubCategoryService().selectsubName(subCategory);
 			
 			String lecType = mr.getParameter("classType"); //수업형태 (1:1수업, 그룹수업)
-			System.out.println(lecType);
+		
 			int lecmaxcount = 0;
 			if(lecType.equals("그룹")) {
 				lecmaxcount = Integer.parseInt(mr.getParameter("studentCount"));
 				
 			}
 	
-			System.out.println(lecmaxcount);
-//			String address= mr.getParameter("subcategory");
-//			address+=mr.getParameter("local2");
-//			System.out.println(address);
+	
 			String lecMentoContent =mr.getParameter("mentoIntroduce"); //멘토소개
-			System.out.println(lecMentoContent);
 			String lecLectureContent = mr.getParameter("classIntroduce"); //수업소개
-			System.out.println(lecLectureContent);
 			int lecPrice = Integer.parseInt(mr.getParameter("price")); //시간당 가격
-			System.out.println(lecPrice);
 			int lecTime = Integer.parseInt(mr.getParameter("time")); //1회 수업 시간
-			System.out.println(lecTime);
 			int lecCount = Integer.parseInt(mr.getParameter("totaltime")); //한달 기준 수업 횟수
-			System.out.println(lecCount);
 			int totalprice = lecPrice*lecTime*lecCount ; //총가격
-			System.out.println(totalprice);
 			
 			int local = Integer.parseInt(mr.getParameter("local1")); //메인
 			String subLocal = mr.getParameter("local"); //서브
 			int subLocalNum = new SubLocalService().selectsubLocalName(local,subLocal);
 			//서브지역카테고리
-			System.out.println(subLocal);
 			String lecLocalContent = mr.getParameter("local2"); //세부위치작성
-			System.out.println(lecLocalContent);
-//			String[] lecWeek = mr.getParameterValues("yo");//요일
-//			 m.setHobby(String.join(",", request.getParameterValues("hobby")));
 			String lecWeek = (String.join(",", mr.getParameterValues("yo")));
 
-			System.out.println(lecWeek);
 			String lecTot = mr.getParameter("day1"); // 수업시간
-			System.out.println(lecTot);
 			String lecMeet = mr.getParameter("week1"); // 날짜선택 버튼,날짜협의 버튼
-			System.out.println(lecMeet);
 			Date lecOpenDate = Date.valueOf(mr.getParameter("month1"));//개설날짜
-			System.out.println(lecOpenDate);
 			String lecTot2 = mr.getParameter("day2"); // 수업시간
-			System.out.println(lecTot2);
 			String week2 = mr.getParameter("week2"); //날짜선택 버튼,날짜협의 버튼
-			System.out.println(week2);
 			Date lecOpenDate2 = Date.valueOf(mr.getParameter("month2")); //개설날짜
-			System.out.println(lecOpenDate2);
 			
   
 	      Lecture l = new Lecture(mtNum, subCategoryNum, subLocalNum, lecName, lecType,
@@ -136,9 +115,7 @@ public class LectureEnrollEndServlet extends HttpServlet {
 	            lecTot2, lecOpenDate, lecOpenDate2, lecLocalContent, lecMentoContent,
 	            lecLectureContent);
 	      
-	      System.out.println(l);
 	      int result = new LectureService().insertLecture(l, mtNum); // mtnum
-	      System.out.println("result : "+result);
 	      
 	      String category="";
 	      

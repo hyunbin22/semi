@@ -10,7 +10,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.semi.mento.model.service.MentoService;
 import com.semi.mento.model.service.MentoUploadService;
+import com.semi.mento.model.vo.Mento;
 import com.semi.mento.model.vo.MentoUpload;
 
 /**
@@ -35,6 +37,8 @@ public class MentoUpdateModifyServlet extends HttpServlet {
 		int mtnum=Integer.parseInt(request.getParameter("mtnum"));
 		List<MentoUpload> muList = new MentoUploadService().mentoUpList(mtnum);
 		
+		Mento mt= new MentoService().mentoView(mtnum);
+		request.setAttribute("mento", mt);
 		request.setAttribute("mu", muList);
 		
 		request.getRequestDispatcher("/views/mento/mentoPageModifyView.jsp").forward(request,response);	
