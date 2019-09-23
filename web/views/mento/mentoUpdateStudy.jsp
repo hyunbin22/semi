@@ -85,7 +85,7 @@
              <div id='View_area' style='position: relative; width: 100px; height: 100px; color: black; border: 0px solid black; dispaly: inline; margin:0;'>
              <input type='file' id="file1" name="file1" /> <br> <br>
          
-              <img id="image_section1" alt="미리보기" src="<%=request.getContextPath() %>/upload/lecture/<%=lt.getLectureUpload().getUpLectureReName()%>" style='position: relative; width: 250px; height: 200px; color: black; border: 0px solid black; dispaly: inline;'>
+              <img id="image_section1" alt="미리보기" src="<%=request.getContextPath() %>/upload/lecture/<%=coverName%>" style='position: relative; width: 250px; height: 200px; color: black; border: 0px solid black; dispaly: inline;'>
                           
                </div>
                </div>

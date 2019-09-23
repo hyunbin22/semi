@@ -46,7 +46,6 @@ public class NoticeEnrollServlet extends HttpServlet {
 	      }
 	      
 	    String root=getServletContext().getRealPath("/");
-	    System.out.println(root);
 	      
 	    String saveDir=root+"/upload/notice";
 	      
@@ -65,14 +64,12 @@ public class NoticeEnrollServlet extends HttpServlet {
 		String noticeOriFile=mr.getOriginalFileName("noticefile");
 		String noticeReFile=mr.getFilesystemName("noticefile");
 		
-		System.out.println(aIdNum+" / "+title+" / "+content);
 		
 		Notice n = new Notice(aIdNum, title, content);
 		NoticeUpload nu = new NoticeUpload(noticeOriFile,noticeReFile);
 		
 		NoticeService nw=new NoticeService();
 		int result = nw.enrollNotice(n);
-		System.out.println("시퀀스번호 : " + result);
 		
 		int result2= nw.enrollNoticeImg(nu, result);
 		

@@ -39,7 +39,6 @@ public class QnaCommentServlet extends HttpServlet {
 		QnaComment qc=new QnaComment(mNum, content, qRef);
 		int result=new QnaService().insertComment(qc);
 		
-		System.out.println(result);
 		
 		String msg="";
 	    String loc="";

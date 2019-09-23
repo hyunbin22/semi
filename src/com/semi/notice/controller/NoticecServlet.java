@@ -43,7 +43,6 @@ public class NoticecServlet extends HttpServlet {
 		NoticeService service=new NoticeService();
 		int totalNotice=service.selectNoticeCount();
 		List<Notice> list=service.selectNoticeList(cPage,numPerPage);
-		System.out.println(totalNotice);
 
 		
 		//페이징처리 구현

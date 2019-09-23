@@ -30,7 +30,6 @@ public class NoticeDao {
 	}
 	
 	public int selectNoticeCount(Connection conn) {
-		System.out.println("test4");
 		Statement stmt=null;
 		ResultSet rs=null;
 		int result=0;
@@ -69,7 +68,6 @@ public class NoticeDao {
 				n.setnDate(rs.getDate("ndate"));
 				//np.setFileOriName(rs.getString("ori"));
 				list.add(n);
-				System.out.println(list);
 			}
 		}catch (Exception e) {
 			e.printStackTrace();

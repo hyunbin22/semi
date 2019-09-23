@@ -227,7 +227,7 @@ public class ReportDao {
 				rp.setReportContent(rs.getString("report_content").replaceAll(" ", "&nbsp;").replaceAll("<", "&lt;").replaceAll(">", "&gt;").replaceAll("\n", "<br>"));
 				rp.setReportCheck(rs.getString("report_check").charAt(0));
 				rp.setReportDate(rs.getDate("report_date"));
-				rp.setReportReason(rs.getString("report_reason").replaceAll(" ", "&nbsp;").replaceAll("<", "&lt;").replaceAll(">", "&gt;").replaceAll("\n", "<br>"));
+				rp.setReportReason(rs.getString("report_reason"));
 				rp.setMember(dao.selectMemberMnum(conn, rs.getInt("mreporter_num")));
 			}
 		}catch (Exception e) {
