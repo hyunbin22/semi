@@ -136,14 +136,14 @@
             <hr>
             <div class="box">
             <div class="lecture">멘토소개</div>
-            <textarea id="mento" cols="30" rows="10" name="mentoIntroduce" class="title2"><%=lt.getLecMentoContent()%></textarea>
+            <textarea id="mento" cols="30" rows="10" name="mentoIntroduce" class="title2"><%=lt.getLecMentoContent().replaceAll("<br>", " ").replaceAll("&nbsp;"," ")%></textarea>
             <span id="mentoIntroduce" class="rg-checkMsg"></span>
             </div>
             <br> <br>
             <hr>
             <div class="box">
             <div class="lecture">강의소개</div>
-            <textarea id="lecture" cols="30" rows="10" name="classIntroduce" class="title2"><%=lt.getLecLectureContent()%></textarea>
+            <textarea id="lecture" cols="30" rows="10" name="classIntroduce" class="title2"><%=lt.getLecLectureContent().replaceAll("<br>", " ").replaceAll("&nbsp;"," ")%></textarea>
             <span id="lectureIntroduce" class="rg-checkMsg"></span>
             </div>
             <br> <br>
