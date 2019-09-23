@@ -94,7 +94,7 @@ public class MoimEnrollEndServlet extends HttpServlet {
 		String msg="";
 		String loc="";
 		
-		if(result2>0) {
+		if(result>0) {
 			msg="작성 완료";
 			loc="/moim/moimView.do?moimNum="+result;
 		}

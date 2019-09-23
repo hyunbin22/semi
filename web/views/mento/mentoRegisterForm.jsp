@@ -197,22 +197,26 @@
            nick.focus();
            return false;
         }
-        if(schoo1.is(':checked')==true || school12.is(':checked')==true) {
-            if(school3.val()==null){
-               alert('학교를 입력하세요.');
-               school3.focus();
-               return false;
-            }
-            if(school4.val()==null){
-               alert('학과를 입력하세요.');
-               scholl4.focus();
-               return false;
-            }
-            if(school5.val()==null&&school6.val()==null){
-               alert('재학 혹은 졸업을 선택하세요.');
-               return false;
-            }
+        if(school1.is(':checked')==false&&school12.is(':checked')==false&&school2.is(':checked')==false){
+            alert('신분/학력 인증을 선택하세요.');
+            return false;
          }
+         if(schoo1.is(':checked')==true || school12.is(':checked')==true) {
+             if(school3.val()==null){
+                alert('학교를 입력하세요.');
+                school3.focus();
+                return false;
+             }
+             if(school4.val()==null){
+                alert('학과를 입력하세요.');
+                scholl4.focus();
+                return false;
+             }
+             if(school5.val()==null&&school6.val()==null){
+                alert('재학 혹은 졸업을 선택하세요.');
+                return false;
+             }
+          }
         if(photo.val()==""){
            alert('신분인증사진을 등록하세요.')
            return false;

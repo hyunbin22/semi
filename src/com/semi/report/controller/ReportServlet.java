@@ -86,7 +86,6 @@ public class ReportServlet extends HttpServlet {
       ReportUpload ru = new ReportUpload(reReportOriFile, reReportReFile);
       int result2 = new ReportService().regsterReportImage(ru, result);
       
-      System.out.println(result3);
    
       if(result3 == 1)
       {
