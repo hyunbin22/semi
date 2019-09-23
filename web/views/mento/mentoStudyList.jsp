@@ -37,6 +37,7 @@
                             <td class = "listContent"><span><%=list.get(i).getLecName() %></span></td>
                             <td class = "listCheck">
                             	<button id = "seeMore" name = "seeMore"  onclick="location.href='<%=request.getContextPath()%>/mento/updateStudy.do?lecNum=<%=list.get(i).getLecNum() %>&mtNum=<%=mt.getMtNum()%>'">자세히</button>
+                            	<button id = "seeOrder" name = "seeOrder" onclick="location.href='<%=request.getContextPath() %>/order/orderMemberList.do?lecNum=<%=list.get(i).getLecNum() %>&mtNum=<%=mt.getMtNum()%>'">신청자 목록</button>
                             </td>
                         </tr>
 						<%

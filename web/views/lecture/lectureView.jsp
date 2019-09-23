@@ -14,6 +14,7 @@
    String profileImage = "";
    String lectureImage = "";
    String toId=lec.getLecMento().getMember().getmId();
+
    
    int loginOrderMNum = 0;
    for(int i=0; i<orderList.size();i++){
@@ -25,15 +26,18 @@
    }
    
    for(int i=0;i<lec.getLectureUpList().size();i++){
-      if(lec.getLectureUpList().get(i).getUpLectureCategory().equals("cover")){
-         coverImage = lec.getLectureUpList().get(i).getUpLectureReName();
-      }else if (lec.getLectureUpList().get(i).getUpLectureCategory().equals("lecimage")){
-         lectureImage = lec.getLectureUpList().get(i).getUpLectureReName();
-      }
-      else if(lec.getLecMento().getList().get(i).getUpMentoCategory().equals("profile")){
-         profileImage = lec.getLecMento().getList().get(i).getUpMentoReName();
-      }
-   }
+	      if(lec.getLectureUpList().get(i).getUpLectureCategory().equals("cover")){
+	         coverImage = lec.getLectureUpList().get(i).getUpLectureReName();
+	      }else if (lec.getLectureUpList().get(i).getUpLectureCategory().equals("lecimage")){
+	         lectureImage = lec.getLectureUpList().get(i).getUpLectureReName();
+	      }
+	   }
+	   for(int i=0;i<lec.getLecMento().getList().size();i++){
+	      if(lec.getLecMento().getList().get(i).getUpMentoCategory().equals("profile")){
+	         profileImage = lec.getLecMento().getList().get(i).getUpMentoReName();
+	      }
+	   }
+
    
    
    String var = lec.getLecWeek();
@@ -207,7 +211,7 @@
          <div class="floatMenu">
             <form action="<%=request.getContextPath()%>/order/OrderEnroll.do"
       method="post" >
-      <input type="hidden" value="<%=lec.getLecNum()%>" name="lecnum">
+      <input type="hidden" value="<%=lec.getLecNum()%>" name="lecNum">
             <div class="floatTitle">
                결제
                <hr>
@@ -278,7 +282,7 @@
 
          </div>
       </div>
-<%if(memberLogin!=null) { %>
+	<%if(m!=null) { %>
        <form name="lecMessage" method="post" id="openMessageFrm">   <!-- 메세지보내기 -->
          <input type="hidden" name="toId" value="<%=toId%>">
          <input type="hidden" name="fromId" value="<%=memberLogin.getmId()%>">
@@ -291,7 +295,7 @@
 <script>
 $(function(){
       $('.btnMessage').click(function(){
-         if('<%=m%>'==null) {
+          if('<%=userId%>'==null || '<%=userId%>'=="") {
             alert("로그인 후 이용 가능합니다.");
             $('#id').focus();
          } else {
@@ -310,7 +314,7 @@ $(function(){
 
 $(function(){
    $("#rTitle").click(function(){
-      if('<%=m%>' == null){
+      if('<%=userId%>'==null || '<%=userId%>'==""){
          alert("로그인해주시기 바랍니다.");
          $('#id').focus();
       }else if('<%=loginOrderMNum%>'==0){
@@ -320,7 +324,7 @@ $(function(){
 });
    $(function(){
       $("#rText").click(function(){
-         if('<%=m%>' == null){
+         if('<%=userId%>'==null || '<%=userId%>'==""){
             alert("로그인해주시기 바랍니다.");
             $('#id').focus();
          }else if('<%=loginOrderMNum%>'==0){

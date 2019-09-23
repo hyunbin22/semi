@@ -22,6 +22,7 @@
 
 <section>
 <div class="wrap">
+      	  		<div id="myPageContentWrap">
              <div class="bar">
 				<br>
                 <h1 class="center1">신청자 목록</h1>
@@ -86,7 +87,7 @@
                  <br>
 
   				<div class="center1"><%=pageBar %></div>
-  
+  				</div>
                 </div>
             </div>
       </section>

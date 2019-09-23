@@ -80,14 +80,8 @@ public class OrderMemberListServlet extends HttpServlet {
 		int lecnum = Integer.parseInt(request.getParameter("lecNum"));
 		List<Lecture> lec = new LectureService().lectureListByMtNum(mtnum);
 		List<Order> order = new OrderService().orderListByLecNum(lecnum, cPage, numPerPage);
-		
-		System.out.println("OrderMemberListServlet의 요소 ======");
-		System.out.println("mtnum:"+mtnum);
-		System.out.println("lecnum:"+lecnum);
-		System.out.println("lec:"+lec);
-		System.out.println("order:"+order);
-		
-		
+
+			
 		request.setAttribute("pageBar", pageBar);
 	    request.setAttribute("cPage", cPage);
 		request.setAttribute("mtnum", mtnum);

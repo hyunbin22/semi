@@ -49,7 +49,7 @@
 			<td colspan="4"><hr></td>
 		</tr>
 		<tr>
-			<td><%=days %>요일</td>
+			<td><%=days %></td>
 			<td>시간 : <%=lecTot %></td>
 			<td>정원 : <%=lec.getLecStudentCount() %>/<%=lec.getLecMaxCount() %></td>
 			

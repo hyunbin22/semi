@@ -49,11 +49,13 @@
 					<%} %>
                     </table>
                  <br><br>
+                 <div class="center1">
                  <%if(count > 0){ %>
 					<div id="admin-appro-pageBar">
          				<%=request.getAttribute("pageBar")%>
       				</div>
       			<%} %>
+      			</div>
          
   
   					</div>
