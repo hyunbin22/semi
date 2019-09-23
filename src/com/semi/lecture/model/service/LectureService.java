@@ -47,6 +47,7 @@ public class LectureService {
 		return result;
 	}
 
+	//관리자 강의 검색
 	public List<Lecture> lectureApproFindList(String type, String data, int cPage, int numPerPage) {
 		Connection conn = getConnection();
 		List<Lecture> list = dao.lectureApproList(conn, type, data, cPage, numPerPage);
@@ -54,6 +55,7 @@ public class LectureService {
 		return list;
 	}
 
+	//멘토의 강의정보 리스트 받기
 	public List<Lecture> lectureMentoList(int cPage, int numPerPage,int mtnum) {
 		Connection conn= getConnection();
 		List<Lecture> list=dao.lectureMentoList(conn, cPage, numPerPage,mtnum);
@@ -123,6 +125,7 @@ public class LectureService {
 		return list;
 	}
 
+	//멘토번호로 강의조회
 	public List<Lecture> lectureListByMtNum(int mtnum) {
 		Connection conn= getConnection();
 		List<Lecture> list=dao.lectureListByMtNum(conn, mtnum);
@@ -130,7 +133,7 @@ public class LectureService {
 		return list;
 	}
 
-
+	//강의번호로 강의조회
 	public Lecture lectureListByLecNum(int lecNum) {
 		Connection conn= getConnection();
 		Lecture lt=dao.lectureListByLecNum(conn, lecNum);
@@ -138,6 +141,7 @@ public class LectureService {
 		return lt;
 	}
 
+	//강의 수정
 	public int updateLecture(Lecture l, int lecNum) {
 		Connection conn = getConnection();
 		int result=dao.updateLecture(conn, l, lecNum);
@@ -162,6 +166,7 @@ public class LectureService {
 		return result;
 	}
 
+	//강의번호로 강의전체리스트 검색
 	public List<Lecture> lectureAllListByLecNum(int lecNum) {
 		Connection conn= getConnection();
 		List<Lecture> list=dao.lectureAllListByLecNum(conn, lecNum);
@@ -254,6 +259,7 @@ public class LectureService {
 		return list;
 	}
 
+	//리뷰삭제
 	public int deleteReview(int lecNum, int rNum) {
 		Connection conn=getConnection();
 		int result=dao.deleteComment(conn, lecNum, rNum);
@@ -263,6 +269,7 @@ public class LectureService {
 		return result;
 	}
 
+	//리뷰등록
 	public int insertReview(int lecNum, int mNum, String rTitle, String rText) {
 		Connection conn=getConnection();
 		int result=dao.insertComment(conn,lecNum,mNum,rTitle,rText);

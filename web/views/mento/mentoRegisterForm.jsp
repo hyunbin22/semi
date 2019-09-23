@@ -62,8 +62,8 @@
             name="mtlicense" class = "title2"/> <br> <br> <span class = "lecture">자격증 1 사진</span> <input id="licensePhoto" class="title2"
             type="file" name="mtlicenseimg" id="profile_pt" ><br><br>
             <img id="licenseImg"
-   src='https://dumielauxepices.net/sites/default/files/digital-camera-clipart-basic-camera-502592-7419029.jpg'
-    width=150px; height=150px;/><br><br>
+	src='https://dumielauxepices.net/sites/default/files/digital-camera-clipart-basic-camera-502592-7419029.jpg'
+ 	width=150px; height=150px;/><br><br>
          
          
          <span class = "lecture">자격증 2 (선택)</span>
@@ -73,8 +73,8 @@
          <span class = "lecture">자격증 2 사진</span> <input class="title2" id="licensePhoto2" type="file" name="mtImgLicense"
             id="profile_pt2"><br><br>
          <img id="licenseImg2"
-   src='https://dumielauxepices.net/sites/default/files/digital-camera-clipart-basic-camera-502592-7419029.jpg'
-    width=150px; height=150px;/><br><br>
+	src='https://dumielauxepices.net/sites/default/files/digital-camera-clipart-basic-camera-502592-7419029.jpg'
+ 	width=150px; height=150px;/><br><br>
             <span class = "lecture">은행</span> <select name="mtbank" id="bank" style='position: relative; width: 100px; height: 100px; color: black; border: 0px solid black; dispaly: inline;'>
                <option value="농협은행">농협은행</option>
                <option value="카카오뱅크">카카오뱅크</option>
@@ -261,7 +261,7 @@
          }   
          
          $("#confirmPhoto").change(function(){
-            confirmReadURL(this);
+        	 confirmReadURL(this);
          });
          
          //자격증사진 미리보기
@@ -278,7 +278,7 @@
          }   
          
          $("#licensePhoto").change(function(){
-            licenseImageURL(this);
+        	 licenseImageURL(this);
          });
          
          function licenseImageURL2(input) {
@@ -294,7 +294,7 @@
             }   
             
             $("#licensePhoto2").change(function(){
-               licenseImageURL2(this);
+            	licenseImageURL2(this);
             });
        </script>
 </section>

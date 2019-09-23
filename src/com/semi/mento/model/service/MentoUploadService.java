@@ -13,7 +13,7 @@ import com.semi.mento.model.dao.MentoUploadDao;
 import com.semi.mento.model.vo.MentoUpload;
 
 public class MentoUploadService {
-
+	
 	private MentoUploadDao dao = new MentoUploadDao();
 
 	// 멘토신청이미지
@@ -41,7 +41,7 @@ public class MentoUploadService {
 		close(conn);
 		return result;
 	}
-
+	
 	public int updateMentoImage(MentoUpload mtu1, int mtNum, String category) {
 
 		Connection conn = getConnection();
@@ -74,6 +74,4 @@ public class MentoUploadService {
 		close(conn);
 		return result;
 	}
-
-
 }
