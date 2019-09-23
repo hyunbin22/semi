@@ -594,7 +594,6 @@ $(function(){
          }
          //수업사진 체크글자가 보일때
          if ($('#addImg').val().length==0) {
-            console.log($('#lectureImg').val());
             alert("수업사진을 등록하세요.");
             return false;
          }
@@ -650,7 +649,6 @@ function readURL(input) {
                           if(data==0){
                              $("#good").append("<option value='1'>과목선택</option>");
                           }else{
-                       console.log(datas[i]);                        
                           $('<option value="' + (i+1) +'">' + datas[i] + '</option>').appendTo('#good');
                     }
                        }
@@ -806,7 +804,6 @@ function readURL(input) {
                              if(data==0){
                                 $("#local").append("<option value='1'>지역선택</option>");
                              }else{
-                          console.log(datas[i]);                        
                              $('<option value="' + (i+1) +'">' + datas[i] + '</option>').appendTo('#local');
                        }
                           }

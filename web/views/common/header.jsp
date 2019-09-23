@@ -93,7 +93,7 @@
 <header id="mainHeader">
         <div id="head" >
         	<div id="topWrap">
-	            <div id='logoWrap'><a href = "<%=request.getContextPath()%>"><img id = 'logoImg' src = "<%=request.getContextPath()%>/image/logo.png"></a></div> <!--메인 아이콘 이미지-->
+	            <div id='logoWrap'><a href = "<%=request.getContextPath()%>/"><img id = 'logoImg' src = "<%=request.getContextPath()%>/image/logo.png"></a></div> <!--메인 아이콘 이미지-->
 	            <%if(memberLogin == null){ %>
 	            		
 	            <div id="loginWrap">
