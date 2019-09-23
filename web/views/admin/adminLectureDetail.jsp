@@ -16,7 +16,7 @@
 <section>
 	<article class="admin-mento-detailwrap">
 		<div class="admin-mento-detailwrap">
-		<br><br><h1>강의 상세보기</h1>
+		<br><br><h3><strong>강의 상세보기</strong></h3>
 		<div class="admin-detail-frm-wrap">
 			<input type="hidden" name="lecNum" id="lecNum" value="<%=lec.getLecNum()%>">
 			<br>
@@ -30,46 +30,96 @@
 			<div class="detailbody">
 				<div class="class_info">
 					<h5 class="title"><%=lec.getLecName() %></h5>
-					<table class="detailbar">
-						<tr>
-							<td>프로필</td>
-							<td>수업</td>
-						</tr>
-					</table>
 					<p class="proinfo">
-						<h2>멘토소개</h2>
+						<h3><strong>멘토소개</strong></h3>
 						<p>
 							<%=lec.getLecMentoContent() %>
 						</p>
 					</p>
 					<p class="classinfo">
-						<h2>강의 기본정보</h2>
+						<h3><strong>강의 기본정보</strong></h3>
 						<p>
-							카테고리 : <%=cate %><br>
-							수업타입 : <%=lec.getLecLectureContent() %><br>
-							1회 수업 정원 : <%=lec.getLecMaxCount() %> 명 <br>
-							1회 수업 시간 : <%=lec.getLecTime() %> 시간<br>
-							1회 시간당 가격 : <%=lec.getLecPrice() %> 원<br>
-							수업 횟수 : <%=lec.getLecCount() %> 회<br>
-							수업 요일 : <%=lec.getLecWeek() %> <br>
-							수업 날자 : <%=lec.getLecMeet() %><br>
-							<%if(lec.getLecTot()!=null){%>
-							수업 시간 : <%=lec.getLecTot() %><br>
-							<%} if(lec.getLecTot2()!=null) {%>
-							수업 시간 : <%=lec.getLecTot2() %><br>
-							<%} %>
-							<%if(lec.getLecOpenDate()!=null){%>
-							개설 날자 : <%=lec.getLecOpenDate() %><br>
-							<%} if(lec.getLecOpenDate2()!=null) {%>
-							개설 날자 : <%=lec.getLecOpenDate2() %><br>
-							<%} %>
-							지역 : <%=local %><br>
-							상세지역 : <%=lec.getLecLocalContent()!=null?lec.getLecLocalContent():"협의" %>
+							
+							카테고리 : <%=cate %><br><hr>
+							<table class="tblLectureInfo">
+								<tr>
+									<td>수업타입&nbsp;&nbsp;&nbsp;&nbsp;:</td>
+									<td style="width:20px;"></td>
+									<td><%=lec.getLecType() %></td>
+								</tr>
+								<tr>
+									<td>1회 수업 정원&nbsp;&nbsp;&nbsp;&nbsp;:</td>
+									<td style="width:20px;"></td>
+									<td><%=lec.getLecMaxCount() %> 명 </td>
+								</tr>
+								<tr>
+									<td>1회 수업 시간&nbsp;&nbsp;&nbsp;&nbsp;:</td>
+									<td style="width:20px;"></td>
+									<td><%=lec.getLecTime() %> 시간</td>
+								</tr>
+								<tr>
+									<td>1회 시간당 가격&nbsp;&nbsp;&nbsp;&nbsp;:</td>
+									<td style="width:20px;"></td>
+									<td><%=lec.getLecPrice() %> 원</td>
+								</tr>
+								<tr>
+									<td>수업 횟수&nbsp;&nbsp;&nbsp;&nbsp;:</td>
+									<td style="width:20px;"></td>
+									<td><%=lec.getLecCount() %> 회</td>
+								</tr>
+								<tr>
+									<td>수업 요일&nbsp;&nbsp;&nbsp;&nbsp;:</td>
+									<td style="width:20px;"></td>
+									<td><%=lec.getLecWeek() %></td>
+								</tr>
+								<tr>
+									<td>수업 날자&nbsp;&nbsp;&nbsp;&nbsp;:</td>
+									<td style="width:20px;"></td>
+									<td><%=lec.getLecMeet() %></td>
+								</tr>
+								<%if(lec.getLecTot()!=null){%>
+								<tr>
+									<td>수업 시간&nbsp;&nbsp;&nbsp;&nbsp;:</td>
+									<td style="width:20px;"></td>
+									<td><%=lec.getLecTot() %></td>
+								</tr>
+								<%} if(lec.getLecTot2()!=null) {%>
+								<tr>
+									<td>수업 시간&nbsp;&nbsp;&nbsp;&nbsp;:</td>
+									<td style="width:20px;"></td>
+									<td><%=lec.getLecTot2() %></td>
+								</tr>
+								<%} %>
+								<%if(lec.getLecOpenDate()!=null){%>
+								<tr>
+									<td>개설 날자&nbsp;&nbsp;&nbsp;&nbsp;:</td>
+									<td style="width:20px;"></td>
+									<td><%=lec.getLecOpenDate() %></td>
+								</tr>
+								<%} if(lec.getLecOpenDate2()!=null) {%>
+								<tr>
+									<td>개설 날자&nbsp;&nbsp;&nbsp;&nbsp;:</td>
+									<td style="width:20px;"></td>
+									<td><%=lec.getLecOpenDate2() %></td>
+								</tr>
+								<%} %>
+								<tr>
+									<td>지역&nbsp;&nbsp;&nbsp;&nbsp;:</td>
+									<td style="width:20px;"></td>
+									<td><%=local %></td>
+								</tr>
+								<tr>
+									<td>상세지역&nbsp;&nbsp;&nbsp;&nbsp;:</td>
+									<td style="width:20px;"></td>
+									<td><%=lec.getLecLocalContent()!=null?lec.getLecLocalContent():"협의" %></td>
+								</tr>
+							
+							</table>
 						</p>
 					</p>
 					<p class="classinfo">
 					
-						<h2>강의사진</h2>
+						<h3><strong>강의사진</strong></h3>
 						<p>
 							<%for(int i = 0; i < lec.getLectureUpList().size(); i++) {
 								if(lec.getLectureUpList().get(i).getUpLectureCategory().equals("lecimage")) {%>
@@ -83,16 +133,16 @@
 					
 					
 					<p class="classinfo">
-						<h2>커리큘럼</h2>
+						<h3><strong>커리큘럼</strong></h3>
 						<p>
 							<%=lec.getLecLectureContent() %>
 						</p>
 					</p>
 					<%if(temp!=0) {%>
 						<p class="refusalinfo">
-							<h2>거절사유</h2>
+							<h3><strong>거절사유</strong></h3>
 							<div class="center1">
-								<textarea id="refusalContent" cols="107" rows="5" style="resize: none;" maxlength="200" placeholder="거절사유를 입력하세요." style="width:100%;"><%=reason %></textarea>
+								<textarea id="refusalContent" cols="107" rows="5" style="resize: none;width: 100%;" maxlength="200" placeholder="거절사유를 입력하세요."><%=reason %></textarea>
 							</div>
 						</p>
 					<%} %>
