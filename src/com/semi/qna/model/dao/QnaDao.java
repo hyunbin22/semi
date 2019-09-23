@@ -246,7 +246,7 @@ public class QnaDao {
 		Statement stmt=null;
 		ResultSet rs=null;
 		int result = 0;
-		String sql="select seq_qna_comment_nnum.currval from dual";
+		String sql="select SEQ_QNA_COMMENT.currval from dual";
 		try {
 			stmt=conn.createStatement();
 			rs=stmt.executeQuery(sql);
@@ -302,5 +302,50 @@ public class QnaDao {
 			close(pstmt);
 		}
 		return qu;
+	}
+	
+	/* Qna글 수정 */
+	public Qna QnaUpdate(Connection conn, int qNum) {
+		PreparedStatement pstmt = null;
+		ResultSet rs=null;
+		Qna q=null;
+		Member m = new Member();
+		MemberDao dao = new MemberDao();
+		String sql=prop.getProperty("selectQna");
+		try {
+			pstmt=conn.prepareStatement(sql);
+			pstmt.setInt(1, qNum);
+			rs=pstmt.executeQuery();
+			if(rs.next()) {
+				q=new Qna();
+				q.setqNum(rs.getInt("qnum"));
+				q.setqTitle(rs.getString("qtitle"));
+				q.setmNum(rs.getInt("mnum"));
+				q.setqContent(rs.getString("qcontent"));
+				q.setqDate(rs.getDate("qdate"));
+				q.setMember(dao.selectMemberMnum(conn, rs.getInt("mnum")));
+			}
+		}catch (Exception e) {
+			e.printStackTrace();
+		}finally {
+			close(rs);
+			close(pstmt);
+		}return q;
+	}
+	
+	public int updateQna(Connection conn, String title, String content) {
+		PreparedStatement pstmt=null;
+		int result=0;
+		String sql=prop.getProperty("updateQna");
+		try {
+			pstmt=conn.prepareStatement(sql);
+			pstmt.setString(1, title);
+			pstmt.setString(2, content);
+			result = pstmt.executeUpdate();
+		}catch (Exception e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}return result;
 	}
 }

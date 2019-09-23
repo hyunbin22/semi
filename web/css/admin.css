@@ -3,12 +3,14 @@
 @import url(http://fonts.googleapis.com/earlyaccess/nanumgothic.css);
 @import url(http://fonts.googleapis.com/earlyaccess/hanna.css);
 
+
 .center1{
     width:fit-content;
     left:0;
     right:0;
     margin: 0 auto;
 }
+
 h3 {
    font-family: 'Noto Sans KR', sans-serif;
 }

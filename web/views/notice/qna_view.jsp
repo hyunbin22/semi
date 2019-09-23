@@ -1,3 +1,4 @@
+<%@page import="oracle.net.aso.q"%>
 <%@page import="sun.invoke.empty.Empty"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
@@ -102,14 +103,7 @@
                             		<%=qc.getQcContent()%>
                             	</td>
                             </tr>
-                            <tr>
-                                <%if(memberLogin.getmId().equals("kiho") || memberLogin.getmId().equals("admin") || memberLogin.getmId().equals("gusqls897") || memberLogin.getmId().equals("rldh8") || memberLogin.getmId().equals("thd9292")) {%>
-                            	<td>
-                            		<button class="btn-delete next" value="<%=qc.getqRef() %>">삭제</button>
-                            	</td>
-                            	<%} %>
-                            </tr>
-                       
+                            
                             <script>
 							$(function(){
 								$('.btn-delete').click(function(){
@@ -118,9 +112,14 @@
 									}
 								});
 							});
-						
 							</script>
                     </table>
+                    <%if(memberLogin.getmId().equals("kiho") || memberLogin.getmId().equals("admin") || memberLogin.getmId().equals("gusqls897") || memberLogin.getmId().equals("rldh8") || memberLogin.getmId().equals("thd9292")) {%>
+                    <br><br><br>
+                    <div class="center1">
+                    	<button class="btn-delete next" value="<%=qc.getqRef() %>">댓글 삭제</button>
+					</div>
+                    <%} %>
                 </ul>
                <%} %>
                 <%if(memberLogin != null && qc==null){
@@ -143,15 +142,27 @@
 	                <input type="hidden" name="qcNum" value="<%=q.getqNum() %>">
 	                <input type = "hidden" name = "qcmNum" value = "<%=m.getmNum() %>">
 	                </form>
-				<%}
-				}%>
             </div>
         </div>
-        <section>
-       	
-        	
-        </section>
-
-        <br><!--------------------------------------------------->
+				<%}
+				}%>
+				<%if(memberLogin!=null){
+					if(memberLogin.getmId().equals(q.getMember().getmId()) && qc==null){%>
+				<div class="center1">
+				<br>
+					<button class="updateButton next" value="">수정</button>
+				</div>
+				<%}
+				}%>
+		        <script>
+					$(function(){
+						$('.updateButton').click(function(){
+							if(confirm("내용을 수정하시겠습니까?")){
+								location.href="<%=request.getContextPath()%>/qna/qnaUpdate.do?qNum=<%=q.getqNum()%>";
+							}
+						});
+					});
+				</script>
+        <!--------------------------------------------------->
     </section>
     <%@ include file="/views/common/footer.jsp"%>

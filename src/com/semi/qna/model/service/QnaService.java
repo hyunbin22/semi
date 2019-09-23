@@ -68,7 +68,7 @@ public class QnaService {
 	}
 
 	
-	/* 댓글-------------------------------------------------*/
+	/* 댓글 */
 	//댓글 데이터저장
 	public int insertComment(QnaComment qc) {
 		Connection conn=getConnection();
@@ -102,7 +102,7 @@ public class QnaService {
 		return result;
 	}
 	
-	/* 파일불러오기------------------------------*/
+	/* 파일불러오기 */
 	public QnaUpload selectQnaUpload(int qNum) {
 		Connection conn=getConnection();
 		QnaUpload qu=dao.selectQnaUpload(conn, qNum);
@@ -110,5 +110,18 @@ public class QnaService {
 		return qu;
 	}
 	
+	/* Qna글 수정 */
+	public Qna QnaUpdate(int qNum) {
+		Connection conn=getConnection();
+		Qna q=dao.QnaUpdate(conn, qNum);
+		close(conn);
+		return q;
+	}
+	public int updateQna(String title , String content) {
+		Connection conn=getConnection();
+		int result=dao.updateQna(conn, title, content);
+		close(conn);
+		return result;
+	}
 }
 
