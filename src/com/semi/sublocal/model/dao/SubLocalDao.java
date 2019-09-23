@@ -132,7 +132,6 @@ public class SubLocalDao {
 		ResultSet rs=null;
 		int result=0;
 		String sql="select sublocalnum from tb_sub_location where localnum=? and local_country=?";
-		System.out.println("로컬 ㅣ "+local+"서브로컬 : "+subLocal);
 		try {
 			pstmt=conn.prepareStatement(sql);
 			pstmt.setInt(1, local);

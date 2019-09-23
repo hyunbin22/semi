@@ -42,7 +42,7 @@
 		    </tr>
 		</table>
 		<br>
-		<button type="submit" id="subName" name="subName" onclick="enrollSubCategory();">등록</button>
+		<button type="submit" id="subName" class = "next" name="subName" onclick="enrollSubCategory();">등록</button>
 		<br><br><br><br>
 		<div id="search1">수업카테고리(Sub)수정삭제</div>
 		<table border="1" width="500"  bgcolor="" align="center" cellspacing="0" cellpadding="3" 
@@ -76,8 +76,8 @@
 
            <br>
 			<div class="center1">
-           <input type="submit" value="수정" id="subName" name="subName" onclick="updateSubCategory();">
-           <input type="submit" value="삭제" id="subName" name="subName" onclick="deleteSubCategory();">
+           <input type="submit" value="수정" id="subName" class = "next" name="subName" onclick="updateSubCategory();">
+           <input type="submit" value="삭제" id="subName" class = "next" name="subName" onclick="deleteSubCategory();">
            </div>
         </section>
         <br>

@@ -164,7 +164,8 @@
 				var sendSms = $('#sendSms');
 				var checkKey = $('#checkKey');
 				alert("핸드폰 인증이 완료되었습니다.");
-				sendSms.disabled = 'disabled';
+				sendSms.prop("disabled",true);
+				checkKey.prop("disabled",true);
 				checkKey.disabled = 'disabled';
 				$('#tel1').prop("readonly", true);
 				$('#tel2').prop("readonly", true);
