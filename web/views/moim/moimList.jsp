@@ -84,7 +84,7 @@ div#search-container {
        
 
         <div class="class-pay-container">
-            <div class="notice-table" style="width:100%;">
+            <div class="notice-table moim-table" style="width:100%;">
                 <table class="table table-hover">
                 	<tr>
 	                    <th>No</th>
