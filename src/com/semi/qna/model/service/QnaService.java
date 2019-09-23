@@ -19,9 +19,9 @@ import com.semi.qna.model.vo.QnaUpload;
 import common.template.JDBCTemplate;
 
 public class QnaService {
-	
+
 	private QnaDao dao=new QnaDao();
-	
+
 	public int selectQnaCount() {
 		Connection conn=getConnection();
 		int result=dao.selectCountQna(conn);
@@ -34,7 +34,7 @@ public class QnaService {
 		close(conn);
 		return list;
 	}
-	
+
 	public int enrollQna(String mId , String title , String content) {
 		Connection conn=getConnection();
 		int result=dao.enrollQna(conn, mId, title, content);
@@ -47,7 +47,7 @@ public class QnaService {
 		close(conn);
 		return result;
 	}
-	
+
 	public int enrollQnaImg(String qnaOriName, String qnaReName, int result) {
 		Connection conn=getConnection();
 		int result2 = dao.enrollQnaImg(conn, qnaOriName, qnaReName, result);
@@ -59,7 +59,7 @@ public class QnaService {
 		close(conn);
 		return result2;
 	}
-	
+
 	public Qna selectQna(int qNum) {
 		Connection conn = getConnection();
 		Qna q=dao.selectQna(conn, qNum);
@@ -67,7 +67,7 @@ public class QnaService {
 		return q;
 	}
 
-	
+
 	/* 댓글 */
 	//댓글 데이터저장
 	public int insertComment(QnaComment qc) {
@@ -82,8 +82,8 @@ public class QnaService {
 		close(conn);
 		return result;
 	}
-	
-	
+
+
 	//댓글 불러오기
 	public QnaComment selectQnaComment(int qRef) {
 		Connection conn = getConnection();
@@ -101,7 +101,7 @@ public class QnaService {
 		close(conn);
 		return result;
 	}
-	
+
 	/* 파일불러오기 */
 	public QnaUpload selectQnaUpload(int qNum) {
 		Connection conn=getConnection();
@@ -109,7 +109,7 @@ public class QnaService {
 		close(conn);
 		return qu;
 	}
-	
+
 	/* Qna글 수정 */
 	public Qna QnaUpdate(int qNum) {
 		Connection conn=getConnection();
@@ -117,9 +117,12 @@ public class QnaService {
 		close(conn);
 		return q;
 	}
-	public int updateQna(String title , String content) {
+
+
+	//서비스
+	public int updateQna(String title , String content, int qNum) {
 		Connection conn=getConnection();
-		int result=dao.updateQna(conn, title, content);
+		int result=dao.updateQna(conn, title, content, qNum);
 		close(conn);
 		return result;
 	}

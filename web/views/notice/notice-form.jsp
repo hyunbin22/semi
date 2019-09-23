@@ -7,7 +7,7 @@
 %>
 	<section class="qna-view center1">
 	    <br>
-	    <p class="qna-title">공지사항 작성</p>
+	    <p class="notice-wrt-title">공지사항 작성</p>
 	    <form action = "<%=request.getContextPath()%>/notice/noticeFormEnd.do" method="POST" enctype="multipart/form-data">
 	    <div class="qna-view-box center1" >
 	        <table>

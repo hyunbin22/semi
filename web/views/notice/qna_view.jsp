@@ -29,7 +29,7 @@
     	
     	
     </form>
-        <p class="qna-title">Q&A</p>
+        <p class="qna-title">1:1문의</p>
         <div class="qna-table1">
             <div class="qna-inbox">              
                 <div class="qna-boxTilte">

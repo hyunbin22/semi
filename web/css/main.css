@@ -8,19 +8,9 @@
 
 * {
 	font-family: 'Noto Sans KR', sans-serif;
-	/*  margin: 0 auto; */
 	padding: 0 auto;
 }
-/* h5 {
-	font-family: 'Noto Sans KR', sans-serif;
-	font-size: 15px;
-}
-h4 {
-	font-family: 'Noto Sans KR', sans-serif;
-}
-h3 {
-	font-family: 'Hanna';
-}*/
+
 h2 {
 	font-family: 'Hanna';
 }
@@ -1284,11 +1274,26 @@ input.inputbtn, input.btnregister {
 }
 
 /* QnA게시판 */
-.qna-title {
-	font-size: 40px;
-	font-weight: bolder;
-	border-bottom: 2px solid #f24365;
-	width: 100px;
+.qna-title{
+   font-size: 40px;
+   font-weight: bolder;
+   border-bottom: 2px solid #f24365;
+   width: 150px;
+}
+
+.qna-redit-title{
+   font-size: 40px;
+   font-weight: bolder;
+   border-bottom: 2px solid #f24365;
+   width: 200px;
+}
+
+.notice-wrt-title{
+   font-size: 40px;
+   font-weight: bolder;
+   border-bottom: 2px solid #f24365;
+   width: 240px;
+   
 }
 
 .qns-writer {

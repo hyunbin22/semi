@@ -9,7 +9,7 @@
             </div>
             <div class="qna-content center1"><br>
             	<a class="qna-tab on" onclick="qna_ts();">수강생</a>
-                <a class="qna-tab" onclick = "location.href='<%=request.getContextPath()%>/views/notice/faq_tt.jsp'">강사</a>
+                <a class="qna-tab" onclick = "location.href='<%=request.getContextPath()%>/faq/faqMento.do'">멘토</a>
             </div>
             <div class="qna-section center1">
                 <div class="qna-que">

@@ -133,7 +133,11 @@
                   
         <table class="lectureTable"  style="cursor:pointer;" onclick="location.href='<%=request.getContextPath() %>/lecture/lectureView?lecnum=<%=lec.getLecNum()%>'">
             <tr>
-                <td colspan="4"><img class="img300px" src="<%=request.getContextPath()%>/upload/lecture/<%=lec.getLectureUpload().getUpLectureReName()%>"></td>
+                <td colspan="4">
+                	<div class="img300px">
+                      <img class="img300px" src="<%=request.getContextPath()%>/upload/lecture/<%=lec.getLectureUpload().getUpLectureReName()%>">
+                   </div>
+                </td>
             </tr>
             <tr>
                 <td colspan="3"class="lectureListName" ><%=lec.getLecName() %></td>
