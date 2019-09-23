@@ -51,6 +51,28 @@ public class MentoUploadDao {
 		return result;
 	}
 
+	//멘토자격증
+	public int registerMentoImage2(Connection conn, MentoUpload mtu, int mtnum, String category, String upMentoNameLicense) {
+		PreparedStatement pstmt=null;
+		int result=0;
+		String sql=prop.getProperty("registerMentoImage2");
+		try {
+			pstmt=conn.prepareStatement(sql);
+			pstmt.setInt(1, mtnum);
+			pstmt.setString(2, category);
+			pstmt.setString(3, mtu.getUpMentoNameLicense());
+			pstmt.setString(4, mtu.getUpMentoOrgName());
+			pstmt.setString(5, mtu.getUpMentoReName());
+			result=pstmt.executeUpdate();
+
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}
+		return result;
+	}
+
 
 
 	//첨부파일 전체불러오기

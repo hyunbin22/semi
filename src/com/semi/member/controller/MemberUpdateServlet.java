@@ -1,11 +1,13 @@
 package com.semi.member.controller;
 
 import java.io.IOException;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.semi.member.model.service.MemberService;
 import com.semi.member.model.vo.Member;
@@ -37,11 +39,16 @@ public class MemberUpdateServlet extends HttpServlet {
 		phone+=request.getParameter("tel2");
 		phone+=request.getParameter("tel3");
 	
-
+		
 	
 		
 		int result=new MemberService().updateMember(mPw, mEmail,phone,mId);
-
+		Member m = new MemberService().selectMember(mId);
+		
+		if(result> 0) {
+			HttpSession session = request.getSession();
+			session.setAttribute("loginMember", m);
+		}
 		
 		String msg=result>0?"회원수정이 완료되었습니다.":"회원수정을 실패하였습니다.";
 		String loc="/";

@@ -13,7 +13,7 @@ import com.semi.mento.model.dao.MentoUploadDao;
 import com.semi.mento.model.vo.MentoUpload;
 
 public class MentoUploadService {
-	
+
 	private MentoUploadDao dao = new MentoUploadDao();
 
 	// 멘토신청이미지
@@ -28,7 +28,20 @@ public class MentoUploadService {
 		close(conn);
 		return result;
 	}
-	
+
+	//멘토신청 자격증 이미지
+	public int registerMentoImage2(MentoUpload mtu3, int mtnum, String category, String upMentoNameLicense) {
+		Connection conn=getConnection();
+		int result=dao.registerMentoImage2(conn, mtu3, mtnum, category, upMentoNameLicense);
+		if(result>0) {
+			commit(conn);
+		}else {
+			rollback(conn);
+		}
+		close(conn);
+		return result;
+	}
+
 	public int updateMentoImage(MentoUpload mtu1, int result, String category) {
 
 		Connection conn = getConnection();

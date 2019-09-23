@@ -382,7 +382,7 @@
 		
 		//이메일 체크 글자가 보일때
 		if ($('#emailCheck').prop('disabled')) {
-			alert("인증번호를 확인하세요.");
+			alert("이메일을 확인하세요.");
 			return false;
 		}
 		

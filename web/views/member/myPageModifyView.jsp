@@ -48,6 +48,10 @@
 							id="email" placeholder="변경하실 이메일을 입력해주세요" required></td>
 							<td></td>
 					</tr>
+					<tr>
+						<td colspan="2"></td>
+						<td id="emailCheck" class="rg-checkMsg"></td>
+					</tr>
 					<tr></tr>
 					<tr>
 						<td colspan='2' class = "lecture">연락처</td>
@@ -77,7 +81,7 @@
 					<tr>
 						<td colspan='1' class = "lecture">인증번호</td>
 						<td><input class="textfield title2" type="text" name="number"
-							placeholder="인증번호를 입력해주세요" id="checkNum" required></td>
+							placeholder="인증번호를 입력해주세요" id="checkNum"></td>
 						<td></td>
 					</tr>
 					<tr>
@@ -228,6 +232,39 @@
     				}
     			});
     	});
+    	
+      //이메일 중복검사
+    	$(function(){
+    	 	var emailCheck = $('#emailCheck');
+    		$('#email').blur(function(){
+    			var email = $('#email').val();
+    			$.ajax({
+    				url:"<%=request.getContextPath()%>/member/MemberEmailDupliCheckServlet.do?email="+ email,
+    				type : "get",
+    				dataType : "html",
+    				success : function(result) {
+    					if (result == 0) { //이메일이 중복될경우
+    						$(emailCheck).text("사용중인 이메일입니다.");
+    						$(emailCheck).css({
+    							"color" : "red",
+    							"font-size" : "11px"
+    						});
+    						$(emailCheck).prop("disabled",true);
+    					} else {
+    						$(emailCheck).text("");
+    						$(emailCheck).prop("disabled",false);
+    						} 
+    					
+    					},
+    					error : function(request, status, error) {
+    						alert("code = " + request.status
+    								+ " message = "
+    								+ request.responseText
+    								+ " error = " + error); // 실패 시 처리
+    					}
+    				});
+    			});
+    		});
 
     	$(function() {
     		var pwCheck2 = $('#pwCheck2');
@@ -276,7 +313,40 @@
     		});
     	});
         
-    	
+    	//회원가입 정규식
+    	function checkValue() {
+
+    		var rgUserName = $('#userName');
+    		var email = $('#email');
+    		var tel2 = $('#tel2');
+    		var tel3 = $('#tel3');
+    		var birth = $('#birth');
+
+    		var re2 = /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i;// 이메일이 적합한지 검사할 정규식
+
+    		//비밀번호 체크 글자가 보일때
+    		if ($('#pwCheck').prop('disabled') || $('#pwCheck2').prop('disabled')) {
+    			alert("비밀번호를 확인하세요.");
+    			return false;
+    		}
+
+    		//인증번호 체크글자가 보일때
+    		if ($('#keyCheck').prop('disabled') && $('#keyCheck').attr("color")=="red") {
+    			alert("인증번호를 확인하세요.");
+    			return false;
+    		} 
+    		
+    		//이메일 체크 글자가 보일때
+    		if ($('#emailCheck').prop('disabled')) {
+    			alert("이메일을 확인하세요.");
+    			return false;
+    		}
+
+    		return true;
+    		
+    		
+
+    	};
     	
         function updateMember(){
         	
