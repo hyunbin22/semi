@@ -38,11 +38,6 @@ public class SelectSubCategoryServlet extends HttpServlet {
 		List<SubCategory> list = service.selectSub(scNum);
 
 		
-		
-		
-		System.out.println(scNum);
-		System.out.println(list);
-		
 //		request.setAttribute("scList", list);
 //		request.getRequestDispatcher("/views/lecture/lectureEnrollEnd.jsp").forward(request, response);
 		
