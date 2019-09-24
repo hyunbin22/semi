@@ -27,7 +27,7 @@ public class ReportDao {
 	private Properties prop = new Properties();
 	
 	public ReportDao() {
-		String path=MentoDao.class.getResource("/sql/semi/report-query.properties").getPath();
+		String path=ReportDao.class.getResource("/sql/semi/report-query.properties").getPath();
 		try {
 			prop.load(new FileReader(path));
 			

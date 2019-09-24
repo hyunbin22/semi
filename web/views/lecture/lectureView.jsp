@@ -271,7 +271,7 @@
             </script>
             
             <div>
-                  <input type="submit" value="신청하기" class="classSubmit">
+                  <input type="submit" value="신청하기" class="classSubmit btnOrder">
            </div>
               </form>
             <br>
@@ -310,6 +310,15 @@ $(function(){
          }
       })
    });
+   
+$(function(){
+	$('.btnOrder').click(function(){
+          if('<%=userId%>'==null || '<%=userId%>'=="") {
+            alert("로그인 후 이용 가능합니다.");
+            $('#id').focus();
+         }
+});
+});
 
 $(function(){
    $("#rTitle").click(function(){

@@ -68,7 +68,6 @@
 	$(function() {
 		$('#findMember').click(function(){
 			var userId = $('#findId').val();
-			console.log(userId);
 			$.ajax({
 				type: "post",
 				url: "<%=request.getContextPath()%>/member/MemberIdDupliCheckServlet.do",
