@@ -123,8 +123,6 @@
         
     
     <div class="LectureMainFrame">
-        
-        
         <%for(Lecture lec : list){ 
         %>
         
@@ -161,32 +159,12 @@
         
         
         <%} %>
-
-
-
-      <!-- 원래 틀
-      <table class="classtable">
-            
-            <tr>
-                <td colspan="4"><img src="사이즈300_300.png"></td>
-            </tr>
-            <tr>
-                <td colspan="3"class="className" >강좌제목가나다라마바사아자aaaa지금은 5시 21분aaaaaaaaaaa차카타파하</td>
-                <td class="classplace">위치 | 경기수원</td>
-            </tr>
-            <tr>
-                <td colspan="4" class="classinfo">
-                    소개설명<br>제매력에 빠져보실래요?<br>개피곤하다우<hr>
-                    
-                </td>
-            </tr>
-            <tr>
-                <td colspan="2" class="classScore"><b>평점</b><br>4.4/5.0</td>
-                <td colspan="2" class="classmoneytime"><b>돈/시간</b><br>20000원/1시간</td>
-            </tr>
-        </table> -->
+        
+		&nbsp;
         
     </div>
 </section>
-
+<div id="listbottom">
+		
+		</div>
 <%@ include file="/views/common/footer.jsp"%>

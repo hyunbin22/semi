@@ -1602,8 +1602,8 @@ table.mtStudyList {
 } */
 .LectureMainFrame {
 	width: 1024px;
-	heigth: 1600px;
 	border-left: 340px;
+	margin-bottom: 10px;
 }
 
 .lectureFix {
@@ -1727,6 +1727,16 @@ table.mtStudyList {
 
 .lectureTable:nth-child(2n) {
 	margin-left: 10px;
+	margin-right:71px;
+}
+
+.lectureTable:nth:last-child{
+	margin-bottom:1000px;
+}
+
+.lastTable{
+	margin-left:260px;
+	margin-bottom:50px;
 }
 
 .img300px {
@@ -1990,4 +2000,8 @@ td.contentTable2 {
 
 .moim-table {
 	margin-top:20px;
+}
+
+.listbottom{
+	margin-bottom:300px;
 }
