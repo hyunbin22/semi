@@ -533,6 +533,25 @@ public class ReportDao {
 		return list;
 	}
 
+	public int modifyReason(Connection conn, int reportNo, String reportReason) {
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		int result = 0;
+		String sql=prop.getProperty("modifyReason");
+		try {
+			pstmt=conn.prepareStatement(sql);
+			pstmt.setString(1, reportReason);
+			pstmt.setInt(2, reportNo);
+			result=pstmt.executeUpdate();
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}
+		finally {
+			close(pstmt);
+		}
+		return result;
+	}
+
 
 	
 

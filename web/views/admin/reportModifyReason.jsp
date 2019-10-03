@@ -15,8 +15,8 @@
           <div class="row">
          <div class="col">
             <div class="notice-table2">
-            <form id = "replyFrm" action = "" method = "post">
-            <input type="hidden" name="reportId" value=<%=rp.getMember().getmId() %>>
+            <form id = "replyFrm" action = "/admin/adminReportModifyReasonEnd.do" method = "post">
+            <input type="hidden" name="reportNo" value=<%=rp.getReportNum() %>>
                 <table class="notice-top">
                 	<tr>
 	                    <th class="notice-highlight1"></th>
@@ -32,7 +32,6 @@
                         	<td class="notice-highlight">
                         </td>
                         <td class="notice-date"><%if(rpu.getFileReNmae()!=null) {%>
-						<%-- <a href="<%=request.getContextPath()%>/notice/noticeFileDown?fileName=<%=n.getFilePath()%>"> --%>
 						<a href="javascript:fn_filedown('<%=rpu.getFileOriName()%>','<%=rpu.getFileReNmae()%>')">
 							<img src="<%=request.getContextPath() %>/image/첨부파일.png"
 							width='40px'/>
@@ -61,36 +60,13 @@
                                 </div>
                             </td>
                         </tr>
-                        <% if(rp.getReportCheck() != 'Y') {%>
                         <tr>
-                        <td colspan="4">답변</td>
+                        <td colspan="4">답변 수정</td>
                         </tr>
                         <tr>
                         <td colspan="4">
-                        <textarea rows="10" cols="110" style="resize: none;" name = "rReply" id = "rReply"></textarea>
+                        <textarea rows="10" cols="110" style="resize: none;" name = "rReply" id = "rReply"><%=rp.getReportReason() %></textarea>
                         </td>
-                        </tr>
-                        <tr class = "notice-top">
-                        <td colspan="4">
-                        	ID 사용정지 처리 :
-                        <input type = "radio" name = "check" id = "checkName1" value = "Y" style = "cursor: pointer;">
-                        <label for = "checkName1" style = "cursor: pointer;">예</label>
-                        <input type = "radio" name = "check" id = "checkName" value = "N" style = "cursor: pointer;">
-                        <label for = "checkName" style = "cursor: pointer;">아니오</label>
-                        </td>
-                        <%} else {%>
-                        <tr>
-                        <td colspan="4">답변</td>
-                        </tr>
-                        <tr class="notice-content">
-                            <td colspan="4">
-                                <div class="notice-content3">
-                                <div class = "report-content">
-                                   <%=rp.getReportReason() %>
-
-								</div>
-                                </div>
-                            </td>
                         </tr>
                         <tr class = "notice-top">
                         <td colspan="2">
@@ -105,24 +81,18 @@
                         <% } %>	
                  
                         </td>
-                        <%} %>
                         <td colspan="3">
                         </td>
                         </tr>
                 </table>
-                </form>
                 <table class = "center1">
                     <tr class="null">
                     <td>
-                    <button id ="seeMore" name = "seeMore"  onclick="back();">대기목록으로</button>
-                    <% if(rp.getReportCheck() != 'Y') {%>
-                    <input type = "submit" id ="seeMore" name = "seeMore" value = "처리하기" onclick = "memberBlack();">
-                    <%} else {%>
-                    <button id = "seeMore" onclick = "modifyReason();">답변수정</button>
-                    <%} %>
+                    <input type = "submit" id = "seeMore" value = "답변수정하기"/>
                     </td>
                     </tr>
                 </table>
+                </form>
                 </div>
                 </div>
             </div>
@@ -141,25 +111,6 @@
           return true;
           }
 	
-		function memberBlack(){
-    	
-		var frm=$('#replyFrm');
-		var url="<%=request.getContextPath()%>/admin/memberBlacklist?attNo=<%=rp.getmAttackerNum() %>";
-		frm.attr("action",url);
-		frm.submit();
-		
-		}
-		
-		function back()
-		{
-			var url="<%=request.getContextPath()%>/admin/AdminReportApproval.do";
-			location.href=url;
-		}
-		
-		function modifyReason(){
-			var url = "<%=request.getContextPath()%>/admin/AdminReportModifyReason.do?reportNo=<%=rp.getReportNum()%>";
-			location.href=url;
-		}
 	</script>
 
 
