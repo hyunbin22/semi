@@ -159,6 +159,13 @@ public class ReportService {
 		close(conn);
 		return list;
 	}
+
+	public int modifyReason(int reportNo, String reportReason) {
+		Connection conn=getConnection();
+		int result = dao.modifyReason(conn, reportNo, reportReason);
+		close(conn);
+		return result;
+	}
 	
 
 
